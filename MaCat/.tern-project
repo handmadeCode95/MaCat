@@ -1,0 +1,14 @@
+{
+  "ecmaVersion": 5,
+  "plugins": {
+    "outline": {
+      
+    },
+    "guess-types": {
+      
+    }
+  },
+  "libs": [
+    
+  ]
+}

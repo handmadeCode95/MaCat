@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MaCatMapper">
+	<!--=========================== 메인 ===========================-->
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="MbersVO" resultType="MbersVO">
+		SELECT * FROM MEMBERS WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="MbersVO">
+		INSERT INTO MEMBERS VALUES(MBER_SEQ.NEXTVAL, #{id}, #{pw}, #{name}, #{email}, #{birthday}, #{phone}, #{tel}, 1000000, SYSDATE, SYSDATE, #{zonecode}, #{adres}, #{detail_adres}, 1)
+	</insert>
+	
+	<!-- 접속일 업데이트 -->
+	<update id="login_record" parameterType="MbersVO">
+		UPDATE MEMBERS SET CONECT_RCORD = SYSDATE WHERE ID = #{id} AND PW = #{pw}
+	</update>
+	
+	
+	<!--=========================== 회원 정보 관리 ===========================-->
+	
+	<!-- 전체 회원 숫자 -->
+	<select id="mbers_count" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS
+	</select>
+	
+	<!-- 전체 조회 -->
+	<select id="mbers_list" parameterType="Map" resultType="MbersVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS ORDER BY MBER_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 회원 and조건 검색 -->
+	<select id="mber_and_search" parameterType="MbersSearchVO" resultType="MbersVO">
+		SELECT * FROM MEMBERS
+		<where>
+	  		<if test="name != null">
+		    	NAME = #{name}
+		    </if>
+		    <if test="mber_sn != null">
+		        AND MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="id != null">
+		        AND ID = #{id}
+		    </if>
+		    <if test="birthday_start != null and birthday_end != null">
+		        AND BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end != null">
+		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end != null">
+		        AND CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="phone != null">
+		        AND PHONE = #{phone}
+		    </if>
+		    <if test="mber_grad != null">
+		        AND MBER_GRAD = #{mber_grad}
+		    </if>
+		</where>
+		ORDER BY MBER_SN
+	</select>
+	
+	<!-- 회원 or조건 검색 -->
+	<select id="mber_or_search" parameterType="MbersSearchVO" resultType="MbersVO">
+		SELECT * FROM MEMBERS
+		<where>
+	  		<if test="name != null">
+		    	NAME = #{name}
+		    </if>
+		    <if test="mber_sn != null">
+		        OR MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="id != null">
+		        OR ID = #{id}
+		    </if>
+		    <if test="birthday_start != null and birthday_end != null">
+		        OR BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end != null">
+		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end != null">
+		        OR CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="phone != null">
+		        OR PHONE = #{phone}
+		    </if>
+		    <if test="mber_grad != null">
+		        OR MBER_GRAD = #{mber_grad}
+		    </if>
+		</where>
+		ORDER BY MBER_SN
+	</select>
+		
+	<!-- 회원 정보 수정 -->
+	<update id="mber_update" parameterType="MbersVO">
+		UPDATE MEMBERS SET PW = #{pw}, NAME = #{name}, EMAIL = #{email}, PHONE = #{phone}, TEL = #{tel}, ZONECODE = #{zonecode}, ADRES = #{adres}, DETAIL_ADRES = #{detail_adres}, MBER_GRAD = #{mber_grad} WHERE MBER_SN = #{mber_sn}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="mber_withdrawal_admin" parameterType="String">
+		DELETE FROM MEMBERS WHERE MBER_SN = #{mber_sn}
+	</delete>
+	
+	
+	<!--=========================== 공지사항 관리 ===========================-->
+	
+	
+	<!-- 전체 조회 -->
+	<select id="notices_list" resultType="NotVO"> 
+		SELECT * FROM NOTICES ORDER BY NOT_SN
+	</select>
+	
+	<!-- 회원 and조건 검색 -->
+	<select id="not_and_search" parameterType="NotSearchVO" resultType="NotVO">
+		SELECT * FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        AND NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        AND NOT_NAME = #{not_name}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        AND NOT_REG_DATE BETWEEN #{not_reg_date_start} AND #{not_reg_date_end}
+		    </if>
+		</where>
+		ORDER BY NOT_SN
+	</select>
+	
+	<!-- 회원 or조건 검색 -->
+	<select id="not_or_search" parameterType="NotSearchVO" resultType="NotVO">
+		SELECT * FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        OR NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        OR NOT_NAME = #{not_name}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        OR NOT_REG_DATE BETWEEN #{not_reg_date_start} AND #{not_reg_date_end}
+		    </if>
+		</where>
+		ORDER BY NOT_SN
+	</select>
+</mapper>
+
+
+
