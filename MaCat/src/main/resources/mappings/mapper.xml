@@ -33,9 +33,9 @@
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS ORDER BY MBER_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
-	<!-- 회원 and조건 검색 -->
-	<select id="mber_and_search" parameterType="MbersSearchVO" resultType="MbersVO">
-		SELECT * FROM MEMBERS
+	<!-- 회원 and조건 검색 결과 인원 -->
+	<select id="mbers_and_count" parameterType="MbersSearchVO" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS
 		<where>
 	  		<if test="name != null">
 		    	NAME = #{name}
@@ -62,12 +62,48 @@
 		        AND MBER_GRAD = #{mber_grad}
 		    </if>
 		</where>
-		ORDER BY MBER_SN
 	</select>
 	
-	<!-- 회원 or조건 검색 -->
-	<select id="mber_or_search" parameterType="MbersSearchVO" resultType="MbersVO">
-		SELECT * FROM MEMBERS
+	<!-- 회원 and조건 검색 -->
+	<select id="mbers_and_search" parameterType="MbersSearchVO" resultType="MbersVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS
+		<where>
+	  		<if test="name != null">
+		    	NAME = #{name}
+		    </if>
+		    <if test="mber_sn != null">
+		        AND MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="id != null">
+		        AND ID = #{id}
+		    </if>
+		    <if test="birthday_start != null and birthday_end != null">
+		        AND BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end != null">
+		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end != null">
+		        AND CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="phone != null">
+		        AND PHONE = #{phone}
+		    </if>
+		    <if test="mber_grad != null">
+		        AND MBER_GRAD = #{mber_grad}
+		    </if>
+		</where>
+		
+		ORDER BY MBER_SN DESC) A )
+		
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 회원 or조건 검색 결과 인원 -->
+	<select id="mbers_or_count" parameterType="MbersSearchVO" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS
 		<where>
 	  		<if test="name != null">
 		    	NAME = #{name}
@@ -94,16 +130,52 @@
 		        OR MBER_GRAD = #{mber_grad}
 		    </if>
 		</where>
-		ORDER BY MBER_SN
+	</select>
+	
+	<!-- 회원 and조건 검색 -->
+	<select id="mbers_or_search" parameterType="MbersSearchVO" resultType="MbersVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS
+		<where>
+	  		<if test="name != null">
+		    	NAME = #{name}
+		    </if>
+		    <if test="mber_sn != null">
+		        OR MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="id != null">
+		        OR ID = #{id}
+		    </if>
+		    <if test="birthday_start != null and birthday_end != null">
+		        OR BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end != null">
+		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end != null">
+		        OR CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="phone != null">
+		        OR PHONE = #{phone}
+		    </if>
+		    <if test="mber_grad != null">
+		        OR MBER_GRAD = #{mber_grad}
+		    </if>
+		</where>
+		
+		ORDER BY MBER_SN DESC) A )
+		
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
 	</select>
 		
 	<!-- 회원 정보 수정 -->
-	<update id="mber_update" parameterType="MbersVO">
+	<update id="mbers_update" parameterType="MbersVO">
 		UPDATE MEMBERS SET PW = #{pw}, NAME = #{name}, EMAIL = #{email}, PHONE = #{phone}, TEL = #{tel}, ZONECODE = #{zonecode}, ADRES = #{adres}, DETAIL_ADRES = #{detail_adres}, MBER_GRAD = #{mber_grad} WHERE MBER_SN = #{mber_sn}
 	</update>
 	
 	<!-- 회원 탈퇴 -->
-	<delete id="mber_withdrawal_admin" parameterType="String">
+	<delete id="mbers_withdrawal_admin" parameterType="String">
 		DELETE FROM MEMBERS WHERE MBER_SN = #{mber_sn}
 	</delete>
 	

@@ -4,6 +4,7 @@ public class MbersSearchVO {
 	
 	private String mber_sn, id, name, birthday_start, birthday_end, reg_date_start, reg_date_end,
 					conect_rcord_start, conect_rcord_end, phone, mber_grad, and_or_chk;
+	private int begin, end;
 	
 	public MbersSearchVO() {
 
@@ -11,7 +12,7 @@ public class MbersSearchVO {
 
 	public MbersSearchVO(String mber_sn, String id, String name, String birthday_start, String birthday_end,
 			String reg_date_start, String reg_date_end, String conect_rcord_start, String conect_rcord_end,
-			String phone, String mber_grad, String and_or_chk) {
+			String phone, String mber_grad, String and_or_chk, int begin, int end) {
 		super();
 		this.mber_sn = mber_sn;
 		this.id = id;
@@ -25,6 +26,8 @@ public class MbersSearchVO {
 		this.phone = phone;
 		this.mber_grad = mber_grad;
 		this.and_or_chk = and_or_chk;
+		this.begin = begin;
+		this.end = end;
 	}
 
 	public String getMber_sn() {
@@ -121,5 +124,21 @@ public class MbersSearchVO {
 
 	public void setAnd_or_chk(String and_or_chk) {
 		this.and_or_chk = and_or_chk;
+	}
+
+	public int getBegin() {
+		return begin;
+	}
+
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 }

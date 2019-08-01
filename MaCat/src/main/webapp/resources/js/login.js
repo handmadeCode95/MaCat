@@ -41,3 +41,19 @@ function checkPw(pw){
 	
 	return true;
 }
+
+// 카카오 로그인 API
+onload = function() {
+	// JavaScript 키
+	Kakao.init("b9f4bfb4831bff17354b1e3de31c0ac5");
+	// 카카오 로그인 버튼을 생성
+	Kakao.Auth.createLoginButton({
+		container: "#kakao-login-btn",
+		success: function(authObj) {
+			alert(JSON.stringify(authObj));
+		},
+		fail: function(err) {
+			alert(JSON.stringify(err));
+		}
+	});
+}

@@ -36,6 +36,9 @@ public class MyController {
 		this.dao = dao;
 	}
 	
+	private MbersSearchVO mbersSearchVO; // 페이징을 위한 검색 기록
+	private String usedVO;			 	 // 페이징을 위한 조회 기록
+	private int count;					 // 페이징을 위한 검색 인원 수 기록
 	private String cPage;
 	
 	////////////////////////////////// 메인 //////////////////////////////////
@@ -94,9 +97,11 @@ public class MyController {
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manage.mcat")
 	public ModelAndView getMbersListCmd(String cPage) {
+		usedVO = "MbersVO";
 		ModelAndView mv = new ModelAndView("admin/members/search");
 		Paging paging = new Paging();
-		getPaging(paging, dao.getMbersCount(), cPage);
+		count = dao.getMbersCount();
+		getPaging(paging, count, cPage);
 		mv.addObject("mbers_list", dao.getMbersList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
@@ -115,10 +120,10 @@ public class MyController {
 	
 	
 	// 회원 검색
-	// 회원 검색 페이징 걸기
 	@RequestMapping(value = "mbers_search.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public List<MbersVO> getMbersSearchCmd(@RequestBody MbersSearchVO mbersSearchVO) {
+	public Map<String, Object> getMbersSearchCmd(@RequestBody MbersSearchVO mbersSearchVO) {
+		
 		if (mbersSearchVO.getConect_rcord_start() != null && mbersSearchVO.getConect_rcord_end() != null) {
 			mbersSearchVO.setConect_rcord_start(mbersSearchVO.getConect_rcord_start() + " 00:00:00");
 			mbersSearchVO.setConect_rcord_end(mbersSearchVO.getConect_rcord_end() + " 23:59:59");
@@ -127,11 +132,30 @@ public class MyController {
 			mbersSearchVO.setReg_date_end(mbersSearchVO.getReg_date_end() + " 23:59:59");
 		}
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Paging paging = new Paging();
+		
 		if (mbersSearchVO.getAnd_or_chk().equals("and")) {
-			return dao.getMbersAndSearch(mbersSearchVO);
+			usedVO = "MbersSearchVO_and";
+			count = dao.getMbersAndCount(mbersSearchVO);
 		}else {
-			return dao.getMbersOrSearch(mbersSearchVO);
+			usedVO = "MbersSearchVO_or";
+			count = dao.getMbersOrCount(mbersSearchVO);
 		}
+		
+		getPaging(paging, count, null);
+		map.put("paging", paging);
+		mbersSearchVO.setBegin(paging.getBegin());
+		mbersSearchVO.setEnd(paging.getEnd());
+		this.mbersSearchVO = mbersSearchVO; // 페이징을 위한 검색 기록 저장
+		
+		if (mbersSearchVO.getAnd_or_chk().equals("and")) {
+			map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
+		}else {
+			map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
+		}
+		
+		return map;
 	}
 	
 	// 회원 정보 페이징
@@ -141,9 +165,22 @@ public class MyController {
 		this.cPage = cPage;
 		Paging paging = new Paging();
 		Map<String, Object> map = new HashMap<String, Object>();
-		getPaging(paging, dao.getMbersCount(), cPage);
+		
+		getPaging(paging, count, cPage);
 		map.put("paging", paging);
-		map.put("mbersVO", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+		
+		if (usedVO.equals("MbersVO")) {
+			map.put("mbersVO", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+		}else {
+			mbersSearchVO.setBegin(paging.getBegin());
+			mbersSearchVO.setEnd(paging.getEnd());
+			if(usedVO.equals("MbersSearchVO_and")) {
+				map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
+			}else {
+				map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
+			}
+		}
+		
 		return map;
 	}
 	

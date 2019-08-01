@@ -54,25 +54,35 @@ public class DAO {
 		map.put("end", end);
 		return sqlSessionTemplate.selectList("mbers_list", map);
 	}
+	
+	// 회원 and조건 검색 결과 인원
+	public int getMbersAndCount(MbersSearchVO mbersSearchVO) {
+		return sqlSessionTemplate.selectOne("mbers_and_count", mbersSearchVO);
+	}
+		
+	// 회원 or조건 검색 결과 인원
+	public int getMbersOrCount(MbersSearchVO mbersSearchVO) {
+		return sqlSessionTemplate.selectOne("mbers_or_count", mbersSearchVO);
+	}
 
 	// 회원 and조건 검색
 	public List<MbersVO> getMbersAndSearch(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectList("mber_and_search", mbersSearchVO);
+		return sqlSessionTemplate.selectList("mbers_and_search", mbersSearchVO);
 	}
 
 	// 회원 or조건 검색
 	public List<MbersVO> getMbersOrSearch(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectList("mber_or_search", mbersSearchVO);
+		return sqlSessionTemplate.selectList("mbers_or_search", mbersSearchVO);
 	}
 
 	// 회원 정보 수정
 	public int getMbersUpdate(MbersVO mbersVO) {
-		return sqlSessionTemplate.update("mber_update", mbersVO);
+		return sqlSessionTemplate.update("mbers_update", mbersVO);
 	}
 
 	// 회원 탈퇴(관리자)
 	public int getMbersWithdrawal(String mber_sn) {
-		return sqlSessionTemplate.delete("mber_withdrawal_admin", mber_sn);
+		return sqlSessionTemplate.delete("mbers_withdrawal_admin", mber_sn);
 	}
 	
 	

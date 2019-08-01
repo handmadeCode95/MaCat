@@ -166,7 +166,6 @@ $(function() {
 	});
 	
 	// 회원 검색 AJAX
-	// 회원 검색에 페이징 걸기
 	$("#searchBtn").click(function() {
 		$.ajax({
 			url			: "mbers_search.mcat",
@@ -175,12 +174,7 @@ $(function() {
             contentType : "application/json",
             data		: $().toJSON($("#searchForm > *:not(input[name=search_chk])")),
             success		: function(data) {
-			            	  var result = "";
-							  $.each(data, function(k, v){
-								  result += $().getTbody(k, v);
-							  });
-							  $("#searchResult").empty();
-							  $("#searchResult").append(result);
+            				  $().getTable(data);
             			  },
             error		: function(error) {
             				  console.log(error);
