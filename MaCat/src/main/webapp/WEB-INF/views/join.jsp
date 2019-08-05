@@ -20,12 +20,11 @@
     <body>
         <div class="wrapper fadeInDown">
             <div id="formContent">
-            <!-- Tabs Titles -->
-                <!-- 로고 -->
+                <%-- 로고 --%>
                 <div class="fadeIn first">
                 	<img src="resources/img/mcat-logo-footer.png" id="icon" alt="MaCat" />
                 </div>
-                <!-- 로그인 폼 -->
+                <%-- 로그인 폼 --%>
                 <form name="f" action="mber_join.mcat" method="post" onsubmit="return checkAll()">
 	                <input type="text" id="login" class="fadeIn second" name="id" placeholder="아이디">
 	                <input type="password" id="pw" class="fadeIn third" name="pw" placeholder="비밀번호">
@@ -47,7 +46,7 @@
 	                <input type="text" id="detail_adres" class="fadeIn twelfth" name="detail_adres" placeholder="상세주소">
 	                <input type="submit" id="join_submit" class="fadeIn thirteenth" value="작성완료">
                 </form>
-                <!-- 하단 텍스트 링크 -->
+                <%-- 하단 텍스트 링크 --%>
                 <div id="formFooter">
                 	<p>모든 정보를 입력하셔야 가입이 가능합니다.</p>
                 </div>

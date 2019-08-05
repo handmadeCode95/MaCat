@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 전체 조회 -->
-	<select id="mbers_list" parameterType="Map" resultType="MbersVO"> 
+	<select id="members" parameterType="Map" resultType="MbersVO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS ORDER BY MBER_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
@@ -182,51 +182,16 @@
 	
 	<!--=========================== 공지사항 관리 ===========================-->
 	
+	<!-- 전체 회원 숫자 -->
+	<select id="nots_count" resultType="int">
+		SELECT COUNT(*) FROM NOTICES
+	</select>
 	
 	<!-- 전체 조회 -->
-	<select id="notices_list" resultType="NotVO"> 
-		SELECT * FROM NOTICES ORDER BY NOT_SN
+	<select id="notices" parameterType="Map" resultType="NotsVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES ORDER BY NOT_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
-	<!-- 회원 and조건 검색 -->
-	<select id="not_and_search" parameterType="NotSearchVO" resultType="NotVO">
-		SELECT * FROM NOTICES
-		<where>
-	  		<if test="not_sn != null">
-		    	NOT_SN = #{not_sn}
-		    </if>
-		    <if test="not_sj != null">
-		        AND NOT_SJ = #{not_sj}
-		    </if>
-		    <if test="not_name != null">
-		        AND NOT_NAME = #{not_name}
-		    </if>
-		    <if test="not_reg_date_start != null and not_reg_date_end != null">
-		        AND NOT_REG_DATE BETWEEN #{not_reg_date_start} AND #{not_reg_date_end}
-		    </if>
-		</where>
-		ORDER BY NOT_SN
-	</select>
-	
-	<!-- 회원 or조건 검색 -->
-	<select id="not_or_search" parameterType="NotSearchVO" resultType="NotVO">
-		SELECT * FROM NOTICES
-		<where>
-	  		<if test="not_sn != null">
-		    	NOT_SN = #{not_sn}
-		    </if>
-		    <if test="not_sj != null">
-		        OR NOT_SJ = #{not_sj}
-		    </if>
-		    <if test="not_name != null">
-		        OR NOT_NAME = #{not_name}
-		    </if>
-		    <if test="not_reg_date_start != null and not_reg_date_end != null">
-		        OR NOT_REG_DATE BETWEEN #{not_reg_date_start} AND #{not_reg_date_end}
-		    </if>
-		</where>
-		ORDER BY NOT_SN
-	</select>
 </mapper>
 
 

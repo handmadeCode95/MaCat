@@ -2,23 +2,21 @@ package com.macat.service;
 
 import java.util.List;
 
-public class NotVO {
+public class NotsVO {
 	
-	private String not_sn, not_sj, not_name, not_cn, not_file_name, not_reg_date, mber_sn;
-	private List<NotVO> notVOList;
+	private String not_sn, not_sj, not_name, not_cn, not_reg_date, mber_sn;
 	
-	public NotVO() {
+	public NotsVO() {
 
 	}
 
-	public NotVO(String not_sn, String not_sj, String not_name, String not_cn, String not_file_name,
+	public NotsVO(String not_sn, String not_sj, String not_name, String not_cn, 
 			String not_reg_date, String mber_sn) {
 		super();
 		this.not_sn = not_sn;
 		this.not_sj = not_sj;
 		this.not_name = not_name;
 		this.not_cn = not_cn;
-		this.not_file_name = not_file_name;
 		this.not_reg_date = not_reg_date;
 		this.mber_sn = mber_sn;
 	}
@@ -55,14 +53,6 @@ public class NotVO {
 		this.not_cn = not_cn;
 	}
 
-	public String getNot_file_name() {
-		return not_file_name;
-	}
-
-	public void setNot_file_name(String not_file_name) {
-		this.not_file_name = not_file_name;
-	}
-
 	public String getNot_reg_date() {
 		return not_reg_date;
 	}
@@ -77,13 +67,5 @@ public class NotVO {
 
 	public void setMber_sn(String mber_sn) {
 		this.mber_sn = mber_sn;
-	}
-
-	public List<NotVO> getNotVOList() {
-		return notVOList;
-	}
-
-	public void setNotVOList(List<NotVO> notVOList) {
-		this.notVOList = notVOList;
 	}
 }

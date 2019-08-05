@@ -42,7 +42,7 @@ function checkPw(pw){
 	return true;
 }
 
-// 카카오 로그인 API
+// 카카오 로그인 API (기능 보류)
 onload = function() {
 	// JavaScript 키
 	Kakao.init("b9f4bfb4831bff17354b1e3de31c0ac5");

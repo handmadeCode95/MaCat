@@ -9,10 +9,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">
-			onload = function() {
-				location.href = "login.mcat";
-			}
+			$(function() {
+				$(location).attr("href", "login.mcat");
+			});
 		</script>
 	</head>
 

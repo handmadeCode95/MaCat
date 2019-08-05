@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macat.service.DAO;
 import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
-import com.macat.service.NotSearchVO;
+import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
 
 @Controller
@@ -36,10 +36,10 @@ public class MyController {
 		this.dao = dao;
 	}
 	
-	private MbersSearchVO mbersSearchVO; // 페이징을 위한 검색 기록
+	private MbersSearchVO mbersSearchVO; // 페이징을 위한 회원 정보 검색 기록
 	private String usedVO;			 	 // 페이징을 위한 조회 기록
 	private int count;					 // 페이징을 위한 검색 인원 수 기록
-	private String cPage;
+	private String cPage;				 // 페이징을 위한 현재 페이지 기록
 	
 	////////////////////////////////// 메인 //////////////////////////////////
 	
@@ -94,24 +94,33 @@ public class MyController {
 		return new ModelAndView("admin/main");
 	}
 	
+	
+	////////////////////////////////// 관리자 메인 //////////////////////////////////
+	
+	
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manage.mcat")
-	public ModelAndView getMbersListCmd(String cPage) {
+	public ModelAndView getMembersCmd(String cPage) {
 		usedVO = "MbersVO";
-		ModelAndView mv = new ModelAndView("admin/members/search");
+		ModelAndView mv = new ModelAndView("admin/members/management");
 		Paging paging = new Paging();
 		count = dao.getMbersCount();
 		getPaging(paging, count, cPage);
-		mv.addObject("mbers_list", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+		mv.addObject("members", dao.getMbersList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
 	}
 	
-	// 회원 정보 조회로 이동
+	// 공지사항 조회로 이동
 	@RequestMapping("notices_manage.mcat")
-	public ModelAndView getNoticeListCmd() {
-		ModelAndView mv = new ModelAndView("admin/notices/search");
-		mv.addObject("notices_list", dao.getNoticesList());
+	public ModelAndView getNoticesCmd(String cPage) {
+		usedVO = "NotsVO";
+		ModelAndView mv = new ModelAndView("admin/notices/management");
+		Paging paging = new Paging();
+		count = dao.getNotsCount();
+		getPaging(paging, count, cPage);
+		mv.addObject("notices", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+		mv.addObject("paging", paging);
 		return mv;
 	}
 	
@@ -161,7 +170,7 @@ public class MyController {
 	// 회원 정보 페이징
 	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMbersPaging(@RequestBody String cPage) {
+	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
 		this.cPage = cPage;
 		Paging paging = new Paging();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -193,7 +202,7 @@ public class MyController {
 				dao.getMbersUpdate(j);
 			}
 		}
-		return getMbersPaging(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 	
 	// 회원 탈퇴
@@ -205,32 +214,25 @@ public class MyController {
 				dao.getMbersWithdrawal(j);
 			}
 		}
-		return getMbersPaging(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 	
 	
 	////////////////////////////////// 공지사항 관리 //////////////////////////////////
 	
 	
-	// 공지사항 검색
-	@RequestMapping(value = "not_search.mcat", method = RequestMethod.POST)
-	public ModelAndView getNoticesSearchCmd(NotSearchVO notSearchVO) {
-		ModelAndView mv = new ModelAndView("admin/notices/search");
-		
-		if (notSearchVO.getNot_reg_date_start() != null && notSearchVO.getNot_reg_date_end() != null) {
-			notSearchVO.setNot_reg_date_start(notSearchVO.getNot_reg_date_start() + " 00:00:00");
-			notSearchVO.setNot_reg_date_end(notSearchVO.getNot_reg_date_end() + " 23:59:59");
-		}
-		
-		if (notSearchVO.getAnd_or_chk().equals("and")) {
-			mv.addObject("notices_list", dao.getNoticesAndSearch(notSearchVO));
-		}else if (notSearchVO.getAnd_or_chk().equals("or")){
-			mv.addObject("notices_list", dao.getNoticesOrSearch(notSearchVO));
-		}
-		
-		return mv;
+	// 공지사항 작성으로 이동
+	@RequestMapping("nots_write.mcat")
+	public ModelAndView getNotsWriteGoCmd() {
+		return new ModelAndView("admin/notices/write");
 	}
 	
+	// 공지사항 수정으로 이동
+	@RequestMapping("nots_update.mcat")
+	public ModelAndView getNotsUpdateGoCmd() {
+		return new ModelAndView("admin/notices/update");
+	}
+		
 	
 	////////////////////////////////// 페이징 //////////////////////////////////
 	

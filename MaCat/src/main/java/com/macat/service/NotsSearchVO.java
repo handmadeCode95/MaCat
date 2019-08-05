@@ -1,14 +1,14 @@
 package com.macat.service;
 
-public class NotSearchVO {
+public class NotsSearchVO {
 	
 	private String not_sn, not_sj, not_name, not_reg_date_start, not_reg_date_end ,and_or_chk;
 	
-	public NotSearchVO() {
+	public NotsSearchVO() {
 
 	}
 
-	public NotSearchVO(String not_sn, String not_sj, String not_name, String not_reg_date_start,
+	public NotsSearchVO(String not_sn, String not_sj, String not_name, String not_reg_date_start,
 			String not_reg_date_end, String and_or_chk) {
 		super();
 		this.not_sn = not_sn;

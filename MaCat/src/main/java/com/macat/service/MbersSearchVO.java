@@ -4,7 +4,7 @@ public class MbersSearchVO {
 	
 	private String mber_sn, id, name, birthday_start, birthday_end, reg_date_start, reg_date_end,
 					conect_rcord_start, conect_rcord_end, phone, mber_grad, and_or_chk;
-	private int begin, end;
+	private int begin, end; // 페이징
 	
 	public MbersSearchVO() {
 

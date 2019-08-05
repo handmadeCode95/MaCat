@@ -52,7 +52,7 @@ public class DAO {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
 		map.put("end", end);
-		return sqlSessionTemplate.selectList("mbers_list", map);
+		return sqlSessionTemplate.selectList("members", map);
 	}
 	
 	// 회원 and조건 검색 결과 인원
@@ -87,20 +87,18 @@ public class DAO {
 	
 	
 	////////////////////////////////// 공지사항 관리 //////////////////////////////////
+
 	
+	// 전체 공지 갯수
+		public int getNotsCount() {
+			return sqlSessionTemplate.selectOne("nots_count");
+		}
 	
 	// 공지사항 가져오기
-	public List<MbersVO> getNoticesList() {
-		return sqlSessionTemplate.selectList("notices_list");
-	}
-	
-	// 공지 and조건 검색
-	public List<MbersVO> getNoticesAndSearch(NotSearchVO notSearchVO) {
-		return sqlSessionTemplate.selectList("not_and_search", notSearchVO);
-	}
-
-	// 공지 or조건 검색
-	public List<MbersVO> getNoticesOrSearch(NotSearchVO notSearchVO) {
-		return sqlSessionTemplate.selectList("not_or_search", notSearchVO);
+	public List<NotsVO> getNotsList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("notices", map);
 	}
 }

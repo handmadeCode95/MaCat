@@ -6,7 +6,6 @@ public class MbersVO {
 	
 	private String mber_sn, id, pw, name, email, email_end, birthday, phone, tel, point,
 				   reg_date, conect_rcord, zonecode, adres, detail_adres, mber_grad;
-	private List<MbersVO> mbersVOList;
 	
 	public MbersVO() {
 	
@@ -160,13 +159,5 @@ public class MbersVO {
 
 	public void setMber_grad(String mber_grad) {
 		this.mber_grad = mber_grad;
-	}
-
-	public List<MbersVO> getMbersVOList() {
-		return mbersVOList;
-	}
-
-	public void setMbersVOList(List<MbersVO> mbersVOList) {
-		this.mbersVOList = mbersVOList;
 	}
 }

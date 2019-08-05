@@ -13,7 +13,7 @@
 			table{width: 500px; margin: 0 auto;}
 			table,tr,th,td {border: 1px solid black; border-collapse: collapse;}
 			div{text-align: center; margin: 0 auto;}
-			/* paging */
+			<%-- paging --%>
 			table tfoot ol#paging {list-style: none;}
 			table tfoot ol#paging li {float: left; margin-right: 8px;}
 			table tfoot ol#paging li a {display: block;	padding: 3px 7px; color: #2f313e; font-weight: bold;}
@@ -22,7 +22,7 @@
 			.now {padding: 3px 7px; background: purple; color: white; font-weight: bold;}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <script src="resources/js/admin/members/search.js"></script>
+	    <script src="resources/js/admin/members/management.js"></script>
 	</head>
 
 	<body>
@@ -69,7 +69,7 @@
 	    
 	    <hr>
 	    
-	    <div id="mbers_list" style="overflow: scroll; text-align: center; margin: 0 auto;">
+	    <div id="members" style="overflow: scroll; text-align: center; margin: 0 auto;">
 			<form method="post" id="resultForm">
 				<h1> 회원 정보 목록 </h1>
 				<table style="width: 500px; margin: 0 auto;">
@@ -81,14 +81,14 @@
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
-							<c:when test="${empty mbers_list}">
+							<c:when test="${empty members}">
 								<tr>
 									<td colspan="16"><h3>조회된 회원 정보가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
-								<c:forEach var="i" items="${mbers_list}">
+								<c:forEach var="i" items="${members}">
 									<tr id="${i.mber_sn}">
 										<td><input type="checkbox" class="chkbox" name="mbers" value="${i.mber_sn}"></td>
 										<td><input type="hidden" class="${i.mber_sn}" name="mber_sn" value="${i.mber_sn}" disabled>${i.mber_sn}</td>
@@ -116,10 +116,10 @@
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
-								<c:if test="${fn:length(mbers_list) % 10 != 0}">
-									<c:forEach begin="1" end="${10 - (fn:length(mbers_list) % 10)}">
+								<c:if test="${fn:length(members) % 10 != 0}">
+									<c:forEach begin="1" end="${10 - (fn:length(members) % 10)}">
 										<tr>
-											<!-- 공백 삽입 -->
+											<%-- 공백 삽입 --%>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -129,12 +129,12 @@
 							</c:otherwise>
 						</c:choose>
 					</tbody>
-					<!-- 페이징 기법 -->
+					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
 							<td colspan="16">
 								<ol id="paging">
-									<!-- 이전 -->
+									<%-- 이전 --%>
 									<c:choose>
 										<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
 											<li class="disable">◀</li>
@@ -144,9 +144,9 @@
 										</c:otherwise>
 									</c:choose>
 									
-									<!-- 블록안에 들어간 페이지번호들 -->
+									<%-- 블록안에 들어간 페이지번호들 --%>
 									<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="i">
-										<!-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 -->
+										<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
 										<c:choose>
 											<c:when test="${i == paging.nowPage}">
 												<li class="now">${i}</li>
@@ -157,7 +157,7 @@
 										</c:choose>
 									</c:forEach>
 									
-									<!-- 다음 -->
+									<%-- 다음 --%>
 									<c:choose>
 										<c:when test="${paging.endBlock >= paging.totalPage}">
 											<li class="disable">▶</li>
