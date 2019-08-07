@@ -28,7 +28,7 @@
 		SELECT COUNT(*) FROM MEMBERS
 	</select>
 	
-	<!-- 전체 조회 -->
+	<!-- 회원 정보 가져오기 -->
 	<select id="members" parameterType="Map" resultType="MbersVO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS ORDER BY MBER_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
@@ -132,7 +132,7 @@
 		</where>
 	</select>
 	
-	<!-- 회원 and조건 검색 -->
+	<!-- 회원 or조건 검색 -->
 	<select id="mbers_or_search" parameterType="MbersSearchVO" resultType="MbersVO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS
 		<where>
@@ -182,15 +182,120 @@
 	
 	<!--=========================== 공지사항 관리 ===========================-->
 	
-	<!-- 전체 회원 숫자 -->
+	<!-- 전체 공지 갯수 -->
 	<select id="nots_count" resultType="int">
 		SELECT COUNT(*) FROM NOTICES
 	</select>
 	
-	<!-- 전체 조회 -->
+	<!-- 공지사항 가져오기 -->
 	<select id="notices" parameterType="Map" resultType="NotsVO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES ORDER BY NOT_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<!-- 공지사항 and조건 검색 결과 인원 -->
+	<select id="nots_and_count" parameterType="NotsSearchVO" resultType="int">
+		SELECT COUNT(*) FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        AND NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        AND NOT_NAME = #{not_name}
+		    </if>
+		    <if test="mber_sn != null">
+		        AND MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        AND NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 공지사항 and조건 검색 -->
+	<select id="nots_and_search" parameterType="NotsSearchVO" resultType="NotsVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        AND NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        AND NOT_NAME = #{not_name}
+		    </if>
+		    <if test="mber_sn != null">
+		        AND MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        AND NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		
+		ORDER BY NOT_SN DESC) A )
+		
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 공지사항 or조건 검색 결과 인원 -->
+	<select id="nots_or_count" parameterType="NotsSearchVO" resultType="int">
+		SELECT COUNT(*) FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        OR NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        OR NOT_NAME = #{not_name}
+		    </if>
+		    <if test="mber_sn != null">
+		        OR MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        OR NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 공지사항 or조건 검색 -->
+	<select id="nots_or_search" parameterType="NotsSearchVO" resultType="NotsVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES
+		<where>
+	  		<if test="not_sn != null">
+		    	NOT_SN = #{not_sn}
+		    </if>
+		    <if test="not_sj != null">
+		        OR NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="not_name != null">
+		        OR NOT_NAME = #{not_name}
+		    </if>
+		    <if test="mber_sn != null">
+		        OR MBER_SN = #{mber_sn}
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		        OR NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		
+		ORDER BY NOT_SN DESC) A )
+		
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="nots_delete" parameterType="String">
+		DELETE FROM NOTICES WHERE NOT_SN = #{not_sn}
+	</delete>
 	
 </mapper>
 

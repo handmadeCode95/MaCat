@@ -36,7 +36,10 @@ public class MyController {
 		this.dao = dao;
 	}
 	
-	private MbersSearchVO mbersSearchVO; // 페이징을 위한 회원 정보 검색 기록
+	// 페이징을 위한 회원 정보 검색 기록
+	private MbersSearchVO mbersSearchVO;
+	private NotsSearchVO notsSearchVO;
+	
 	private String usedVO;			 	 // 페이징을 위한 조회 기록
 	private int count;					 // 페이징을 위한 검색 인원 수 기록
 	private String cPage;				 // 페이징을 위한 현재 페이지 기록
@@ -112,7 +115,7 @@ public class MyController {
 	}
 	
 	// 공지사항 조회로 이동
-	@RequestMapping("notices_manage.mcat")
+	@RequestMapping("nots_manage.mcat")
 	public ModelAndView getNoticesCmd(String cPage) {
 		usedVO = "NotsVO";
 		ModelAndView mv = new ModelAndView("admin/notices/management");
@@ -127,6 +130,34 @@ public class MyController {
 		
 	////////////////////////////////// 회원 정보 관리 //////////////////////////////////
 	
+	
+	// 회원 정보 페이징
+	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
+		
+		this.cPage = cPage;
+		Paging paging = new Paging();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		getPaging(paging, count, cPage);
+		map.put("paging", paging);
+		
+		switch (usedVO) {
+			case "MbersVO" :
+				map.put("mbersVO", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+				break;
+			default :
+				mbersSearchVO.setBegin(paging.getBegin());
+				mbersSearchVO.setEnd(paging.getEnd());
+				switch (usedVO) {
+					case "MbersSearchVO_and" : map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO)); break;
+					case "MbersSearchVO_or"  : map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));  break;
+				}
+		}
+		
+		return map;
+	}
 	
 	// 회원 검색
 	@RequestMapping(value = "mbers_search.mcat", method = RequestMethod.POST)
@@ -144,12 +175,15 @@ public class MyController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();
 		
-		if (mbersSearchVO.getAnd_or_chk().equals("and")) {
-			usedVO = "MbersSearchVO_and";
-			count = dao.getMbersAndCount(mbersSearchVO);
-		}else {
-			usedVO = "MbersSearchVO_or";
-			count = dao.getMbersOrCount(mbersSearchVO);
+		switch (mbersSearchVO.getAnd_or_chk()) {
+			case "and" :
+				usedVO = "MbersSearchVO_and";
+				count = dao.getMbersAndCount(mbersSearchVO);
+				break;
+			case "or"  :
+				usedVO = "MbersSearchVO_or";
+				count = dao.getMbersOrCount(mbersSearchVO);
+				break;
 		}
 		
 		getPaging(paging, count, null);
@@ -158,36 +192,9 @@ public class MyController {
 		mbersSearchVO.setEnd(paging.getEnd());
 		this.mbersSearchVO = mbersSearchVO; // 페이징을 위한 검색 기록 저장
 		
-		if (mbersSearchVO.getAnd_or_chk().equals("and")) {
-			map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
-		}else {
-			map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
-		}
-		
-		return map;
-	}
-	
-	// 회원 정보 페이징
-	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
-		this.cPage = cPage;
-		Paging paging = new Paging();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		getPaging(paging, count, cPage);
-		map.put("paging", paging);
-		
-		if (usedVO.equals("MbersVO")) {
-			map.put("mbersVO", dao.getMbersList(paging.getBegin(), paging.getEnd()));
-		}else {
-			mbersSearchVO.setBegin(paging.getBegin());
-			mbersSearchVO.setEnd(paging.getEnd());
-			if(usedVO.equals("MbersSearchVO_and")) {
-				map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
-			}else {
-				map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
-			}
+		switch (mbersSearchVO.getAnd_or_chk()) {
+			case "and" : map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO)); break;
+			case "or"  : map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));  break;
 		}
 		
 		return map;
@@ -214,12 +221,85 @@ public class MyController {
 				dao.getMbersWithdrawal(j);
 			}
 		}
+		
+		switch (usedVO) {
+			case "MbersVO"			 : count = dao.getMbersCount(); 				break;
+			case "MbersSearchVO_and" : count = dao.getMbersAndCount(mbersSearchVO); break;
+			case "MbersSearchVO_or"	 : count = dao.getMbersOrCount(mbersSearchVO);  break;
+		}
+		
 		return getMbersPagingCmd(cPage);
 	}
 	
 	
 	////////////////////////////////// 공지사항 관리 //////////////////////////////////
 	
+	
+	// 공지사항 페이징
+	@RequestMapping(value = "nots_paging.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
+		
+		this.cPage = cPage;
+		Paging paging = new Paging();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		getPaging(paging, count, cPage);
+		map.put("paging", paging);
+		
+		switch (usedVO) {
+			case "NotsVO" :
+				map.put("NotsVO", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+				break;
+			default :
+				notsSearchVO.setBegin(paging.getBegin());
+				notsSearchVO.setEnd(paging.getEnd());
+				switch (usedVO) {
+					case "NotsSearchVO_and" : map.put("NotsVO", dao.getNotsAndSearch(notsSearchVO)); break;
+					case "NotsSearchVO_or"  : map.put("NotsVO", dao.getNotsOrSearch(notsSearchVO));  break;
+				}
+		}
+		
+		return map;
+	}
+	
+	// 공지사항 검색
+	@RequestMapping(value = "nots_search.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getNotsSearchCmd(@RequestBody NotsSearchVO notsSearchVO) {
+		
+		if (notsSearchVO.getNot_reg_date_start() != null && notsSearchVO.getNot_reg_date_end() != null) {
+			notsSearchVO.setNot_reg_date_start(notsSearchVO.getNot_reg_date_start() + " 00:00:00");
+			notsSearchVO.setNot_reg_date_end(notsSearchVO.getNot_reg_date_end() + " 23:59:59");
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Paging paging = new Paging();
+		
+		switch (notsSearchVO.getAnd_or_chk()) {
+			case "and" :
+				usedVO = "NotsSearchVO_and";
+				count = dao.getNotsAndCount(notsSearchVO);
+				break;
+			case "or"  :
+				usedVO = "NotsSearchVO_or";
+				count = dao.getNotsOrCount(notsSearchVO);
+				break;
+		}
+		
+		getPaging(paging, count, null);
+		map.put("paging", paging);
+		notsSearchVO.setBegin(paging.getBegin());
+		notsSearchVO.setEnd(paging.getEnd());
+		this.notsSearchVO = notsSearchVO; // 페이징을 위한 검색 기록 저장
+		
+		switch (notsSearchVO.getAnd_or_chk()) {
+			case "and" : map.put("NotsVO", dao.getNotsAndSearch(notsSearchVO)); break;
+			case "or"  : map.put("NotsVO", dao.getNotsOrSearch(notsSearchVO));  break;
+		}
+		
+		return map;
+	}
 	
 	// 공지사항 작성으로 이동
 	@RequestMapping("nots_write.mcat")
@@ -231,6 +311,25 @@ public class MyController {
 	@RequestMapping("nots_update.mcat")
 	public ModelAndView getNotsUpdateGoCmd() {
 		return new ModelAndView("admin/notices/update");
+	}
+	
+	// 공지사항 삭제
+	@RequestMapping(value = "delete.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getNotsDeleteCmd(@RequestBody Map<String, List<String>> nots) {
+		for (String i : nots.keySet()) {
+			for (String j : nots.get(i)) {
+				dao.getNotsDelete(j);
+			}
+		}
+		
+		switch (usedVO) {
+			case "NotsVO"			: count = dao.getNotsCount(); 				 break;
+			case "NotsSearchVO_and" : count = dao.getNotsAndCount(notsSearchVO); break;
+			case "NotsSearchVO_or"	: count = dao.getNotsOrCount(notsSearchVO);  break;
+		}
+		
+		return getNotsPagingCmd(cPage);
 	}
 		
 	

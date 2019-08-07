@@ -7,7 +7,8 @@
 		<meta charset="UTF-8">
 		<title>공지사항 작성</title>
 		<style type="text/css">
-			#bbs table {width:580px; margin:0 auto; margin-top:20px; border:1px solid black; border-collapse:collapse; font-size:14px;}
+			#bbs {width:750px; margin:0 auto;}
+			#bbs table {width:750px; margin:0 auto; margin-top:20px; border:1px solid black; border-collapse:collapse; font-size:14px;}
 			#bbs table caption {font-size:20px; font-weight:bold; margin-bottom:10px;}
 			#bbs table th {text-align:center; border:1px solid black; padding:4px 10px;}
 			#bbs table td {text-align:left; border:1px solid black; padding:4px 10px;}
@@ -18,6 +19,7 @@
 			.hit {width:15%}
 			.title{background:lightsteelblue}
 			.odd {background:silver}
+			.uploadImg {margin-top: 5px; margin-right: 5px;}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	    <script src="resources/js/admin/notices/write.js"></script>
@@ -31,15 +33,15 @@
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="not_sj" size="45"/></td>
+						<td><input type="text" name="not_sj" size="85"/></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="not_cn" cols="50" rows="8"></textarea></td>
+						<td><textarea name="not_cn" cols="87" rows="8"></textarea></td>
 					</tr>
 					<tr>
-						<th>첨부파일</th> <!-- 멀티업로드로 변경 -->
-						<td><input type="file" name="img"/></td>
+						<th>첨부파일</th>
+						<td><input type="file" name="img" id="imgUpload" multiple/></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -50,6 +52,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="uploadImg"><img src=""></div>
 		</form>
 		</div>
 	</body>

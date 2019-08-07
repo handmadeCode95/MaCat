@@ -101,4 +101,30 @@ public class DAO {
 		map.put("end", end);
 		return sqlSessionTemplate.selectList("notices", map);
 	}
+	
+	// 공지사항 and조건 검색 결과 인원
+	public int getNotsAndCount(NotsSearchVO notsSearchVO) {
+		return sqlSessionTemplate.selectOne("nots_and_count", notsSearchVO);
+	}
+			
+	// 공지사항 or조건 검색 결과 인원
+	public int getNotsOrCount(NotsSearchVO notsSearchVO) {
+		return sqlSessionTemplate.selectOne("nots_or_count", notsSearchVO);
+	}
+
+	// 공지사항 and조건 검색
+	public List<NotsVO> getNotsAndSearch(NotsSearchVO notsSearchVO) {
+		return sqlSessionTemplate.selectList("nots_and_search", notsSearchVO);
+	}
+
+	// 공지사항 or조건 검색
+	public List<NotsVO> getNotsOrSearch(NotsSearchVO notsSearchVO) {
+		return sqlSessionTemplate.selectList("nots_or_search", notsSearchVO);
+	}
+	
+	// 공지사항 삭제
+	public int getNotsDelete(String not_sn) {
+		return sqlSessionTemplate.delete("nots_delete", not_sn);
+	}
+
 }
