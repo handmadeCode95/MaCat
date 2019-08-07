@@ -164,13 +164,18 @@ public class MyController {
 	@ResponseBody
 	public Map<String, Object> getMbersSearchCmd(@RequestBody MbersSearchVO mbersSearchVO) {
 		
-		if (mbersSearchVO.getConect_rcord_start() != null && mbersSearchVO.getConect_rcord_end() != null) {
+		if (mbersSearchVO.getBirthday_start() != null)
+			mbersSearchVO.setBirthday_start(mbersSearchVO.getBirthday_start() + " 00:00:00");
+		if (mbersSearchVO.getBirthday_end() != null)
+			mbersSearchVO.setBirthday_end(mbersSearchVO.getBirthday_end() + " 23:59:59");
+		if (mbersSearchVO.getConect_rcord_start() != null)
 			mbersSearchVO.setConect_rcord_start(mbersSearchVO.getConect_rcord_start() + " 00:00:00");
+		if (mbersSearchVO.getConect_rcord_end() != null)
 			mbersSearchVO.setConect_rcord_end(mbersSearchVO.getConect_rcord_end() + " 23:59:59");
-		}else if (mbersSearchVO.getReg_date_start() != null && mbersSearchVO.getReg_date_end() != null) {
+		if (mbersSearchVO.getReg_date_start() != null)
 			mbersSearchVO.setReg_date_start(mbersSearchVO.getReg_date_start() + " 00:00:00");
+		if (mbersSearchVO.getReg_date_end() != null)
 			mbersSearchVO.setReg_date_end(mbersSearchVO.getReg_date_end() + " 23:59:59");
-		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();
@@ -268,10 +273,10 @@ public class MyController {
 	@ResponseBody
 	public Map<String, Object> getNotsSearchCmd(@RequestBody NotsSearchVO notsSearchVO) {
 		
-		if (notsSearchVO.getNot_reg_date_start() != null && notsSearchVO.getNot_reg_date_end() != null) {
+		if (notsSearchVO.getNot_reg_date_start() != null)
 			notsSearchVO.setNot_reg_date_start(notsSearchVO.getNot_reg_date_start() + " 00:00:00");
+		if (notsSearchVO.getNot_reg_date_end() != null)
 			notsSearchVO.setNot_reg_date_end(notsSearchVO.getNot_reg_date_end() + " 23:59:59");
-		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();

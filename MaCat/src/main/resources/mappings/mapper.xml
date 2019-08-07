@@ -47,13 +47,31 @@
 		        AND ID = #{id}
 		    </if>
 		    <if test="birthday_start != null and birthday_end != null">
-		        AND BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		        AND BIRTHDAY BETWEEN TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start == null and birthday_end != null">
+		        AND BIRTHDAY <![CDATA[ <= ]]> TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start != null and birthday_end == null">
+		        AND BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="reg_date_start == null and reg_date_end != null">
+		        AND REG_DATE <![CDATA[ <= ]]> TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end == null">
+		        AND REG_DATE <![CDATA[ >= ]]> TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
 		    <if test="conect_rcord_start != null and conect_rcord_end != null">
 		        AND CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start == null and conect_rcord_end != null">
+		        AND CONECT_RCORD <![CDATA[ <= ]]> TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end == null">
+		        AND CONECT_RCORD <![CDATA[ >= ]]> TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="phone != null">
 		        AND PHONE = #{phone}
@@ -78,13 +96,31 @@
 		        AND ID = #{id}
 		    </if>
 		    <if test="birthday_start != null and birthday_end != null">
-		        AND BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		        AND BIRTHDAY BETWEEN TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start == null and birthday_end != null">
+		        AND BIRTHDAY <![CDATA[ <= ]]> TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start != null and birthday_end == null">
+		        AND BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="reg_date_start == null and reg_date_end != null">
+		        AND REG_DATE <![CDATA[ <= ]]> TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end == null">
+		        AND REG_DATE <![CDATA[ >= ]]> TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
 		    <if test="conect_rcord_start != null and conect_rcord_end != null">
 		        AND CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start == null and conect_rcord_end != null">
+		        AND CONECT_RCORD <![CDATA[ <= ]]> TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end == null">
+		        AND CONECT_RCORD <![CDATA[ >= ]]> TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="phone != null">
 		        AND PHONE = #{phone}
@@ -115,13 +151,31 @@
 		        OR ID = #{id}
 		    </if>
 		    <if test="birthday_start != null and birthday_end != null">
-		        OR BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		        OR BIRTHDAY BETWEEN TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start == null and birthday_end != null">
+		        OR BIRTHDAY <![CDATA[ <= ]]> TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start != null and birthday_end == null">
+		        OR BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="reg_date_start == null and reg_date_end != null">
+		        OR REG_DATE <![CDATA[ <= ]]> TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end == null">
+		        OR REG_DATE <![CDATA[ >= ]]> TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
 		    <if test="conect_rcord_start != null and conect_rcord_end != null">
 		        OR CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start == null and conect_rcord_end != null">
+		        OR CONECT_RCORD <![CDATA[ <= ]]> TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end == null">
+		        OR CONECT_RCORD <![CDATA[ >= ]]> TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="phone != null">
 		        OR PHONE = #{phone}
@@ -146,14 +200,35 @@
 		        OR ID = #{id}
 		    </if>
 		    <if test="birthday_start != null and birthday_end != null">
-		        OR BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		        OR BIRTHDAY BETWEEN TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start == null and birthday_end != null">
+		        OR BIRTHDAY <![CDATA[ <= ]]> TO_DATE(#{birthday_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="birthday_start != null and birthday_end == null">
+		        OR BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="reg_date_start == null and reg_date_end != null">
+		        OR REG_DATE <![CDATA[ <= ]]> TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="reg_date_start != null and reg_date_end == null">
+		        OR REG_DATE <![CDATA[ >= ]]> TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
 		    <if test="conect_rcord_start != null and conect_rcord_end != null">
 		        OR CONECT_RCORD BETWEEN TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="conect_rcord_start == null and conect_rcord_end != null">
+		        OR CONECT_RCORD <![CDATA[ <= ]]> TO_DATE(#{conect_rcord_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="conect_rcord_start != null and conect_rcord_end == null">
+		        OR CONECT_RCORD <![CDATA[ >= ]]> TO_DATE(#{conect_rcord_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- <if test="birthday_start != null and birthday_end != null">
+		        OR BIRTHDAY BETWEEN #{birthday_start} AND #{birthday_end}
+		    </if> -->
 		    <if test="phone != null">
 		        OR PHONE = #{phone}
 		    </if>
@@ -208,8 +283,14 @@
 		    <if test="mber_sn != null">
 		        AND MBER_SN = #{mber_sn}
 		    </if>
-		    <if test="not_reg_date_start != null and not_reg_date_end != null">
+		     <if test="not_reg_date_start != null and not_reg_date_end != null">
 		        AND NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start == null and not_reg_date_end != null">
+		        AND NOT_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end == null">
+		        AND NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
 	</select>
@@ -232,6 +313,12 @@
 		    </if>
 		    <if test="not_reg_date_start != null and not_reg_date_end != null">
 		        AND NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start == null and not_reg_date_end != null">
+		        AND NOT_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end == null">
+		        AND NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
 		
@@ -261,6 +348,12 @@
 		    <if test="not_reg_date_start != null and not_reg_date_end != null">
 		        OR NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="not_reg_date_start == null and not_reg_date_end != null">
+		        OR NOT_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end == null">
+		        OR NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
 		</where>
 	</select>
 	
@@ -282,6 +375,12 @@
 		    </if>
 		    <if test="not_reg_date_start != null and not_reg_date_end != null">
 		        OR NOT_REG_DATE BETWEEN TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start == null and not_reg_date_end != null">
+		        OR NOT_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{not_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_date_start != null and not_reg_date_end == null">
+		        OR NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
 		

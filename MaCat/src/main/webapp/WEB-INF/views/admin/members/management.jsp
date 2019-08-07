@@ -55,10 +55,10 @@
 	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_grad">
 	        회원 등급 <select class="mber_grad" name="mber_grad" disabled>
 	            <option value="">등급선택</option>
-	            <option value="4">운영자</option>
-	            <option value="3">관리자</option>
-	            <option value="2">판매자</option>
-	            <option value="1">일반회원</option>
+	            <option value="4">관리자</option>
+	            <option value="3">VIP</option>
+	            <option value="2">GOLD</option>
+	            <option value="1">WHITE</option>
 	        </select><br><br>
 
 	        
@@ -93,7 +93,7 @@
 										<td><input type="checkbox" class="chkbox" name="mbers" value="${i.mber_sn}"></td>
 										<td><input type="hidden" class="${i.mber_sn}" name="mber_sn" value="${i.mber_sn}" disabled>${i.mber_sn}</td>
 										<td>${i.id}</td>
-										<td><input type="text" class="${i.mber_sn}" name="pw" value="${i.pw}" minlength="8" disabled></td>
+										<td><input type="password" class="${i.mber_sn}" name="pw" value="${i.pw}" disabled></td>
 										<td><input type="text" class="${i.mber_sn}" name="name" value="${i.name}" disabled></td>
 										<td><input type="text" class="${i.mber_sn}" name="email" value="${i.email}" disabled></td>
 										<td>${i.birthday.substring(0, 10)}</td>
@@ -108,9 +108,9 @@
 										<td><select id="grad" class="${i.mber_sn}" name="mber_grad" disabled>
 								            <option value="">등급선택</option>
 								            <option value="4" <c:if test="${i.mber_grad == 4}">selected</c:if>>운영자</option>
-								            <option value="3" <c:if test="${i.mber_grad == 3}">selected</c:if>>관리자</option>
-								            <option value="2" <c:if test="${i.mber_grad == 2}">selected</c:if>>판매자</option>
-								            <option value="1" <c:if test="${i.mber_grad == 1}">selected</c:if>>일반회원</option>
+								            <option value="3" <c:if test="${i.mber_grad == 3}">selected</c:if>>VIP</option>
+								            <option value="2" <c:if test="${i.mber_grad == 2}">selected</c:if>>GOLD</option>
+								            <option value="1" <c:if test="${i.mber_grad == 1}">selected</c:if>>WHITE</option>
 										</select></td>
 									</tr>
 								</c:forEach>

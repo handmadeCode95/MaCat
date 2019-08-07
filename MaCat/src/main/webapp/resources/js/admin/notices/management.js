@@ -54,6 +54,8 @@ $(function() {
 		$.each(array, function() {
 			var name = $.trim(this.name), value = $.trim(this.value);
 			
+			if (value == "") return true;
+			
 			if (newJSON[name]) {
 	            if (!newJSON[name].push) {
 	            	newJSON[name] = [newJSON[name]];
