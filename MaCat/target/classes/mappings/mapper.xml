@@ -23,6 +23,7 @@
 	
 	<!--=========================== 회원 정보 관리 ===========================-->
 	
+	
 	<!-- 전체 회원 숫자 -->
 	<select id="mbers_count" resultType="int">
 		SELECT COUNT(*) FROM MEMBERS
@@ -129,9 +130,7 @@
 		        AND MBER_GRAD = #{mber_grad}
 		    </if>
 		</where>
-		
 		ORDER BY MBER_SN DESC) A )
-		
 		<where>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
@@ -236,9 +235,7 @@
 		        OR MBER_GRAD = #{mber_grad}
 		    </if>
 		</where>
-		
 		ORDER BY MBER_SN DESC) A )
-		
 		<where>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
@@ -256,6 +253,7 @@
 	
 	
 	<!--=========================== 공지사항 관리 ===========================-->
+	
 	
 	<!-- 전체 공지 갯수 -->
 	<select id="nots_count" resultType="int">
@@ -321,9 +319,7 @@
 		        AND NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
-		
 		ORDER BY NOT_SN DESC) A )
-		
 		<where>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
@@ -383,9 +379,7 @@
 		        OR NOT_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{not_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
-		
 		ORDER BY NOT_SN DESC) A )
-		
 		<where>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
@@ -396,6 +390,166 @@
 		DELETE FROM NOTICES WHERE NOT_SN = #{not_sn}
 	</delete>
 	
+	
+	<!--=========================== 고객 문의 관리 ===========================-->
+	
+	
+	<!-- 전체 문의 갯수 -->
+	<select id="qna_count" resultType="int">
+		SELECT COUNT(*) FROM QNA
+	</select>
+	
+	<!-- 고객 문의 가져오기 -->
+	<select id="qna" parameterType="Map" resultType="QnaVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A ) WHERE QNA_LEVEL = 0 AND R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 고객 문의 and조건 검색 결과 인원 -->
+	<select id="qna_and_count" parameterType="QnaSearchVO" resultType="int">
+		SELECT COUNT(*) FROM QNA
+		<where>
+	  		<if test="qna_sn != null">
+		    	QNA_SN = #{qna_sn}
+		    </if>
+		    <if test="qna_sj != null">
+		        AND QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_name != null">
+		        AND QNA_NAME = #{qna_name}
+		    </if>
+		    <if test="qna_id != null">
+		        AND QNA_ID = #{qna_id}
+		    </if>
+		     <if test="qna_reg_date_start != null and qna_reg_date_end != null">
+		        AND QNA_REG_DATE BETWEEN TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start == null and qna_reg_date_end != null">
+		        AND QNA_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
+		        AND QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 고객 문의 and조건 검색 -->
+	<select id="qna_and_search" parameterType="QnaSearchVO" resultType="QnaVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA
+		<where>
+	  		<if test="qna_sn != null">
+		    	QNA_SN = #{qna_sn}
+		    </if>
+		    <if test="qna_sj != null">
+		        AND QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_name != null">
+		        AND QNA_NAME = #{qna_name}
+		    </if>
+		    <if test="qna_id != null">
+		        AND QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end != null">
+		        AND QNA_REG_DATE BETWEEN TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start == null and qna_reg_date_end != null">
+		        AND QNA_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
+		        AND QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
+		<where>
+			<if test="view_answer == null">
+				QNA_LEVEL = 0 AND
+			</if>
+			<if test="view_answered_qna == null">
+				QNA_ANS_CHK = 0 AND
+			</if>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 고객 문의 or조건 검색 결과 인원 -->
+	<select id="qna_or_count" parameterType="QnaSearchVO" resultType="int">
+		SELECT COUNT(*) FROM QNA
+		<where>
+	  		<if test="qna_sn != null">
+		    	QNA_SN = #{qna_sn}
+		    </if>
+		    <if test="qna_sj != null">
+		        OR QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_name != null">
+		        OR QNA_NAME = #{qna_name}
+		    </if>
+		    <if test="qna_id != null">
+		        OR QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end != null">
+		        OR QNA_REG_DATE BETWEEN TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start == null and qna_reg_date_end != null">
+		        OR QNA_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
+		        OR QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 고객 문의 or조건 검색 -->
+	<select id="qna_or_search" parameterType="QnaSearchVO" resultType="QnaVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA
+		<where>
+	  		<if test="qna_sn != null">
+		    	QNA_SN = #{qna_sn}
+		    </if>
+		    <if test="qna_sj != null">
+		        OR QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_name != null">
+		        OR QNA_NAME = #{qna_name}
+		    </if>
+		    <if test="qna_id != null">
+		        OR QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end != null">
+		        OR QNA_REG_DATE BETWEEN TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start == null and qna_reg_date_end != null">
+		        OR QNA_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{qna_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
+		        OR QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
+		<where>
+			<if test="view_answer == null">
+				QNA_LEVEL = 0 AND
+			</if>
+			<if test="view_answered_qna == null">
+				QNA_ANS_CHK = 0 AND
+			</if>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 고객 문의 삭제 -->
+	<delete id="qna_delete" parameterType="String">
+		DELETE FROM QNA WHERE QNA_SN = #{qna_sn}
+	</delete>
+	
+	<!-- 고객 문의 보기 -->
+	<select id="qna_view" resultType="QnaVO" parameterType="String">
+		SELECT * FROM QNA WHERE QNA_SN = #{qna_sn}
+	</select>
+	
+	<!-- 고객 문의 조회수 업데이트 -->
+	<update id="qna_rdcnt_update" parameterType="QnaVO">
+		UPDATE QNA SET QNA_RDCNT = #{qna_rdcnt} WHERE QNA_SN = #{qna_sn}
+	</update>
 </mapper>
 
 

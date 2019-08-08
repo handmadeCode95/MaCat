@@ -1,7 +1,5 @@
 package com.macat.service;
 
-import java.util.List;
-
 public class MbersVO {
 	
 	private String mber_sn, id, pw, name, email, email_end, birthday, phone, tel, point,

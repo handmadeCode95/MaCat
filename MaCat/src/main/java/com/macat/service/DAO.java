@@ -90,9 +90,9 @@ public class DAO {
 
 	
 	// 전체 공지 갯수
-		public int getNotsCount() {
-			return sqlSessionTemplate.selectOne("nots_count");
-		}
+	public int getNotsCount() {
+		return sqlSessionTemplate.selectOne("nots_count");
+	}
 	
 	// 공지사항 가져오기
 	public List<NotsVO> getNotsList(int begin, int end) {
@@ -125,6 +125,58 @@ public class DAO {
 	// 공지사항 삭제
 	public int getNotsDelete(String not_sn) {
 		return sqlSessionTemplate.delete("nots_delete", not_sn);
+	}
+	
+	
+	////////////////////////////////// 고객 문의 관리 //////////////////////////////////
+	
+	
+	// 전체 문의 갯수
+	public int getQnaCount() {
+		return sqlSessionTemplate.selectOne("qna_count");
+	}
+	
+	// 고객 문의 가져오기
+	public List<QnaVO> getQnaList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("qna", map);
+	}
+	
+	// 고객 문의 and조건 검색 결과 인원
+	public int getQnaAndCount(QnaSearchVO qnaSearchVO) {
+		return sqlSessionTemplate.selectOne("qna_and_count", qnaSearchVO);
+	}
+			
+	// 고객 문의 or조건 검색 결과 인원
+	public int getQnaOrCount(QnaSearchVO qnaSearchVO) {
+		return sqlSessionTemplate.selectOne("qna_or_count", qnaSearchVO);
+	}
+
+	// 고객 문의 and조건 검색
+	public List<QnaVO> getQnaAndSearch(QnaSearchVO qnaSearchVO) {
+		return sqlSessionTemplate.selectList("qna_and_search", qnaSearchVO);
+	}
+
+	// 고객 문의 or조건 검색
+	public List<QnaVO> getQnaOrSearch(QnaSearchVO qnaSearchVO) {
+		return sqlSessionTemplate.selectList("qna_or_search", qnaSearchVO);
+	}
+		
+	// 고객 문의 삭제
+	public int getQnaDelete(String qna_sn) {
+		return sqlSessionTemplate.delete("qna_delete", qna_sn);
+	}
+	
+	// 고객 문의 보기
+	public QnaVO getQnaView(String qna_sn) {
+		return sqlSessionTemplate.selectOne("qna_view", qna_sn);
+	}
+	
+	// 고객 문의 조회수 업데이트
+	public int getQnaRdcntUpdate(QnaVO qnaVO) {
+		return sqlSessionTemplate.update("qna_rdcnt_update", qnaVO);
 	}
 
 }

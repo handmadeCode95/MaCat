@@ -1,6 +1,5 @@
 package com.macat.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +19,8 @@ import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
 import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
+import com.macat.service.QnaSearchVO;
+import com.macat.service.QnaVO;
 
 @Controller
 public class MyController {
@@ -39,6 +39,7 @@ public class MyController {
 	// 페이징을 위한 회원 정보 검색 기록
 	private MbersSearchVO mbersSearchVO;
 	private NotsSearchVO notsSearchVO;
+	private QnaSearchVO qnaSearchVO;
 	
 	private String usedVO;			 	 // 페이징을 위한 조회 기록
 	private int count;					 // 페이징을 위한 검색 인원 수 기록
@@ -93,7 +94,7 @@ public class MyController {
 	
 	// 관리자 main으로 이동
 	@RequestMapping("admin.mcat")
-	public ModelAndView getAdminMain() {
+	public ModelAndView getAdminMainCmd() {
 		return new ModelAndView("admin/main");
 	}
 	
@@ -123,6 +124,19 @@ public class MyController {
 		count = dao.getNotsCount();
 		getPaging(paging, count, cPage);
 		mv.addObject("notices", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+		mv.addObject("paging", paging);
+		return mv;
+	}
+	
+	// 고객 문의 관리로 이동
+	@RequestMapping("qna_manage.mcat")
+	public ModelAndView getQnaCmd(String cPage) {
+		usedVO = "QnaVO";
+		ModelAndView mv = new ModelAndView("admin/qna/management");
+		Paging paging = new Paging();
+		count = dao.getQnaCount();
+		getPaging(paging, count, cPage);
+		mv.addObject("qna", dao.getQnaList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
 	}
@@ -319,7 +333,7 @@ public class MyController {
 	}
 	
 	// 공지사항 삭제
-	@RequestMapping(value = "delete.mcat", method = RequestMethod.POST)
+	@RequestMapping(value = "nots_delete.mcat", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getNotsDeleteCmd(@RequestBody Map<String, List<String>> nots) {
 		for (String i : nots.keySet()) {
@@ -336,9 +350,112 @@ public class MyController {
 		
 		return getNotsPagingCmd(cPage);
 	}
+	
+	
+	////////////////////////////////// 고객 문의 관리 //////////////////////////////////
+
+	
+	// 고객 문의 페이징
+	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
 		
+		this.cPage = cPage;
+		Paging paging = new Paging();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		getPaging(paging, count, cPage);
+		map.put("paging", paging);
+		
+		switch (usedVO) {
+			case "QnaVO" :
+				map.put("QnaVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
+				break;
+			default :
+				qnaSearchVO.setBegin(paging.getBegin());
+				qnaSearchVO.setEnd(paging.getEnd());
+				switch (usedVO) {
+					case "QnaSearchVO_and" : map.put("QnaVO", dao.getQnaAndSearch(qnaSearchVO)); break;
+					case "QnaSearchVO_or"  : map.put("QnaVO", dao.getQnaOrSearch(qnaSearchVO));  break;
+				}
+		}
+		
+		return map;
+	}
+	
+	// 고객 문의 검색
+	@RequestMapping(value = "qna_search.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getQnaSearchCmd(@RequestBody QnaSearchVO qnaSearchVO) {
+		
+		if (qnaSearchVO.getQna_reg_date_start() != null)
+			qnaSearchVO.setQna_reg_date_start(qnaSearchVO.getQna_reg_date_start() + " 00:00:00");
+		if (qnaSearchVO.getQna_reg_date_end() != null)
+			qnaSearchVO.setQna_reg_date_end(qnaSearchVO.getQna_reg_date_end() + " 23:59:59");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Paging paging = new Paging();
+		
+		switch (qnaSearchVO.getAnd_or_chk()) {
+			case "and" :
+				usedVO = "QnaSearchVO_and";
+				count = dao.getQnaAndCount(qnaSearchVO);
+				break;
+			case "or"  :
+				usedVO = "QnaSearchVO_or";
+				count = dao.getQnaOrCount(qnaSearchVO);
+				break;
+		}
+		
+		getPaging(paging, count, null);
+		map.put("paging", paging);
+		qnaSearchVO.setBegin(paging.getBegin());
+		qnaSearchVO.setEnd(paging.getEnd());
+		this.qnaSearchVO = qnaSearchVO; // 페이징을 위한 검색 기록 저장
+		
+		switch (qnaSearchVO.getAnd_or_chk()) {
+			case "and" : map.put("QnaVO", dao.getQnaAndSearch(qnaSearchVO)); break;
+			case "or"  : map.put("QnaVO", dao.getQnaOrSearch(qnaSearchVO));  break;
+		}
+		
+		return map;
+	}
+	
+	// 고객 문의 삭제
+	@RequestMapping(value = "qna_delete.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getQnaDeleteCmd(@RequestBody Map<String, List<String>> qnas) {
+		for (String i : qnas.keySet()) {
+			for (String j : qnas.get(i)) {
+				dao.getQnaDelete(j);
+			}
+		}
+		
+		switch (usedVO) {
+			case "QnaVO"			: count = dao.getQnaCount(); 			   break;
+			case "QnaSearchVO_and"  : count = dao.getQnaAndCount(qnaSearchVO); break;
+			case "QnaSearchVO_or"	: count = dao.getQnaOrCount(qnaSearchVO);  break;
+		}
+		
+		return getQnaPagingCmd(cPage);
+	}
+	
+	// 문의 보기로 이동
+	@RequestMapping("qna_view.mcat")
+	public ModelAndView getQnaViewCmd(HttpSession session, String qna_sn) {
+		QnaVO qnaVO = dao.getQnaView(qna_sn);
+		
+		qnaVO.setQna_rdcnt(qnaVO.getQna_rdcnt() + 1);
+		dao.getQnaRdcntUpdate(qnaVO);
+		
+		session.setAttribute("qnaVO", qnaVO);
+		
+		return new ModelAndView("admin/qna/view");
+	}
+	
 	
 	////////////////////////////////// 페이징 //////////////////////////////////
+	
 	
 	public void getPaging(Paging paging, int count, String cPage) {
 		paging.setTotalRecord(count);

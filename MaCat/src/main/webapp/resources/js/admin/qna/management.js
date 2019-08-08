@@ -5,15 +5,16 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "NotsVO") {
+			if (key === "QnaVO") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["not_sn"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='nots' value='" + v["not_sn"] + "'></td>";
-					result += "<td>" + v["not_sn"] + "</td>";
-					result += "<td><a href='nots_update.mcat'>" + v["not_sj"] + "</a></td>";
-					result += "<td>" + v["not_name"] + "</td>";
-					result += "<td>" + v["mber_sn"] + "</td>";
-					result += "<td>" + v["not_reg_date"].substring(0, 10) + "</td>";
+					result += "<tr id='" + v["qna_sn"] + "'>";
+					result += "<td><input type='checkbox' class='chkbox' name='qnas' value='" + v["qna_sn"] + "'></td>";
+					result += "<td>"; if (v["qna_ans_chk"] == 0) result += "미답변"; if (v["qna_ans_chk"] == 1) result += "답변완료"; result += "</td>";
+					result += "<td>" + v["qna_sn"] + "</td>";
+					result += "<td><a href='qna_view.mcat?qna_sn=" + v["qna_sn"] + "'>" + v["qna_sj"] + "</a></td>";
+					result += "<td>" + v["qna_name"] + "</td>";
+					result += "<td>" + v["qna_reg_date"].substring(0, 10) + "</td>";
+					result += "<td>" + v["qna_rdcnt"] + "</td>";
 				});
 			}else if (key === "paging"){
 				var paging = value;
@@ -62,8 +63,8 @@ $(function() {
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 nots일 경우에는 무조건 배열처리(nots는 체크박스이다)
-	        	if (name === "nots") {
+	        	// 이름이 qnas일 경우에는 무조건 배열처리(qnas는 체크박스이다)
+	        	if (name === "qnas") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -95,7 +96,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "nots_paging.mcat",
+			url			: "qna_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -111,10 +112,10 @@ $(function() {
 	});
 	
 	
-	// 공지사항 검색 AJAX
+	// 고객 문의 검색 AJAX
 	$("#searchBtn").click(function() {
 		$.ajax({
-			url			: "nots_search.mcat",
+			url			: "qna_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -130,10 +131,10 @@ $(function() {
 	});
 	
 	
-	// 삭제 AJAX
+	// 고객 문의 삭제 AJAX
 	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "nots_delete.mcat",
+			url			: "qna_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -147,12 +148,6 @@ $(function() {
             				  alert("에러 발생");
             			  }
 		});
-	});
-
-	
-	// 글쓰기 버튼 클릭시 공지사항 작성 페이지로 이동
-	$("#write").click(function() {
-		$(location).attr("href", "nots_write.mcat");
 	});
 	
 });

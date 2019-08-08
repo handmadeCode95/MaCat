@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$(location).attr("href", "nots_manage.mcat");
+				$(location).attr("href", "login.mcat");
 			});
 		</script>
 	</head>

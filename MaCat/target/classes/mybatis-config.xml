@@ -8,6 +8,8 @@
 		<typeAlias type="com.macat.service.MbersSearchVO" alias="MbersSearchVO"/>
 		<typeAlias type="com.macat.service.NotsVO" alias="NotsVO"/>
 		<typeAlias type="com.macat.service.NotsSearchVO" alias="NotsSearchVO"/>
+		<typeAlias type="com.macat.service.QnaVO" alias="QnaVO"/>
+		<typeAlias type="com.macat.service.QnaSearchVO" alias="QnaSearchVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

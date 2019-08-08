@@ -1,7 +1,5 @@
 package com.macat.service;
 
-import java.util.List;
-
 public class NotsVO {
 	
 	private String not_sn, not_sj, not_name, not_cn, not_reg_date, mber_sn;
