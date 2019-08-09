@@ -2,7 +2,7 @@ package com.macat.service;
 
 public class QnaSearchVO {
 	
-	private String qna_sn, qna_sj, qna_name, qna_id, qna_reg_date_start, qna_reg_date_end, view_answer, view_answered_qna, and_or_chk;
+	private String qna_sn, qna_sj, qna_name, qna_id, qna_reg_date_start, qna_reg_date_end, view, and_or_chk;
 	private int begin, end; // 페이징
 	
 	public QnaSearchVO() {
@@ -10,7 +10,7 @@ public class QnaSearchVO {
 	}
 
 	public QnaSearchVO(String qna_sn, String qna_sj, String qna_name, String qna_id, String qna_reg_date_start,
-			String qna_reg_date_end, String view_answer, String view_answered_qna, String and_or_chk, int begin,
+			String qna_reg_date_end, String view, String and_or_chk, int begin,
 			int end) {
 		super();
 		this.qna_sn = qna_sn;
@@ -19,8 +19,7 @@ public class QnaSearchVO {
 		this.qna_id = qna_id;
 		this.qna_reg_date_start = qna_reg_date_start;
 		this.qna_reg_date_end = qna_reg_date_end;
-		this.view_answer = view_answer;
-		this.view_answered_qna = view_answered_qna;
+		this.view = view;
 		this.and_or_chk = and_or_chk;
 		this.begin = begin;
 		this.end = end;
@@ -98,19 +97,12 @@ public class QnaSearchVO {
 		this.end = end;
 	}
 
-	public String getView_answer() {
-		return view_answer;
+	public String getView() {
+		return view;
 	}
 
-	public void setView_answer(String view_answer) {
-		this.view_answer = view_answer;
+	public void setView(String view) {
+		this.view = view;
 	}
 
-	public String getView_answered_qna() {
-		return view_answered_qna;
-	}
-
-	public void setView_answered_qna(String view_answered_qna) {
-		this.view_answered_qna = view_answered_qna;
-	}
 }

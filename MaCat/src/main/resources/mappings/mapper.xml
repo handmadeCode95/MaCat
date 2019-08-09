@@ -401,7 +401,7 @@
 	
 	<!-- 고객 문의 가져오기 -->
 	<select id="qna" parameterType="Map" resultType="QnaVO"> 
-		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A ) WHERE QNA_LEVEL = 0 AND R_NUM BETWEEN #{begin} AND #{end}
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end} AND QNA_ANS_CHK = 0
 	</select>
 	
 	<!-- 고객 문의 and조건 검색 결과 인원 -->
@@ -429,6 +429,12 @@
 		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
 		        AND QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
 		</where>
 	</select>
 	
@@ -457,15 +463,15 @@
 		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
 		        AND QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
 		</where>
 		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
 		<where>
-			<if test="view_answer == null">
-				QNA_LEVEL = 0 AND
-			</if>
-			<if test="view_answered_qna == null">
-				QNA_ANS_CHK = 0 AND
-			</if>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
 	</select>
@@ -495,6 +501,12 @@
 		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
 		        OR QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
 		</where>
 	</select>
 	
@@ -523,15 +535,15 @@
 		    <if test="qna_reg_date_start != null and qna_reg_date_end == null">
 		        OR QNA_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{qna_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
 		</where>
 		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
 		<where>
-			<if test="view_answer == null">
-				QNA_LEVEL = 0 AND
-			</if>
-			<if test="view_answered_qna == null">
-				QNA_ANS_CHK = 0 AND
-			</if>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
 	</select>
@@ -551,6 +563,3 @@
 		UPDATE QNA SET QNA_RDCNT = #{qna_rdcnt} WHERE QNA_SN = #{qna_sn}
 	</update>
 </mapper>
-
-
-

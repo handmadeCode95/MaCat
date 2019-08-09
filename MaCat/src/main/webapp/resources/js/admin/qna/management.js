@@ -9,9 +9,13 @@ $(function() {
 				$.each(value, function(k, v){
 					result += "<tr id='" + v["qna_sn"] + "'>";
 					result += "<td><input type='checkbox' class='chkbox' name='qnas' value='" + v["qna_sn"] + "'></td>";
-					result += "<td>"; if (v["qna_ans_chk"] == 0) result += "미답변"; if (v["qna_ans_chk"] == 1) result += "답변완료"; result += "</td>";
+					result += "<td>"; if (v["qna_ans_chk"] == 0) result += "미답변"; if (v["qna_ans_chk"] == 1) result += "답변완료"; if (v["qna_ans_chk"] == 2) result += "답변"; result += "</td>";
 					result += "<td>" + v["qna_sn"] + "</td>";
-					result += "<td><a href='qna_view.mcat?qna_sn=" + v["qna_sn"] + "'>" + v["qna_sj"] + "</a></td>";
+					result += "<td>";
+					for (var i = 0; i < v["qna_level"]; i++) {
+						result += "&nbsp;&nbsp;┗";
+					}
+					result += "<a href='qna_view.mcat?qna_sn=" + v["qna_sn"] + "'>" + v["qna_sj"] + "</a></td>";
 					result += "<td>" + v["qna_name"] + "</td>";
 					result += "<td>" + v["qna_reg_date"].substring(0, 10) + "</td>";
 					result += "<td>" + v["qna_rdcnt"] + "</td>";

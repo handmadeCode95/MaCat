@@ -44,8 +44,9 @@
 	        등록일 <input type="date" class="qna_reg_date" name="qna_reg_date_start" disabled>~
 	        <input type="date" class="qna_reg_date" name="qna_reg_date_end" disabled><br><br>
 	        
-	        <input type="checkbox" name="view_answer" value="view">답변 글 보기
-	        <input type="checkbox" name="view_answered_qna" value="view">이미 답변한 문의 보기<br><br>
+	        <input type="radio" name="view" value="0" checked>미답변 문의 보기
+	        <input type="radio" name="view" value="1">답변 완료 문의 보기
+	        <input type="radio" name="view" value="2">전체 보기<br><br>
 	        <input type="radio" name="and_or_chk" value="and" checked>AND
 	        <input type="radio" name="and_or_chk" value="or">OR
 	        <input type="button" value="조회" id="searchBtn">
@@ -73,9 +74,15 @@
 								<c:forEach var="i" items="${qna}">
 									<tr id="${i.qna_sn}">
 										<td><input type="checkbox" class="chkbox" name="qnas" value="${i.qna_sn}"></td>
-										<td><c:if test="${i.qna_ans_chk == 0}">미답변</c:if><c:if test="${i.qna_ans_chk == 1}">답변완료</c:if></td>
+										<td><c:if test="${i.qna_ans_chk == 0}">미답변</c:if>
+										<c:if test="${i.qna_ans_chk == 1}">답변완료</c:if><c:if test="${i.qna_ans_chk == 2}">답변</c:if></td>
 										<td>${i.qna_sn}</td>
-										<td><a href="qna_view.mcat?qna_sn=${i.qna_sn}">${i.qna_sj}</a></td>
+										<td>
+											<c:forEach begin="1" end="${i.qna_level}">
+												&nbsp;&nbsp;┗
+											</c:forEach>
+											<a href="qna_view.mcat?qna_sn=${i.qna_sn}">${i.qna_sj}</a>
+										</td>
 										<td>${i.qna_name}</td>
 										<td>${i.qna_reg_date.substring(0, 10)}</td>
 										<td>${i.qna_rdcnt}</td>
