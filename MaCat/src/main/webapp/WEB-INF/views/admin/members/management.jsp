@@ -40,21 +40,25 @@
 	        <input type="checkbox" name="search_chk" value="birthday">
 	        생일 <input type="date" class="birthday" name="birthday_start" disabled>~
 	        <input type="date" class="birthday" name="birthday_end" disabled>
+	        
+	        &nbsp;&nbsp;&nbsp;성별&nbsp;<input type="radio" name="gender" value="0" checked>전체
+	        <input type="radio" name="gender" value="1">남성
+	        <input type="radio" name="gender" value="2">여성<br><br>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="reg_date">
+	        <input type="checkbox" name="search_chk" value="reg_date">
 	        가입일 <input type="date" class="reg_date" name="reg_date_start" disabled>~
-	        <input type="date" class="reg_date" name="reg_date_end" disabled><br><br>
+	        <input type="date" class="reg_date" name="reg_date_end" disabled>
 	
-	        <input type="checkbox" name="search_chk" value="conect_rcord">
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="conect_rcord">
 	        접속일 <input type="date" class="conect_rcord" name="conect_rcord_start" disabled>~
-	        <input type="date" class="conect_rcord" name="conect_rcord_end" disabled>
+	        <input type="date" class="conect_rcord" name="conect_rcord_end" disabled><br><br>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="phone">
+	        <input type="checkbox" name="search_chk" value="phone">
 	        핸드폰 <input type="tel" class="phone" name="phone" disabled>
 	
 	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_grad">
 	        회원 등급 <select class="mber_grad" name="mber_grad" disabled>
-	            <option value="">등급선택</option>
+	            <option selected>등급선택</option>
 	            <option value="4">관리자</option>
 	            <option value="3">VIP</option>
 	            <option value="2">GOLD</option>
@@ -75,7 +79,7 @@
 				<table style="width: 500px; margin: 0 auto;">
 					<thead>
 						<tr><th><input type="checkbox" class="all" name="mbers_all" value="0"></th><th>번호</th><th>아이디</th><th>패스워드</th>
-						<th>이름</th><th>이메일</th><th>생일</th><th>휴대폰</th>
+						<th>이름</th><th>이메일</th><th>생일</th><th>성별</th><th>휴대폰</th>
 						<th>전화번호</th><th>포인트</th><th>가입날짜</th><th>접속날짜</th>
 						<th>우편번호</th><th>주소</th><th>상세주소</th><th>회원등급</th></tr>
 					</thead>
@@ -83,7 +87,7 @@
 						<c:choose>
 							<c:when test="${empty members}">
 								<tr>
-									<td colspan="16"><h3>조회된 회원 정보가 없습니다.</h3></td>
+									<td colspan="17"><h3>조회된 회원 정보가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
@@ -97,6 +101,7 @@
 										<td><input type="text" class="${i.mber_sn}" name="name" value="${i.name}" disabled></td>
 										<td><input type="text" class="${i.mber_sn}" name="email" value="${i.email}" disabled></td>
 										<td>${i.birthday.substring(0, 10)}</td>
+										<td><c:if test="${i.gender == 1}">남</c:if><c:if test="${i.gender == 2}">여</c:if></td>
 										<td><input type="text" class="${i.mber_sn}" name="phone" value="${i.phone}" disabled></td>
 										<td><input type="text" class="${i.mber_sn}" name="tel" value="${i.tel}" disabled></td>
 										<td>${i.point}</td>
@@ -106,7 +111,7 @@
 										<td><input type="text" class="${i.mber_sn}" name="adres" value="${i.adres}" disabled></td>
 										<td><input type="text" class="${i.mber_sn}" name="detail_adres" value="${i.detail_adres}" disabled></td>
 										<td><select id="grad" class="${i.mber_sn}" name="mber_grad" disabled>
-								            <option value="">등급선택</option>
+								            <option>등급선택</option>
 								            <option value="4" <c:if test="${i.mber_grad == 4}">selected</c:if>>운영자</option>
 								            <option value="3" <c:if test="${i.mber_grad == 3}">selected</c:if>>VIP</option>
 								            <option value="2" <c:if test="${i.mber_grad == 2}">selected</c:if>>GOLD</option>
@@ -121,7 +126,7 @@
 										<tr>
 											<%-- 공백 삽입 --%>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 										</tr>
 									</c:forEach>
@@ -132,7 +137,7 @@
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
-							<td colspan="16">
+							<td colspan="17">
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>

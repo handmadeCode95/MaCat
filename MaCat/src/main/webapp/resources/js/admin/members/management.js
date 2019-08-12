@@ -14,6 +14,7 @@ $(function() {
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='name' value='" + v["name"] + "' disabled></td>";
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='email' value='" + v["email"] + "' disabled></td>";
 					result += "<td>" + v["birthday"].substring(0, 10) + "</td>";
+					result += "<td>"; if(v["gender"] === "1") result += "남"; if(v["gender"] === "2") result += "여"; result += "</td>";
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='phone' value='" + v["phone"] + "' disabled></td>";
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='tel' value='" + v["tel"] + "' disabled></td>";
 					result += "<td>" + v["point"] + "</td>";
@@ -23,7 +24,7 @@ $(function() {
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='adres' value='" + v["adres"] + "' disabled></td>";
 					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='detail_adres' value='" + v["detail_adres"] + "' disabled></td>";
 					result += "<td><select id='grad' class='" + v["mber_sn"] + "' name='mber_grad' disabled>";
-					result += "<option value=''>등급선택</option>";
+					result += "<option>등급선택</option>";
 					result += "<option value='4'"; if(v["mber_grad"] === "4") result += " selected"; result += ">운영자</option>";
 					result += "<option value='3'"; if(v["mber_grad"] === "3") result += " selected"; result += ">VIP</option>";
 					result += "<option value='2'"; if(v["mber_grad"] === "2") result += " selected"; result += ">GOLD</option>";

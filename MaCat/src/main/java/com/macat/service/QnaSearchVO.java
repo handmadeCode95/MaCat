@@ -2,17 +2,17 @@ package com.macat.service;
 
 public class QnaSearchVO {
 	
-	private String qna_sn, qna_sj, qna_name, qna_id, qna_reg_date_start, qna_reg_date_end, view, and_or_chk;
+	private String qna_ctgry, qna_sn, qna_sj, qna_name, qna_id, qna_reg_date_start, qna_reg_date_end, view, and_or_chk;
 	private int begin, end; // 페이징
 	
 	public QnaSearchVO() {
 
 	}
 
-	public QnaSearchVO(String qna_sn, String qna_sj, String qna_name, String qna_id, String qna_reg_date_start,
-			String qna_reg_date_end, String view, String and_or_chk, int begin,
-			int end) {
+	public QnaSearchVO(String qna_ctgry, String qna_sn, String qna_sj, String qna_name, String qna_id,
+			String qna_reg_date_start, String qna_reg_date_end, String view, String and_or_chk, int begin, int end) {
 		super();
+		this.qna_ctgry = qna_ctgry;
 		this.qna_sn = qna_sn;
 		this.qna_sj = qna_sj;
 		this.qna_name = qna_name;
@@ -23,6 +23,14 @@ public class QnaSearchVO {
 		this.and_or_chk = and_or_chk;
 		this.begin = begin;
 		this.end = end;
+	}
+
+	public String getQna_ctgry() {
+		return qna_ctgry;
+	}
+
+	public void setQna_ctgry(String qna_ctgry) {
+		this.qna_ctgry = qna_ctgry;
 	}
 
 	public String getQna_sn() {

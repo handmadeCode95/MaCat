@@ -56,6 +56,9 @@
 		    <if test="birthday_start != null and birthday_end == null">
 		        AND BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="gender > 0">
+		        AND GENDER = #{gender}
+		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
@@ -104,6 +107,9 @@
 		    </if>
 		    <if test="birthday_start != null and birthday_end == null">
 		        AND BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="gender > 0">
+		        AND GENDER = #{gender}
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        AND REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
@@ -158,6 +164,9 @@
 		    <if test="birthday_start != null and birthday_end == null">
 		        OR BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
+		    <if test="gender > 0">
+		        OR GENDER = #{gender}
+		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
@@ -206,6 +215,9 @@
 		    </if>
 		    <if test="birthday_start != null and birthday_end == null">
 		        OR BIRTHDAY <![CDATA[ >= ]]> TO_DATE(#{birthday_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="gender > 0">
+		        OR GENDER = #{gender}
 		    </if>
 		    <if test="reg_date_start != null and reg_date_end != null">
 		        OR REG_DATE BETWEEN TO_DATE(#{reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
@@ -408,8 +420,11 @@
 	<select id="qna_and_count" parameterType="QnaSearchVO" resultType="int">
 		SELECT COUNT(*) FROM QNA
 		<where>
+			<if test="qna_ctgry > 0">
+		    	QNA_CTGRY = #{qna_ctgry}
+		    </if>
 	  		<if test="qna_sn != null">
-		    	QNA_SN = #{qna_sn}
+		    	AND QNA_SN = #{qna_sn}
 		    </if>
 		    <if test="qna_sj != null">
 		        AND QNA_SJ = #{qna_sj}
@@ -442,8 +457,11 @@
 	<select id="qna_and_search" parameterType="QnaSearchVO" resultType="QnaVO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA
 		<where>
+			<if test="qna_ctgry > 0">
+		    	QNA_CTGRY = #{qna_ctgry}
+		    </if>
 	  		<if test="qna_sn != null">
-		    	QNA_SN = #{qna_sn}
+		    	AND QNA_SN = #{qna_sn}
 		    </if>
 		    <if test="qna_sj != null">
 		        AND QNA_SJ = #{qna_sj}
@@ -480,8 +498,11 @@
 	<select id="qna_or_count" parameterType="QnaSearchVO" resultType="int">
 		SELECT COUNT(*) FROM QNA
 		<where>
+			<if test="qna_ctgry > 0">
+		    	QNA_CTGRY = #{qna_ctgry}
+		    </if>
 	  		<if test="qna_sn != null">
-		    	QNA_SN = #{qna_sn}
+		    	OR QNA_SN = #{qna_sn}
 		    </if>
 		    <if test="qna_sj != null">
 		        OR QNA_SJ = #{qna_sj}
@@ -514,8 +535,11 @@
 	<select id="qna_or_search" parameterType="QnaSearchVO" resultType="QnaVO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA
 		<where>
+			<if test="qna_ctgry > 0">
+		    	QNA_CTGRY = #{qna_ctgry}
+		    </if>
 	  		<if test="qna_sn != null">
-		    	QNA_SN = #{qna_sn}
+		    	OR QNA_SN = #{qna_sn}
 		    </if>
 		    <if test="qna_sj != null">
 		        OR QNA_SJ = #{qna_sj}
@@ -562,4 +586,309 @@
 	<update id="qna_rdcnt_update" parameterType="QnaVO">
 		UPDATE QNA SET QNA_RDCNT = #{qna_rdcnt} WHERE QNA_SN = #{qna_sn}
 	</update>
+	
+	
+	<!--=========================== 상품 문의 관리 ===========================-->
+	
+	
+	<!-- 전체 문의 갯수 -->
+	<select id="pq_count" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT_QNA
+	</select>
+	
+	<!-- 상품 문의 가져오기 -->
+	<select id="product_qna" parameterType="Map" resultType="PqVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCT_QNA ORDER BY PQ_GROUP DESC, PQ_LEVEL ASC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end} AND PQ_ANS_CHK = 0
+	</select>
+	
+	<!-- 상품 문의 and조건 검색 결과 인원 -->
+	<select id="pq_and_count" parameterType="PqSearchVO" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT_QNA
+		<where>
+	  		<if test="pq_sn != null">
+		    	PQ_SN = #{pq_sn}
+		    </if>
+		    <if test="prduct_sn != null">
+		    	AND PRDUCT_SN = #{prduct_sn}
+		    </if>
+		    <if test="pq_sj != null">
+		        AND PQ_SJ = #{pq_sj}
+		    </if>
+		    <if test="pq_name != null">
+		        AND PQ_NAME = #{pq_name}
+		    </if>
+		    <if test="pq_id != null">
+		        AND PQ_ID = #{pq_id}
+		    </if>
+		     <if test="pq_reg_date_start != null and pq_reg_date_end != null">
+		        AND PQ_REG_DATE BETWEEN TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start == null and pq_reg_date_end != null">
+		        AND PQ_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end == null">
+		        AND PQ_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND PQ_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND PQ_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+	</select>
+	
+	<!-- 상품 문의 and조건 검색 -->
+	<select id="pq_and_search" parameterType="PqSearchVO" resultType="PqVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCT_QNA
+		<where>
+	  		<if test="pq_sn != null">
+		    	PQ_SN = #{pq_sn}
+		    </if>
+		    <if test="prduct_sn != null">
+		    	AND PRDUCT_SN = #{prduct_sn}
+		    </if>
+		    <if test="pq_sj != null">
+		        AND PQ_SJ = #{pq_sj}
+		    </if>
+		    <if test="pq_name != null">
+		        AND PQ_NAME = #{pq_name}
+		    </if>
+		    <if test="pq_id != null">
+		        AND PQ_ID = #{pq_id}
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end != null">
+		        AND PQ_REG_DATE BETWEEN TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start == null and pq_reg_date_end != null">
+		        AND PQ_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end == null">
+		        AND PQ_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND PQ_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND PQ_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+		ORDER BY PQ_GROUP DESC, PQ_LEVEL ASC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 상품 문의 or조건 검색 결과 인원 -->
+	<select id="pq_or_count" parameterType="PqSearchVO" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT_QNA
+		<where>
+	  		<if test="pq_sn != null">
+		    	PQ_SN = #{pq_sn}
+		    </if>
+		    <if test="prduct_sn != null">
+		    	OR PRDUCT_SN = #{prduct_sn}
+		    </if>
+		    <if test="pq_sj != null">
+		        OR PQ_SJ = #{pq_sj}
+		    </if>
+		    <if test="pq_name != null">
+		        OR PQ_NAME = #{pq_name}
+		    </if>
+		    <if test="pq_id != null">
+		        OR PQ_ID = #{pq_id}
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end != null">
+		        OR PQ_REG_DATE BETWEEN TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start == null and pq_reg_date_end != null">
+		        OR PQ_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end == null">
+		        OR PQ_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND PQ_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND PQ_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+	</select>
+	
+	<!-- 상품 문의 or조건 검색 -->
+	<select id="pq_or_search" parameterType="PqSearchVO" resultType="PqVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCT_QNA
+		<where>
+	  		<if test="pq_sn != null">
+		    	PQ_SN = #{pq_sn}
+		    </if>
+		    <if test="prduct_sn != null">
+		    	OR PRDUCT_SN = #{prduct_sn}
+		    </if>
+		    <if test="pq_sj != null">
+		        OR PQ_SJ = #{pq_sj}
+		    </if>
+		    <if test="pq_name != null">
+		        OR PQ_NAME = #{pq_name}
+		    </if>
+		    <if test="pq_id != null">
+		        OR PQ_ID = #{pq_id}
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end != null">
+		        OR PQ_REG_DATE BETWEEN TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start == null and pq_reg_date_end != null">
+		        OR PQ_REG_DATE <![CDATA[ <= ]]> TO_DATE(#{pq_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="pq_reg_date_start != null and pq_reg_date_end == null">
+		        OR PQ_REG_DATE <![CDATA[ >= ]]> TO_DATE(#{pq_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND PQ_ANS_CHK = 0
+			</if>
+			<if test="view == 1">
+				AND PQ_ANS_CHK <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+		ORDER BY PQ_GROUP DESC, PQ_LEVEL ASC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 상품 문의 삭제 -->
+	<delete id="pq_delete" parameterType="String">
+		DELETE FROM PRODUCT_QNA WHERE PQ_SN = #{pq_sn}
+	</delete>
+	
+	<!-- 상품 문의 보기 -->
+	<select id="pq_view" resultType="PqVO" parameterType="String">
+		SELECT * FROM PRODUCT_QNA WHERE PQ_SN = #{pq_sn}
+	</select>
+	
+	<!-- 상품 문의 조회수 업데이트 -->
+	<update id="pq_rdcnt_update" parameterType="PqVO">
+		UPDATE PRODUCT_QNA SET PQ_RDCNT = #{pq_rdcnt} WHERE PQ_SN = #{pq_sn}
+	</update>
+	
+	
+	<!--=========================== 고객 문의 관리 ===========================-->
+	
+	
+	<!-- 전체 FAQ 갯수 -->
+	<select id="faq_count" resultType="int">
+		SELECT COUNT(*) FROM FAQ
+	</select>
+	
+	<!-- FAQ 가져오기 -->
+	<select id="faq" parameterType="Map" resultType="FaqVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ ORDER BY FAQ_SN DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- FAQ and조건 검색 결과 인원 -->
+	<select id="faq_and_count" parameterType="FaqSearchVO" resultType="int">
+		SELECT COUNT(*) FROM FAQ
+		<where>
+			<if test="faq_ctgry > 0">
+		    	FAQ_CTGRY = #{faq_ctgry}
+		    </if>
+	  		<if test="faq_sn != null">
+		    	AND FAQ_SN = #{faq_sn}
+		    </if>
+		    <if test="faq_sj != null">
+		        AND FAQ_SJ = #{faq_sj}
+		    </if>
+		    <if test="faq_name != null">
+		        AND FAQ_NAME = #{faq_name}
+		    </if>
+		    <if test="faq_id != null">
+		        AND FAQ_ID = #{faq_id}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- FAQ and조건 검색 -->
+	<select id="faq_and_search" parameterType="FaqSearchVO" resultType="FaqVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ
+		<where>
+			<if test="faq_ctgry > 0">
+		    	FAQ_CTGRY = #{faq_ctgry}
+		    </if>
+	  		<if test="faq_sn != null">
+		    	AND FAQ_SN = #{faq_sn}
+		    </if>
+		    <if test="faq_sj != null">
+		        AND FAQ_SJ = #{faq_sj}
+		    </if>
+		    <if test="faq_name != null">
+		        AND FAQ_NAME = #{faq_name}
+		    </if>
+		    <if test="faq_id != null">
+		        AND FAQ_ID = #{faq_id}
+		    </if>
+		</where>
+		ORDER BY FAQ_SN DESC) A ) 
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- FAQ or조건 검색 결과 인원 -->
+	<select id="faq_or_count" parameterType="FaqSearchVO" resultType="int">
+		SELECT COUNT(*) FROM FAQ
+		<where>
+			<if test="faq_ctgry > 0">
+		    	FAQ_CTGRY = #{faq_ctgry}
+		    </if>
+	  		<if test="faq_sn != null">
+		    	OR FAQ_SN = #{faq_sn}
+		    </if>
+		    <if test="faq_sj != null">
+		        OR FAQ_SJ = #{faq_sj}
+		    </if>
+		    <if test="faq_name != null">
+		        OR FAQ_NAME = #{faq_name}
+		    </if>
+		    <if test="faq_id != null">
+		        OR FAQ_ID = #{faq_id}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- FAQ or조건 검색 -->
+	<select id="faq_or_search" parameterType="FaqSearchVO" resultType="FaqVO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ
+		<where>
+			<if test="faq_ctgry > 0">
+		    	FAQ_CTGRY = #{faq_ctgry}
+		    </if>
+	  		<if test="faq_sn != null">
+		    	OR FAQ_SN = #{faq_sn}
+		    </if>
+		    <if test="faq_sj != null">
+		        OR FAQ_SJ = #{faq_sj}
+		    </if>
+		    <if test="faq_name != null">
+		        OR FAQ_NAME = #{faq_name}
+		    </if>
+		    <if test="faq_id != null">
+		        OR FAQ_ID = #{faq_id}
+		    </if>
+		</where>
+		ORDER BY FAQ_SN DESC) A ) 
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- FAQ 삭제 -->
+	<delete id="faq_delete" parameterType="String">
+		DELETE FROM FAQ WHERE FAQ_SN = #{faq_sn}
+	</delete>
+	
+	<!-- FAQ 보기 -->
+	<select id="faq_view" resultType="FaqVO" parameterType="String">
+		SELECT * FROM FAQ WHERE FAQ_SN = #{faq_sn}
+	</select>
 </mapper>

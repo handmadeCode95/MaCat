@@ -20,7 +20,7 @@ public class DAO {
 	}
 	
 	
-	////////////////////////////////// 메인 //////////////////////////////////
+	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
 	
 	// 회원가입
@@ -39,7 +39,7 @@ public class DAO {
 	}
 	
 	
-	////////////////////////////////// 회원 정보 관리 //////////////////////////////////
+	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
 	
 	
 	// 전체 회원 숫자
@@ -86,7 +86,7 @@ public class DAO {
 	}
 	
 	
-	////////////////////////////////// 공지사항 관리 //////////////////////////////////
+	/*////////////////////////////////// 공지사항 관리 //////////////////////////////////*/
 
 	
 	// 전체 공지 갯수
@@ -128,7 +128,7 @@ public class DAO {
 	}
 	
 	
-	////////////////////////////////// 고객 문의 관리 //////////////////////////////////
+	/*////////////////////////////////// 고객 문의 관리 //////////////////////////////////*/
 	
 	
 	// 전체 문의 갯수
@@ -178,5 +178,99 @@ public class DAO {
 	public int getQnaRdcntUpdate(QnaVO qnaVO) {
 		return sqlSessionTemplate.update("qna_rdcnt_update", qnaVO);
 	}
+	
+	
+	/*////////////////////////////////// 상품 문의 관리 //////////////////////////////////*/
+	
+	
+	// 전체 문의 갯수
+	public int getPqCount() {
+		return sqlSessionTemplate.selectOne("pq_count");
+	}
+	
+	// 상품 문의 가져오기
+	public List<PqVO> getPqList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("product_qna", map);
+	}
+	
+	// 상품 문의 and조건 검색 결과 인원
+	public int getPqAndCount(PqSearchVO pqSearchVO) {
+		return sqlSessionTemplate.selectOne("pq_and_count", pqSearchVO);
+	}
+			
+	// 상품 문의 or조건 검색 결과 인원
+	public int getPqOrCount(PqSearchVO pqSearchVO) {
+		return sqlSessionTemplate.selectOne("pq_or_count", pqSearchVO);
+	}
 
+	// 상품 문의 and조건 검색
+	public List<PqVO> getPqAndSearch(PqSearchVO pqSearchVO) {
+		return sqlSessionTemplate.selectList("pq_and_search", pqSearchVO);
+	}
+
+	// 상품 문의 or조건 검색
+	public List<PqVO> getPqOrSearch(PqSearchVO pqSearchVO) {
+		return sqlSessionTemplate.selectList("pq_or_search", pqSearchVO);
+	}
+		
+	// 상품 문의 삭제
+	public int getPqDelete(String pq_sn) {
+		return sqlSessionTemplate.delete("pq_delete", pq_sn);
+	}
+	
+	// 상품 문의 보기
+	public PqVO getPqView(String pq_sn) {
+		return sqlSessionTemplate.selectOne("pq_view", pq_sn);
+	}
+	
+	
+	/*////////////////////////////////// FAQ 관리 //////////////////////////////////*/
+	
+	
+	// 전체 FAQ 갯수
+	public int getFaqCount() {
+		return sqlSessionTemplate.selectOne("faq_count");
+	}
+	
+	// FAQ 가져오기
+	public List<FaqVO> getFaqList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("faq", map);
+	}
+	
+	// FAQ and조건 검색 결과 인원
+	public int getFaqAndCount(FaqSearchVO faqSearchVO) {
+		return sqlSessionTemplate.selectOne("faq_and_count", faqSearchVO);
+	}
+			
+	// FAQ or조건 검색 결과 인원
+	public int getFaqOrCount(FaqSearchVO faqSearchVO) {
+		return sqlSessionTemplate.selectOne("faq_or_count", faqSearchVO);
+	}
+
+	// FAQ and조건 검색
+	public List<FaqVO> getFaqAndSearch(FaqSearchVO faqSearchVO) {
+		return sqlSessionTemplate.selectList("faq_and_search", faqSearchVO);
+	}
+
+	// FAQ or조건 검색
+	public List<FaqVO> getFaqOrSearch(FaqSearchVO faqSearchVO) {
+		return sqlSessionTemplate.selectList("faq_or_search", faqSearchVO);
+	}
+		
+	// FAQ 삭제
+	public int getFaqDelete(String faq_sn) {
+		return sqlSessionTemplate.delete("faq_delete", faq_sn);
+	}
+	
+	// FAQ 보기
+	public FaqVO getFaqView(String faq_sn) {
+		return sqlSessionTemplate.selectOne("faq_view", faq_sn);
+	}
+	
 }

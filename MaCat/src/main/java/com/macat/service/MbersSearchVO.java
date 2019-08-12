@@ -2,7 +2,7 @@ package com.macat.service;
 
 public class MbersSearchVO {
 	
-	private String mber_sn, id, name, birthday_start, birthday_end, reg_date_start, reg_date_end,
+	private String mber_sn, id, name, birthday_start, birthday_end, gender, reg_date_start, reg_date_end,
 					conect_rcord_start, conect_rcord_end, phone, mber_grad, and_or_chk;
 	private int begin, end; // 페이징
 	
@@ -11,14 +11,15 @@ public class MbersSearchVO {
 	}
 
 	public MbersSearchVO(String mber_sn, String id, String name, String birthday_start, String birthday_end,
-			String reg_date_start, String reg_date_end, String conect_rcord_start, String conect_rcord_end,
-			String phone, String mber_grad, String and_or_chk, int begin, int end) {
+			String gender, String reg_date_start, String reg_date_end, String conect_rcord_start,
+			String conect_rcord_end, String phone, String mber_grad, String and_or_chk, int begin, int end) {
 		super();
 		this.mber_sn = mber_sn;
 		this.id = id;
 		this.name = name;
 		this.birthday_start = birthday_start;
 		this.birthday_end = birthday_end;
+		this.gender = gender;
 		this.reg_date_start = reg_date_start;
 		this.reg_date_end = reg_date_end;
 		this.conect_rcord_start = conect_rcord_start;
@@ -68,6 +69,14 @@ public class MbersSearchVO {
 
 	public void setBirthday_end(String birthday_end) {
 		this.birthday_end = birthday_end;
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getReg_date_start() {

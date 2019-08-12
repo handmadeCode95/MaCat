@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>고객 문의 관리</title>
+		<title>상품 문의 관리</title>
 		<style type="text/css">
 			table{width: 500px; margin: 0 auto;}
 			table,tr,th,td {border: 1px solid black; border-collapse: collapse;}
@@ -22,37 +22,30 @@
 			.now {padding: 3px 7px; background: purple; color: white; font-weight: bold;}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <script src="resources/js/admin/qna/management.js"></script>
+	    <script src="resources/js/admin/pq/management.js"></script>
 	</head>
 
 	<body>
-	    <form action="qna_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
-	    
-	    	<input type="checkbox" name="search_chk" value="qna_ctgry">
-	        카테고리 <select class="qna_ctgry" name="qna_ctgry" disabled>
-	            <option value="0" selected>전체</option>
-	            <option value="1">취소</option>
-	            <option value="2">교환</option>
-	            <option value="3">배송</option>
-	            <option value="4">결제</option>
-	            <option value="5">기타</option>
-	        </select>
+	    <form action="pq_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
 		
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_sn">
-	       	문의 번호 <input type="number" class="qna_sn" name="qna_sn" disabled>
+	        <input type="checkbox" name="search_chk" value="pq_sn">
+	       	문의 번호 <input type="number" class="pq_sn" name="pq_sn" disabled>
+	       	
+	       	<input type="checkbox" name="search_chk" value="prduct_sn">
+	       	상품 번호 <input type="number" class="prduct_sn" name="prduct_sn" disabled>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_sj"checked>
-	        제목 <input type="text" class="qna_sj" name="qna_sj"><br><br>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="pq_sj"checked>
+	        제목 <input type="text" class="pq_sj" name="pq_sj"><br><br>
 	
-	        <input type="checkbox" name="search_chk" value="qna_name">
-	        고객명 <input type="text" class="qna_name" name="qna_name" disabled>
+	        <input type="checkbox" name="search_chk" value="pq_name">
+	        고객명 <input type="text" class="pq_name" name="pq_name" disabled>
 	        
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_id">
-	        아이디 <input type="number" class="qna_id" name="qna_id" disabled><br><br>
+	        <input type="checkbox" name="search_chk" value="pq_id">
+	        아이디 <input type="number" class="pq_id" name="pq_id" disabled><br><br>
 		
-	        <input type="checkbox" name="search_chk" value="qna_reg_date">
-	        등록일 <input type="date" class="qna_reg_date" name="qna_reg_date_start" disabled>~
-	        <input type="date" class="qna_reg_date" name="qna_reg_date_end" disabled><br><br>
+	        <input type="checkbox" name="search_chk" value="pq_reg_date">
+	        등록일 <input type="date" class="pq_reg_date" name="pq_reg_date_start" disabled>~
+	        <input type="date" class="pq_reg_date" name="pq_reg_date_end" disabled><br><br>
 	        
 	        <input type="radio" name="view" value="0" checked>미답변 문의 보기
 	        <input type="radio" name="view" value="1">답변 완료 문의 보기
@@ -64,55 +57,49 @@
 	    
 	    <hr>
 	    
-	    <div id="qna" style="overflow: scroll; text-align: center; margin: 0 auto;">
+	    <div id="pq" style="overflow: scroll; text-align: center; margin: 0 auto;">
 			<form method="post" id="resultForm">
 				<h1> 고객 문의 목록 </h1>
 				<table style="width: 500px; margin: 0 auto;">
 					<thead>
-						<tr><th><input type="checkbox" class="all" name="qna_all" value="0"></th>
-						<th>답변여부</th><th>카테고리</th><th>문의 번호</th><th>제목</th><th>고객명</th><th>등록일</th><th>조회수</th></tr>
+						<tr><th><input type="checkbox" class="all" name="pq_all" value="0"></th>
+						<th>답변여부</th><th>문의 번호</th><th>상품 번호</th><th>제목</th><th>고객명</th><th>등록일</th></tr>
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
-							<c:when test="${empty qna}">
+							<c:when test="${empty product_qna}">
 								<tr>
-									<td colspan="8"><h3>조회된 문의가 없습니다.</h3></td>
+									<td colspan="7"><h3>조회된 문의가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
-								<c:forEach var="i" items="${qna}">
-									<tr id="${i.qna_sn}">
-										<td><input type="checkbox" class="chkbox" name="qnas" value="${i.qna_sn}"></td>
+								<c:forEach var="i" items="${product_qna}">
+									<tr id="${i.pq_sn}">
+										<td><input type="checkbox" class="chkbox" name="pqs" value="${i.pq_sn}"></td>
 										<td>
-											<c:if test="${i.qna_ans_chk == 0}">미답변</c:if>
-											<c:if test="${i.qna_ans_chk == 1}">답변완료</c:if>
-											<c:if test="${i.qna_ans_chk == 2}">답글</c:if>
+											<c:if test="${i.pq_ans_chk == 0}">미답변</c:if>
+											<c:if test="${i.pq_ans_chk == 1}">답변완료</c:if>
+											<c:if test="${i.pq_ans_chk == 2}">답글</c:if>
 										</td>
+										<td>${i.pq_sn}</td>
+										<td>${i.prduct_sn}</td>
 										<td>
-											<c:if test="${i.qna_ctgry == 1}">취소</c:if>
-											<c:if test="${i.qna_ctgry == 2}">교환</c:if>
-											<c:if test="${i.qna_ctgry == 3}">배송</c:if>
-											<c:if test="${i.qna_ctgry == 4}">결제</c:if>
-										</td>
-										<td>${i.qna_sn}</td>
-										<td>
-											<c:forEach begin="1" end="${i.qna_level}">
+											<c:forEach begin="1" end="${i.pq_level}">
 												&nbsp;&nbsp;┗
 											</c:forEach>
-											<a href="qna_view.mcat?qna_sn=${i.qna_sn}">${i.qna_sj}</a>
+											<a href="pq_view.mcat?pq_sn=${i.pq_sn}">${i.pq_sj}</a>
 										</td>
-										<td>${i.qna_name}</td>
-										<td>${i.qna_reg_date.substring(0, 10)}</td>
-										<td>${i.qna_rdcnt}</td>
+										<td>${i.pq_name}</td>
+										<td>${i.pq_reg_date.substring(0, 10)}</td>
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
-								<c:if test="${fn:length(qna) % 10 != 0}">
-									<c:forEach begin="1" end="${10 - (fn:length(qna) % 10)}">
+								<c:if test="${fn:length(product_qna) % 10 != 0}">
+									<c:forEach begin="1" end="${10 - (fn:length(product_qna) % 10)}">
 										<tr>
 											<%-- 공백 삽입 --%>
-											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -122,7 +109,7 @@
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
-							<td colspan="8">
+							<td colspan="7">
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>

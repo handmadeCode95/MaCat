@@ -2,16 +2,16 @@ package com.macat.service;
 
 public class MbersVO {
 	
-	private String mber_sn, id, pw, name, email, email_end, birthday, phone, tel, point,
+	private String mber_sn, id, pw, name, email, email_end, gender, birthday, phone, tel, point,
 				   reg_date, conect_rcord, zonecode, adres, detail_adres, mber_grad;
 	
 	public MbersVO() {
 	
 	}
-	
-	public MbersVO(String mber_sn, String id, String pw, String name, String email, String email_end, String birthday,
-			String phone, String tel, String point, String reg_date, String conect_rcord, String zonecode, String adres,
-			String detail_adres, String mber_grad) {
+
+	public MbersVO(String mber_sn, String id, String pw, String name, String email, String email_end, String gender,
+			String birthday, String phone, String tel, String point, String reg_date, String conect_rcord,
+			String zonecode, String adres, String detail_adres, String mber_grad) {
 		super();
 		this.mber_sn = mber_sn;
 		this.id = id;
@@ -19,6 +19,7 @@ public class MbersVO {
 		this.name = name;
 		this.email = email;
 		this.email_end = email_end;
+		this.gender = gender;
 		this.birthday = birthday;
 		this.phone = phone;
 		this.tel = tel;
@@ -77,6 +78,14 @@ public class MbersVO {
 
 	public void setEmail_end(String email_end) {
 		this.email_end = email_end;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getBirthday() {

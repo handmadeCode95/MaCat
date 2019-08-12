@@ -5,30 +5,19 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "QnaVO") {
+			if (key === "FaqVO") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["qna_sn"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='qnas' value='" + v["qna_sn"] + "'></td>";
+					result += "<tr id='" + v["faq_sn"] + "'>";
+					result += "<td><input type='checkbox' class='chkbox' name='faqs' value='" + v["faq_sn"] + "'></td>";
 					result += "<td>";
-						if (v["qna_ans_chk"] == 0) result += "미답변";
-						if (v["qna_ans_chk"] == 1) result += "답변완료";
-						if (v["qna_ans_chk"] == 2) result += "답글";
+						if (v["faq_ctgry"] == 1) result += "취소";
+						if (v["faq_ctgry"] == 2) result += "교환";
+						if (v["faq_ctgry"] == 3) result += "배송";
+						if (v["faq_ctgry"] == 4) result += "결제";
 					result += "</td>";
-					result += "<td>";
-						if (v["qna_ctgry"] == 1) result += "취소";
-						if (v["qna_ctgry"] == 2) result += "교환";
-						if (v["qna_ctgry"] == 3) result += "배송";
-						if (v["qna_ctgry"] == 4) result += "결제";
-					result += "</td>";
-					result += "<td>" + v["qna_sn"] + "</td>";
-					result += "<td>";
-					for (var i = 0; i < v["qna_level"]; i++) {
-						result += "&nbsp;&nbsp;┗";
-					}
-					result += "<a href='qna_view.mcat?qna_sn=" + v["qna_sn"] + "'>" + v["qna_sj"] + "</a></td>";
-					result += "<td>" + v["qna_name"] + "</td>";
-					result += "<td>" + v["qna_reg_date"].substring(0, 10) + "</td>";
-					result += "<td>" + v["qna_rdcnt"] + "</td>";
+					result += "<td>" + v["faq_sn"] + "</td>";
+					result += "<td><a href='faq_view.mcat?faq_sn=" + v["faq_sn"] + "'>" + v["faq_sj"] + "</a></td>";
+					result += "<td>" + v["faq_name"] + "</td>";
 				});
 			}else if (key === "paging"){
 				var paging = value;
@@ -77,8 +66,8 @@ $(function() {
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 qnas일 경우에는 무조건 배열처리(qnas는 체크박스이다)
-	        	if (name === "qnas") {
+	        	// 이름이 faqs일 경우에는 무조건 배열처리(faqs는 체크박스이다)
+	        	if (name === "faqs") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -110,7 +99,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "qna_paging.mcat",
+			url			: "faq_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -126,10 +115,11 @@ $(function() {
 	});
 	
 	
-	// 고객 문의 검색 AJAX
+	// FAQ 검색 AJAX
 	$("#searchBtn").click(function() {
+		console.log($().toJSON($("#searchForm > *:not(input[name=search_chk])")));
 		$.ajax({
-			url			: "qna_search.mcat",
+			url			: "faq_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -145,10 +135,10 @@ $(function() {
 	});
 	
 	
-	// 고객 문의 삭제 AJAX
+	// FAQ 삭제 AJAX
 	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "qna_delete.mcat",
+			url			: "faq_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
