@@ -9,7 +9,7 @@
         <title>회원가입</title>
         <link rel="stylesheet" href="resources/css/normalize.css">
         <link rel="stylesheet" href="resources/css/join.css">
-        <link rel="shortcut icon" href="resources/img/mcat-favicon.ico">
+        <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -22,7 +22,7 @@
             <div id="formContent">
                 <%-- 로고 --%>
                 <div class="fadeIn first">
-                	<img src="resources/img/mcat-logo-footer.png" id="icon" alt="MaCat" />
+                	<img src="resources/img/logos/mcat-logo-footer.png" id="icon" alt="MaCat" />
                 </div>
                 <%-- 로그인 폼 --%>
                 <form name="f" action="mber_join.mcat" method="post" onsubmit="return checkAll()">

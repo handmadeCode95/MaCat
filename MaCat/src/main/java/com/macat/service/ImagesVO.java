@@ -2,105 +2,106 @@ package com.macat.service;
 
 public class ImagesVO {
 	
-	private String img_sn, img, prduct_sn, event_sn, faq_sn, re_sn, pq_sn, not_sn, qna_sn;
-	private int img_thumb;
+	private String img_sq, img_nm, prduct_sq, event_sq, faq_sq, re_sq, not_sq, qna_sq;
+	private int img_main_fl, img_thumb_fl;
 	
 	public ImagesVO() {
 
 	}
-	
-	public ImagesVO(String img_sn, String img, int img_thumb, String prduct_sn, String event_sn, String faq_sn,
-			String re_sn, String pq_sn, String not_sn, String qna_sn) {
+
+	public ImagesVO(String img_sq, String img_nm, String prduct_sq, String event_sq, String faq_sq, String re_sq,
+			String not_sq, String qna_sq, int img_main_fl, int img_thumb_fl) {
 		super();
-		this.img_sn = img_sn;
-		this.img = img;
-		this.img_thumb = img_thumb;
-		this.prduct_sn = prduct_sn;
-		this.event_sn = event_sn;
-		this.faq_sn = faq_sn;
-		this.re_sn = re_sn;
-		this.pq_sn = pq_sn;
-		this.not_sn = not_sn;
-		this.qna_sn = qna_sn;
+		this.img_sq = img_sq;
+		this.img_nm = img_nm;
+		this.prduct_sq = prduct_sq;
+		this.event_sq = event_sq;
+		this.faq_sq = faq_sq;
+		this.re_sq = re_sq;
+		this.not_sq = not_sq;
+		this.qna_sq = qna_sq;
+		this.img_main_fl = img_main_fl;
+		this.img_thumb_fl = img_thumb_fl;
 	}
 
-	public String getImg_sn() {
-		return img_sn;
+	public String getImg_sq() {
+		return img_sq;
 	}
 
-	public void setImg_sn(String img_sn) {
-		this.img_sn = img_sn;
+	public void setImg_sq(String img_sq) {
+		this.img_sq = img_sq;
 	}
 
-	public String getImg() {
-		return img;
+	public String getImg_nm() {
+		return img_nm;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImg_nm(String img_nm) {
+		this.img_nm = img_nm;
 	}
 
-	public int getImg_thumb() {
-		return img_thumb;
+	public String getPrduct_sq() {
+		return prduct_sq;
 	}
 
-	public void setImg_thumb(int img_thumb) {
-		this.img_thumb = img_thumb;
+	public void setPrduct_sq(String prduct_sq) {
+		this.prduct_sq = prduct_sq;
 	}
 
-	public String getPrduct_sn() {
-		return prduct_sn;
+	public String getEvent_sq() {
+		return event_sq;
 	}
 
-	public void setPrduct_sn(String prduct_sn) {
-		this.prduct_sn = prduct_sn;
+	public void setEvent_sq(String event_sq) {
+		this.event_sq = event_sq;
 	}
 
-	public String getEvent_sn() {
-		return event_sn;
+	public String getFaq_sq() {
+		return faq_sq;
 	}
 
-	public void setEvent_sn(String event_sn) {
-		this.event_sn = event_sn;
+	public void setFaq_sq(String faq_sq) {
+		this.faq_sq = faq_sq;
 	}
 
-	public String getFaq_sn() {
-		return faq_sn;
+	public String getRe_sq() {
+		return re_sq;
 	}
 
-	public void setFaq_sn(String faq_sn) {
-		this.faq_sn = faq_sn;
+	public void setRe_sq(String re_sq) {
+		this.re_sq = re_sq;
 	}
 
-	public String getRe_sn() {
-		return re_sn;
+	public String getNot_sq() {
+		return not_sq;
 	}
 
-	public void setRe_sn(String re_sn) {
-		this.re_sn = re_sn;
+	public void setNot_sq(String not_sq) {
+		this.not_sq = not_sq;
 	}
 
-	public String getPq_sn() {
-		return pq_sn;
+	public String getQna_sq() {
+		return qna_sq;
 	}
 
-	public void setPq_sn(String pq_sn) {
-		this.pq_sn = pq_sn;
+	public void setQna_sq(String qna_sq) {
+		this.qna_sq = qna_sq;
 	}
 
-	public String getNot_sn() {
-		return not_sn;
+	public int getImg_main_fl() {
+		return img_main_fl;
 	}
 
-	public void setNot_sn(String not_sn) {
-		this.not_sn = not_sn;
+	public void setImg_main_fl(int img_main_fl) {
+		this.img_main_fl = img_main_fl;
 	}
 
-	public String getQna_sn() {
-		return qna_sn;
+	public int getImg_thumb_fl() {
+		return img_thumb_fl;
 	}
 
-	public void setQna_sn(String qna_sn) {
-		this.qna_sn = qna_sn;
+	public void setImg_thumb_fl(int img_thumb_fl) {
+		this.img_thumb_fl = img_thumb_fl;
 	}
+	
 }

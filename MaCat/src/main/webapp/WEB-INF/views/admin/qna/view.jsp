@@ -25,8 +25,19 @@
 				<tbody>
 					<tr>
 						<th bgcolor="#B2EBF4">답변여부</th>
-						<td><c:if test="${qnaVO.qna_ans_chk == 0}">미답변</c:if>
-						<c:if test="${qnaVO.qna_ans_chk == 1}">답변완료</c:if></td>
+						<td>
+							<c:if test="${qnaVO.qna_ans_chk == 0}">미답변</c:if>
+							<c:if test="${qnaVO.qna_ans_chk == 1}">답변완료</c:if>
+						</td>
+					</tr>
+					<tr>
+						<th bgcolor="#B2EBF4">카테고리</th>
+						<td>
+							<c:if test="${qnaVO.qna_ctgry == 1}">취소</c:if>
+							<c:if test="${qnaVO.qna_ctgry == 2}">교환</c:if>
+							<c:if test="${qnaVO.qna_ctgry == 3}">배송</c:if>
+							<c:if test="${qnaVO.qna_ctgry == 4}">결제</c:if>
+						</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">문의 번호</th>

@@ -13,6 +13,19 @@ public class Paging {
 	private int beginBlock = 0 ;
 	private int endBlock = 0 ;
 	
+	public Paging() {
+
+	}
+	
+	public Paging(int numPerPage) {
+		this.numPerPage = numPerPage;
+	}
+	
+	public Paging(int numPerPage, int pagePerBlock) {
+		this.numPerPage = numPerPage;
+		this.pagePerBlock = pagePerBlock;
+	}
+	
 	public int getNowPage() {
 		return nowPage;
 	}

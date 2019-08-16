@@ -21,6 +21,42 @@
 	</update>
 	
 	
+	<!--=========================== 카테고리 ===========================-->
+	
+	
+	<!-- 카테고리 그룹 조회 -->
+	<select id="ctgry_group" resultType="CtgriesVO" parameterType="int">
+		SELECT * FROM CTGRIES_TB WHERE CTGRY_GROUP = #{ctgry_group} ORDER BY CTGRY_ORD
+	</select>
+	
+	<!-- 카테고리 상품 이미지 -->
+	<select id="product_imgs" resultType="ImagesVO" parameterType="Map">
+		SELECT * FROM IMAGES_TB
+		<where>
+			IMG_MAIN_FL = 1 AND IMG_THUMB_FL = 1
+			<if test="prduct_sqs != null">
+				<foreach collection="prduct_sqs" item="i">
+					AND PRDUCT_SQ = #{i}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	
+	<!--=========================== 상품 조회 ===========================-->
+	
+	
+	<!-- 전체 상품 갯수 -->
+	<select id="prduct_count" resultType="int">
+		SELECT COUNT(*) FROM PRODUCTS_TB
+	</select>
+	
+	<!-- 상품 정보 조회 -->
+	<select id="products" parameterType="Map" resultType="ProductsVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	
 	<!--=========================== 회원 정보 관리 ===========================-->
 	
 	

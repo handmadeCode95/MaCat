@@ -39,6 +39,38 @@ public class DAO {
 	}
 	
 	
+	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
+	
+	
+	// 카테고리 그룹 가져오기
+	public List<CtgriesVO> getCategoryGroup(int ctgry_group) {
+		return sqlSessionTemplate.selectList("ctgry_group", ctgry_group);
+	}
+	
+	// 카테고리 이미지 가져오기
+	public List<ImagesVO> getCategoryProductImgs(Map<String, List<String>> map) {
+		return sqlSessionTemplate.selectList("product_imgs", map);
+	}
+	
+	
+	/*////////////////////////////////// 상품 조회 //////////////////////////////////*/
+	
+	
+	// 전체 상품 갯수
+	public int getProductsCount() {
+		return sqlSessionTemplate.selectOne("prduct_count");
+	}
+	
+	// 상품 정보 가져오기
+	public List<ProductsVO> getProductsList(int prduct_ctgry_group, int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("prduct_ctgry_group", prduct_ctgry_group);
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("products", map);
+	}
+	
+	
 	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
 	
 	

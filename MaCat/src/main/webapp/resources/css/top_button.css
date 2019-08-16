@@ -1,0 +1,8 @@
+.top_button {
+    position: fixed;
+    right: 50%;
+    top: 760px;
+    margin-right: -546px;    
+    width: 30px;
+    height: 30px;    
+}

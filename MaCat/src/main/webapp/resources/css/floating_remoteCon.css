@@ -1,0 +1,51 @@
+
+.floating_remoteCon {
+    /*메뉴 위치*/
+    position: fixed;
+    right: 50%;
+    top: 210px;
+    margin-right: -625px;
+    text-align: center;
+    width: 105px;
+    height: 280px;
+    
+    background-color:#f9f9f9; 
+    border:2px solid #F25E5E; 
+    
+    font-family: Segoe UI;
+    font-size: 15px;
+    
+    
+}
+
+.floating_remoteCon div{
+    margin-top: 5px;
+}
+
+/*최근 본 상품 div 구분하기*/
+.floating_remoteCon div:nth-child(1) {
+    /*타이틀부분*/
+    background: #F25E5E;
+    color: #fff;
+    margin: 0;
+    padding: 0;    
+}
+
+.floating_remoteCon div:nth-child(2){
+    border-radius: 5px;
+    height: 75px;
+    border: 1px solid #f27e63;
+    margin: 5px;
+}
+.floating_remoteCon div:nth-child(3){
+    border-radius: 5px;
+    height: 75px;
+    border: 1px solid #f27e63;
+    margin: 5px;
+}
+.floating_remoteCon div:nth-child(4){
+    border-radius: 5px;
+    height: 75px;
+    border: 1px solid #f2a766;
+    margin: 5px;
+}

@@ -1,5 +1,6 @@
 package com.macat.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macat.service.DAO;
 import com.macat.service.FaqSearchVO;
 import com.macat.service.FaqVO;
+import com.macat.service.ImagesVO;
 import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
 import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
 import com.macat.service.PqSearchVO;
 import com.macat.service.PqVO;
+import com.macat.service.ProductsVO;
 import com.macat.service.QnaSearchVO;
 import com.macat.service.QnaVO;
 
@@ -103,6 +106,30 @@ public class MyController {
 	@RequestMapping("admin.mcat")
 	public ModelAndView getAdminMainCmd() {
 		return new ModelAndView("admin/main");
+	}
+	
+	// 카테고리 페이지로 이동
+	@RequestMapping("category.mcat")
+	public ModelAndView getCategoryCmd(int ctgry_group) {
+		ModelAndView mv = new ModelAndView("product/category");
+		Paging paging = new Paging(20);
+		count = dao.getProductsCount();
+		getPaging(paging, count, cPage);
+		
+		List<ProductsVO> products = dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd());
+		
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		List<String> prduct_sqs = new ArrayList<String>();
+		for (ProductsVO i : products) {
+			prduct_sqs.add(i.getPrduct_sq());
+		}
+		map.put("prduct_sqs", prduct_sqs);
+		
+		mv.addObject("categories", dao.getCategoryGroup(ctgry_group));
+		mv.addObject("product_imgs", dao.getCategoryProductImgs(map));
+		mv.addObject("products", products);
+		mv.addObject("paging", paging);
+		return mv;
 	}
 
 	
@@ -315,17 +342,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "NotsVO":
-			map.put("NotsVO", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+			map.put("notsVO", dao.getNotsList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			notsSearchVO.setBegin(paging.getBegin());
 			notsSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "NotsSearchVO_and":
-				map.put("NotsVO", dao.getNotsAndSearch(notsSearchVO));
+				map.put("notsVO", dao.getNotsAndSearch(notsSearchVO));
 				break;
 			case "NotsSearchVO_or":
-				map.put("NotsVO", dao.getNotsOrSearch(notsSearchVO));
+				map.put("notsVO", dao.getNotsOrSearch(notsSearchVO));
 				break;
 			}
 		}
@@ -365,10 +392,10 @@ public class MyController {
 
 		switch (notsSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("NotsVO", dao.getNotsAndSearch(notsSearchVO));
+			map.put("notsVO", dao.getNotsAndSearch(notsSearchVO));
 			break;
 		case "or":
-			map.put("NotsVO", dao.getNotsOrSearch(notsSearchVO));
+			map.put("notsVO", dao.getNotsOrSearch(notsSearchVO));
 			break;
 		}
 
@@ -430,17 +457,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "QnaVO":
-			map.put("QnaVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
+			map.put("qnaVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			qnaSearchVO.setBegin(paging.getBegin());
 			qnaSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "QnaSearchVO_and":
-				map.put("QnaVO", dao.getQnaAndSearch(qnaSearchVO));
+				map.put("qnaVO", dao.getQnaAndSearch(qnaSearchVO));
 				break;
 			case "QnaSearchVO_or":
-				map.put("QnaVO", dao.getQnaOrSearch(qnaSearchVO));
+				map.put("qnaVO", dao.getQnaOrSearch(qnaSearchVO));
 				break;
 			}
 		}
@@ -480,10 +507,10 @@ public class MyController {
 
 		switch (qnaSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("QnaVO", dao.getQnaAndSearch(qnaSearchVO));
+			map.put("qnaVO", dao.getQnaAndSearch(qnaSearchVO));
 			break;
 		case "or":
-			map.put("QnaVO", dao.getQnaOrSearch(qnaSearchVO));
+			map.put("qnaVO", dao.getQnaOrSearch(qnaSearchVO));
 			break;
 		}
 
@@ -546,17 +573,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "PqVO":
-			map.put("PqVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
+			map.put("pqVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			pqSearchVO.setBegin(paging.getBegin());
 			pqSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "PqSearchVO_and":
-				map.put("PqVO", dao.getPqAndSearch(pqSearchVO));
+				map.put("pqVO", dao.getPqAndSearch(pqSearchVO));
 				break;
 			case "PqSearchVO_or":
-				map.put("PqVO", dao.getPqOrSearch(pqSearchVO));
+				map.put("pqVO", dao.getPqOrSearch(pqSearchVO));
 				break;
 			}
 		}
@@ -596,10 +623,10 @@ public class MyController {
 
 		switch (pqSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("PqVO", dao.getPqAndSearch(pqSearchVO));
+			map.put("pqVO", dao.getPqAndSearch(pqSearchVO));
 			break;
 		case "or":
-			map.put("PqVO", dao.getPqOrSearch(pqSearchVO));
+			map.put("pqVO", dao.getPqOrSearch(pqSearchVO));
 			break;
 		}
 
@@ -659,17 +686,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "FaqVO":
-			map.put("FaqVO", dao.getFaqList(paging.getBegin(), paging.getEnd()));
+			map.put("faqVO", dao.getFaqList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			faqSearchVO.setBegin(paging.getBegin());
 			faqSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "FaqSearchVO_and":
-				map.put("FaqVO", dao.getFaqAndSearch(faqSearchVO));
+				map.put("faqVO", dao.getFaqAndSearch(faqSearchVO));
 				break;
 			case "FaqSearchVO_or":
-				map.put("FaqVO", dao.getFaqOrSearch(faqSearchVO));
+				map.put("faqVO", dao.getFaqOrSearch(faqSearchVO));
 				break;
 			}
 		}
@@ -703,16 +730,16 @@ public class MyController {
 
 		switch (faqSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("FaqVO", dao.getFaqAndSearch(faqSearchVO));
+			map.put("faqVO", dao.getFaqAndSearch(faqSearchVO));
 			break;
 		case "or":
-			map.put("FaqVO", dao.getFaqOrSearch(faqSearchVO));
+			map.put("faqVO", dao.getFaqOrSearch(faqSearchVO));
 			break;
 		}
-
+		
 		return map;
 	}
-
+	
 	// FAQ 삭제
 	@RequestMapping(value = "faq_delete.mcat", method = RequestMethod.POST)
 	@ResponseBody
@@ -738,7 +765,7 @@ public class MyController {
 		return getFaqPagingCmd(cPage);
 	}
 
-	// FAQ로 이동
+	// FAQ 보기로 이동
 	@RequestMapping("faq_view.mcat")
 	public ModelAndView getFaqViewCmd(HttpSession session, String faq_sn) {
 		FaqVO faqVO = dao.getFaqView(faq_sn);

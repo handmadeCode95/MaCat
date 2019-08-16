@@ -1,0 +1,330 @@
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+        url('../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: '서울남산 장체EB';
+}
+/*상단고정 헤더 > macat_header.css*/
+body{
+    font-family: Arial, "맑은 고딕", sans-serif;
+    line-height: 1;
+}
+
+header {
+    font-family: "SeoulNamsanCEB";
+}
+
+/*메인 컨텐츠 세션*/
+.main_contents_section {
+    width: 1024px;
+    min-width: 960px;
+    height: auto;
+    text-align: center;
+    padding: 3px;
+    margin: 0 auto;
+}
+
+.best_item-title_img_container {
+    width: 1024px;
+    display: inline-block;
+    text-align: center;
+}
+
+/*베스트 상품 제목(타이틀명) 위치 & 폰트*/
+.title {
+    float: left;       
+    font-size: 30px;
+    font-family: "THE정고딕150";
+    
+}
+
+/*베스트 상품 타이틀 & 이미지 감싸는 div*/
+.container {
+    display: inline-block;
+    width: 960px;
+    height: 280px;
+}
+
+/* 베스트 상품 소개단*/
+.cat_product_image {
+    /* 이전 설정
+    width: 480px;
+    height: 280px;
+    float: left;
+    background: purple;
+    display: inline-block;
+    margin: 0 auto;*/
+    position: relative;
+    display: inline-block;
+    background-image: url(../img/cat01.jpg);
+    width: 477px;
+    height: 280px;
+    background-size: cover;
+}
+
+/*베스트 상품 텍스트 단*/
+.cat_product_image .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: white;
+    z-index: 2;
+    text-align: center;
+    width: 480px;
+    font-family: "THE정고딕150";
+}
+
+.cat_product_image:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+/*좌측 상품 소개란*/
+.img_cat_product {
+    position: absolute;
+    height: 100%;
+    width: 101%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/*우측 상품소개란 : 이미지 변경용 (덮어씌움)*/
+.brand_img {
+    background-image: url(../img/cat02.jpg);
+    background-size: cover;
+    height: 280px;
+    width: 477px;
+    z-index: 3;
+}
+
+.img_brand_product {
+    position: absolute;
+    height: 100%;
+    width: 100.8%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    margin-left: -2px
+}
+
+/*실제 상품 보여주는 곳*/
+.product_container {
+    background: #fff;
+    display: inline-block;
+    text-align: center;
+    width: 1024px;
+}
+
+.container_position {
+    display: inline-block;
+    width: 1024px;
+}
+
+.main_contents .contents_ul {
+    display: inline-block;
+    /*내부 li 중앙정렬용 text-align*/
+    text-align: center;
+
+    list-style: none;
+    font-size: 0;
+    letter-spacing: -5px;
+}
+
+/* 상품 파트*/
+#category_product {
+    /*상품 선택 전체크기*/
+    display: block;
+    height: 280px;
+    width: 240px;
+    margin: 20px 5px 5px;
+    
+    font-family: "서울남산 장체 EB";
+}
+
+/*상품파트 하단 li 태그 설정*/
+#category_product li {
+    display: block;
+}
+
+
+
+/*상품 이미지 크기 획일화*/
+#product_img {
+    width: 240px;
+    max-width: 82%;
+    height: auto;
+    margin: 0 auto;    
+}
+
+/* 상품명,가격 박스크기 조절용*/
+.title_price_container {
+    margin: 0 auto;
+    height: 80px;
+    width: 240px;
+
+    word-break: normal;
+    white-space: normal;
+
+    vertical-align: middle;
+    text-align: center;
+    
+    position: relative;
+    display: grid;
+    font-size: 15px;
+    
+}
+
+/* 상품명 위치조정*/
+a strong {
+    display: block;
+    color: #150140;        
+    line-height: 20px;
+}
+
+/* 상품가격 위치조정 */
+.price {
+    height: 40px;
+}
+
+/*찜 버튼 위치설정*/
+.price .like_btn {
+    float: left;
+    width: 20%;
+    padding: 2px;
+}
+
+/* 상품명 길이차이에 따른 li 정렬*/
+ul.contents_ul li {
+    font-size: 15px;
+    letter-spacing: 0;
+    vertical-align: top;
+    display: inline;
+    float: left;
+}
+
+/*ul, li 기본값을 없애 중앙정렬 가능하게 함*/
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/*a 태그 기본값 삭제*/
+a {
+    text-decoration: none;
+    color: #3B3B3B;
+}
+
+.product_title a{
+    color: #150140;    
+}
+
+/* 하단 footer */
+footer {
+    display: block;
+    text-align: center;
+    background-color: #F25E5E;
+    height: 200px;
+    margin: 20px auto;
+    font-size: 50px;
+
+}
+
+.title p {
+    margin: 0;
+    padding: 0;
+    
+    display: inline-block;
+    color: #F25E5E;    
+}
+
+div {
+    
+}
+
+.best_item-title_img_container ul {
+    float: right;
+    list-style-type: none;
+    display: inline-block;
+    width: 400px;
+    margin: 10px 10px;
+    
+}
+
+.best_item-title_img_container li {
+    display: inline-block;
+    overflow: hidden;
+    width: 80px;
+    margin: 5px 5px 2px;
+    font-size: 15px;
+    color: black;
+}
+
+.sub_category {
+    float: right;
+    font-size: 21px;
+    font-family: "THE정고딕120";
+    
+    line-height: 30px;
+}
+
+.title_container {
+    width: 960px;
+    display: inline-block;
+    padding: 15px 0px 15px 0px;
+}
+
+.remoteCon_name {
+    line-height: 29px;
+}
+
+.floating_remoteCon img {
+    padding: 10px 5px 0 5px;
+    width: 80px;
+    height: 65px;
+}
+
+.img_ratio_container {
+    display: flex;
+    align-items: center;    
+    height: 200px;
+    
+}
+
+.price p {    
+    float: left;
+    width: 50%;
+    padding: 10px 10px 10px 10px;
+    margin: 0 auto;
+    line-height: 20px;
+}
+
+.product_title {
+    height: 40px;    
+}
+
+.price .space {
+    float: right;
+    width: 20%;
+    height: 40px;
+}
+
+
+
+
