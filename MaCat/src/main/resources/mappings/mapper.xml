@@ -33,10 +33,10 @@
 	<select id="product_imgs" resultType="ImagesVO" parameterType="Map">
 		SELECT * FROM IMAGES_TB
 		<where>
-			IMG_MAIN_FL = 1 AND IMG_THUMB_FL = 1
+			IMG_MAIN_FL = 1 AND IMG_THUMB_FL = 1 AND
 			<if test="prduct_sqs != null">
-				<foreach collection="prduct_sqs" item="i">
-					AND PRDUCT_SQ = #{i}
+				<foreach collection="prduct_sqs" item="i" separator="OR">
+					PRDUCT_SQ = #{i}
 				</foreach>
 			</if>
 		</where>

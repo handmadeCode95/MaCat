@@ -125,8 +125,19 @@ public class MyController {
 		}
 		map.put("prduct_sqs", prduct_sqs);
 		
+		List<ImagesVO> images = dao.getCategoryProductImgs(map);
+		List<ImagesVO> sortImages = new ArrayList<ImagesVO>();
+		
+		for (ProductsVO i : products) {
+			for (ImagesVO j : images) {
+				if (i.getPrduct_sq().equals(j.getPrduct_sq())) {
+					sortImages.add(j);
+				}
+			}
+		}
+		
 		mv.addObject("categories", dao.getCategoryGroup(ctgry_group));
-		mv.addObject("product_imgs", dao.getCategoryProductImgs(map));
+		mv.addObject("product_imgs", sortImages);
 		mv.addObject("products", products);
 		mv.addObject("paging", paging);
 		return mv;

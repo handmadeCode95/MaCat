@@ -33,7 +33,7 @@
 		<!-- 고정헤더 불러오기 -->
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#macat_header").load("../macat_header.jsp");
+				$("#macat_header").load("macat_header.jsp");
 			});
 		</script>
 	</head>
@@ -85,17 +85,13 @@
 			<div class="product_container">
 				<div class="container_position">
 					<ul class="contents_ul">
-						<c:forEach var="i" items="${products}">
+						<c:forEach var="i" varStatus="vs" items="${products}">
 							<li id="category_product">
 								<div>
 									<!--상품 이미지 링크 -->
 									<div class="img_ratio_container">
 										<a href="">
-											<c:forEach var="j" items="${product_imgs}">
-												<c:if test="${i.prduct_sq == j.prduct_sq}">
-													<img id="product_img" src="resources/img/${j.img_nm}.png" alt="" style="display: block">
-												</c:if>
-											</c:forEach>
+											<img id="product_img" src="<c:url value="resources/img/${product_imgs[vs.index].img_nm}.png"></c:url>" alt="" style="display: block">
 										</a>
 									</div>
 									<!--상품명, 가격-->
