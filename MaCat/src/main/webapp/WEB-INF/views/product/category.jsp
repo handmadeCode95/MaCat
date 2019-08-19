@@ -85,13 +85,13 @@
 			<div class="product_container">
 				<div class="container_position">
 					<ul class="contents_ul">
-						<c:forEach var="i" varStatus="vs" items="${products}">
+						<c:forEach var="i" items="${products}">
 							<li id="category_product">
 								<div>
 									<!--상품 이미지 링크 -->
 									<div class="img_ratio_container">
 										<a href="">
-											<img id="product_img" src="<c:url value="resources/img/${product_imgs[vs.index].img_nm}.png"></c:url>" alt="" style="display: block">
+											<img id="product_img" src="<c:url value="resources/img/${i.prduct_thumb_nm}"></c:url>" alt="" style="display: block">
 										</a>
 									</div>
 									<!--상품명, 가격-->

@@ -28,31 +28,29 @@
 	<body>
 	    <form action="qna_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
 	    
-	    	<input type="checkbox" name="search_chk" value="qna_ctgry">
-	        카테고리 <select class="qna_ctgry" name="qna_ctgry" disabled>
-	            <option value="0" selected>전체</option>
-	            <option value="1">취소</option>
-	            <option value="2">교환</option>
-	            <option value="3">배송</option>
-	            <option value="4">결제</option>
-	            <option value="5">기타</option>
+	    	<input type="checkbox" name="search_chk" value="qc_nm">
+	        카테고리 <select class="qc_nm" name="qc_nm" disabled>
+	            <option value="전체" selected>전체</option>
+	            <c:forEach var="i" items="${qna_ctgries}">
+	            	<option value="${i.qc_nm}">${i.qc_nm}</option>
+	            </c:forEach>
 	        </select>
 		
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_sn">
-	       	문의 번호 <input type="number" class="qna_sn" name="qna_sn" disabled>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_sq">
+	       	문의 번호 <input type="number" class="qna_sq" name="qna_sq" disabled>
 	
 	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_sj"checked>
 	        제목 <input type="text" class="qna_sj" name="qna_sj"><br><br>
 	
-	        <input type="checkbox" name="search_chk" value="qna_name">
-	        고객명 <input type="text" class="qna_name" name="qna_name" disabled>
+	        <input type="checkbox" name="search_chk" value="qna_nm">
+	        고객명 <input type="text" class="qna_nm" name="qna_nm" disabled>
 	        
 	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="qna_id">
-	        아이디 <input type="number" class="qna_id" name="qna_id" disabled><br><br>
+	        아이디 <input type="text" class="qna_id" name="qna_id" disabled><br><br>
 		
-	        <input type="checkbox" name="search_chk" value="qna_reg_date">
-	        등록일 <input type="date" class="qna_reg_date" name="qna_reg_date_start" disabled>~
-	        <input type="date" class="qna_reg_date" name="qna_reg_date_end" disabled><br><br>
+	        <input type="checkbox" name="search_chk" value="qna_reg_dt">
+	        등록일 <input type="date" class="qna_reg_dt" name="qna_reg_dt_start" disabled>~
+	        <input type="date" class="qna_reg_dt" name="qna_reg_dt_end" disabled><br><br>
 	        
 	        <input type="radio" name="view" value="0" checked>미답변 문의 보기
 	        <input type="radio" name="view" value="1">답변 완료 문의 보기
@@ -70,41 +68,37 @@
 				<table style="width: 500px; margin: 0 auto;">
 					<thead>
 						<tr><th><input type="checkbox" class="all" name="qna_all" value="0"></th>
-						<th>답변여부</th><th>카테고리</th><th>문의 번호</th><th>제목</th><th>고객명</th><th>등록일</th><th>조회수</th></tr>
+						<th>답변여부</th><th>카테고리</th><th>문의 번호</th><th>제목</th><th>고객명</th><th>아이디</th><th>등록일</th><th>조회수</th></tr>
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
 							<c:when test="${empty qna}">
 								<tr>
-									<td colspan="8"><h3>조회된 문의가 없습니다.</h3></td>
+									<td colspan="9"><h3>조회된 문의가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
 								<c:forEach var="i" items="${qna}">
-									<tr id="${i.qna_sn}">
-										<td><input type="checkbox" class="chkbox" name="qnas" value="${i.qna_sn}"></td>
+									<tr id="${i.qna_sq}">
+										<td><input type="checkbox" class="chkbox" name="qnas" value="${i.qna_sq}"></td>
 										<td>
-											<c:if test="${i.qna_ans_chk == 0}">미답변</c:if>
-											<c:if test="${i.qna_ans_chk == 1}">답변완료</c:if>
-											<c:if test="${i.qna_ans_chk == 2}">답글</c:if>
+											<c:if test="${i.qna_ans_st == 0}">미답변</c:if>
+											<c:if test="${i.qna_ans_st == 1}">답변완료</c:if>
+											<c:if test="${i.qna_ans_st == 2}">답글</c:if>
 										</td>
-										<td>
-											<c:if test="${i.qna_ctgry == 1}">취소</c:if>
-											<c:if test="${i.qna_ctgry == 2}">교환</c:if>
-											<c:if test="${i.qna_ctgry == 3}">배송</c:if>
-											<c:if test="${i.qna_ctgry == 4}">결제</c:if>
-										</td>
-										<td>${i.qna_sn}</td>
+										<td>${i.qc_nm}</td>
+										<td>${i.qna_sq}</td>
 										<td>
 											<c:forEach begin="1" end="${i.qna_level}">
 												&nbsp;&nbsp;┗
 											</c:forEach>
-											<a href="qna_view.mcat?qna_sn=${i.qna_sn}">${i.qna_sj}</a>
+											<a href="qna_view.mcat?qna_sq=${i.qna_sq}">${i.qna_sj}</a>
 										</td>
-										<td>${i.qna_name}</td>
-										<td>${i.qna_reg_date.substring(0, 10)}</td>
-										<td>${i.qna_rdcnt}</td>
+										<td>${i.qna_nm}</td>
+										<td>${i.qna_id}</td>
+										<td>${i.qna_reg_dt.substring(0, 10)}</td>
+										<td>${i.qna_view_cnt}</td>
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
@@ -122,7 +116,7 @@
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
-							<td colspan="8">
+							<td colspan="9">
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>

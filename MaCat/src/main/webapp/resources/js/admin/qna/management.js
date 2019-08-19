@@ -5,30 +5,26 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "qnaVO") {
+			if (key === "qna") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["qna_sn"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='qnas' value='" + v["qna_sn"] + "'></td>";
+					result += "<tr id='" + v["qna_sq"] + "'>";
+					result += "<td><input type='checkbox' class='chkbox' name='qnas' value='" + v["qna_sq"] + "'></td>";
 					result += "<td>";
-						if (v["qna_ans_chk"] == 0) result += "미답변";
-						if (v["qna_ans_chk"] == 1) result += "답변완료";
-						if (v["qna_ans_chk"] == 2) result += "답글";
+						if (v["qna_ans_st"] == 0) result += "미답변";
+						if (v["qna_ans_st"] == 1) result += "답변완료";
+						if (v["qna_ans_st"] == 2) result += "답글";
 					result += "</td>";
-					result += "<td>";
-						if (v["qna_ctgry"] == 1) result += "취소";
-						if (v["qna_ctgry"] == 2) result += "교환";
-						if (v["qna_ctgry"] == 3) result += "배송";
-						if (v["qna_ctgry"] == 4) result += "결제";
-					result += "</td>";
-					result += "<td>" + v["qna_sn"] + "</td>";
+					result += "<td>" + v["qc_nm"] + "</td>";
+					result += "<td>" + v["qna_sq"] + "</td>";
 					result += "<td>";
 					for (var i = 0; i < v["qna_level"]; i++) {
 						result += "&nbsp;&nbsp;┗";
 					}
-					result += "<a href='qna_view.mcat?qna_sn=" + v["qna_sn"] + "'>" + v["qna_sj"] + "</a></td>";
-					result += "<td>" + v["qna_name"] + "</td>";
-					result += "<td>" + v["qna_reg_date"].substring(0, 10) + "</td>";
-					result += "<td>" + v["qna_rdcnt"] + "</td>";
+					result += "<a href='qna_view.mcat?qna_sq=" + v["qna_sq"] + "'>" + v["qna_sj"] + "</a></td>";
+					result += "<td>" + v["qna_nm"] + "</td>";
+					result += "<td>" + v["qna_id"] + "</td>";
+					result += "<td>" + v["qna_reg_dt"].substring(0, 10) + "</td>";
+					result += "<td>" + v["qna_view_cnt"] + "</td>";
 				});
 			}else if (key === "paging"){
 				var paging = value;

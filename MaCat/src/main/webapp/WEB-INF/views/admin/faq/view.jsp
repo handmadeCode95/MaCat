@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>고객문의 :: ${faqVO.faq_sj}</title>
+		<title>고객문의 :: ${qnaVO.qna_sj}</title>
 		<style type="text/css">
 			*{font-family: "나눔고딕";}
 			table{margin: 20px auto;}
@@ -16,7 +16,7 @@
 			th {width:120px; text-align:center; padding:4px 10px; background-color: #B2CCFF;}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <script src="resources/js/admin/faq/view.js"></script>
+	    <script src="resources/js/admin/qna/view.js"></script>
 	</head>
 	
 	<body>
@@ -24,29 +24,37 @@
 			<table width="700">
 				<tbody>
 					<tr>
-						<th bgcolor="#B2EBF4">카테고리</th>
-						<td>
-							<c:if test="${faqVO.faq_ctgry == 1}">취소</c:if>
-							<c:if test="${faqVO.faq_ctgry == 2}">교환</c:if>
-							<c:if test="${faqVO.faq_ctgry == 3}">배송</c:if>
-							<c:if test="${faqVO.faq_ctgry == 4}">결제</c:if>
-						</td>
+						<th bgcolor="#B2EBF4">답변여부</th>
+						<td><c:if test="${qnaVO.qna_ans_st == 0}">미답변</c:if>
+						<c:if test="${qnaVO.qna_ans_st == 1}">답변완료</c:if></td>
 					</tr>
 					<tr>
-						<th bgcolor="#B2EBF4">번호</th>
-						<td>${faqVO.faq_sn}</td>
+						<th bgcolor="#B2EBF4">문의 번호</th>
+						<td>${qnaVO.qna_sq}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">제목</th>
-						<td>${faqVO.faq_sj}</td>
+						<td>${qnaVO.qna_sj}</td>
 					</tr>
 					<tr>
-						<th bgcolor="#B2EBF4">작성자</th>
-						<td>관리자</td>
+						<th bgcolor="#B2EBF4">고객명</th>
+						<td>${qnaVO.qna_nm}</td>
+					</tr>
+					<tr>
+						<th bgcolor="#B2EBF4">아이디</th>
+						<td>${qnaVO.qna_id}</td>
+					</tr>
+					<tr>
+						<th bgcolor="#B2EBF4">등록일</th>
+						<td>${qnaVO.qna_reg_dt.substring(0, 10)}</td>
+					</tr>
+					<tr>
+						<th bgcolor="#B2EBF4">조회수</th>
+						<td>${qnaVO.qna_view_cnt}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">내용</th>
-						<td><pre>${faqVO.faq_cn}</pre></td>
+						<td><pre>${qnaVO.qna_cn}</pre></td>
 					</tr>
 					</tbody>
 					<tfoot>
@@ -57,9 +65,9 @@
 					        <input type="button" value="답글" id="answerGO"
 					        <c:if test="${sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
 					        <input type="button" value="수정" id="updateGO" style="display: none"
-					        <c:if test="${faqVO.mber_sn != sessionScope.loginChk.mber_sn}"> style="display: none"</c:if> />
+					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq}"> style="display: none"</c:if> />
 					        <input type="button" value="삭제" id="deleteGO" style="display: none"
-					        <c:if test="${faqVO.mber_sn != sessionScope.loginChk.mber_sn || sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
+					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq || sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
 					    </td>
 					</tr>
 				</tfoot>

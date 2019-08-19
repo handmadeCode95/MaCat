@@ -38,6 +38,16 @@ public class DAO {
 		return sqlSessionTemplate.update("login_record", mbersVO);
 	}
 	
+	// 회원 등급 조회
+	public List<MberGradVO> getMberGradList() {
+		return sqlSessionTemplate.selectList("mber_grad_list");
+	}
+	
+	// 문의 카테고리 조회
+	public List<CtgriesVO> getQnaCtgriesList() {
+		return sqlSessionTemplate.selectList("qna_ctgries_list");
+	}
+	
 	
 	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
 	
@@ -45,11 +55,6 @@ public class DAO {
 	// 카테고리 그룹 가져오기
 	public List<CtgriesVO> getCategoryGroup(int ctgry_group) {
 		return sqlSessionTemplate.selectList("ctgry_group", ctgry_group);
-	}
-	
-	// 카테고리 이미지 가져오기
-	public List<ImagesVO> getCategoryProductImgs(Map<String, List<String>> map) {
-		return sqlSessionTemplate.selectList("product_imgs", map);
 	}
 	
 	
@@ -211,54 +216,7 @@ public class DAO {
 		return sqlSessionTemplate.update("qna_rdcnt_update", qnaVO);
 	}
 	
-	
-	/*////////////////////////////////// 상품 문의 관리 //////////////////////////////////*/
-	
-	
-	// 전체 문의 갯수
-	public int getPqCount() {
-		return sqlSessionTemplate.selectOne("pq_count");
-	}
-	
-	// 상품 문의 가져오기
-	public List<PqVO> getPqList(int begin, int end) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("begin", begin);
-		map.put("end", end);
-		return sqlSessionTemplate.selectList("product_qna", map);
-	}
-	
-	// 상품 문의 and조건 검색 결과 인원
-	public int getPqAndCount(PqSearchVO pqSearchVO) {
-		return sqlSessionTemplate.selectOne("pq_and_count", pqSearchVO);
-	}
-			
-	// 상품 문의 or조건 검색 결과 인원
-	public int getPqOrCount(PqSearchVO pqSearchVO) {
-		return sqlSessionTemplate.selectOne("pq_or_count", pqSearchVO);
-	}
-
-	// 상품 문의 and조건 검색
-	public List<PqVO> getPqAndSearch(PqSearchVO pqSearchVO) {
-		return sqlSessionTemplate.selectList("pq_and_search", pqSearchVO);
-	}
-
-	// 상품 문의 or조건 검색
-	public List<PqVO> getPqOrSearch(PqSearchVO pqSearchVO) {
-		return sqlSessionTemplate.selectList("pq_or_search", pqSearchVO);
-	}
 		
-	// 상품 문의 삭제
-	public int getPqDelete(String pq_sn) {
-		return sqlSessionTemplate.delete("pq_delete", pq_sn);
-	}
-	
-	// 상품 문의 보기
-	public PqVO getPqView(String pq_sn) {
-		return sqlSessionTemplate.selectOne("pq_view", pq_sn);
-	}
-	
-	
 	/*////////////////////////////////// FAQ 관리 //////////////////////////////////*/
 	
 	

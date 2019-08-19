@@ -25,23 +25,12 @@
 				<tbody>
 					<tr>
 						<th bgcolor="#B2EBF4">답변여부</th>
-						<td>
-							<c:if test="${qnaVO.qna_ans_chk == 0}">미답변</c:if>
-							<c:if test="${qnaVO.qna_ans_chk == 1}">답변완료</c:if>
-						</td>
-					</tr>
-					<tr>
-						<th bgcolor="#B2EBF4">카테고리</th>
-						<td>
-							<c:if test="${qnaVO.qna_ctgry == 1}">취소</c:if>
-							<c:if test="${qnaVO.qna_ctgry == 2}">교환</c:if>
-							<c:if test="${qnaVO.qna_ctgry == 3}">배송</c:if>
-							<c:if test="${qnaVO.qna_ctgry == 4}">결제</c:if>
-						</td>
+						<td><c:if test="${qnaVO.qna_ans_st == 0}">미답변</c:if>
+						<c:if test="${qnaVO.qna_ans_st == 1}">답변완료</c:if></td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">문의 번호</th>
-						<td>${qnaVO.qna_sn}</td>
+						<td>${qnaVO.qna_sq}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">제목</th>
@@ -49,7 +38,7 @@
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">고객명</th>
-						<td>${qnaVO.qna_name}</td>
+						<td>${qnaVO.qna_nm}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">아이디</th>
@@ -57,11 +46,11 @@
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">등록일</th>
-						<td>${qnaVO.qna_reg_date.substring(0, 10)}</td>
+						<td>${qnaVO.qna_reg_dt.substring(0, 10)}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">조회수</th>
-						<td>${qnaVO.qna_rdcnt}</td>
+						<td>${qnaVO.qna_view_cnt}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">내용</th>
@@ -76,9 +65,9 @@
 					        <input type="button" value="답글" id="answerGO"
 					        <c:if test="${sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
 					        <input type="button" value="수정" id="updateGO" style="display: none"
-					        <c:if test="${qnaVO.mber_sn != sessionScope.loginChk.mber_sn}"> style="display: none"</c:if> />
+					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq}"> style="display: none"</c:if> />
 					        <input type="button" value="삭제" id="deleteGO" style="display: none"
-					        <c:if test="${qnaVO.mber_sn != sessionScope.loginChk.mber_sn || sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
+					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq || sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
 					    </td>
 					</tr>
 				</tfoot>

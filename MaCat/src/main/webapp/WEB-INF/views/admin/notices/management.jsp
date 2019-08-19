@@ -28,21 +28,15 @@
 	<body>
 	    <form action="not_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
 		
-	        <input type="checkbox" name="search_chk" value="not_sn">
-	        글 번호 <input type="number" class="not_sn" name="not_sn" disabled>
+	        <input type="checkbox" name="search_chk" value="not_sq">
+	        글 번호 <input type="number" class="not_sq" name="not_sq" disabled>
 	
 	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="not_sj">
-	        제목 <input type="text" class="not_sj" name="not_sj" disabled>
-	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="not_name" checked>
-	        작성자 <input type="text" class="not_name" name="not_name"><br><br>
-	        
-	        <input type="checkbox" name="search_chk" value="mber_sn">
-	        작성자 회원 번호 <input type="number" class="mber_sn" name="mber_sn" disabled>
+	        제목 <input type="text" class="not_sj" name="not_sj" disabled><br><br>
 		
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="not_reg_date">
-	        작성일 <input type="date" class="not_reg_date" name="not_reg_date_start" disabled>~
-	        <input type="date" class="not_reg_date" name="not_reg_date_end" disabled><br><br>
+	        <input type="checkbox" name="search_chk" value="not_reg_dt">
+	        작성일 <input type="date" class="not_reg_dt" name="not_reg_dt_start" disabled>~
+	        <input type="date" class="not_reg_dt" name="not_reg_dt_end" disabled><br><br>
 	        
 	        <input type="radio" name="and_or_chk" value="and" checked>AND
 	        <input type="radio" name="and_or_chk" value="or">OR
@@ -57,25 +51,23 @@
 				<table style="width: 500px; margin: 0 auto;">
 					<thead>
 						<tr><th><input type="checkbox" class="all" name="nots_all" value="0"></th>
-						<th>글 번호</th><th>제목</th><th>작성자</th><th>작성자 회원 번호</th><th>작성일</th></tr>
+						<th>글 번호</th><th>제목</th><th>작성일</th></tr>
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
 							<c:when test="${empty notices}">
 								<tr>
-									<td colspan="6"><h3>등록된 공지사항이 없습니다.</h3></td>
+									<td colspan="4"><h3>등록된 공지사항이 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
 								<c:forEach var="i" items="${notices}">
-									<tr id="${i.not_sn}">
-										<td><input type="checkbox" class="chkbox" name="nots" value="${i.not_sn}"></td>
-										<td>${i.not_sn}</td>
+									<tr id="${i.not_sq}">
+										<td><input type="checkbox" class="chkbox" name="nots" value="${i.not_sq}"></td>
+										<td>${i.not_sq}</td>
 										<td><a href="nots_update.mcat">${i.not_sj}</a></td>
-										<td>${i.not_name}</td>
-										<td>${i.mber_sn}</td>
-										<td>${i.not_reg_date.substring(0, 10)}</td>
+										<td>${i.not_reg_dt.substring(0, 10)}</td>
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
@@ -83,7 +75,7 @@
 									<c:forEach begin="1" end="${10 - (fn:length(notices) % 10)}">
 										<tr>
 											<%-- 공백 삽입 --%>
-											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -93,7 +85,7 @@
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
-							<td colspan="6">
+							<td colspan="4">
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>

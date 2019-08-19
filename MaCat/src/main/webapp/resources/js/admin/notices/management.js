@@ -5,15 +5,13 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "notsVO") {
+			if (key === "notices") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["not_sn"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='nots' value='" + v["not_sn"] + "'></td>";
-					result += "<td>" + v["not_sn"] + "</td>";
+					result += "<tr id='" + v["not_sq"] + "'>";
+					result += "<td><input type='checkbox' class='chkbox' name='nots' value='" + v["not_sq"] + "'></td>";
+					result += "<td>" + v["not_sq"] + "</td>";
 					result += "<td><a href='nots_update.mcat'>" + v["not_sj"] + "</a></td>";
-					result += "<td>" + v["not_name"] + "</td>";
-					result += "<td>" + v["mber_sn"] + "</td>";
-					result += "<td>" + v["not_reg_date"].substring(0, 10) + "</td>";
+					result += "<td>" + v["not_reg_dt"].substring(0, 10) + "</td>";
 				});
 			}else if (key === "paging"){
 				var paging = value;

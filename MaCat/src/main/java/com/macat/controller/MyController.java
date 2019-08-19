@@ -23,8 +23,6 @@ import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
 import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
-import com.macat.service.PqSearchVO;
-import com.macat.service.PqVO;
 import com.macat.service.ProductsVO;
 import com.macat.service.QnaSearchVO;
 import com.macat.service.QnaVO;
@@ -47,7 +45,6 @@ public class MyController {
 	private MbersSearchVO mbersSearchVO;
 	private NotsSearchVO notsSearchVO;
 	private QnaSearchVO qnaSearchVO;
-	private PqSearchVO pqSearchVO;
 	private FaqSearchVO faqSearchVO;
 
 	private String usedVO; // 페이징을 위한 조회 기록
@@ -97,7 +94,7 @@ public class MyController {
 		 * dao.getJoin(mbersVO); }
 		 */
 
-		mbersVO.setEmail(mbersVO.getEmail() + mbersVO.getEmail_end());
+		mbersVO.setMber_email(mbersVO.getMber_email() + mbersVO.getMber_email_end());
 		dao.getJoin(mbersVO);
 		return new ModelAndView("redirect:login.mcat");
 	}
@@ -115,37 +112,15 @@ public class MyController {
 		Paging paging = new Paging(20);
 		count = dao.getProductsCount();
 		getPaging(paging, count, cPage);
-		
-		List<ProductsVO> products = dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd());
-		
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
-		List<String> prduct_sqs = new ArrayList<String>();
-		for (ProductsVO i : products) {
-			prduct_sqs.add(i.getPrduct_sq());
-		}
-		map.put("prduct_sqs", prduct_sqs);
-		
-		List<ImagesVO> images = dao.getCategoryProductImgs(map);
-		List<ImagesVO> sortImages = new ArrayList<ImagesVO>();
-		
-		for (ProductsVO i : products) {
-			for (ImagesVO j : images) {
-				if (i.getPrduct_sq().equals(j.getPrduct_sq())) {
-					sortImages.add(j);
-				}
-			}
-		}
-		
 		mv.addObject("categories", dao.getCategoryGroup(ctgry_group));
-		mv.addObject("product_imgs", sortImages);
-		mv.addObject("products", products);
+		mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
 	}
 
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
-
+	
 	
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manage.mcat")
@@ -155,6 +130,7 @@ public class MyController {
 		Paging paging = new Paging();
 		count = dao.getMbersCount();
 		getPaging(paging, count, cPage);
+		mv.addObject("mber_grad", dao.getMberGradList());
 		mv.addObject("members", dao.getMbersList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
@@ -181,20 +157,8 @@ public class MyController {
 		Paging paging = new Paging();
 		count = dao.getQnaCount();
 		getPaging(paging, count, cPage);
+		mv.addObject("qna_ctgries", dao.getQnaCtgriesList());
 		mv.addObject("qna", dao.getQnaList(paging.getBegin(), paging.getEnd()));
-		mv.addObject("paging", paging);
-		return mv;
-	}
-	
-	// 상품 문의 관리로 이동
-	@RequestMapping("pq_manage.mcat")
-	public ModelAndView getPqCmd(String cPage) {
-		usedVO = "PqVO";
-		ModelAndView mv = new ModelAndView("admin/pq/management");
-		Paging paging = new Paging();
-		count = dao.getPqCount();
-		getPaging(paging, count, cPage);
-		mv.addObject("product_qna", dao.getPqList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
 	}
@@ -207,6 +171,7 @@ public class MyController {
 		Paging paging = new Paging();
 		count = dao.getFaqCount();
 		getPaging(paging, count, cPage);
+		mv.addObject("qna_ctgries", dao.getQnaCtgriesList());
 		mv.addObject("faq", dao.getFaqList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
 		return mv;
@@ -227,20 +192,22 @@ public class MyController {
 
 		getPaging(paging, count, cPage);
 		map.put("paging", paging);
+		
+		map.put("mber_grad", dao.getMberGradList());
 
 		switch (usedVO) {
 		case "MbersVO":
-			map.put("mbersVO", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+			map.put("members", dao.getMbersList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			mbersSearchVO.setBegin(paging.getBegin());
 			mbersSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "MbersSearchVO_and":
-				map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
+				map.put("members", dao.getMbersAndSearch(mbersSearchVO));
 				break;
 			case "MbersSearchVO_or":
-				map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
+				map.put("members", dao.getMbersOrSearch(mbersSearchVO));
 				break;
 			}
 		}
@@ -253,18 +220,18 @@ public class MyController {
 	@ResponseBody
 	public Map<String, Object> getMbersSearchCmd(@RequestBody MbersSearchVO mbersSearchVO) {
 
-		if (mbersSearchVO.getBirthday_start() != null)
-			mbersSearchVO.setBirthday_start(mbersSearchVO.getBirthday_start() + " 00:00:00");
-		if (mbersSearchVO.getBirthday_end() != null)
-			mbersSearchVO.setBirthday_end(mbersSearchVO.getBirthday_end() + " 23:59:59");
-		if (mbersSearchVO.getConect_rcord_start() != null)
-			mbersSearchVO.setConect_rcord_start(mbersSearchVO.getConect_rcord_start() + " 00:00:00");
-		if (mbersSearchVO.getConect_rcord_end() != null)
-			mbersSearchVO.setConect_rcord_end(mbersSearchVO.getConect_rcord_end() + " 23:59:59");
-		if (mbersSearchVO.getReg_date_start() != null)
-			mbersSearchVO.setReg_date_start(mbersSearchVO.getReg_date_start() + " 00:00:00");
-		if (mbersSearchVO.getReg_date_end() != null)
-			mbersSearchVO.setReg_date_end(mbersSearchVO.getReg_date_end() + " 23:59:59");
+		if (mbersSearchVO.getMber_birthday_dt_start() != null)
+			mbersSearchVO.setMber_birthday_dt_start(mbersSearchVO.getMber_birthday_dt_start() + " 00:00:00");
+		if (mbersSearchVO.getMber_birthday_dt_end() != null)
+			mbersSearchVO.setMber_birthday_dt_end(mbersSearchVO.getMber_birthday_dt_end() + " 23:59:59");
+		if (mbersSearchVO.getMber_conect_dt_start() != null)
+			mbersSearchVO.setMber_conect_dt_start(mbersSearchVO.getMber_conect_dt_start() + " 00:00:00");
+		if (mbersSearchVO.getMber_conect_dt_end() != null)
+			mbersSearchVO.setMber_conect_dt_end(mbersSearchVO.getMber_conect_dt_end() + " 23:59:59");
+		if (mbersSearchVO.getMber_reg_dt_start() != null)
+			mbersSearchVO.setMber_reg_dt_start(mbersSearchVO.getMber_reg_dt_start() + " 00:00:00");
+		if (mbersSearchVO.getMber_reg_dt_end() != null)
+			mbersSearchVO.setMber_reg_dt_end(mbersSearchVO.getMber_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();
@@ -285,13 +252,15 @@ public class MyController {
 		mbersSearchVO.setBegin(paging.getBegin());
 		mbersSearchVO.setEnd(paging.getEnd());
 		this.mbersSearchVO = mbersSearchVO; // 페이징을 위한 검색 기록 저장
+		
+		map.put("mber_grad", dao.getMberGradList());
 
 		switch (mbersSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("mbersVO", dao.getMbersAndSearch(mbersSearchVO));
+			map.put("members", dao.getMbersAndSearch(mbersSearchVO));
 			break;
 		case "or":
-			map.put("mbersVO", dao.getMbersOrSearch(mbersSearchVO));
+			map.put("members", dao.getMbersOrSearch(mbersSearchVO));
 			break;
 		}
 
@@ -301,9 +270,9 @@ public class MyController {
 	// 회원 정보 수정
 	@RequestMapping(value = "mbers_update.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMbersUpdateCmd(@RequestBody Map<String, List<MbersVO>> mbersVO) {
-		for (String i : mbersVO.keySet()) {
-			for (MbersVO j : mbersVO.get(i)) {
+	public Map<String, Object> getMbersUpdateCmd(@RequestBody Map<String, List<MbersVO>> members) {
+		for (String i : members.keySet()) {
+			for (MbersVO j : members.get(i)) {
 				dao.getMbersUpdate(j);
 			}
 		}
@@ -350,20 +319,20 @@ public class MyController {
 
 		getPaging(paging, count, cPage);
 		map.put("paging", paging);
-
+		
 		switch (usedVO) {
 		case "NotsVO":
-			map.put("notsVO", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+			map.put("notices", dao.getNotsList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			notsSearchVO.setBegin(paging.getBegin());
 			notsSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "NotsSearchVO_and":
-				map.put("notsVO", dao.getNotsAndSearch(notsSearchVO));
+				map.put("notices", dao.getNotsAndSearch(notsSearchVO));
 				break;
 			case "NotsSearchVO_or":
-				map.put("notsVO", dao.getNotsOrSearch(notsSearchVO));
+				map.put("notices", dao.getNotsOrSearch(notsSearchVO));
 				break;
 			}
 		}
@@ -376,10 +345,10 @@ public class MyController {
 	@ResponseBody
 	public Map<String, Object> getNotsSearchCmd(@RequestBody NotsSearchVO notsSearchVO) {
 
-		if (notsSearchVO.getNot_reg_date_start() != null)
-			notsSearchVO.setNot_reg_date_start(notsSearchVO.getNot_reg_date_start() + " 00:00:00");
-		if (notsSearchVO.getNot_reg_date_end() != null)
-			notsSearchVO.setNot_reg_date_end(notsSearchVO.getNot_reg_date_end() + " 23:59:59");
+		if (notsSearchVO.getNot_reg_dt_start() != null)
+			notsSearchVO.setNot_reg_dt_start(notsSearchVO.getNot_reg_dt_start() + " 00:00:00");
+		if (notsSearchVO.getNot_reg_dt_end() != null)
+			notsSearchVO.setNot_reg_dt_end(notsSearchVO.getNot_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();
@@ -403,10 +372,10 @@ public class MyController {
 
 		switch (notsSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("notsVO", dao.getNotsAndSearch(notsSearchVO));
+			map.put("notices", dao.getNotsAndSearch(notsSearchVO));
 			break;
 		case "or":
-			map.put("notsVO", dao.getNotsOrSearch(notsSearchVO));
+			map.put("notices", dao.getNotsOrSearch(notsSearchVO));
 			break;
 		}
 
@@ -468,17 +437,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "QnaVO":
-			map.put("qnaVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
+			map.put("qna", dao.getQnaList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			qnaSearchVO.setBegin(paging.getBegin());
 			qnaSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "QnaSearchVO_and":
-				map.put("qnaVO", dao.getQnaAndSearch(qnaSearchVO));
+				map.put("qna", dao.getQnaAndSearch(qnaSearchVO));
 				break;
 			case "QnaSearchVO_or":
-				map.put("qnaVO", dao.getQnaOrSearch(qnaSearchVO));
+				map.put("qna", dao.getQnaOrSearch(qnaSearchVO));
 				break;
 			}
 		}
@@ -491,10 +460,10 @@ public class MyController {
 	@ResponseBody
 	public Map<String, Object> getQnaSearchCmd(@RequestBody QnaSearchVO qnaSearchVO) {
 
-		if (qnaSearchVO.getQna_reg_date_start() != null)
-			qnaSearchVO.setQna_reg_date_start(qnaSearchVO.getQna_reg_date_start() + " 00:00:00");
-		if (qnaSearchVO.getQna_reg_date_end() != null)
-			qnaSearchVO.setQna_reg_date_end(qnaSearchVO.getQna_reg_date_end() + " 23:59:59");
+		if (qnaSearchVO.getQna_reg_dt_start() != null)
+			qnaSearchVO.setQna_reg_dt_start(qnaSearchVO.getQna_reg_dt_start() + " 00:00:00");
+		if (qnaSearchVO.getQna_reg_dt_end() != null)
+			qnaSearchVO.setQna_reg_dt_end(qnaSearchVO.getQna_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		Paging paging = new Paging();
@@ -518,10 +487,10 @@ public class MyController {
 
 		switch (qnaSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("qnaVO", dao.getQnaAndSearch(qnaSearchVO));
+			map.put("qna", dao.getQnaAndSearch(qnaSearchVO));
 			break;
 		case "or":
-			map.put("qnaVO", dao.getQnaOrSearch(qnaSearchVO));
+			map.put("qna", dao.getQnaOrSearch(qnaSearchVO));
 			break;
 		}
 
@@ -555,10 +524,10 @@ public class MyController {
 
 	// 문의 보기로 이동
 	@RequestMapping("qna_view.mcat")
-	public ModelAndView getQnaViewCmd(HttpSession session, String qna_sn) {
-		QnaVO qnaVO = dao.getQnaView(qna_sn);
+	public ModelAndView getQnaViewCmd(HttpSession session, String qna_sq) {
+		QnaVO qnaVO = dao.getQnaView(qna_sq);
 
-		qnaVO.setQna_rdcnt(qnaVO.getQna_rdcnt() + 1);
+		qnaVO.setQna_view_cnt(qnaVO.getQna_view_cnt() + 1);
 		dao.getQnaRdcntUpdate(qnaVO);
 
 		session.setAttribute("qnaVO", qnaVO);
@@ -567,119 +536,6 @@ public class MyController {
 	}
 	
 
-	/*////////////////////////////////// 상품 문의 관리 //////////////////////////////////*/
-
-	
-	// 상품 문의 페이징
-	@RequestMapping(value = "pq_paging.mcat", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getPqPagingCmd(@RequestBody String cPage) {
-
-		this.cPage = cPage;
-		Paging paging = new Paging();
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		getPaging(paging, count, cPage);
-		map.put("paging", paging);
-
-		switch (usedVO) {
-		case "PqVO":
-			map.put("pqVO", dao.getQnaList(paging.getBegin(), paging.getEnd()));
-			break;
-		default:
-			pqSearchVO.setBegin(paging.getBegin());
-			pqSearchVO.setEnd(paging.getEnd());
-			switch (usedVO) {
-			case "PqSearchVO_and":
-				map.put("pqVO", dao.getPqAndSearch(pqSearchVO));
-				break;
-			case "PqSearchVO_or":
-				map.put("pqVO", dao.getPqOrSearch(pqSearchVO));
-				break;
-			}
-		}
-
-		return map;
-	}
-
-	// 상품 문의 검색
-	@RequestMapping(value = "pq_search.mcat", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getPqSearchCmd(@RequestBody PqSearchVO pqSearchVO) {
-
-		if (pqSearchVO.getPq_reg_date_start() != null)
-			pqSearchVO.setPq_reg_date_start(pqSearchVO.getPq_reg_date_start() + " 00:00:00");
-		if (pqSearchVO.getPq_reg_date_end() != null)
-			pqSearchVO.setPq_reg_date_end(pqSearchVO.getPq_reg_date_end() + " 23:59:59");
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		Paging paging = new Paging();
-
-		switch (pqSearchVO.getAnd_or_chk()) {
-		case "and":
-			usedVO = "PqSearchVO_and";
-			count = dao.getPqAndCount(pqSearchVO);
-			break;
-		case "or":
-			usedVO = "PqSearchVO_or";
-			count = dao.getPqOrCount(pqSearchVO);
-			break;
-		}
-
-		getPaging(paging, count, null);
-		map.put("paging", paging);
-		pqSearchVO.setBegin(paging.getBegin());
-		pqSearchVO.setEnd(paging.getEnd());
-		this.pqSearchVO = pqSearchVO; // 페이징을 위한 검색 기록 저장
-
-		switch (pqSearchVO.getAnd_or_chk()) {
-		case "and":
-			map.put("pqVO", dao.getPqAndSearch(pqSearchVO));
-			break;
-		case "or":
-			map.put("pqVO", dao.getPqOrSearch(pqSearchVO));
-			break;
-		}
-
-		return map;
-	}
-
-	// 상품 문의 삭제
-	@RequestMapping(value = "pq_delete.mcat", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getPqDeleteCmd(@RequestBody Map<String, List<String>> pqs) {
-		for (String i : pqs.keySet()) {
-			for (String j : pqs.get(i)) {
-				dao.getPqDelete(j);
-			}
-		}
-
-		switch (usedVO) {
-		case "PqVO":
-			count = dao.getPqCount();
-			break;
-		case "PqSearchVO_and":
-			count = dao.getPqAndCount(pqSearchVO);
-			break;
-		case "PqSearchVO_or":
-			count = dao.getPqOrCount(pqSearchVO);
-			break;
-		}
-
-		return getPqPagingCmd(cPage);
-	}
-
-	// 상품 문의 보기로 이동
-	@RequestMapping("pq_view.mcat")
-	public ModelAndView getPqViewCmd(HttpSession session, String pq_sn) {
-		PqVO pqVO = dao.getPqView(pq_sn);
-		
-		session.setAttribute("pqVO", pqVO);
-
-		return new ModelAndView("admin/pq/view");
-	}
-	
-	
 	/*////////////////////////////////// FAQ 관리 //////////////////////////////////*/
 
 	
@@ -697,17 +553,17 @@ public class MyController {
 
 		switch (usedVO) {
 		case "FaqVO":
-			map.put("faqVO", dao.getFaqList(paging.getBegin(), paging.getEnd()));
+			map.put("faq", dao.getFaqList(paging.getBegin(), paging.getEnd()));
 			break;
 		default:
 			faqSearchVO.setBegin(paging.getBegin());
 			faqSearchVO.setEnd(paging.getEnd());
 			switch (usedVO) {
 			case "FaqSearchVO_and":
-				map.put("faqVO", dao.getFaqAndSearch(faqSearchVO));
+				map.put("faq", dao.getFaqAndSearch(faqSearchVO));
 				break;
 			case "FaqSearchVO_or":
-				map.put("faqVO", dao.getFaqOrSearch(faqSearchVO));
+				map.put("faq", dao.getFaqOrSearch(faqSearchVO));
 				break;
 			}
 		}
@@ -741,10 +597,10 @@ public class MyController {
 
 		switch (faqSearchVO.getAnd_or_chk()) {
 		case "and":
-			map.put("faqVO", dao.getFaqAndSearch(faqSearchVO));
+			map.put("faq", dao.getFaqAndSearch(faqSearchVO));
 			break;
 		case "or":
-			map.put("faqVO", dao.getFaqOrSearch(faqSearchVO));
+			map.put("faq", dao.getFaqOrSearch(faqSearchVO));
 			break;
 		}
 		
@@ -778,8 +634,8 @@ public class MyController {
 
 	// FAQ 보기로 이동
 	@RequestMapping("faq_view.mcat")
-	public ModelAndView getFaqViewCmd(HttpSession session, String faq_sn) {
-		FaqVO faqVO = dao.getFaqView(faq_sn);
+	public ModelAndView getFaqViewCmd(HttpSession session, String faq_sq) {
+		FaqVO faqVO = dao.getFaqView(faq_sq);
 
 		session.setAttribute("faqVO", faqVO);
 
@@ -805,14 +661,17 @@ public class MyController {
 		if (cPage == null) {
 			paging.setNowPage(1);
 		} else {
-			paging.setNowPage(Integer.parseInt(cPage));
+			if (paging.getTotalPage() < Integer.parseInt(cPage)) {
+				paging.setNowPage(paging.getTotalPage());
+			}else {
+				paging.setNowPage(Integer.parseInt(cPage));	
+			}
 		}
 
 		paging.setBegin((paging.getNowPage() - 1) * paging.getNumPerPage() + 1);
 		paging.setEnd((paging.getBegin() - 1) + paging.getNumPerPage());
 
-		paging.setBeginBlock(
-				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+		paging.setBeginBlock((int)((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
 
 		if (paging.getEndBlock() > paging.getTotalPage()) {

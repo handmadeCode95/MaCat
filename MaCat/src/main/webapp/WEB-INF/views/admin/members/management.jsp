@@ -28,41 +28,40 @@
 	<body>
 	    <form action="mber_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
 		
-	        <input type="checkbox" name="search_chk" value="mber_sn">
-	        회원 번호 <input type="number" class="mber_sn" name="mber_sn" disabled>
+	        <input type="checkbox" name="search_chk" value="mber_sq">
+	        회원 번호 <input type="number" class="mber_sq" name="mber_sq" disabled>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="id">
-	        아이디 <input type="text" class="id" name="id" disabled>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_id">
+	        아이디 <input type="text" class="mber_id" name="mber_id" disabled>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="name" checked>
-	        이름 <input type="text" class="name" name="name"><br><br>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_nm" checked>
+	        이름 <input type="text" class="mber_nm" name="mber_nm"><br><br>
 	
-	        <input type="checkbox" name="search_chk" value="birthday">
-	        생일 <input type="date" class="birthday" name="birthday_start" disabled>~
-	        <input type="date" class="birthday" name="birthday_end" disabled>
+	        <input type="checkbox" name="search_chk" value="mber_birthday_dt">
+	        생일 <input type="date" class="mber_birthday_dt" name="mber_birthday_dt_start" disabled>~
+	        <input type="date" class="mber_birthday_dt" name="mber_birthday_dt_end" disabled>
 	        
-	        &nbsp;&nbsp;&nbsp;성별&nbsp;<input type="radio" name="gender" value="0" checked>전체
-	        <input type="radio" name="gender" value="1">남성
-	        <input type="radio" name="gender" value="2">여성<br><br>
+	        &nbsp;&nbsp;&nbsp;성별&nbsp;<input type="radio" name="mber_gender" value="0" checked>전체
+	        <input type="radio" name="mber_gender" value="1">남성
+	        <input type="radio" name="mber_gender" value="2">여성<br><br>
 	
-	        <input type="checkbox" name="search_chk" value="reg_date">
-	        가입일 <input type="date" class="reg_date" name="reg_date_start" disabled>~
-	        <input type="date" class="reg_date" name="reg_date_end" disabled>
+	        <input type="checkbox" name="search_chk" value="mber_reg_dt">
+	        가입일 <input type="date" class="mber_reg_dt" name="mber_reg_dt_start" disabled>~
+	        <input type="date" class="mber_reg_dt" name="mber_reg_dt_end" disabled>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="conect_rcord">
-	        접속일 <input type="date" class="conect_rcord" name="conect_rcord_start" disabled>~
-	        <input type="date" class="conect_rcord" name="conect_rcord_end" disabled><br><br>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_conect_dt">
+	        접속일 <input type="date" class="mber_conect_dt" name="mber_conect_dt_start" disabled>~
+	        <input type="date" class="mber_conect_dt" name="mber_conect_dt_end" disabled><br><br>
 	
-	        <input type="checkbox" name="search_chk" value="phone">
-	        핸드폰 <input type="tel" class="phone" name="phone" disabled>
+	        <input type="checkbox" name="search_chk" value="mber_phone_no">
+	        핸드폰 <input type="tel" class="mber_phone_no" name="mber_phone_no" disabled>
 	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_grad">
-	        회원 등급 <select class="mber_grad" name="mber_grad" disabled>
-	            <option selected>등급선택</option>
-	            <option value="4">관리자</option>
-	            <option value="3">VIP</option>
-	            <option value="2">GOLD</option>
-	            <option value="1">WHITE</option>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="mber_grad_nm">
+	        회원 등급 <select class="mber_grad_nm" name="mber_grad_nm" disabled>
+	        	<option selected>등급선택</option>
+	        	<c:forEach var="i" items="${mber_grad}">
+	            	<option value="${i.mber_grad_nm}">${i.mber_grad_nm}</option>
+	            </c:forEach>
 	        </select><br><br>
 
 	        
@@ -93,30 +92,28 @@
 							
 							<c:otherwise>
 								<c:forEach var="i" items="${members}">
-									<tr id="${i.mber_sn}">
-										<td><input type="checkbox" class="chkbox" name="mbers" value="${i.mber_sn}"></td>
-										<td><input type="hidden" class="${i.mber_sn}" name="mber_sn" value="${i.mber_sn}" disabled>${i.mber_sn}</td>
-										<td>${i.id}</td>
-										<td><input type="password" class="${i.mber_sn}" name="pw" value="${i.pw}" disabled></td>
-										<td><input type="text" class="${i.mber_sn}" name="name" value="${i.name}" disabled></td>
-										<td><input type="text" class="${i.mber_sn}" name="email" value="${i.email}" disabled></td>
-										<td>${i.birthday.substring(0, 10)}</td>
-										<td><c:if test="${i.gender == 1}">남</c:if><c:if test="${i.gender == 2}">여</c:if></td>
-										<td><input type="text" class="${i.mber_sn}" name="phone" value="${i.phone}" disabled></td>
-										<td><input type="text" class="${i.mber_sn}" name="tel" value="${i.tel}" disabled></td>
-										<td>${i.point}</td>
-										<td>${i.reg_date.substring(0, 10)}</td>
-										<td>${i.conect_rcord.substring(0, 10)}</td>
-										<td><input type="text" class="${i.mber_sn}" name="zonecode" value="${i.zonecode}" disabled></td>
-										<td><input type="text" class="${i.mber_sn}" name="adres" value="${i.adres}" disabled></td>
-										<td><input type="text" class="${i.mber_sn}" name="detail_adres" value="${i.detail_adres}" disabled></td>
-										<td><select id="grad" class="${i.mber_sn}" name="mber_grad" disabled>
-								            <option>등급선택</option>
-								            <option value="4" <c:if test="${i.mber_grad == 4}">selected</c:if>>운영자</option>
-								            <option value="3" <c:if test="${i.mber_grad == 3}">selected</c:if>>VIP</option>
-								            <option value="2" <c:if test="${i.mber_grad == 2}">selected</c:if>>GOLD</option>
-								            <option value="1" <c:if test="${i.mber_grad == 1}">selected</c:if>>WHITE</option>
-										</select></td>
+									<tr id="${i.mber_sq}">
+										<td><input type="checkbox" class="chkbox" name="mbers" value="${i.mber_sq}"></td>
+										<td><input type="hidden" class="${i.mber_sq}" name="mber_sq" value="${i.mber_sq}" disabled>${i.mber_sq}</td>
+										<td>${i.mber_id}</td>
+										<td><input type="password" class="${i.mber_sq}" name="mber_pw" value="${i.mber_pw}" disabled></td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_nm" value="${i.mber_nm}" disabled></td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_email" value="${i.mber_email}" disabled></td>
+										<td>${i.mber_birthday_dt.substring(0, 10)}</td>
+										<td>${i.mber_gender}</td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_phone_no" value="${i.mber_phone_no}" disabled></td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_tel_no" value="${i.mber_tel_no}" disabled></td>
+										<td>${i.mber_point_sum}</td>
+										<td>${i.mber_reg_dt.substring(0, 10)}</td>
+										<td>${i.mber_conect_dt.substring(0, 10)}</td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_zip_no" value="${i.mber_zip_no}" disabled></td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_adres" value="${i.mber_adres}" disabled></td>
+										<td><input type="text" class="${i.mber_sq}" name="mber_detail_adres" value="${i.mber_detail_adres}" disabled></td>
+										<td><select class="${i.mber_sq}" name="mber_grad_nm" disabled>
+								        	<c:forEach var="j" items="${mber_grad}">
+								            	<option value="${j.mber_grad_nm}"<c:if test="${j.mber_grad_nm == i.mber_grad_nm}"> selected</c:if>>${j.mber_grad_nm}</option>
+								            </c:forEach>
+								        </select></td>
 									</tr>
 								</c:forEach>
 								

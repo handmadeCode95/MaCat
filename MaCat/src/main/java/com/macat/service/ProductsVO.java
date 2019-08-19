@@ -3,7 +3,7 @@ package com.macat.service;
 public class ProductsVO {
 	
 	private String prduct_sq, prduct_reg_dt, prduct_dom_dt, prduct_amt, prduct_price, prduct_dlvy_price, prduct_view_cnt,
-				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, prduct_qa,
+				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, prduct_qa, prduct_thumb_nm,
 				   ctgry_nm, prduct_rating_avg, prduct_dc_pt, prduct_save_pt, prduct_ctgry_group, prduct_dc, prduct_save, prduct_cd;
 	
 	public ProductsVO() {
@@ -13,8 +13,9 @@ public class ProductsVO {
 	public ProductsVO(String prduct_sq, String prduct_reg_dt, String prduct_dom_dt, String prduct_amt,
 			String prduct_price, String prduct_dlvy_price, String prduct_view_cnt, String prduct_sale_sum,
 			String prduct_as, String prduct_maker, String prduct_coo, String prduct_matr, String prduct_size,
-			String prduct_nm, String prduct_qa, String ctgry_nm, String prduct_rating_avg, String prduct_dc_pt,
-			String prduct_save_pt, String prduct_ctgry_group, String prduct_dc, String prduct_save, String prduct_cd) {
+			String prduct_nm, String prduct_qa, String prduct_thumb_nm, String ctgry_nm, String prduct_rating_avg,
+			String prduct_dc_pt, String prduct_save_pt, String prduct_ctgry_group, String prduct_dc, String prduct_save,
+			String prduct_cd) {
 		super();
 		this.prduct_sq = prduct_sq;
 		this.prduct_reg_dt = prduct_reg_dt;
@@ -31,6 +32,7 @@ public class ProductsVO {
 		this.prduct_size = prduct_size;
 		this.prduct_nm = prduct_nm;
 		this.prduct_qa = prduct_qa;
+		this.prduct_thumb_nm = prduct_thumb_nm;
 		this.ctgry_nm = ctgry_nm;
 		this.prduct_rating_avg = prduct_rating_avg;
 		this.prduct_dc_pt = prduct_dc_pt;
@@ -161,6 +163,14 @@ public class ProductsVO {
 		this.prduct_qa = prduct_qa;
 	}
 
+	public String getPrduct_thumb_nm() {
+		return prduct_thumb_nm;
+	}
+
+	public void setPrduct_thumb_nm(String prduct_thumb_nm) {
+		this.prduct_thumb_nm = prduct_thumb_nm;
+	}
+
 	public String getCtgry_nm() {
 		return ctgry_nm;
 	}
@@ -192,7 +202,7 @@ public class ProductsVO {
 	public void setPrduct_save_pt(String prduct_save_pt) {
 		this.prduct_save_pt = prduct_save_pt;
 	}
-	
+
 	public String getPrduct_ctgry_group() {
 		return prduct_ctgry_group;
 	}
@@ -224,4 +234,5 @@ public class ProductsVO {
 	public void setPrduct_cd(String prduct_cd) {
 		this.prduct_cd = prduct_cd;
 	}
+
 }

@@ -10,13 +10,13 @@
 		<typeAlias type="com.macat.service.NotsSearchVO" alias="NotsSearchVO"/>
 		<typeAlias type="com.macat.service.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.macat.service.QnaSearchVO" alias="QnaSearchVO"/>
-		<typeAlias type="com.macat.service.PqVO" alias="PqVO"/>
-		<typeAlias type="com.macat.service.PqSearchVO" alias="PqSearchVO"/>
 		<typeAlias type="com.macat.service.FaqVO" alias="FaqVO"/>
 		<typeAlias type="com.macat.service.FaqSearchVO" alias="FaqSearchVO"/>
 		<typeAlias type="com.macat.service.CtgriesVO" alias="CtgriesVO"/>
 		<typeAlias type="com.macat.service.ProductsVO" alias="ProductsVO"/>
 		<typeAlias type="com.macat.service.ImagesVO" alias="ImagesVO"/>
+		<typeAlias type="com.macat.service.QnaCtgriesVO" alias="QnaCtgriesVO"/>
+		<typeAlias type="com.macat.service.MberGradVO" alias="MberGradVO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

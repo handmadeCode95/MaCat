@@ -2,24 +2,27 @@ package com.macat.service;
 
 public class FaqVO {
 	
-	private String faq_sn, faq_sj, faq_name, faq_cn, faq_ctgry, mber_sn;
+	private String faq_sq, faq_sj, faq_cn, qc_nm, mber_sq;
 
-	public FaqVO(String faq_sn, String faq_sj, String faq_name, String faq_cn, String faq_ctgry, String mber_sn) {
+	public FaqVO() {
+		
+	}
+	
+	public FaqVO(String faq_sq, String faq_sj, String faq_cn, String qc_nm, String mber_sq) {
 		super();
-		this.faq_sn = faq_sn;
+		this.faq_sq = faq_sq;
 		this.faq_sj = faq_sj;
-		this.faq_name = faq_name;
 		this.faq_cn = faq_cn;
-		this.faq_ctgry = faq_ctgry;
-		this.mber_sn = mber_sn;
+		this.qc_nm = qc_nm;
+		this.mber_sq = mber_sq;
+	}
+	
+	public String getFaq_sq() {
+		return faq_sq;
 	}
 
-	public String getFaq_sn() {
-		return faq_sn;
-	}
-
-	public void setFaq_sn(String faq_sn) {
-		this.faq_sn = faq_sn;
+	public void setFaq_sq(String faq_sq) {
+		this.faq_sq = faq_sq;
 	}
 
 	public String getFaq_sj() {
@@ -30,14 +33,6 @@ public class FaqVO {
 		this.faq_sj = faq_sj;
 	}
 
-	public String getFaq_name() {
-		return faq_name;
-	}
-
-	public void setFaq_name(String faq_name) {
-		this.faq_name = faq_name;
-	}
-
 	public String getFaq_cn() {
 		return faq_cn;
 	}
@@ -46,19 +41,21 @@ public class FaqVO {
 		this.faq_cn = faq_cn;
 	}
 
-	public String getFaq_ctgry() {
-		return faq_ctgry;
+	public String getQc_nm() {
+		return qc_nm;
 	}
 
-	public void setFaq_ctgry(String faq_ctgry) {
-		this.faq_ctgry = faq_ctgry;
+	public void setQc_nm(String qc_nm) {
+		this.qc_nm = qc_nm;
 	}
 
-	public String getMber_sn() {
-		return mber_sn;
+	public String getMber_sq() {
+		return mber_sq;
 	}
 
-	public void setMber_sn(String mber_sn) {
-		this.mber_sn = mber_sn;
+	public void setMber_sq(String mber_sq) {
+		this.mber_sq = mber_sq;
 	}
+
+	
 }

@@ -2,36 +2,36 @@ package com.macat.service;
 
 public class QnaVO {
 	
-	private String qna_sn, qna_sj, qna_name, qna_id, qna_cn, qna_reg_date, qna_ctgry, mber_sn, qna_ans_chk;
-	private int qna_rdcnt, qna_group, qna_level;
+	private String qna_sq, qna_sj, qna_nm, qna_id, qna_cn, qna_reg_dt, qc_nm, mber_sq, qna_ans_st;
+	private int qna_view_cnt, qna_group, qna_level;
 
 	public QnaVO() {
 
 	}
 
-	public QnaVO(String qna_sn, String qna_sj, String qna_name, String qna_id, String qna_cn, String qna_reg_date,
-			String qna_ctgry, String mber_sn, String qna_ans_chk, int qna_rdcnt, int qna_group, int qna_level) {
+	public QnaVO(String qna_sq, String qna_sj, String qna_nm, String qna_id, String qna_cn, String qna_reg_dt,
+			String qc_nm, String mber_sq, String qna_ans_st, int qna_view_cnt, int qna_group, int qna_level) {
 		super();
-		this.qna_sn = qna_sn;
+		this.qna_sq = qna_sq;
 		this.qna_sj = qna_sj;
-		this.qna_name = qna_name;
+		this.qna_nm = qna_nm;
 		this.qna_id = qna_id;
 		this.qna_cn = qna_cn;
-		this.qna_reg_date = qna_reg_date;
-		this.qna_ctgry = qna_ctgry;
-		this.mber_sn = mber_sn;
-		this.qna_ans_chk = qna_ans_chk;
-		this.qna_rdcnt = qna_rdcnt;
+		this.qna_reg_dt = qna_reg_dt;
+		this.qc_nm = qc_nm;
+		this.mber_sq = mber_sq;
+		this.qna_ans_st = qna_ans_st;
+		this.qna_view_cnt = qna_view_cnt;
 		this.qna_group = qna_group;
 		this.qna_level = qna_level;
 	}
 
-	public String getQna_sn() {
-		return qna_sn;
+	public String getQna_sq() {
+		return qna_sq;
 	}
 
-	public void setQna_sn(String qna_sn) {
-		this.qna_sn = qna_sn;
+	public void setQna_sq(String qna_sq) {
+		this.qna_sq = qna_sq;
 	}
 
 	public String getQna_sj() {
@@ -42,12 +42,12 @@ public class QnaVO {
 		this.qna_sj = qna_sj;
 	}
 
-	public String getQna_name() {
-		return qna_name;
+	public String getQna_nm() {
+		return qna_nm;
 	}
 
-	public void setQna_name(String qna_name) {
-		this.qna_name = qna_name;
+	public void setQna_nm(String qna_nm) {
+		this.qna_nm = qna_nm;
 	}
 
 	public String getQna_id() {
@@ -66,36 +66,44 @@ public class QnaVO {
 		this.qna_cn = qna_cn;
 	}
 
-	public String getQna_reg_date() {
-		return qna_reg_date;
+	public String getQna_reg_dt() {
+		return qna_reg_dt;
 	}
 
-	public void setQna_reg_date(String qna_reg_date) {
-		this.qna_reg_date = qna_reg_date;
+	public void setQna_reg_dt(String qna_reg_dt) {
+		this.qna_reg_dt = qna_reg_dt;
 	}
 
-	public String getMber_sn() {
-		return mber_sn;
+	public String getQc_nm() {
+		return qc_nm;
 	}
 
-	public void setMber_sn(String mber_sn) {
-		this.mber_sn = mber_sn;
-	}
-	
-	public String getQna_ctgry() {
-		return qna_ctgry;
+	public void setQc_nm(String qc_nm) {
+		this.qc_nm = qc_nm;
 	}
 
-	public void setQna_ctgry(String qna_ctgry) {
-		this.qna_ctgry = qna_ctgry;
+	public String getMber_sq() {
+		return mber_sq;
 	}
 
-	public int getQna_rdcnt() {
-		return qna_rdcnt;
+	public void setMber_sq(String mber_sq) {
+		this.mber_sq = mber_sq;
 	}
 
-	public void setQna_rdcnt(int qna_rdcnt) {
-		this.qna_rdcnt = qna_rdcnt;
+	public String getQna_ans_st() {
+		return qna_ans_st;
+	}
+
+	public void setQna_ans_st(String qna_ans_st) {
+		this.qna_ans_st = qna_ans_st;
+	}
+
+	public int getQna_view_cnt() {
+		return qna_view_cnt;
+	}
+
+	public void setQna_view_cnt(int qna_view_cnt) {
+		this.qna_view_cnt = qna_view_cnt;
 	}
 
 	public int getQna_group() {
@@ -114,11 +122,5 @@ public class QnaVO {
 		this.qna_level = qna_level;
 	}
 
-	public String getQna_ans_chk() {
-		return qna_ans_chk;
-	}
-
-	public void setQna_ans_chk(String qna_ans_chk) {
-		this.qna_ans_chk = qna_ans_chk;
-	}
+	
 }

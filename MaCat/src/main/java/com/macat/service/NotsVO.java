@@ -2,29 +2,27 @@ package com.macat.service;
 
 public class NotsVO {
 	
-	private String not_sn, not_sj, not_name, not_cn, not_reg_date, mber_sn;
+	private String not_sq, not_sj, not_cn, not_reg_dt, mber_sq;
 	
 	public NotsVO() {
 
 	}
 
-	public NotsVO(String not_sn, String not_sj, String not_name, String not_cn, 
-			String not_reg_date, String mber_sn) {
+	public NotsVO(String not_sq, String not_sj, String not_cn, String not_reg_dt, String mber_sq) {
 		super();
-		this.not_sn = not_sn;
+		this.not_sq = not_sq;
 		this.not_sj = not_sj;
-		this.not_name = not_name;
 		this.not_cn = not_cn;
-		this.not_reg_date = not_reg_date;
-		this.mber_sn = mber_sn;
+		this.not_reg_dt = not_reg_dt;
+		this.mber_sq = mber_sq;
 	}
 
-	public String getNot_sn() {
-		return not_sn;
+	public String getNot_sq() {
+		return not_sq;
 	}
 
-	public void setNot_sn(String not_sn) {
-		this.not_sn = not_sn;
+	public void setNot_sq(String not_sq) {
+		this.not_sq = not_sq;
 	}
 
 	public String getNot_sj() {
@@ -35,14 +33,6 @@ public class NotsVO {
 		this.not_sj = not_sj;
 	}
 
-	public String getNot_name() {
-		return not_name;
-	}
-
-	public void setNot_name(String not_name) {
-		this.not_name = not_name;
-	}
-
 	public String getNot_cn() {
 		return not_cn;
 	}
@@ -51,19 +41,21 @@ public class NotsVO {
 		this.not_cn = not_cn;
 	}
 
-	public String getNot_reg_date() {
-		return not_reg_date;
+	public String getNot_reg_dt() {
+		return not_reg_dt;
 	}
 
-	public void setNot_reg_date(String not_reg_date) {
-		this.not_reg_date = not_reg_date;
+	public void setNot_reg_dt(String not_reg_dt) {
+		this.not_reg_dt = not_reg_dt;
 	}
 
-	public String getMber_sn() {
-		return mber_sn;
+	public String getMber_sq() {
+		return mber_sq;
 	}
 
-	public void setMber_sn(String mber_sn) {
-		this.mber_sn = mber_sn;
+	public void setMber_sq(String mber_sq) {
+		this.mber_sq = mber_sq;
 	}
+
+
 }

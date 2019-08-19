@@ -28,28 +28,20 @@
 	<body>
 	    <form action="faq_search.mcat" method="post" style="margin: 0 auto; width: 850px" id="searchForm">
 	    
-	    	<input type="checkbox" name="search_chk" value="faq_ctgry">
-	        카테고리 <select class="faq_ctgry" name="faq_ctgry" disabled>
-	            <option value="0" selected>전체</option>
-	            <option value="1">취소</option>
-	            <option value="2">교환</option>
-	            <option value="3">배송</option>
-	            <option value="4">결제</option>
-	            <option value="5">기타</option>
+	    	<input type="checkbox" name="search_chk" value="qc_nm">
+	        카테고리 <select class="qc_nm" name="qc_nm" disabled>
+	            <option value="전체" selected>전체</option>
+	            <c:forEach var="i" items="${qna_ctgries}">
+	            	<option value="${i.qc_nm}">${i.qc_nm}</option>
+	            </c:forEach>
 	        </select>
 		
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="faq_sn">
-	       	번호 <input type="number" class="faq_sn" name="faq_sn" disabled><br><br>
+	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="faq_sq">
+	       	번호 <input type="number" class="faq_sq" name="faq_sq" disabled><br><br>
 	
 	        <input type="checkbox" name="search_chk" value="faq_sj"checked>
 	        제목 <input type="text" class="faq_sj" name="faq_sj">
-	
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="faq_name">
-	        담당자 <input type="text" class="faq_name" name="faq_name" disabled>
 	        
-	        &nbsp;&nbsp;&nbsp;<input type="checkbox" name="search_chk" value="faq_id">
-	        아이디 <input type="number" class="faq_id" name="faq_id" disabled><br><br>
-			
 	        <input type="radio" name="and_or_chk" value="and" checked>AND
 	        <input type="radio" name="and_or_chk" value="or">OR
 	        <input type="button" value="조회" id="searchBtn">
@@ -63,29 +55,23 @@
 				<table style="width: 500px; margin: 0 auto;">
 					<thead>
 						<tr><th><input type="checkbox" class="all" name="faq_all" value="0"></th>
-						<th>카테고리</th><th>번호</th><th>제목</th><th>담당자</th></tr>
+						<th>카테고리</th><th>번호</th><th>제목</th></tr>
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
 							<c:when test="${empty faq}">
 								<tr>
-									<td colspan="5"><h3>조회된 문의가 없습니다.</h3></td>
+									<td colspan="4"><h3>조회된 문의가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
 								<c:forEach var="i" items="${faq}">
-									<tr id="${i.faq_sn}">
-										<td><input type="checkbox" class="chkbox" name="faqs" value="${i.faq_sn}"></td>
-										<td>
-											<c:if test="${i.faq_ctgry == 1}">취소</c:if>
-											<c:if test="${i.faq_ctgry == 2}">교환</c:if>
-											<c:if test="${i.faq_ctgry == 3}">배송</c:if>
-											<c:if test="${i.faq_ctgry == 4}">결제</c:if>
-										</td>
-										<td>${i.faq_sn}</td>
-										<td><a href="faq_view.mcat?faq_sn=${i.faq_sn}">${i.faq_sj}</a></td>
-										<td>${i.faq_name}</td>
+									<tr id="${i.faq_sq}">
+										<td><input type="checkbox" class="chkbox" name="faqs" value="${i.faq_sq}"></td>
+										<td>${i.qc_nm}</td>
+										<td>${i.faq_sq}</td>
+										<td><a href="faq_view.mcat?faq_sq=${i.faq_sq}">${i.faq_sj}</a></td>
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
@@ -93,7 +79,7 @@
 									<c:forEach begin="1" end="${10 - (fn:length(faq) % 10)}">
 										<tr>
 											<%-- 공백 삽입 --%>
-											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -103,7 +89,7 @@
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
-							<td colspan="5">
+							<td colspan="4">
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>

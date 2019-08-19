@@ -2,169 +2,172 @@ package com.macat.service;
 
 public class MbersVO {
 	
-	private String mber_sn, id, pw, name, email, email_end, gender, birthday, phone, tel, point,
-				   reg_date, conect_rcord, zonecode, adres, detail_adres, mber_grad;
+	private String mber_sq, mber_id, mber_pw, mber_nm, mber_email, mber_email_end, mber_gender, mber_birthday_dt, mber_phone_no, mber_tel_no, mber_point_sum,
+				   mber_reg_dt, mber_conect_dt, mber_zip_no, mber_adres, mber_detail_adres, mber_grad_nm;
 	
 	public MbersVO() {
 	
 	}
 
-	public MbersVO(String mber_sn, String id, String pw, String name, String email, String email_end, String gender,
-			String birthday, String phone, String tel, String point, String reg_date, String conect_rcord,
-			String zonecode, String adres, String detail_adres, String mber_grad) {
+	public MbersVO(String mber_sq, String mber_id, String mber_pw, String mber_nm, String mber_email,
+			String mber_email_end, String mber_gender, String mber_birthday_dt, String mber_phone_no,
+			String mber_tel_no, String mber_point_sum, String mber_reg_dt, String mber_conect_dt, String mber_zip_no,
+			String mber_adres, String mber_detail_adres, String mber_grad_nm) {
 		super();
-		this.mber_sn = mber_sn;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.email = email;
-		this.email_end = email_end;
-		this.gender = gender;
-		this.birthday = birthday;
-		this.phone = phone;
-		this.tel = tel;
-		this.point = point;
-		this.reg_date = reg_date;
-		this.conect_rcord = conect_rcord;
-		this.zonecode = zonecode;
-		this.adres = adres;
-		this.detail_adres = detail_adres;
-		this.mber_grad = mber_grad;
+		this.mber_sq = mber_sq;
+		this.mber_id = mber_id;
+		this.mber_pw = mber_pw;
+		this.mber_nm = mber_nm;
+		this.mber_email = mber_email;
+		this.mber_email_end = mber_email_end;
+		this.mber_gender = mber_gender;
+		this.mber_birthday_dt = mber_birthday_dt;
+		this.mber_phone_no = mber_phone_no;
+		this.mber_tel_no = mber_tel_no;
+		this.mber_point_sum = mber_point_sum;
+		this.mber_reg_dt = mber_reg_dt;
+		this.mber_conect_dt = mber_conect_dt;
+		this.mber_zip_no = mber_zip_no;
+		this.mber_adres = mber_adres;
+		this.mber_detail_adres = mber_detail_adres;
+		this.mber_grad_nm = mber_grad_nm;
 	}
 
-	public String getMber_sn() {
-		return mber_sn;
+	public String getMber_sq() {
+		return mber_sq;
 	}
 
-	public void setMber_sn(String mber_sn) {
-		this.mber_sn = mber_sn;
+	public void setMber_sq(String mber_sq) {
+		this.mber_sq = mber_sq;
 	}
 
-	public String getId() {
-		return id;
+	public String getMber_id() {
+		return mber_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMber_id(String mber_id) {
+		this.mber_id = mber_id;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getMber_pw() {
+		return mber_pw;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setMber_pw(String mber_pw) {
+		this.mber_pw = mber_pw;
 	}
 
-	public String getName() {
-		return name;
+	public String getMber_nm() {
+		return mber_nm;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMber_nm(String mber_nm) {
+		this.mber_nm = mber_nm;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMber_email() {
+		return mber_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMber_email(String mber_email) {
+		this.mber_email = mber_email;
 	}
 
-	public String getEmail_end() {
-		return email_end;
+	public String getMber_email_end() {
+		return mber_email_end;
 	}
 
-	public void setEmail_end(String email_end) {
-		this.email_end = email_end;
+	public void setMber_email_end(String mber_email_end) {
+		this.mber_email_end = mber_email_end;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getMber_gender() {
+		return mber_gender;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setMber_gender(String mber_gender) {
+		this.mber_gender = mber_gender;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public String getMber_birthday_dt() {
+		return mber_birthday_dt;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setMber_birthday_dt(String mber_birthday_dt) {
+		this.mber_birthday_dt = mber_birthday_dt;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getMber_phone_no() {
+		return mber_phone_no;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMber_phone_no(String mber_phone_no) {
+		this.mber_phone_no = mber_phone_no;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getMber_tel_no() {
+		return mber_tel_no;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setMber_tel_no(String mber_tel_no) {
+		this.mber_tel_no = mber_tel_no;
 	}
 
-	public String getPoint() {
-		return point;
+	public String getMber_point_sum() {
+		return mber_point_sum;
 	}
 
-	public void setPoint(String point) {
-		this.point = point;
+	public void setMber_point_sum(String mber_point_sum) {
+		this.mber_point_sum = mber_point_sum;
 	}
 
-	public String getReg_date() {
-		return reg_date;
+	public String getMber_reg_dt() {
+		return mber_reg_dt;
 	}
 
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+	public void setMber_reg_dt(String mber_reg_dt) {
+		this.mber_reg_dt = mber_reg_dt;
 	}
 
-	public String getConect_rcord() {
-		return conect_rcord;
+	public String getMber_conect_dt() {
+		return mber_conect_dt;
 	}
 
-	public void setConect_rcord(String conect_rcord) {
-		this.conect_rcord = conect_rcord;
+	public void setMber_conect_dt(String mber_conect_dt) {
+		this.mber_conect_dt = mber_conect_dt;
 	}
 
-	public String getZonecode() {
-		return zonecode;
+	public String getMber_zip_no() {
+		return mber_zip_no;
 	}
 
-	public void setZonecode(String zonecode) {
-		this.zonecode = zonecode;
+	public void setMber_zip_no(String mber_zip_no) {
+		this.mber_zip_no = mber_zip_no;
 	}
 
-	public String getAdres() {
-		return adres;
+	public String getMber_adres() {
+		return mber_adres;
 	}
 
-	public void setAdres(String adres) {
-		this.adres = adres;
+	public void setMber_adres(String mber_adres) {
+		this.mber_adres = mber_adres;
 	}
 
-	public String getDetail_adres() {
-		return detail_adres;
+	public String getMber_detail_adres() {
+		return mber_detail_adres;
 	}
 
-	public void setDetail_adres(String detail_adres) {
-		this.detail_adres = detail_adres;
+	public void setMber_detail_adres(String mber_detail_adres) {
+		this.mber_detail_adres = mber_detail_adres;
 	}
 
-	public String getMber_grad() {
-		return mber_grad;
+	public String getMber_grad_nm() {
+		return mber_grad_nm;
 	}
 
-	public void setMber_grad(String mber_grad) {
-		this.mber_grad = mber_grad;
+	public void setMber_grad_nm(String mber_grad_nm) {
+		this.mber_grad_nm = mber_grad_nm;
 	}
+
+	
 }

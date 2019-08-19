@@ -2,33 +2,32 @@ package com.macat.service;
 
 public class NotsSearchVO {
 	
-	private String not_sn, not_sj, not_name, mber_sn, not_reg_date_start, not_reg_date_end ,and_or_chk;
+	private String not_sq, not_sj, mber_sq, not_reg_dt_start, not_reg_dt_end ,and_or_chk;
 	private int begin, end; // 페이징
 	
 	public NotsSearchVO() {
 
 	}
 
-	public NotsSearchVO(String not_sn, String not_sj, String not_name, String mber_sn, String not_reg_date_start,
-			String not_reg_date_end, String and_or_chk, int begin, int end) {
+	public NotsSearchVO(String not_sq, String not_sj, String mber_sq, String not_reg_dt_start, String not_reg_dt_end,
+			String and_or_chk, int begin, int end) {
 		super();
-		this.not_sn = not_sn;
+		this.not_sq = not_sq;
 		this.not_sj = not_sj;
-		this.not_name = not_name;
-		this.mber_sn = mber_sn;
-		this.not_reg_date_start = not_reg_date_start;
-		this.not_reg_date_end = not_reg_date_end;
+		this.mber_sq = mber_sq;
+		this.not_reg_dt_start = not_reg_dt_start;
+		this.not_reg_dt_end = not_reg_dt_end;
 		this.and_or_chk = and_or_chk;
 		this.begin = begin;
 		this.end = end;
 	}
 
-	public String getNot_sn() {
-		return not_sn;
+	public String getNot_sq() {
+		return not_sq;
 	}
 
-	public void setNot_sn(String not_sn) {
-		this.not_sn = not_sn;
+	public void setNot_sq(String not_sq) {
+		this.not_sq = not_sq;
 	}
 
 	public String getNot_sj() {
@@ -39,36 +38,28 @@ public class NotsSearchVO {
 		this.not_sj = not_sj;
 	}
 
-	public String getNot_name() {
-		return not_name;
+	public String getMber_sq() {
+		return mber_sq;
 	}
 
-	public void setNot_name(String not_name) {
-		this.not_name = not_name;
+	public void setMber_sq(String mber_sq) {
+		this.mber_sq = mber_sq;
 	}
 
-	public String getMber_sn() {
-		return mber_sn;
+	public String getNot_reg_dt_start() {
+		return not_reg_dt_start;
 	}
 
-	public void setMber_sn(String mber_sn) {
-		this.mber_sn = mber_sn;
+	public void setNot_reg_dt_start(String not_reg_dt_start) {
+		this.not_reg_dt_start = not_reg_dt_start;
 	}
 
-	public String getNot_reg_date_start() {
-		return not_reg_date_start;
+	public String getNot_reg_dt_end() {
+		return not_reg_dt_end;
 	}
 
-	public void setNot_reg_date_start(String not_reg_date_start) {
-		this.not_reg_date_start = not_reg_date_start;
-	}
-
-	public String getNot_reg_date_end() {
-		return not_reg_date_end;
-	}
-
-	public void setNot_reg_date_end(String not_reg_date_end) {
-		this.not_reg_date_end = not_reg_date_end;
+	public void setNot_reg_dt_end(String not_reg_dt_end) {
+		this.not_reg_dt_end = not_reg_dt_end;
 	}
 
 	public String getAnd_or_chk() {
@@ -94,4 +85,6 @@ public class NotsSearchVO {
 	public void setEnd(int end) {
 		this.end = end;
 	}
+
+	
 }

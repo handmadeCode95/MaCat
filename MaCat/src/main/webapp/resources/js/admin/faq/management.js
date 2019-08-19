@@ -5,19 +5,13 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "faqVO") {
+			if (key === "faq") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["faq_sn"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='faqs' value='" + v["faq_sn"] + "'></td>";
-					result += "<td>";
-						if (v["faq_ctgry"] == 1) result += "취소";
-						if (v["faq_ctgry"] == 2) result += "교환";
-						if (v["faq_ctgry"] == 3) result += "배송";
-						if (v["faq_ctgry"] == 4) result += "결제";
-					result += "</td>";
-					result += "<td>" + v["faq_sn"] + "</td>";
-					result += "<td><a href='faq_view.mcat?faq_sn=" + v["faq_sn"] + "'>" + v["faq_sj"] + "</a></td>";
-					result += "<td>" + v["faq_name"] + "</td>";
+					result += "<tr id='" + v["faq_sq"] + "'>";
+					result += "<td><input type='checkbox' class='chkbox' name='faqs' value='" + v["faq_sq"] + "'></td>";
+					result += "<td>" + v["qc_nm"] + "</td>";
+					result += "<td>" + v["faq_sq"] + "</td>";
+					result += "<td><a href='faq_view.mcat?faq_sq=" + v["faq_sq"] + "'>" + v["faq_sj"] + "</a></td>";
 				});
 			}else if (key === "paging"){
 				var paging = value;

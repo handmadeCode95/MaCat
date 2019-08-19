@@ -5,30 +5,30 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "mbersVO") {
+			if (key === "members") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["mber_sn"] + "'><td><input type='checkbox' class='chkbox' name='mbers' value='" + v["mber_sn"] + "'></td>";
-					result += "<td><input type='hidden' class='" + v["mber_sn"] + "' name='mber_sn' value='" + v["mber_sn"] + "' disabled>" + v["mber_sn"] + "</td>";
-					result += "<td>" + v["id"] + "</td>";
-					result += "<td><input type='password' class='" + v["mber_sn"] + "' name='pw' value='" + v["pw"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='name' value='" + v["name"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='email' value='" + v["email"] + "' disabled></td>";
-					result += "<td>" + v["birthday"].substring(0, 10) + "</td>";
-					result += "<td>"; if(v["gender"] === "1") result += "남"; if(v["gender"] === "2") result += "여"; result += "</td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='phone' value='" + v["phone"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='tel' value='" + v["tel"] + "' disabled></td>";
-					result += "<td>" + v["point"] + "</td>";
-					result += "<td>" + v["reg_date"].substring(0, 10) + "</td>";
-					result += "<td>" + v["conect_rcord"].substring(0, 10) + "</td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='zonecode' value='" + v["zonecode"] + "' minlength='5' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='adres' value='" + v["adres"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sn"] + "' name='detail_adres' value='" + v["detail_adres"] + "' disabled></td>";
-					result += "<td><select id='grad' class='" + v["mber_sn"] + "' name='mber_grad' disabled>";
+					result += "<tr id='" + v["mber_sq"] + "'><td><input type='checkbox' class='chkbox' name='mbers' value='" + v["mber_sq"] + "'></td>";
+					result += "<td><input type='hidden' class='" + v["mber_sq"] + "' name='mber_sq' value='" + v["mber_sq"] + "' disabled>" + v["mber_sq"] + "</td>";
+					result += "<td>" + v["mber_id"] + "</td>";
+					result += "<td><input type='password' class='" + v["mber_sq"] + "' name='mber_pw' value='" + v["mber_pw"] + "' disabled></td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_nm' value='" + v["mber_nm"] + "' disabled></td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_email' value='" + v["mber_email"] + "' disabled></td>";
+					result += "<td>" + v["mber_birthday_dt"].substring(0, 10) + "</td>";
+					result += "<td>" + v["mber_gender"] + "</td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_phone_no' value='" + v["mber_phone_no"] + "' disabled></td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_tel_no' value='" + v["mber_tel_no"] + "' disabled></td>";
+					result += "<td>" + v["mber_point_sum"] + "</td>";
+					result += "<td>" + v["mber_reg_dt"].substring(0, 10) + "</td>";
+					result += "<td>" + v["mber_conect_dt"].substring(0, 10) + "</td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_zip_no' value='" + v["mber_zip_no"] + "' minlength='5' disabled></td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_adres' value='" + v["mber_adres"] + "' disabled></td>";
+					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_detail_adres' value='" + v["mber_detail_adres"] + "' disabled></td>";
+					result += "<td><select class='" + v["mber_sq"] + "' name='mber_grad_nm' disabled>";
 					result += "<option>등급선택</option>";
-					result += "<option value='4'"; if(v["mber_grad"] === "4") result += " selected"; result += ">운영자</option>";
-					result += "<option value='3'"; if(v["mber_grad"] === "3") result += " selected"; result += ">VIP</option>";
-					result += "<option value='2'"; if(v["mber_grad"] === "2") result += " selected"; result += ">GOLD</option>";
-					result += "<option value='1'"; if(v["mber_grad"] === "1") result += " selected"; result += ">WHITE</option>";
+					$.each(data.mber_grad, function(mgKey, mgValue) {
+						result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
+					})
+					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
 					result += "</select></td></tr>";
 				});
 			}else if (key === "paging"){

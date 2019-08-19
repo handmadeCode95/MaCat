@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$(location).attr("href", "category.mcat?ctgry_nm=대분류카테고리&ctgry_group=1");
+				$(location).attr("href", "category.mcat?ctgry_group=1");
 			});
 		</script>
 	</head>
