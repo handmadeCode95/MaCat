@@ -1,0 +1,48 @@
+/*탭메뉴*/
+#item_tab{
+    width:1024px;
+    margin:0 auto;
+    text-align:center;    
+    border-top: 2px solid #707070;
+    padding-bottom: 48px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #707070;
+}
+
+.tab-titles{
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;    
+    width: 760px;
+}
+
+/* Float the list items side by side */
+.tab-titles li {
+    float: left;
+    width: 25%;
+}
+/* Style the links inside the list items */
+.tab-titles li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 28px;
+    padding-bottom: 26px;
+    font-size: 20px;
+    transition:0.3s;
+}
+/* Style the tab content */
+.tabcontent {
+    border-top: 2px solid #707070;
+    display: none;
+    background-color:#ffffff;
+    padding-top: 63px;
+}
+ul.tab-titles li.current > a{
+    color: #F25e5e;
+}
+.tabcontent.current {
+    display: block;
+}

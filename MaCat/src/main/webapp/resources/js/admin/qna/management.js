@@ -32,7 +32,7 @@ $(function() {
 				if (paging.beginBlock <= paging.pagePerBlock){
 					pagingResult += '<li class="disable">◀</li>';
 				}else {
-					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (paging.beginBlock - paging.pagePerBlock + 4) + '"></a></li>';
+					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (paging.beginBlock - 1) + '"></a></li>';
 				}
 				  
 				for (var i = paging.beginBlock; i <= paging.endBlock; i++) {

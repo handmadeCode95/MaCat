@@ -44,13 +44,22 @@
 	
 	
 	<!-- 전체 상품 갯수 -->
-	<select id="prduct_count" resultType="int">
-		SELECT COUNT(*) FROM PRODUCTS_TB
+	<select id="prduct_group_count" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group}
+	</select>
+	
+	<select id="prduct_count" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm}
+	</select>
+	
+	<!-- 상품 정보 조회 -->
+	<select id="products_group" parameterType="Map" resultType="ProductsVO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}		
 	</select>
 	
 	<!-- 상품 정보 조회 -->
 	<select id="products" parameterType="Map" resultType="ProductsVO"> 
-		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}	
 	</select>
 	
 	

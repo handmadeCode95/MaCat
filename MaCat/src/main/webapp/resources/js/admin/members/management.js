@@ -35,9 +35,14 @@ $(function() {
 				var paging = value;
 				
 				if (paging.beginBlock <= paging.pagePerBlock){
-					pagingResult += '<li class="disable">◀</li>';
+					pagingResult += '<li class="disable">';
+					pagingResult +=	'<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">'
+					pagingResult += '</li>';
 				}else {
-					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (paging.beginBlock - paging.pagePerBlock + 4) + '"></a></li>';
+					pagingResult += '<li><a class="page">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (paging.beginBlock - 1) + '">';
+					pagingResult += '</a></li>';
 				}
 				  
 				for (var i = paging.beginBlock; i <= paging.endBlock; i++) {
@@ -49,14 +54,19 @@ $(function() {
 				}
 				  
 				if (paging.endBlock >= paging.totalPage){
-					pagingResult += '<li class="disable">▶</li>';
+					pagingResult += '<li class="disable">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
+					pagingResult += '</li>';
 				}else {
-					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (paging.beginBlock + paging.pagePerBlock) + '"></a></li>';
+					pagingResult += '<li><a class="page">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (paging.beginBlock + paging.pagePerBlock) + '">';
+					pagingResult += '</a></li>';
 				}
-			}
-		});
-		$("#searchResult").empty();
-		$("#searchResult").append(result);
+		}
+	});
+	$("#searchResult").empty();
+	$("#searchResult").append(result);
 		$("#paging").empty();
 		$("#paging").append(pagingResult);
 	}

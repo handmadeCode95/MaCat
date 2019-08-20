@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<html lang="kr">
+<html lang="ko">
 
 	<head>
 		<meta charset="UTF-8">
@@ -21,43 +21,49 @@
 		
 		<style type="text/css">
 			<%-- 임시 페이징 --%>
-			ol#paging {list-style: none;}
-			ol#paging li {float: left; margin-right: 8px;}
-			ol#paging li a {display: block;	padding: 3px 7px; color: #2f313e; font-weight: bold;}
-			ol#paging li a:hover {background: #00B3DC; color: white; font-weight: bold;}
-			.disable {padding: 3px 7px;	border: 1px solid silver; color: silver;}
-			.now {padding: 3px 7px; background: purple; color: white; font-weight: bold;}
+			ol#paging {list-style: none; float: right; left: -50%; position: relative; margin-top: 0px;}
+			ol#paging li {float: left; margin-right: 8px; left: 50%; position: relative; margin-top: 0px;}
+			ol#paging li a {display: block;	padding: 3px 7px; color: #2f313e;}
+			ol#paging li a:hover {background: #F2A766; color: white;}
+			.disable {padding: 3px 7px;	color: silver;}
+			.now {padding: 3px 7px; background: #F25E5E; color: white;}
 		</style>
 		
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-		<!-- 고정헤더 불러오기 -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#macat_header").load("macat_header.jsp");
-			});
-		</script>
 	</head>
 
 	<body>
 		<!-- 고정헤더 불러오기 -->
-		<div id="macat_header"></div>
+		<div id="macat_header"><%@ include file="../macat_header.jsp" %></div>
 		<!-- 여백-->
 		<div class="spacing"></div>
 	
 		<section class="main_contents_section">
 			<div class="best_item-title_img_container">
 				<div class="title_container">
-					<c:forEach var="i" items="${categories}">
-						<c:if test="${i.ctgry_level == 0}">
-							<div class="title middle">
+					<div class="title middle">
+						<c:choose>
+							<c:when test="${ctgry_level == 0}">
 								베스트 상품
-								<p>- ${i.ctgry_nm}</p>
-							</div>
-						</c:if>
-					</c:forEach>
-					<div class="sub_category">
+							</c:when>
+							<c:otherwise>
+								${ctgry_nm}
+							</c:otherwise>
+						</c:choose>
 						<c:forEach var="i" items="${categories}">
-							<c:if test="${i.ctgry_level == 1}"><a href="">${i.ctgry_nm}</a></c:if>
+							<c:if test="${i.ctgry_level == 0}">
+								<p>- ${i.ctgry_nm}</p>
+							</c:if>
+						</c:forEach>
+					</div>
+					<div class="sub_category">
+						<a href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=0&ctgry_nm=전체"
+						<c:if test="${ctgry_level == 0}"> id="selectedCtgry"</c:if>>전체</a>
+						<c:forEach var="i" items="${categories}">
+							<c:if test="${i.ctgry_level == 1}">
+								<a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}"
+								<c:if test="${ctgry_nm == i.ctgry_nm}"> id="selectedCtgry"</c:if>>${i.ctgry_nm}</a>
+							</c:if>
 						</c:forEach>
 					</div>
 				</div>
@@ -91,7 +97,7 @@
 									<!--상품 이미지 링크 -->
 									<div class="img_ratio_container">
 										<a href="">
-											<img id="product_img" src="<c:url value="resources/img/${i.prduct_thumb_nm}"></c:url>" alt="" style="display: block">
+											<img id="product_img" src="resources/img/${i.prduct_thumb_nm}" alt="" style="display: block">
 										</a>
 									</div>
 									<!--상품명, 가격-->
@@ -121,16 +127,20 @@
 				</div>
 			</div>
 			
-			<div style="margin: 0 auto">
+			<div>
 				<%-- 페이징 기법 --%>
 				<ol id="paging">
 					<%-- 이전 --%>
 					<c:choose>
 						<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-							<li class="disable">◀</li>
+							<li class="disable">
+								<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
+							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - paging.pagePerBlock + 4}"></a></li>
+							<li><a class="page" href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
+								<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
+							</a></li>
 						</c:otherwise>
 					</c:choose>
 										
@@ -142,7 +152,7 @@
 								<li class="now">${i}</li>
 							</c:when>
 							<c:otherwise>
-								<li><a class="page">${i}<input type="hidden" name="cPage" value="${i}"></a></li>
+								<li><a class="page" href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -150,10 +160,14 @@
 						<%-- 다음 --%>
 						<c:choose>
 						<c:when test="${paging.endBlock >= paging.totalPage}">
-							<li class="disable">▶</li>
+							<li class="disable">
+								<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
+							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="page">▶<input type="hidden" name="cPage" value="${paging.beginBlock + paging.pagePerBlock}"></a></li>
+							<li><a class="page" href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
+								<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
+							</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ol>

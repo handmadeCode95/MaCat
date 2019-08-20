@@ -124,7 +124,7 @@
 											<li class="disable">◀</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - paging.pagePerBlock + 4}"></a></li>
+											<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - 1}"></a></li>
 										</c:otherwise>
 									</c:choose>
 									

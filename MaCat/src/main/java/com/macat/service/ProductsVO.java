@@ -4,7 +4,9 @@ public class ProductsVO {
 	
 	private String prduct_sq, prduct_reg_dt, prduct_dom_dt, prduct_amt, prduct_price, prduct_dlvy_price, prduct_view_cnt,
 				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, prduct_qa, prduct_thumb_nm,
-				   ctgry_nm, prduct_rating_avg, prduct_dc_pt, prduct_save_pt, prduct_ctgry_group, prduct_dc, prduct_save, prduct_cd;
+				   ctgry_nm, prduct_rating_avg, prduct_dc_pt, prduct_save_pt, prduct_dc, prduct_save, prduct_cd;
+	
+	private int prduct_ctgry_group;
 	
 	public ProductsVO() {
 
@@ -14,7 +16,7 @@ public class ProductsVO {
 			String prduct_price, String prduct_dlvy_price, String prduct_view_cnt, String prduct_sale_sum,
 			String prduct_as, String prduct_maker, String prduct_coo, String prduct_matr, String prduct_size,
 			String prduct_nm, String prduct_qa, String prduct_thumb_nm, String ctgry_nm, String prduct_rating_avg,
-			String prduct_dc_pt, String prduct_save_pt, String prduct_ctgry_group, String prduct_dc, String prduct_save,
+			String prduct_dc_pt, String prduct_save_pt, int prduct_ctgry_group, String prduct_dc, String prduct_save,
 			String prduct_cd) {
 		super();
 		this.prduct_sq = prduct_sq;
@@ -203,11 +205,11 @@ public class ProductsVO {
 		this.prduct_save_pt = prduct_save_pt;
 	}
 
-	public String getPrduct_ctgry_group() {
+	public int getPrduct_ctgry_group() {
 		return prduct_ctgry_group;
 	}
 
-	public void setPrduct_ctgry_group(String prduct_ctgry_group) {
+	public void setPrduct_ctgry_group(int prduct_ctgry_group) {
 		this.prduct_ctgry_group = prduct_ctgry_group;
 	}
 

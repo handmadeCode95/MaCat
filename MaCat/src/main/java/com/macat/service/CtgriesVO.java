@@ -2,13 +2,14 @@ package com.macat.service;
 
 public class CtgriesVO {
 	
-	private String ctgry_nm, ctgry_ord, ctgry_group, ctgry_level;
+	private String ctgry_nm;
+	private int ctgry_ord, ctgry_group, ctgry_level;
 	
 	public CtgriesVO() {
 
 	}
 
-	public CtgriesVO(String ctgry_nm, String ctgry_ord, String ctgry_group, String ctgry_level) {
+	public CtgriesVO(String ctgry_nm, int ctgry_ord, int ctgry_group, int ctgry_level) {
 		super();
 		this.ctgry_nm = ctgry_nm;
 		this.ctgry_ord = ctgry_ord;
@@ -24,27 +25,27 @@ public class CtgriesVO {
 		this.ctgry_nm = ctgry_nm;
 	}
 
-	public String getCtgry_ord() {
+	public int getCtgry_ord() {
 		return ctgry_ord;
 	}
 
-	public void setCtgry_ord(String ctgry_ord) {
+	public void setCtgry_ord(int ctgry_ord) {
 		this.ctgry_ord = ctgry_ord;
 	}
 
-	public String getCtgry_group() {
+	public int getCtgry_group() {
 		return ctgry_group;
 	}
 
-	public void setCtgry_group(String ctgry_group) {
+	public void setCtgry_group(int ctgry_group) {
 		this.ctgry_group = ctgry_group;
 	}
 
-	public String getCtgry_level() {
+	public int getCtgry_level() {
 		return ctgry_level;
 	}
 
-	public void setCtgry_level(String ctgry_level) {
+	public void setCtgry_level(int ctgry_level) {
 		this.ctgry_level = ctgry_level;
 	}
 }

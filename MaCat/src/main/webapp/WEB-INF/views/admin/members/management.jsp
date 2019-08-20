@@ -13,13 +13,13 @@
 			table{width: 500px; margin: 0 auto;}
 			table,tr,th,td {border: 1px solid black; border-collapse: collapse;}
 			div{text-align: center; margin: 0 auto;}
-			<%-- paging --%>
-			table tfoot ol#paging {list-style: none;}
-			table tfoot ol#paging li {float: left; margin-right: 8px;}
-			table tfoot ol#paging li a {display: block;	padding: 3px 7px; color: #2f313e; font-weight: bold;}
-			table tfoot ol#paging li a:hover {background: #00B3DC; color: white; font-weight: bold;}
-			.disable {padding: 3px 7px;	border: 1px solid silver; color: silver;}
-			.now {padding: 3px 7px; background: purple; color: white; font-weight: bold;}
+			<%-- 임시 페이징 --%>
+			ol#paging {list-style: none; float: right; left: -50%; position: relative; margin-top: 0px;}
+			ol#paging li {float: left; margin-right: 8px; left: 50%; position: relative; margin-top: 0px;}
+			ol#paging li a {display: block;	padding: 3px 7px; color: #2f313e;}
+			ol#paging li a:hover {background: #F2A766; color: white;}
+			.disable {padding: 3px 7px;	color: silver;}
+			.now {padding: 3px 7px; background: #F25E5E; color: white;}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	    <script src="resources/js/admin/members/management.js"></script>
@@ -135,17 +135,23 @@
 					<tfoot>
 						<tr>
 							<td colspan="17">
+								<%-- 페이징 기법 --%>
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>
 										<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-											<li class="disable">◀</li>
+											<li class="disable">
+												<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
+											</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - paging.pagePerBlock + 4}"></a></li>
+											<li><a class="page">
+												<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
+												<input type="hidden" name="cPage" value="${paging.beginBlock - 1}">
+											</a></li>
 										</c:otherwise>
 									</c:choose>
-									
+														
 									<%-- 블록안에 들어간 페이지번호들 --%>
 									<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="i">
 										<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
@@ -158,14 +164,19 @@
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
-									
-									<%-- 다음 --%>
-									<c:choose>
+														
+										<%-- 다음 --%>
+										<c:choose>
 										<c:when test="${paging.endBlock >= paging.totalPage}">
-											<li class="disable">▶</li>
+											<li class="disable">
+												<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
+											</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">▶<input type="hidden" name="cPage" value="${paging.beginBlock + paging.pagePerBlock}"></a></li>
+											<li><a class="page">
+												<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
+												<input type="hidden" name="cPage" value="${paging.beginBlock + paging.pagePerBlock}">
+											</a></li>
 										</c:otherwise>
 									</c:choose>
 								</ol>

@@ -280,8 +280,19 @@ div {
     float: right;
     font-size: 21px;
     font-family: "THE정고딕120";
-    
     line-height: 30px;
+}
+
+.sub_category a{
+	margin-left: 37px;
+}
+
+.sub_category a:first-child{
+	margin-left: 0px;
+}
+
+#selectedCtgry{
+	color: #F25E5E;
 }
 
 .title_container {

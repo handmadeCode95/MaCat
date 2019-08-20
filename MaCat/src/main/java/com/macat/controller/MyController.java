@@ -1,6 +1,5 @@
 package com.macat.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macat.service.DAO;
 import com.macat.service.FaqSearchVO;
 import com.macat.service.FaqVO;
-import com.macat.service.ImagesVO;
 import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
 import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
-import com.macat.service.ProductsVO;
 import com.macat.service.QnaSearchVO;
 import com.macat.service.QnaVO;
 
@@ -107,13 +104,27 @@ public class MyController {
 	
 	// 카테고리 페이지로 이동
 	@RequestMapping("category.mcat")
-	public ModelAndView getCategoryCmd(int ctgry_group) {
+	public ModelAndView getCategoryCmd(String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
+		this.cPage = cPage;
+		
 		ModelAndView mv = new ModelAndView("product/category");
 		Paging paging = new Paging(20);
-		count = dao.getProductsCount();
-		getPaging(paging, count, cPage);
+		
 		mv.addObject("categories", dao.getCategoryGroup(ctgry_group));
-		mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
+		
+		if (ctgry_level > 0) {
+			count = dao.getProductsCount(ctgry_nm);
+			getPaging(paging, count, cPage);
+			mv.addObject("products", dao.getProductsList(ctgry_nm, paging.getBegin(), paging.getEnd()));
+		}else {
+			count = dao.getProductsCount(ctgry_group);
+			getPaging(paging, count, cPage);
+			mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
+		}
+		
+		mv.addObject("ctgry_group", ctgry_group);
+		mv.addObject("ctgry_level", ctgry_level);
+		mv.addObject("ctgry_nm", ctgry_nm);
 		mv.addObject("paging", paging);
 		return mv;
 	}
@@ -125,6 +136,7 @@ public class MyController {
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manage.mcat")
 	public ModelAndView getMembersCmd(String cPage) {
+		this.cPage = cPage;
 		usedVO = "MbersVO";
 		ModelAndView mv = new ModelAndView("admin/members/management");
 		Paging paging = new Paging();
@@ -139,6 +151,7 @@ public class MyController {
 	// 공지사항 조회로 이동
 	@RequestMapping("nots_manage.mcat")
 	public ModelAndView getNoticesCmd(String cPage) {
+		this.cPage = cPage;
 		usedVO = "NotsVO";
 		ModelAndView mv = new ModelAndView("admin/notices/management");
 		Paging paging = new Paging();
@@ -152,6 +165,7 @@ public class MyController {
 	// 고객 문의 관리로 이동
 	@RequestMapping("qna_manage.mcat")
 	public ModelAndView getQnaCmd(String cPage) {
+		this.cPage = cPage;
 		usedVO = "QnaVO";
 		ModelAndView mv = new ModelAndView("admin/qna/management");
 		Paging paging = new Paging();
@@ -166,6 +180,7 @@ public class MyController {
 	// FAQ 관리로 이동
 	@RequestMapping("faq_manage.mcat")
 	public ModelAndView getFaqCmd(String cPage) {
+		this.cPage = cPage;
 		usedVO = "FaqVO";
 		ModelAndView mv = new ModelAndView("admin/faq/management");
 		Paging paging = new Paging();
