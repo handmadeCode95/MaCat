@@ -1,0 +1,64 @@
+table.type11 {
+    border-collapse: separate;
+    text-align: center;
+    margin: 0px 23px 130px 26px;
+    padding-top: 34px;
+    width: 1596px;    
+}
+
+table.type11 th { 
+    height: 40px;    
+    vertical-align: middle;
+    
+    color: #ffffff;
+    background: #F25E5E;
+    border: 1px solid #707070;
+    
+    font-size: 15px;
+}
+/*테이블 헤드 길이 선언*/
+/*.mber_no, .mber_name{
+    width: 100px;
+}
+.id, .pwd{
+    width: 140px;
+}
+.email{
+    width: 240px;
+}
+.phone_num, .tel_num{
+    width: 145px;
+}
+.birth_yymmdd, .join_yymmdd, .lately{
+    width: 130px;
+}
+.point{
+    width: 83px;
+}
+.zip_code{
+    width: 72.5px;
+}*/
+
+
+table.type11 th:first-child {
+    width: 40px;    
+    height: 40px;    
+    vertical-align: middle;
+    
+    color: #ffffff;
+    background: #ffffff;
+    border: 1px solid #707070;
+    
+    font-size: 15px;
+}
+
+table.type11 td {
+    height: 34px;
+    vertical-align: middle;
+    
+    border: 1px solid #707070;
+    box-sizing: content-box;
+    background: #FFFFFF;
+    
+    font-size: 15px;    
+}

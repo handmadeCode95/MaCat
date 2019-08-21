@@ -63,12 +63,12 @@ public class DAO {
 	
 	// 전체 상품 갯수
 	public int getProductsCount(int prduct_ctgry_group) {
-		return sqlSessionTemplate.selectOne("prduct_group_count", prduct_ctgry_group);
+		return sqlSessionTemplate.selectOne("products_group_list_count", prduct_ctgry_group);
 	}
 	
 	// 전체 상품 갯수
 	public int getProductsCount(String ctgry_nm) {
-		return sqlSessionTemplate.selectOne("prduct_count", ctgry_nm);
+		return sqlSessionTemplate.selectOne("products_list_count", ctgry_nm);
 	}
 	
 	// 상품 정보 가져오기(그룹, 대분류)
@@ -77,7 +77,7 @@ public class DAO {
 		map.put("prduct_ctgry_group", prduct_ctgry_group);
 		map.put("begin", begin);
 		map.put("end", end);
-		return sqlSessionTemplate.selectList("products_group", map);
+		return sqlSessionTemplate.selectList("products_group_list", map);
 	}
 	
 	// 상품 정보 가져오기(네임, 소분류)
@@ -86,7 +86,12 @@ public class DAO {
 		map.put("ctgry_nm", ctgry_nm);
 		map.put("begin", String.valueOf(begin));
 		map.put("end", String.valueOf(end));
-		return sqlSessionTemplate.selectList("products", map);
+		return sqlSessionTemplate.selectList("products_list", map);
+	}
+	
+	// 하나의 상품 정보 가져오기
+	public ProductsVO getProduct(String prduct_sq) {
+		return sqlSessionTemplate.selectOne("product", prduct_sq);
 	}
 	
 	

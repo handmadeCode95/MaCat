@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -11,16 +13,10 @@
 		<link rel="stylesheet" href="resources/css/normalize.css">
 		<link rel="stylesheet" href="resources/css/spacing.css">
 		<!--탭메뉴 css-->
-		<link rel="stylesheet" href="resources/css/tab_menu.css">
+		<link rel="stylesheet" href="resources/css/product/tab_menu.css">
 		<!--상품 상세페이지-->
-		<link rel="stylesheet" href="resources/css/macat_product.css">
+		<link rel="stylesheet" href="resources/css/product/macat_product.css">
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-		<!-- 고정헤더 불러오기 -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#macat_header").load("macat_header.html")
-			});
-		</script>
 		<!--탭메뉴 쿼리-->
 		<script>
 			$(function() {
@@ -37,7 +33,7 @@
 	
 	<body>
 		<!-- 고정헤더 불러오기 -->
-		<div id="macat_header"></div>
+		<div id="macat_header"><div id="macat_header"><%@ include file="../macat_header.jsp" %></div></div>
 		<!-- 여백-->
 		<div class="spacing"></div>
 	
@@ -51,10 +47,10 @@
 					<!--왼쪽 : 이미지 파트-->
 					<div class="img_choice">
 						<div class="slide_choice">
-							<img src="resources/img/macat_food01.png" alt=""> <img
-								src="resources/img/macat_food01.png" alt=""> <img
-								src="resources/img/macat_food01.png" alt=""> <img
-								src="resources/img/macat_food01.png" alt="">
+							<img src="resources/img/macat_food01.png" alt="">
+							<img src="resources/img/macat_food01.png" alt="">
+							<img src="resources/img/macat_food01.png" alt="">
+							<img src="resources/img/macat_food01.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -64,11 +60,16 @@
 						<div class="product_name">
 							<ul>
 								<li>
-									<p>GO! 고우핏프리 그레인 프리!</p>
+									<p>${product.prduct_nm}</p>
 								</li>
 								<li>
 									<p id="star">
-										<img src="resources/img/bg_starpoint_on.gif" alt="">
+										<c:forEach var="i" begin="2" end="${product.prduct_rating_round}" step="2">
+											<img src="resources/img/mcat-whole-star.png" alt="★">
+										</c:forEach>
+										<c:if test="${product.prduct_rating_round % 2 == 1}">
+											<img src="resources/img/mcat-half-star.png" alt="☆">
+										</c:if>
 									</p>
 								</li>
 							</ul>
@@ -77,8 +78,7 @@
 							<ul>
 								<li>
 									<p id="directory1">베스트 상품&nbsp;></p>
-									<p id="directory2">&nbsp;&nbsp;캣타워&nbsp;&nbsp;></p>
-									<p id="directory3">&nbsp;&nbsp;대형</p>
+									<p id="directory2">&nbsp;&nbsp;캣타워</p>
 								</li>
 								<li>
 									<p id="review_count">상품평 : 7개 &nbsp;</p>
@@ -91,11 +91,11 @@
 						<ul>
 							<li>
 								<p class="title">상품가격</p>
-								<p class="info">85,000</p>
+								<p class="info"><fmt:formatNumber value="${product.prduct_price}" pattern="#,###"></fmt:formatNumber></p>
 							</li>
 							<li>
 								<p class="title">상품코드</p>
-								<p class="info">1234567890</p>
+								<p class="info">${product.prduct_sq}</p>
 							</li>
 						</ul>
 					</div>
@@ -107,13 +107,13 @@
 									<p class="title_left">배송비</p>
 								</li>
 								<li>
-									<p class="price">2,500</p>
+									<p class="price"><fmt:formatNumber value="${product.prduct_dlvy_price}" pattern="#,###"></fmt:formatNumber></p>
 								</li>
 								<li>
 									<p class="title_left">포인트 적립</p>
 								</li>
 								<li>
-									<p class="point">172 p</p>
+									<p class="point"><fmt:formatNumber value="${product.prduct_point}" pattern="#,###"></fmt:formatNumber> p</p>
 								</li>
 							</ul>
 							<ul class="point_select">
@@ -123,7 +123,6 @@
 								<li>
 									<p class="product_count_box">
 										<select name="수량선택" id="">
-											<option value="0">::: 수량 :::</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -133,16 +132,17 @@
 											<option value="7">7</option>
 											<option value="8">8</option>
 											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>
 									</p>
 								</li>
 								<li>
-									<p class="title_right">옵션</p>
+									<p class="title_right">컬러</p>
 								</li>
 								<li>
 									<p class="color_choice_box">
 										<select name="수량선택" id="">
-											<option value="0">::: 컬러 :::</option>
+											<option value="0">color</option>
 											<option value="1">레드</option>
 											<option value="2">블루</option>
 											<option value="3">그린</option>
@@ -161,7 +161,7 @@
 					<!--총가격 파트-->
 					<div class="total_price">
 						<p>
-							총 <span>172,500 원 </span>
+							총 <span><fmt:formatNumber value="${product.prduct_dced_price + product.prduct_dlvy_price}" pattern="#,###"></fmt:formatNumber> 원 </span>
 						</p>
 					</div>
 					<!--찜리스트 장바구니 바로구매 버튼 파트-->
@@ -204,12 +204,7 @@
 	
 					<!--각 메뉴탭별로 다른 페이지를 구현할 것임-->
 					<div id="tab1" class="tabcontent current">
-						상품상세 페이지입니다 <img src="resources/img/boy.png"
-							style="display: block; width: 50%; margin: 0px auto;"> <img
-							src="resources/img/coffe.png"
-							style="display: block; width: 50%; margin: 0px auto;"> <img
-							src="resources/img/dog.png"
-							style="display: block; width: 50%; margin: 0px auto;">
+						<%-- ${product.prduct_cn} --%>
 					</div>
 					<div id="tab2" class="tabcontent">
 						상품리뷰 페이지입니다 <img src="resources/img/boy.png"

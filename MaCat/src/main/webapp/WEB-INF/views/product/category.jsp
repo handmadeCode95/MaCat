@@ -47,7 +47,7 @@
 								베스트 상품
 							</c:when>
 							<c:otherwise>
-								${ctgry_nm}
+								${sessionScope.ctgry_nm}
 							</c:otherwise>
 						</c:choose>
 						<c:forEach var="i" items="${categories}">
@@ -57,7 +57,7 @@
 						</c:forEach>
 					</div>
 					<div class="sub_category">
-						<a href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=0&ctgry_nm=전체"
+						<a href="category.mcat?ctgry_group=${sessionScope.ctgry_group}&ctgry_level=0&ctgry_nm=전체"
 						<c:if test="${ctgry_level == 0}"> id="selectedCtgry"</c:if>>전체</a>
 						<c:forEach var="i" items="${categories}">
 							<c:if test="${i.ctgry_level == 1}">
@@ -96,7 +96,7 @@
 								<div>
 									<!--상품 이미지 링크 -->
 									<div class="img_ratio_container">
-										<a href="">
+										<a href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
 											<img id="product_img" src="resources/img/${i.prduct_thumb_nm}" alt="" style="display: block">
 										</a>
 									</div>
@@ -104,10 +104,11 @@
 									<div class="title_price_container">
 										<!--상품명-->
 										<div class="product_title">
-											<a href="">${i.prduct_nm}</a>
+											<a href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">${i.prduct_nm}</a>
 										</div>
 										<!--가격-->
 										<div class="price">
+											<!-- 좋아요버튼 -->
 											<div class="like_btn">
 												<a href=""><img src="resources/img/like_btn.png" alt=""></a>
 											</div>
@@ -138,7 +139,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="page" href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
+							<li><a class="page" href="ctgry_group=${sessionScope.ctgry_group}&ctgry_level=${sessionScope.ctgry_level}&ctgry_nm=${sessionScope.ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
 								<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
 							</a></li>
 						</c:otherwise>
@@ -152,7 +153,7 @@
 								<li class="now">${i}</li>
 							</c:when>
 							<c:otherwise>
-								<li><a class="page" href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
+								<li><a class="page" href="category.mcat?ctgry_group=${sessionScope.ctgry_group}&ctgry_level=${sessionScope.ctgry_level}&ctgry_nm=${sessionScope.ctgry_nm}&cPage=${i}">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -165,7 +166,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="page" href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
+							<li><a class="page" href="category.mcat?ctgry_group=${sessionScope.ctgry_group}&ctgry_level=${sessionScope.ctgry_level}&ctgry_nm=${sessionScope.ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
 								<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
 							</a></li>
 						</c:otherwise>
@@ -183,13 +184,25 @@
 		<div class="floating_remoteCon">
 			<div class="remoteCon_name">최근 본 상품</div>
 			<div>
-				<img src="" alt="">
+				<c:if test="${cookie.viewedProductSq1 != null}">
+					<a href="product.mcat?prduct_sq=${cookie.viewedProductSq1.value}&prduct_thumb_nm=${cookie.viewedProductThumb1.value}">
+						<img src="resources/img/${cookie.viewedProductThumb1.value}" alt="">
+					</a>
+				</c:if>
 			</div>
 			<div>
-				<img src="" alt="">
+				<c:if test="${cookie.viewedProductSq2 != null}">
+					<a href="product.mcat?prduct_sq=${cookie.viewedProductSq2.value}&prduct_thumb_nm=${cookie.viewedProductThumb2.value}">
+						<img src="resources/img/${cookie.viewedProductThumb2.value}" alt="">
+					</a>
+				</c:if>
 			</div>
 			<div>
-				<img src="" alt="">
+				<c:if test="${cookie.viewedProductSq3 != null}">
+					<a href="product.mcat?prduct_sq=${cookie.viewedProductSq3.value}&prduct_thumb_nm=${cookie.viewedProductThumb3.value}">
+						<img src="resources/img/${cookie.viewedProductThumb3.value}" alt="">
+					</a>
+				</c:if>
 			</div>
 		</div>
 	</body>

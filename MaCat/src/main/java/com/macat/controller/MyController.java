@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +24,7 @@ import com.macat.service.MbersSearchVO;
 import com.macat.service.MbersVO;
 import com.macat.service.NotsSearchVO;
 import com.macat.service.Paging;
+import com.macat.service.ProductsVO;
 import com.macat.service.QnaSearchVO;
 import com.macat.service.QnaVO;
 
@@ -104,7 +108,7 @@ public class MyController {
 	
 	// 카테고리 페이지로 이동
 	@RequestMapping("category.mcat")
-	public ModelAndView getCategoryCmd(String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
+	public ModelAndView getCategoryCmd(HttpSession session, String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
 		this.cPage = cPage;
 		
 		ModelAndView mv = new ModelAndView("product/category");
@@ -122,13 +126,77 @@ public class MyController {
 			mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
 		}
 		
-		mv.addObject("ctgry_group", ctgry_group);
-		mv.addObject("ctgry_level", ctgry_level);
-		mv.addObject("ctgry_nm", ctgry_nm);
+		session.setAttribute("ctgry_group", ctgry_group);
+		session.setAttribute("ctgry_level", ctgry_level);
+		session.setAttribute("ctgry_nm", ctgry_nm);
 		mv.addObject("paging", paging);
 		return mv;
 	}
-
+	
+	
+	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
+	
+	
+	// 상품 페이지로 이동
+	@RequestMapping("product.mcat")
+	public ModelAndView getProductCmd(@CookieValue(required = false, name = "viewedProductSq1") String viewedProductSq1,
+			@CookieValue(required = false, name = "viewedProductSq2") String viewedProductSq2,
+			@CookieValue(required = false, name = "viewedProductSq3") String viewedProductSq3,
+			@CookieValue(required = false, name = "viewedProductThumb1") String viewedProductThumb1,
+			@CookieValue(required = false, name = "viewedProductThumb2") String viewedProductThumb2,
+			@CookieValue(required = false, name = "viewedProductThumb3") String viewedProductThumb3,
+			HttpServletResponse response, String prduct_sq, String prduct_thumb_nm) {
+		ModelAndView mv = new ModelAndView("product/product");
+		
+		// 최근 본 상품 쿠키에 추가. 3개 이상이면 첫 상품 삭제, 중복 불가
+		if (!prduct_sq.equals(viewedProductSq1) && !prduct_sq.equals(viewedProductSq2) && !prduct_sq.equals(viewedProductSq3)) {
+			if (viewedProductSq1 != null) {
+				if (viewedProductSq2 != null) {
+					if (viewedProductSq3 != null) {
+						response.addCookie(getCookie("viewedProductSq1", viewedProductSq2));
+						response.addCookie(getCookie("viewedProductThumb1", viewedProductThumb2));
+						response.addCookie(getCookie("viewedProductSq2", viewedProductSq3));
+						response.addCookie(getCookie("viewedProductThumb2", viewedProductThumb3));
+					}
+					response.addCookie(getCookie("viewedProductSq3", prduct_sq));
+					response.addCookie(getCookie("viewedProductThumb3", prduct_thumb_nm));
+				}else {
+					response.addCookie(getCookie("viewedProductSq2", prduct_sq));
+					response.addCookie(getCookie("viewedProductThumb2", prduct_thumb_nm));
+				}
+			}else {
+				response.addCookie(getCookie("viewedProductSq1", prduct_sq));
+				response.addCookie(getCookie("viewedProductThumb1", prduct_thumb_nm));
+			}
+		}
+		
+		ProductsVO productsVO =  dao.getProduct(prduct_sq);
+		
+		// 상품 총 적립 금액
+		if (productsVO.getPrduct_save() > 0) {
+			productsVO.setPrduct_point(productsVO.getPrduct_save());
+		}else if (productsVO.getPrduct_save_pt() > 0 && productsVO.getPrduct_price() > 99) {
+			productsVO.setPrduct_point(productsVO.getPrduct_price() * productsVO.getPrduct_save_pt() / 100);
+		}else {
+			productsVO.setPrduct_point(0);
+		}
+		
+		// 상품 할인된 가격
+		if (productsVO.getPrduct_dc() > 0) {
+			productsVO.setPrduct_dced_price(productsVO.getPrduct_price() - productsVO.getPrduct_dc());
+		}else if (productsVO.getPrduct_dc_pt() > 0 && productsVO.getPrduct_price() > 99) {
+			productsVO.setPrduct_dced_price(productsVO.getPrduct_price() - (productsVO.getPrduct_price() * productsVO.getPrduct_dc_pt() / 100));
+		}else {
+			productsVO.setPrduct_dced_price(productsVO.getPrduct_price());
+		}
+		
+		// 상품 평점 반올림
+		productsVO.setPrduct_rating_round(Math.round(productsVO.getPrduct_rating_avg()));
+		
+		mv.addObject("product", productsVO);
+		return mv;
+	}
+	
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
 	
@@ -658,9 +726,18 @@ public class MyController {
 	}
 	
 	
-	/*////////////////////////////////// 페이징 //////////////////////////////////*/
+	/*////////////////////////////////// 기타 메소드 //////////////////////////////////*/
 
 	
+	// 쿠키
+	public Cookie getCookie(String name, String value) {
+		Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		cookie.setMaxAge(60 * 60 * 24);
+		return cookie;
+	}
+	
+	// 페이징
 	public void getPaging(Paging paging, int count, String cPage) {
 		paging.setTotalRecord(count);
 

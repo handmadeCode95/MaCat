@@ -1,0 +1,116 @@
+@font-face {
+	font-family: 'THEjunggt130';
+	src: local('THEjunggt130'),
+		url('../font/THEjunggt130.woff2') format('woff2'),
+		url('../font/THEjunggt130.woff') format('woff'),
+		url('../font/THEjunggt130.otf') format('opentype');
+}			
+@font-face {
+font-family: '서울남산 장체EB';
+src: local('서울남산 장체EB'),
+url('../font/서울남산 장체EB.woff2') format('woff2'),
+	url('../font/서울남산 장체EB.woff') format('woff'),
+		url('../font/서울남산 장체EB.ttf') format('truetype');
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "THEjunggt130";
+}
+
+body{
+	width: 1920px;
+	margin: 0 auto;
+}
+
+ul{
+	list-style: none;
+}
+
+.side-bar{
+	width: 208px;
+	height: 1502px;
+	float: left;
+	background: #5C5173;
+}
+
+.side-bar-menu .side-item{
+	height: 88px;
+}
+
+.side-item{
+	cursor: pointer;
+}
+
+.side-item a{
+	position: relative;
+	top: 34px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #FFFFFF;
+}
+
+#service{
+	position: relative;
+	display: none;
+	top: 64px;
+	padding-top: 21px;
+	width: 208px;
+	height: 236px;
+	background: #402F61;
+}
+
+.side-item > img{
+	position: relative;
+	left: 163px;
+	top: 37px;
+	width: 27px;
+	height: 13px;
+}
+
+.side-item > ul > li{
+	padding-top: 17px;
+	padding-left: 38px;
+	font-size: 16px;
+	color: #D5D5D5;
+}
+
+.header{
+	width: 1920px;
+	height: 60px;
+	background: #402F61;
+}
+
+
+.header > img{
+	position: relative;
+	left: 18px;
+	top: 12px;
+}
+
+.header > a{
+	position: relative;
+	left: 20px;
+	top: 2px;
+	font-size: 22px;
+	color: #FFFFFF;
+}
+
+.rotatedUp{
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transition: all ease 0.5s;
+}
+
+.rotatedDown{
+	transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transition: all ease 0.5s;
+}

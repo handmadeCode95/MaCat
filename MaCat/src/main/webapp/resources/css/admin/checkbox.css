@@ -1,0 +1,133 @@
+.checks {
+    position: relative;
+}
+
+/* 실제 체크박스는 화면에서 숨김 */
+.checks input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.checks input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+/* 체크박스 모양 결정*/
+.checks input[type="checkbox"] + label:before {
+    /* 가짜 체크박스 */
+    content: ' ';
+    display: inline-block;
+    width: 15px;
+    /* 체크박스의 너비를 지정 */
+    height: 15px;
+    /* 체크박스의 높이를 지정 */
+    line-height: 15px;
+    /* 세로정렬을 위해 높이값과 일치 */
+    margin: -2px 8px 0 0;
+    text-align: center;
+    vertical-align: middle;
+    background: #fafafa;
+    border: 1px solid #707070;
+}
+
+.checks input[type="checkbox"] + label:active:before,
+.checks input[type="checkbox"]:checked + label:active:before {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* 체크박스를 체크했을때 */
+.checks input[type="checkbox"]:checked + label:before { 
+    /*content: '\2714';  */ /* 체크표시 유니코드 사용 */
+    background: #f25e5e;
+    border: 1px solid #f25e5e;
+}
+
+/*이름 아이디 핸드폰 생일 text박스*/
+.member_info_middle .checks input:last-child{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;
+}
+/*생일 기간*/
+div .birth_box1{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;
+    
+    margin-right: 17px;
+    margin-left: 15px;
+}
+
+div .birth_box2{    
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;
+    
+    margin-left: 17px;
+}
+
+/*회원번호 회원등급 전화번호 text박스*/
+.member_info_right .checks input:last-child{
+    width: 188px;
+    height: 35px;
+    
+    margin-bottom: 16px;
+}
+
+.checks>div{
+    float: right;
+    width: 456px;
+}
+
+.searching_term_middle .checks>div{
+    float: right;
+    width: 441px;
+}
+
+/*가입일 접속기간 text박스*/
+div .join_box1{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;    
+    margin-right: 17px;
+}
+
+div .join_box2{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;    
+    margin-left: 17px;
+}
+
+div .connect_box1{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;    
+    margin-right: 17px;
+}
+
+div .connect_box2{
+    width: 188px;
+    height: 35px;
+    margin-bottom: 16px;    
+    margin-left: 17px;
+}
+
+.checks label{
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
+}
+
+.searching_term_middle .checks label{
+    height: 72px;
+}
