@@ -4,19 +4,19 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.macat.service.MbersVO" alias="MbersVO"/>
-		<typeAlias type="com.macat.service.MbersSearchVO" alias="MbersSearchVO"/>
-		<typeAlias type="com.macat.service.NotsVO" alias="NotsVO"/>
-		<typeAlias type="com.macat.service.NotsSearchVO" alias="NotsSearchVO"/>
-		<typeAlias type="com.macat.service.QnaVO" alias="QnaVO"/>
-		<typeAlias type="com.macat.service.QnaSearchVO" alias="QnaSearchVO"/>
-		<typeAlias type="com.macat.service.FaqVO" alias="FaqVO"/>
-		<typeAlias type="com.macat.service.FaqSearchVO" alias="FaqSearchVO"/>
-		<typeAlias type="com.macat.service.CtgriesVO" alias="CtgriesVO"/>
-		<typeAlias type="com.macat.service.ProductsVO" alias="ProductsVO"/>
-		<typeAlias type="com.macat.service.ImagesVO" alias="ImagesVO"/>
-		<typeAlias type="com.macat.service.QnaCtgriesVO" alias="QnaCtgriesVO"/>
-		<typeAlias type="com.macat.service.MberGradVO" alias="MberGradVO"/>
+		<typeAlias type="com.macat.service.MbersDTO" alias="MbersDTO"/>
+		<typeAlias type="com.macat.service.MbersSearchDTO" alias="MbersSearchDTO"/>
+		<typeAlias type="com.macat.service.NotsDTO" alias="NotsDTO"/>
+		<typeAlias type="com.macat.service.NotsSearchDTO" alias="NotsSearchDTO"/>
+		<typeAlias type="com.macat.service.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.macat.service.QnaSearchDTO" alias="QnaSearchDTO"/>
+		<typeAlias type="com.macat.service.FaqDTO" alias="FaqDTO"/>
+		<typeAlias type="com.macat.service.FaqSearchDTO" alias="FaqSearchDTO"/>
+		<typeAlias type="com.macat.service.CtgriesDTO" alias="CtgriesDTO"/>
+		<typeAlias type="com.macat.service.ProductsDTO" alias="ProductsDTO"/>
+		<typeAlias type="com.macat.service.ImagesDTO" alias="ImagesDTO"/>
+		<typeAlias type="com.macat.service.QnaCtgriesDTO" alias="QnaCtgriesDTO"/>
+		<typeAlias type="com.macat.service.MberGradDTO" alias="MberGradDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

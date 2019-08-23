@@ -24,27 +24,27 @@ public class DAO {
 
 	
 	// 회원가입
-	public int getJoin(MbersVO mbersVO) {
-		return sqlSessionTemplate.insert("join", mbersVO);
+	public int getJoin(MbersDTO mbersDTO) {
+		return sqlSessionTemplate.insert("join", mbersDTO);
 	}
 
 	// 로그인
-	public MbersVO getLogin(MbersVO mbersVO) {
-		return sqlSessionTemplate.selectOne("login", mbersVO);
+	public MbersDTO getLogin(MbersDTO mbersDTO) {
+		return sqlSessionTemplate.selectOne("login", mbersDTO);
 	}
 
 	// 접속일 업데이트
-	public int getLoginRecord(MbersVO mbersVO) {
-		return sqlSessionTemplate.update("login_record", mbersVO);
+	public int getLoginRecord(MbersDTO mbersDTO) {
+		return sqlSessionTemplate.update("login_record", mbersDTO);
 	}
 	
 	// 회원 등급 조회
-	public List<MberGradVO> getMberGradList() {
+	public List<MberGradDTO> getMberGradList() {
 		return sqlSessionTemplate.selectList("mber_grad_list");
 	}
 	
 	// 문의 카테고리 조회
-	public List<CtgriesVO> getQnaCtgriesList() {
+	public List<CtgriesDTO> getQnaCtgriesList() {
 		return sqlSessionTemplate.selectList("qna_ctgries_list");
 	}
 	
@@ -52,8 +52,13 @@ public class DAO {
 	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
 	
 	
+	// 모든 카테고리 가져오기
+	public List<CtgriesDTO> getCategories() {
+		return sqlSessionTemplate.selectList("categories");
+	}
+	
 	// 카테고리 그룹 가져오기
-	public List<CtgriesVO> getCategoryGroup(int ctgry_group) {
+	public List<CtgriesDTO> getCategoryGroup(int ctgry_group) {
 		return sqlSessionTemplate.selectList("ctgry_group", ctgry_group);
 	}
 	
@@ -72,7 +77,7 @@ public class DAO {
 	}
 	
 	// 상품 정보 가져오기(그룹, 대분류)
-	public List<ProductsVO> getProductsList(int prduct_ctgry_group, int begin, int end) {
+	public List<ProductsDTO> getProductsList(int prduct_ctgry_group, int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("prduct_ctgry_group", prduct_ctgry_group);
 		map.put("begin", begin);
@@ -81,7 +86,7 @@ public class DAO {
 	}
 	
 	// 상품 정보 가져오기(네임, 소분류)
-	public List<ProductsVO> getProductsList(String ctgry_nm, int begin, int end) {
+	public List<ProductsDTO> getProductsList(String ctgry_nm, int begin, int end) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ctgry_nm", ctgry_nm);
 		map.put("begin", String.valueOf(begin));
@@ -90,8 +95,28 @@ public class DAO {
 	}
 	
 	// 하나의 상품 정보 가져오기
-	public ProductsVO getProduct(String prduct_sq) {
+	public ProductsDTO getProduct(String prduct_sq) {
 		return sqlSessionTemplate.selectOne("product", prduct_sq);
+	}
+	
+	// 상품 리뷰 갯수
+	public int getReviewsCount() {
+		return sqlSessionTemplate.selectOne("reviews_count");
+	}
+	
+	// 상품 색상 가져오기
+	public List<String> getColors(String prduct_sq) {
+		return sqlSessionTemplate.selectList("colors", prduct_sq);
+	}
+	
+	// 상품 이미지 가져오기
+	public List<ImagesDTO> getProductImages(String prduct_sq) {
+		return sqlSessionTemplate.selectList("product_img_list", prduct_sq);
+	}
+	
+	// 상품 조회수 업
+	public int getProductViewCntUp(String prduct_sq) {
+		return sqlSessionTemplate.update("product_view_cnt_up", prduct_sq);
 	}
 	
 	
@@ -104,7 +129,7 @@ public class DAO {
 	}
 	
 	// 회원 정보 가져오기
-	public List<MbersVO> getMbersList(int begin, int end) {
+	public List<MbersDTO> getMbersList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
 		map.put("end", end);
@@ -112,28 +137,28 @@ public class DAO {
 	}
 	
 	// 회원 and조건 검색 결과 인원
-	public int getMbersAndCount(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectOne("mbers_and_count", mbersSearchVO);
+	public int getMbersAndCount(MbersSearchDTO mbersSearchDTO) {
+		return sqlSessionTemplate.selectOne("mbers_and_count", mbersSearchDTO);
 	}
 		
 	// 회원 or조건 검색 결과 인원
-	public int getMbersOrCount(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectOne("mbers_or_count", mbersSearchVO);
+	public int getMbersOrCount(MbersSearchDTO mbersSearchDTO) {
+		return sqlSessionTemplate.selectOne("mbers_or_count", mbersSearchDTO);
 	}
 
 	// 회원 and조건 검색
-	public List<MbersVO> getMbersAndSearch(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectList("mbers_and_search", mbersSearchVO);
+	public List<MbersDTO> getMbersAndSearch(MbersSearchDTO mbersSearchDTO) {
+		return sqlSessionTemplate.selectList("mbers_and_search", mbersSearchDTO);
 	}
 
 	// 회원 or조건 검색
-	public List<MbersVO> getMbersOrSearch(MbersSearchVO mbersSearchVO) {
-		return sqlSessionTemplate.selectList("mbers_or_search", mbersSearchVO);
+	public List<MbersDTO> getMbersOrSearch(MbersSearchDTO mbersSearchDTO) {
+		return sqlSessionTemplate.selectList("mbers_or_search", mbersSearchDTO);
 	}
 
 	// 회원 정보 수정
-	public int getMbersUpdate(MbersVO mbersVO) {
-		return sqlSessionTemplate.update("mbers_update", mbersVO);
+	public int getMbersUpdate(MbersDTO mbersDTO) {
+		return sqlSessionTemplate.update("mbers_update", mbersDTO);
 	}
 
 	// 회원 탈퇴(관리자)
@@ -151,7 +176,7 @@ public class DAO {
 	}
 	
 	// 공지사항 가져오기
-	public List<NotsVO> getNotsList(int begin, int end) {
+	public List<NotsDTO> getNotsList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
 		map.put("end", end);
@@ -159,23 +184,23 @@ public class DAO {
 	}
 	
 	// 공지사항 and조건 검색 결과 인원
-	public int getNotsAndCount(NotsSearchVO notsSearchVO) {
-		return sqlSessionTemplate.selectOne("nots_and_count", notsSearchVO);
+	public int getNotsAndCount(NotsSearchDTO notsSearchDTO) {
+		return sqlSessionTemplate.selectOne("nots_and_count", notsSearchDTO);
 	}
 			
 	// 공지사항 or조건 검색 결과 인원
-	public int getNotsOrCount(NotsSearchVO notsSearchVO) {
-		return sqlSessionTemplate.selectOne("nots_or_count", notsSearchVO);
+	public int getNotsOrCount(NotsSearchDTO notsSearchDTO) {
+		return sqlSessionTemplate.selectOne("nots_or_count", notsSearchDTO);
 	}
 
 	// 공지사항 and조건 검색
-	public List<NotsVO> getNotsAndSearch(NotsSearchVO notsSearchVO) {
-		return sqlSessionTemplate.selectList("nots_and_search", notsSearchVO);
+	public List<NotsDTO> getNotsAndSearch(NotsSearchDTO notsSearchDTO) {
+		return sqlSessionTemplate.selectList("nots_and_search", notsSearchDTO);
 	}
 
 	// 공지사항 or조건 검색
-	public List<NotsVO> getNotsOrSearch(NotsSearchVO notsSearchVO) {
-		return sqlSessionTemplate.selectList("nots_or_search", notsSearchVO);
+	public List<NotsDTO> getNotsOrSearch(NotsSearchDTO notsSearchDTO) {
+		return sqlSessionTemplate.selectList("nots_or_search", notsSearchDTO);
 	}
 	
 	// 공지사항 삭제
@@ -193,7 +218,7 @@ public class DAO {
 	}
 	
 	// 고객 문의 가져오기
-	public List<QnaVO> getQnaList(int begin, int end) {
+	public List<QnaDTO> getQnaList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
 		map.put("end", end);
@@ -201,23 +226,23 @@ public class DAO {
 	}
 	
 	// 고객 문의 and조건 검색 결과 인원
-	public int getQnaAndCount(QnaSearchVO qnaSearchVO) {
-		return sqlSessionTemplate.selectOne("qna_and_count", qnaSearchVO);
+	public int getQnaAndCount(QnaSearchDTO qnaSearchDTO) {
+		return sqlSessionTemplate.selectOne("qna_and_count", qnaSearchDTO);
 	}
 			
 	// 고객 문의 or조건 검색 결과 인원
-	public int getQnaOrCount(QnaSearchVO qnaSearchVO) {
-		return sqlSessionTemplate.selectOne("qna_or_count", qnaSearchVO);
+	public int getQnaOrCount(QnaSearchDTO qnaSearchDTO) {
+		return sqlSessionTemplate.selectOne("qna_or_count", qnaSearchDTO);
 	}
 
 	// 고객 문의 and조건 검색
-	public List<QnaVO> getQnaAndSearch(QnaSearchVO qnaSearchVO) {
-		return sqlSessionTemplate.selectList("qna_and_search", qnaSearchVO);
+	public List<QnaDTO> getQnaAndSearch(QnaSearchDTO qnaSearchDTO) {
+		return sqlSessionTemplate.selectList("qna_and_search", qnaSearchDTO);
 	}
 
 	// 고객 문의 or조건 검색
-	public List<QnaVO> getQnaOrSearch(QnaSearchVO qnaSearchVO) {
-		return sqlSessionTemplate.selectList("qna_or_search", qnaSearchVO);
+	public List<QnaDTO> getQnaOrSearch(QnaSearchDTO qnaSearchDTO) {
+		return sqlSessionTemplate.selectList("qna_or_search", qnaSearchDTO);
 	}
 		
 	// 고객 문의 삭제
@@ -226,13 +251,13 @@ public class DAO {
 	}
 	
 	// 고객 문의 보기
-	public QnaVO getQnaView(String qna_sn) {
+	public QnaDTO getQnaView(String qna_sn) {
 		return sqlSessionTemplate.selectOne("qna_view", qna_sn);
 	}
 	
 	// 고객 문의 조회수 업데이트
-	public int getQnaRdcntUpdate(QnaVO qnaVO) {
-		return sqlSessionTemplate.update("qna_rdcnt_update", qnaVO);
+	public int getQnaRdcntUpdate(QnaDTO qnaDTO) {
+		return sqlSessionTemplate.update("qna_rdcnt_update", qnaDTO);
 	}
 	
 		
@@ -245,7 +270,7 @@ public class DAO {
 	}
 	
 	// FAQ 가져오기
-	public List<FaqVO> getFaqList(int begin, int end) {
+	public List<FaqDTO> getFaqList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
 		map.put("end", end);
@@ -253,23 +278,23 @@ public class DAO {
 	}
 	
 	// FAQ and조건 검색 결과 인원
-	public int getFaqAndCount(FaqSearchVO faqSearchVO) {
-		return sqlSessionTemplate.selectOne("faq_and_count", faqSearchVO);
+	public int getFaqAndCount(FaqSearchDTO faqSearchDTO) {
+		return sqlSessionTemplate.selectOne("faq_and_count", faqSearchDTO);
 	}
 			
 	// FAQ or조건 검색 결과 인원
-	public int getFaqOrCount(FaqSearchVO faqSearchVO) {
-		return sqlSessionTemplate.selectOne("faq_or_count", faqSearchVO);
+	public int getFaqOrCount(FaqSearchDTO faqSearchDTO) {
+		return sqlSessionTemplate.selectOne("faq_or_count", faqSearchDTO);
 	}
 
 	// FAQ and조건 검색
-	public List<FaqVO> getFaqAndSearch(FaqSearchVO faqSearchVO) {
-		return sqlSessionTemplate.selectList("faq_and_search", faqSearchVO);
+	public List<FaqDTO> getFaqAndSearch(FaqSearchDTO faqSearchDTO) {
+		return sqlSessionTemplate.selectList("faq_and_search", faqSearchDTO);
 	}
 
 	// FAQ or조건 검색
-	public List<FaqVO> getFaqOrSearch(FaqSearchVO faqSearchVO) {
-		return sqlSessionTemplate.selectList("faq_or_search", faqSearchVO);
+	public List<FaqDTO> getFaqOrSearch(FaqSearchDTO faqSearchDTO) {
+		return sqlSessionTemplate.selectList("faq_or_search", faqSearchDTO);
 	}
 		
 	// FAQ 삭제
@@ -278,7 +303,7 @@ public class DAO {
 	}
 	
 	// FAQ 보기
-	public FaqVO getFaqView(String faq_sn) {
+	public FaqDTO getFaqView(String faq_sn) {
 		return sqlSessionTemplate.selectOne("faq_view", faq_sn);
 	}
 	

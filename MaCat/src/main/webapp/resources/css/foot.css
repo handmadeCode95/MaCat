@@ -1,0 +1,79 @@
+@charset "utf-8";
+@import url(http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@font-face {
+	font-family: 'THEjunggt130';
+	src: local('THEjunggt130'),
+		url('../font/THEjunggt130.woff2') format('woff2'),
+		url('../font/THEjunggt130.woff') format('woff'),
+		url('../font/THEjunggt130.otf') format('opentype');
+}			
+@font-face {
+	font-family: '서울남산 장체EB';
+	src: local('서울남산 장체EB'),
+		url('../font/서울남산 장체EB.woff2') format('woff2'),
+		url('../font/서울남산 장체EB.woff') format('woff'),
+		url('../font/서울남산 장체EB.ttf') format('truetype');
+}
+
+/*reset*/
+* {margin: 0; padding: 0; box-sizing: border-box;}
+ul, ol {list-style-type: none;}
+hr {display: none;}
+h1 {margin: 0;}
+a {text-decoration: none;}
+button {border: none; background: none; text-indent: -9999px;}
+img {border: none;}
+html {font-size: 0.625em;/*10px,pxtoem.com*/}
+body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
+.blind {position: absolute; top: -9999px; left: -9999px;}
+.clear:after {content: ""; display: block; clear: both;}
+.pc {display: none;}
+
+/* footer */
+footer {
+    background: #f25e5e;
+    bottom: 0; width: 100%;
+}
+footer a {
+    color: #fff; font-style: normal;
+}
+.copy {
+    margin-top: 0px; text-align: left;
+}
+.copy img {
+    margin:20px 10% 20px ;
+    width: 80px;
+}
+.copy p {
+    color: #fff; font-size: 1.3rem; font-style: normal; line-height: 1.455;
+    margin-left: 10%;
+}
+.copy p i {
+    font-style: normal;
+}
+
+footer small {
+	display: block; text-align: center;
+	height: 45px; margin-top: 27px;
+	background: #5c5173;
+	color: #fff; font-size: 1.1rem; line-height: 45px;
+}
+
+/*gte 768*/
+@media screen and (min-width:768px) {
+
+    /* footer */
+    .copy {
+        margin-top: 29px;
+    }
+    .copy p {
+        float: left; margin-bottom: 25px;
+    }
+    .copy img {
+        float: left; width: 170px;
+    }
+    small {
+        clear: both;
+    }  
+}
+/*768 media screen end*/

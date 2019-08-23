@@ -1,4 +1,13 @@
 
+@font-face{
+    font-family : 'THEjunggt120';
+    src : local('THEjunggt120'),
+        url('/resources/font/THEjunggt120.woff2') format('woff2'),
+        url('/resources/font/THEjunggt120.woff') format('woff'),
+        url('/resources/font/THEjunggt120.otf') format('opentype'),
+        url('/resources/font/THEjunggt120.eot') format('embedded-opentype');
+}
+
 .floating_remoteCon {
     /*메뉴 위치*/
     position: fixed;
@@ -8,14 +17,9 @@
     text-align: center;
     width: 105px;
     height: 280px;
-    
-    background-color:#f9f9f9; 
     border:2px solid #F25E5E; 
-    
-    font-family: Segoe UI;
+    font-family: 'THEjunggt120';
     font-size: 15px;
-    
-    
 }
 
 .floating_remoteCon div{
@@ -34,18 +38,15 @@
 .floating_remoteCon div:nth-child(2){
     border-radius: 5px;
     height: 75px;
-    border: 1px solid #f27e63;
     margin: 5px;
 }
 .floating_remoteCon div:nth-child(3){
     border-radius: 5px;
     height: 75px;
-    border: 1px solid #f27e63;
     margin: 5px;
 }
 .floating_remoteCon div:nth-child(4){
     border-radius: 5px;
     height: 75px;
-    border: 1px solid #f2a766;
     margin: 5px;
 }

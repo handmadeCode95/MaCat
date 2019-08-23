@@ -186,17 +186,17 @@ $(function() {
 	        // 담은 열 정보를 arr배열에 추가
 	        arr.push(row);
 	    });
-	    // arr배열을 mbersVO라는 key값과 함께 저장
-	    data = {mbersVO : arr};
+	    // arr배열을 mbersDTO라는 key값과 함께 저장
+	    data = {mbersDTO : arr};
 	    // JSON형태로 직렬화
-	    var mbersVO = JSON.stringify(data);
+	    var mbersDTO = JSON.stringify(data);
 	    
 		$.ajax({
 			url			: "mbers_update.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: mbersVO,
+            data		: mbersDTO,
             success		: function(data) {
             				  $(".all").prop("checked", false);
             				  $().getTable(data);

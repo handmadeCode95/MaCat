@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.macat.service.CtgriesVO;
 import com.macat.service.DAO;
 import com.macat.service.FaqSearchVO;
 import com.macat.service.FaqVO;
@@ -55,6 +56,11 @@ public class MyController {
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
+	
+	@RequestMapping("smarteditor.mcat")
+	public ModelAndView getSmartEditorCmd() {
+		return new ModelAndView("sm");
+	}
 	
 	// 로그인 페이지로 이동
 	@RequestMapping("login.mcat")
@@ -111,10 +117,12 @@ public class MyController {
 	public ModelAndView getCategoryCmd(HttpSession session, String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
 		this.cPage = cPage;
 		
+		// 메인쪽으로 이동
+		session.setAttribute("categories", dao.getCategories());
+		
 		ModelAndView mv = new ModelAndView("product/category");
 		Paging paging = new Paging(20);
-		
-		mv.addObject("categories", dao.getCategoryGroup(ctgry_group));
+
 		
 		if (ctgry_level > 0) {
 			count = dao.getProductsCount(ctgry_nm);
@@ -126,9 +134,9 @@ public class MyController {
 			mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
 		}
 		
-		session.setAttribute("ctgry_group", ctgry_group);
-		session.setAttribute("ctgry_level", ctgry_level);
-		session.setAttribute("ctgry_nm", ctgry_nm);
+		mv.addObject("ctgry_group", ctgry_group);
+		mv.addObject("ctgry_level", ctgry_level);
+		mv.addObject("ctgry_nm", ctgry_nm);
 		mv.addObject("paging", paging);
 		return mv;
 	}
@@ -147,6 +155,9 @@ public class MyController {
 			@CookieValue(required = false, name = "viewedProductThumb3") String viewedProductThumb3,
 			HttpServletResponse response, String prduct_sq, String prduct_thumb_nm) {
 		ModelAndView mv = new ModelAndView("product/product");
+		
+		// 조회수 증가
+		if (dao.getProductViewCntUp(prduct_sq) < 1) System.out.println("조회수증가실패");
 		
 		// 최근 본 상품 쿠키에 추가. 3개 이상이면 첫 상품 삭제, 중복 불가
 		if (!prduct_sq.equals(viewedProductSq1) && !prduct_sq.equals(viewedProductSq2) && !prduct_sq.equals(viewedProductSq3)) {
@@ -193,6 +204,12 @@ public class MyController {
 		// 상품 평점 반올림
 		productsVO.setPrduct_rating_round(Math.round(productsVO.getPrduct_rating_avg()));
 		
+		// 상품 색상
+		productsVO.setColors(dao.getColors(prduct_sq));
+		
+		mv.addObject("product_imgs", dao.getProductImages(prduct_sq));
+		mv.addObject("more_product", dao.getProductsList(productsVO.getCtgry_nm(), 1, 5));
+		mv.addObject("review_cnt", dao.getReviewsCount());
 		mv.addObject("product", productsVO);
 		return mv;
 	}

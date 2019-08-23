@@ -6,27 +6,27 @@
 	<!--=========================== 메인 ===========================-->
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="MbersVO" resultType="MbersVO">
+	<select id="login" parameterType="MbersDTO" resultType="MbersDTO">
 		SELECT * FROM MEMBERS_TB WHERE MBER_ID = #{mber_id} AND MBER_PW = #{mber_pw}
 	</select>
 	
 	<!-- 회원가입 -->
-	<insert id="join" parameterType="MbersVO">
+	<insert id="join" parameterType="MbersDTO">
 		INSERT INTO MEMBERS_TB VALUES(MBER_SEQ.NEXTVAL, #{mber_id}, #{mber_pw}, #{mber_nm}, #{mber_email}, #{mber_birthday_dt}, #{mber_phone_no}, #{mber_tel_no}, 1000000, SYSDATE, SYSDATE, #{mber_zip_no}, #{mber_adres}, #{mber_detail_adres}, 1)
 	</insert>
 	
 	<!-- 접속일 업데이트 -->
-	<update id="login_record" parameterType="MbersVO">
+	<update id="login_record" parameterType="MbersDTO">
 		UPDATE MEMBERS_TB SET MBER_CONECT_DT = SYSDATE WHERE MBER_ID = #{mber_id} AND MBER_PW = #{mber_pw}
 	</update>
 	
 	<!-- 회원 등급 조회 -->
-	<select id="mber_grad_list" resultType="MberGradVO">
+	<select id="mber_grad_list" resultType="MberGradDTO">
 		SELECT * FROM MBER_GRAD_TB ORDER BY MBER_GRAD_ORD
 	</select>
 	
 	<!-- 문의 카테고리 조회 -->
-	<select id="qna_ctgries_list" resultType="QnaCtgriesVO">
+	<select id="qna_ctgries_list" resultType="QnaCtgriesDTO">
 		SELECT * FROM QNA_CTGRIES_TB ORDER BY QC_ORD
 	</select>
 	
@@ -35,7 +35,12 @@
 	
 	
 	<!-- 카테고리 그룹 조회 -->
-	<select id="ctgry_group" resultType="CtgriesVO" parameterType="int">
+	<select id="categories" resultType="CtgriesDTO">
+		SELECT * FROM CTGRIES_TB ORDER BY CTGRY_ORD
+	</select>
+	
+	<!-- 카테고리 그룹 조회 -->
+	<select id="ctgry_group" resultType="CtgriesDTO" parameterType="int">
 		SELECT * FROM CTGRIES_TB WHERE CTGRY_GROUP = #{ctgry_group} ORDER BY CTGRY_ORD
 	</select>
 	
@@ -53,19 +58,39 @@
 	</select>
 	
 	<!-- 상품 정보 조회 -->
-	<select id="products_group_list" parameterType="Map" resultType="ProductsVO"> 
+	<select id="products_group_list" parameterType="Map" resultType="ProductsDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}		
 	</select>
 	
 	<!-- 상품 정보 조회 -->
-	<select id="products_list" parameterType="Map" resultType="ProductsVO"> 
+	<select id="products_list" parameterType="Map" resultType="ProductsDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}	
 	</select>
 	
 	<!-- 하나의 상품 정보 가져오기 -->
-	<select id="product" resultType="ProductsVO">
+	<select id="product" resultType="ProductsDTO">
 		SELECT * FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}
 	</select>
+	
+	<!-- 상품 리뷰 갯수 -->
+	<select id="reviews_count" resultType="int">
+		SELECT COUNT(*) FROM REVIEWS_TB
+	</select>
+	
+	<!-- 상품 색상 가져오기 -->
+	<select id="colors" resultType="String">
+		SELECT COLOR_NM FROM COLORS_TB WHERE PRDUCT_SQ = #{prduct_sq}
+	</select>
+	
+	<!-- 상품 이미지 가져오기 -->
+	<select id="product_img_list" parameterType="String" resultType="ImagesDTO">
+		SELECT * FROM IMAGES_TB WHERE PRDUCT_SQ = #{prduct_sq} ORDER BY IMG_MAIN_FL DESC, IMG_ORD ASC
+	</select>
+	
+	<!-- 상품 조회수 업 -->
+	<update id="product_view_cnt_up" parameterType="String">
+		UPDATE PRODUCTS_TB SET PRDUCT_VIEW_CNT = (SELECT PRDUCT_VIEW_CNT FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}) + 1 WHERE PRDUCT_SQ = #{prduct_sq}
+	</update>
 	
 	
 	<!--=========================== 회원 정보 관리 ===========================-->
@@ -77,12 +102,12 @@
 	</select>
 	
 	<!-- 회원 정보 가져오기 -->
-	<select id="members" parameterType="Map" resultType="MbersVO"> 
+	<select id="members" parameterType="Map" resultType="MbersDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB ORDER BY MBER_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<!-- 회원 and조건 검색 결과 인원 -->
-	<select id="mbers_and_count" parameterType="MbersSearchVO" resultType="int">
+	<select id="mbers_and_count" parameterType="MbersSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM MEMBERS_TB
 		<where>
 	  		<if test="mber_nm != null">
@@ -134,7 +159,7 @@
 	</select>
 	
 	<!-- 회원 and조건 검색 -->
-	<select id="mbers_and_search" parameterType="MbersSearchVO" resultType="MbersVO">
+	<select id="mbers_and_search" parameterType="MbersSearchDTO" resultType="MbersDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB
 		<where>
 	  		<if test="mber_nm != null">
@@ -190,7 +215,7 @@
 	</select>
 	
 	<!-- 회원 or조건 검색 결과 인원 -->
-	<select id="mbers_or_count" parameterType="MbersSearchVO" resultType="int">
+	<select id="mbers_or_count" parameterType="MbersSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM MEMBERS_TB
 		<where>
 	  		<if test="mber_nm != null">
@@ -242,7 +267,7 @@
 	</select>
 	
 	<!-- 회원 or조건 검색 -->
-	<select id="mbers_or_search" parameterType="MbersSearchVO" resultType="MbersVO">
+	<select id="mbers_or_search" parameterType="MbersSearchDTO" resultType="MbersDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB
 		<where>
 	  		<if test="mber_nm != null">
@@ -298,7 +323,7 @@
 	</select>
 		
 	<!-- 회원 정보 수정 -->
-	<update id="mbers_update" parameterType="MbersVO">
+	<update id="mbers_update" parameterType="MbersDTO">
 		UPDATE MEMBERS_TB SET MBER_PW = #{mber_pw}, MBER_NM = #{mber_nm}, MBER_EMAIL = #{mber_email}, MBER_PHONE_NO = #{mber_phone_no}, MBER_TEL_NO = #{mber_tel_no}, MBER_ZIP_NO = #{mber_zip_no}, MBER_ADRES = #{mber_adres}, MBER_DETAIL_ADRES = #{mber_detail_adres}, MBER_GRAD_NM = #{mber_grad_nm} WHERE MBER_SQ = #{mber_sq}
 	</update>
 	
@@ -317,12 +342,12 @@
 	</select>
 	
 	<!-- 공지사항 가져오기 -->
-	<select id="notices" parameterType="Map" resultType="NotsVO"> 
+	<select id="notices" parameterType="Map" resultType="NotsDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB ORDER BY NOT_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<!-- 공지사항 and조건 검색 결과 인원 -->
-	<select id="nots_and_count" parameterType="NotsSearchVO" resultType="int">
+	<select id="nots_and_count" parameterType="NotsSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM NOTICES_TB
 		<where>
 	  		<if test="not_sq != null">
@@ -347,7 +372,7 @@
 	</select>
 	
 	<!-- 공지사항 and조건 검색 -->
-	<select id="nots_and_search" parameterType="NotsSearchVO" resultType="NotsVO">
+	<select id="nots_and_search" parameterType="NotsSearchDTO" resultType="NotsDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB
 		<where>
 	  		<if test="not_sq != null">
@@ -376,7 +401,7 @@
 	</select>
 	
 	<!-- 공지사항 or조건 검색 결과 인원 -->
-	<select id="nots_or_count" parameterType="NotsSearchVO" resultType="int">
+	<select id="nots_or_count" parameterType="NotsSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM NOTICES_TB
 		<where>
 	  		<if test="not_sq != null">
@@ -401,7 +426,7 @@
 	</select>
 	
 	<!-- 공지사항 or조건 검색 -->
-	<select id="nots_or_search" parameterType="NotsSearchVO" resultType="NotsVO">
+	<select id="nots_or_search" parameterType="NotsSearchDTO" resultType="NotsDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB
 		<where>
 	  		<if test="not_sq != null">
@@ -444,12 +469,12 @@
 	</select>
 	
 	<!-- 고객 문의 가져오기 -->
-	<select id="qna" parameterType="Map" resultType="QnaVO"> 
+	<select id="qna" parameterType="Map" resultType="QnaDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end} AND QNA_ANS_ST = 0
 	</select>
 	
 	<!-- 고객 문의 and조건 검색 결과 인원 -->
-	<select id="qna_and_count" parameterType="QnaSearchVO" resultType="int">
+	<select id="qna_and_count" parameterType="QnaSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM QNA_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -486,7 +511,7 @@
 	</select>
 	
 	<!-- 고객 문의 and조건 검색 -->
-	<select id="qna_and_search" parameterType="QnaSearchVO" resultType="QnaVO">
+	<select id="qna_and_search" parameterType="QnaSearchDTO" resultType="QnaDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -527,7 +552,7 @@
 	</select>
 	
 	<!-- 고객 문의 or조건 검색 결과 인원 -->
-	<select id="qna_or_count" parameterType="QnaSearchVO" resultType="int">
+	<select id="qna_or_count" parameterType="QnaSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM QNA_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -564,7 +589,7 @@
 	</select>
 	
 	<!-- 고객 문의 or조건 검색 -->
-	<select id="qna_or_search" parameterType="QnaSearchVO" resultType="QnaVO">
+	<select id="qna_or_search" parameterType="QnaSearchDTO" resultType="QnaDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -610,12 +635,12 @@
 	</delete>
 	
 	<!-- 고객 문의 보기 -->
-	<select id="qna_view" resultType="QnaVO" parameterType="String">
+	<select id="qna_view" resultType="QnaDTO" parameterType="String">
 		SELECT * FROM QNA_TB WHERE QNA_SQ = #{qna_sq}
 	</select>
 	
 	<!-- 고객 문의 조회수 업데이트 -->
-	<update id="qna_rdcnt_update" parameterType="QnaVO">
+	<update id="qna_rdcnt_update" parameterType="QnaDTO">
 		UPDATE QNA_TB SET QNA_VIEW_CNT = #{qna_view_cnt} WHERE QNA_SQ = #{qna_sq}
 	</update>
 	
@@ -629,12 +654,12 @@
 	</select>
 	
 	<!-- FAQ 가져오기 -->
-	<select id="faq" parameterType="Map" resultType="FaqVO"> 
+	<select id="faq" parameterType="Map" resultType="FaqDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB ORDER BY FAQ_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<!-- FAQ and조건 검색 결과 인원 -->
-	<select id="faq_and_count" parameterType="FaqSearchVO" resultType="int">
+	<select id="faq_and_count" parameterType="FaqSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM FAQ_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -650,7 +675,7 @@
 	</select>
 	
 	<!-- FAQ and조건 검색 -->
-	<select id="faq_and_search" parameterType="FaqSearchVO" resultType="FaqVO">
+	<select id="faq_and_search" parameterType="FaqSearchDTO" resultType="FaqDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -670,7 +695,7 @@
 	</select>
 	
 	<!-- FAQ or조건 검색 결과 인원 -->
-	<select id="faq_or_count" parameterType="FaqSearchVO" resultType="int">
+	<select id="faq_or_count" parameterType="FaqSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM FAQ_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -686,7 +711,7 @@
 	</select>
 	
 	<!-- FAQ or조건 검색 -->
-	<select id="faq_or_search" parameterType="FaqSearchVO" resultType="FaqVO">
+	<select id="faq_or_search" parameterType="FaqSearchDTO" resultType="FaqDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB
 		<where>
 			<if test="qc_nm != null and qc_nm != '전체'.toString()">
@@ -711,7 +736,7 @@
 	</delete>
 	
 	<!-- FAQ 보기 -->
-	<select id="faq_view" resultType="FaqVO" parameterType="String">
+	<select id="faq_view" resultType="FaqDTO" parameterType="String">
 		SELECT * FROM FAQ_TB WHERE FAQ_SQ = #{faq_sq}
 	</select>
 </mapper>

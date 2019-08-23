@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>고객문의 :: ${qnaVO.qna_sj}</title>
+		<title>고객문의 :: ${qnaDTO.qna_sj}</title>
 		<style type="text/css">
 			*{font-family: "나눔고딕";}
 			table{margin: 20px auto;}
@@ -25,36 +25,36 @@
 				<tbody>
 					<tr>
 						<th bgcolor="#B2EBF4">답변여부</th>
-						<td><c:if test="${qnaVO.qna_ans_st == 0}">미답변</c:if>
-						<c:if test="${qnaVO.qna_ans_st == 1}">답변완료</c:if></td>
+						<td><c:if test="${qnaDTO.qna_ans_st == 0}">미답변</c:if>
+						<c:if test="${qnaDTO.qna_ans_st == 1}">답변완료</c:if></td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">문의 번호</th>
-						<td>${qnaVO.qna_sq}</td>
+						<td>${qnaDTO.qna_sq}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">제목</th>
-						<td>${qnaVO.qna_sj}</td>
+						<td>${qnaDTO.qna_sj}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">고객명</th>
-						<td>${qnaVO.qna_nm}</td>
+						<td>${qnaDTO.qna_nm}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">아이디</th>
-						<td>${qnaVO.qna_id}</td>
+						<td>${qnaDTO.qna_id}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">등록일</th>
-						<td>${qnaVO.qna_reg_dt.substring(0, 10)}</td>
+						<td>${qnaDTO.qna_reg_dt.substring(0, 10)}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">조회수</th>
-						<td>${qnaVO.qna_view_cnt}</td>
+						<td>${qnaDTO.qna_view_cnt}</td>
 					</tr>
 					<tr>
 						<th bgcolor="#B2EBF4">내용</th>
-						<td><pre>${qnaVO.qna_cn}</pre></td>
+						<td><pre>${qnaDTO.qna_cn}</pre></td>
 					</tr>
 					</tbody>
 					<tfoot>
@@ -63,11 +63,11 @@
 					    	<input type="button" value="목록" id="listGO" />
 					    	<%-- 하단 jstl : 사용자 로그인 정보를 이용한 버튼 숨김처리 --%>
 					        <input type="button" value="답글" id="answerGO"
-					        <c:if test="${sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
+					        <c:if test="${sessionScope.loginData.mber_grad != 4}"> style="display: none"</c:if> />
 					        <input type="button" value="수정" id="updateGO" style="display: none"
-					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq}"> style="display: none"</c:if> />
+					        <c:if test="${qnaDTO.mber_sq != sessionScope.loginData.mber_sq}"> style="display: none"</c:if> />
 					        <input type="button" value="삭제" id="deleteGO" style="display: none"
-					        <c:if test="${qnaVO.mber_sq != sessionScope.loginChk.mber_sq || sessionScope.loginChk.mber_grad != 4}"> style="display: none"</c:if> />
+					        <c:if test="${qnaDTO.mber_sq != sessionScope.loginData.mber_sq || sessionScope.loginData.mber_grad != 4}"> style="display: none"</c:if> />
 					    </td>
 					</tr>
 				</tfoot>
