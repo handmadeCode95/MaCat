@@ -144,7 +144,7 @@
 	                            </li>
 	                            <li>
 	                                <p class="product_count_box">
-										<select name="수량선택" id="">
+										<select name="수량선택" id="amount">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -163,10 +163,10 @@
 	                            </li>
 	                            <li>
 	                                <p class="color_choice_box">
-	                                    <select name="색상선택" id="">
+	                                    <select name="색상선택" id="color">
 	                                    	<option value="0">color</option>
-	                                    	<c:forEach var="i" items="${product.colors}" varStatus="vs">
-	                                    		 <option value="${vs.count}">${i}</option>
+	                                    	<c:forEach var="i" items="${product.colors}">
+	                                    		 <option value="${i}">${i}</option>
 	                                    	</c:forEach>
 	                                    </select>
 	                                </p>
@@ -196,7 +196,7 @@
 	                         href="db_cart.mcat?prduct_sq=${product.prduct_sq}&mber_sq=${sessionScope.loginData.mber_sq}"-->
 	                        <c:choose>
 	                        	<c:when test="${empty sessionScope.loginData}">
-		                        	<a href="javascript:cookieCart(${product.prduct_sq});">
+		                        	<a href="javascript:setCookie('cart', ${product.prduct_sq}, 1);">
 		                            	<li class="cart">
 		                                	<img src="resources/img/mcat_cart.png" alt="">
 		                            	</li>
@@ -269,14 +269,17 @@
 	                <!-- 각 이미지에 해당되는 상품상세페이지로 이동-->
 	                <div class="related_product_slide">
 	                	<c:forEach var="i" items="${more_product}">
-		                	<img src="resources/img/${i.prduct_thumb_nm}" alt="">
+		                	<a href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
+		                		<img src="resources/img/${i.prduct_thumb_nm}" alt="">
+		                	</a>
 	                	</c:forEach>
 	                </div>
 	                <!-- 더보기 : 현재 위치한 상품상세페이지의 상품 카테고리 페이지로 이동시킴-->
 	                <c:forEach var="i" items="${sessionScope.categories}">
 						<c:if test="${i.ctgry_nm eq product.ctgry_nm}">
-							<input id="details" type="button" value="더보기"
-	                		onclick="location.href='category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}'">
+							<a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}">
+								<input id="details" type="button" value="더보기">
+	                		</a>
 						</c:if>
 					</c:forEach>
 	            </div>

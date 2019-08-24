@@ -449,7 +449,7 @@ select {
     line-height: 20px;
     letter-spacing: 0px;
     -webkit-appearance: none;
-    background: url(/resources/img/mcat_arrow_down_final.png) no-repeat 100% 50%;
+    background: url(../img/mcat_arrow_down_final.png) no-repeat 100% 50%;
     text-align: center;
     text-align-last: right;
     padding-right: 30px;
@@ -478,7 +478,7 @@ option {
     margin: 0 auto;
 }
 
-.related_products .container .related_product_slide img {
+.related_products .container .related_product_slide a img {
     width: 140px;
     height: 140px;
     padding: 5px;
