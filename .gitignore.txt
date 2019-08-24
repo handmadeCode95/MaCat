@@ -1,7 +1,7 @@
-# 완료된 파일
+# completed works
 
-# 개인참조용 파일
-paginate
-star_rating
-test
-test2
+# personal_reference works
+paginate.html
+star_rating.html
+test.html
+test2.html
