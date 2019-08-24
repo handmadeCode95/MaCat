@@ -1,0 +1,346 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('resources/font/THEjunggt130.woff2') format('woff2'),
+        url('resources/font/THEjunggt130.woff') format('woff'),
+        url('resources/font/THEjunggt130.otf') format('opentype'),
+        url('resources/font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('resources/font/서울남산 장체EB.woff2') format('woff2'),
+        url('resources/font/서울남산 장체EB.woff') format('woff'),
+        url('resources/font/서울남산 장체EB.otf') format('truetype'),       
+        url('resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+div{
+    display: block;
+}
+
+a{
+    text-decoration: none;
+}
+
+#wrap {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+#container #contents {
+    float: left;
+    width: 1100px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.titleArea { 
+    margin: 30px 0 0px;
+    height: 25px;
+    float: left;
+    display: inline-block;
+}
+
+.titleArea span{   
+    font-size: 25px;
+    line-height: 25px;
+    color: #000000;
+    
+    border-left: 3px solid #f25e5e;
+    padding-left: 12px;    
+}
+
+.base_box {
+    float: left;
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(0,0,0);
+    padding: 20px;
+    
+    border-width: 5px;
+    border-style: solid;
+    border-color: #707070;
+}
+
+/*주문상태 선택 파트 : 헤더부분*/
+.order_state_box{
+    width: 1080px;
+    display: inline-block;
+    float: left;
+    margin-top: 20px;
+}
+
+legend{
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;    
+}
+
+/*선택 박스*/
+.base_box .state_select {
+    float: left;
+    display: inline-block;
+    padding: 0 12px 0 0 ;
+    margin: 0 5px 0 2px;    
+}
+
+select{
+    height: 24px;
+    border: 1px solid #cfcfcf;    
+}
+
+option{
+    display: block;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+/*기간선택 박스*/
+.state_select_btn{
+    width: 500px;
+}
+
+.state_select_btn li{
+    float: left;
+    border: 1px solid #CFCFCF;
+    width: 50px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 10px;
+    text-align: center;
+    margin-left: -1px;    
+    box-sizing: border-box; 
+}
+
+ul, li{
+    list-style: none;
+    cursor: pointer;
+}
+
+.selected {
+    background: #f25e5e;
+}
+/*달력 선택 박스*/
+.fText {
+    width: 82px;
+    height: 22px;
+    margin: 0 0 0 2px;
+    padding: 0 6px;
+    border: 1px solid #cfcfcf;
+    line-height: 22px;
+    font-size: 12px;
+}
+
+fieldset > button{
+    width: 14px;
+    height: 14px;
+    margin: 0 5px 0 2px;    
+}
+
+button{
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+fieldset img{
+    vertical-align: middle;
+    height: 20px;
+    width: 20px;
+}
+
+input, select{
+    vertical-align: middle;
+}
+
+.order_state_box ul.describe{  
+    color: #707070;    
+    line-height: 1.5;        
+    display: inline;   
+}
+
+.order_state_box ul.describe span{
+    padding: 0 0 0 9px;
+    text-align: left;
+    font-size: 12px;
+    display: block;    
+    margin: 0 auto;
+    cursor: auto;
+}
+
+/*주문상품정보 게시글 파트*/
+/*제목파트*/
+.title{
+    margin: 40px 0 10px 0px;
+    width: 1024px;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    display: inline-block;
+}
+
+.title > h3{
+    float: left;
+    font-size: 18px;
+}
+/*본문 파트*/
+.ec-base-table table{
+    position: relative;
+    margin : 10px 0 0;
+    font-size: 13px;
+}
+
+table{
+    width: 1074px;
+    vertical-align: middle;
+}
+
+colgroup{
+    display: table-column-group;
+}
+
+col{
+    display: table-column;
+}
+
+thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr{
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.ec-base-table .center{
+    text-align: center;
+}
+
+.ec-base-table .center td{
+    padding-right: 0;
+}
+
+.ec-base-table thead th{
+    padding: 10px 0 10px;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    color: #353535;
+    vertical-align: middle;
+    background: #fbfafa;
+}
+
+.ec-base-table td{
+    padding: 5px 5px 5px;
+}
+/*상품 이미지 썸네일*/
+.ec-base-table tbody .thumb img{
+    width: 93px;
+}
+/*상품정보란 : 상품명*/
+.ec-base-table .center td.left{
+    padding-left: 10px;
+}
+
+.ec-base-table .center td.top{
+    vertical-align: top;    
+}
+
+.ec-base-table .left{
+    text-align-last: left;
+}
+
+/*상품정보란 : 옵션파트*/
+.ec-base-table td.product div.option{
+    margin: 9px 0 0;
+    color: #707070;
+    line-height: 16px;
+}
+
+/*상품구매금액 파트*/
+.ec-base-table .center td.right{
+    padding-right: 10px;
+}
+
+.ec-base-table .right{    
+    text-align: right;
+}
+/*주문처리상태 폰트색상*/
+.txtEm{
+    color: #5c5173;
+}
+
+.line{
+    text-decoration: underline;
+}
+
+/* 취소/반품/교환 내역 */
+
+
+
+/* 페이징 추가 */
+ol, li{
+    margin: 0 auto;
+    padding: 0;
+}
+
+.paginate {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+}
+
+.paginate ol{
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+    vertical-align: top;
+}
+
+.paginate li{
+    margin-left: 0;
+}
+
+.paginate li{
+    display: inline-block;
+    margin: 0 0 0 0 -1px;
+    border: 1px solid #cfcfcf;
+    font-size: 12px;
+    color: #cfcfcf;
+    vertical-align: top;    
+}
+
+.paginate li a.this{
+    padding-bottom: 6px;
+    border-bottom: 3px solid #000000;
+    color: #707070;
+}
+
+.paginate li a{
+    display: block;
+    width: 33px;
+    padding: 9px 0;
+    color: #000000;
+    line-height: 14px;
+    background: #fff;
+}

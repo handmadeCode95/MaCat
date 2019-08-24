@@ -1,0 +1,306 @@
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('/resources/font/THEjunggt130.woff2') format('woff2'),
+        url('/resources/font/THEjunggt130.woff') format('woff'),
+        url('/resources/font/THEjunggt130.otf') format('opentype'),
+        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('/resources/font/서울남산 장체EB.woff2') format('woff2'),
+        url('/resources/font/서울남산 장체EB.woff') format('woff'),
+        url('/resources/font/서울남산 장체EB.otf') format('truetype'),        
+        url('/resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+* {
+    margin: 0;
+    padding: 0;        
+}
+/*임시 사이드메뉴*/
+header{
+    height: 60px;
+    width: 1920px; 
+    background: #402F61; 
+    color: #ffffff;
+    margin: auto;
+    /*텍스트 세로 중앙정렬*/
+    line-height: 60px;    
+    box-sizing: border-box;
+}
+
+header h1{
+    padding-left: 40px;
+}
+
+aside{
+    height: 1502px;
+    width: 208px;
+    float: left;
+    text-align: center;
+    line-height: 80px;
+    background: #5C5173;
+}
+
+main{
+    width: 1920px;
+    height: 1510px;
+    margin: 0 auto;
+}
+
+.wrap {
+    width: 1712px;
+    height: 1502px;
+    background: #dfdfdf;
+    float: right;    
+}
+/* 회원관리 타이틀 파트*/
+.member_management {
+    width: 1645px;
+    height: 60px;
+    background: #ffffff;
+    margin: 16px 40px 14px 27px;    
+}
+.member_management span{
+    line-height: 60px; 
+    margin: 16px 0px 18px 26px;
+    font-size: 22px;
+}
+/*회원정보 작업 파트*/
+.member_information_container {
+    width: 1645px;
+    height: 656px;
+    background: #ffffff;
+    margin: 0px 40px 26px 27px;    
+}
+/* 회원정보 파트*/
+.member_info {
+    width: 1592px;
+    height: 270px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-bottom: 1px solid #707070;    
+}
+/*체크박스 포함 선택단*/
+.infomation_control_part {
+    float: left;
+    /*margin-top: 26.5px;*/
+    height: 270px;
+}
+/*회원정보 타이틀*/
+.member_info_title {
+    width: 311px; 
+    height: 232px; 
+    float: left;
+    margin-top: 19px;
+}
+
+/*회원정보 파트 */
+.member_info_middle{
+    float: left;
+    width: 555px;
+    height: 223px;
+    margin-top: 28px;
+}
+
+.member_info_right{
+    float: left;
+    width: 300px;
+    margin-left: 62.5px;
+    margin-top: 28px;    
+}
+/*
+.member_info span, 
+.searching_term span {
+    margin-left: 11.5px;
+    padding-top: 19px;
+    font-size: 15px;    
+}*/
+
+/*기간 파트*/
+.searching_term {
+    width: 1592px;
+    height: 179px;
+    margin: auto;
+    box-sizing: border-box;
+    border-bottom: 1px solid #707070;
+}
+/*기간 제목부분*/
+.searching_term_title {
+    width: 311px;
+    height: 153px;
+    float: left;
+    margin-top: 13.5px;
+    
+}
+
+.searching_term_middle{
+    float: left;
+    width: 555px;
+    height: 140px;
+    margin-top: 35.5px;
+}
+
+.searching_term_right{
+    float: left;
+    width: 375px;
+    margin-left: 62.5px;
+    margin-top: 35.5px;
+}
+
+/*가입일 기간선택 버튼 div*/
+.join_period_btn{
+    width: 380px;
+    height: 35.5px;
+}
+
+.join_period_btn li{
+    float: left;
+    border: 1px solid #CFCFCF;
+    width: 66px;
+    height: 37.5px;
+    line-height: 35.5px;
+    text-align: center;
+    margin-left: -1px;    
+    box-sizing: border-box; 
+}
+
+.join_period_btn li:first-child,
+.join_period_btn li:last-child{
+    width: 56px;
+}
+
+/*접속기간 기간선택 버튼 div*/
+.connect_period_btn{
+    margin-top: 37.5px;
+    width: 380px;
+    height: 35.5px;
+}
+
+.connect_period_btn li{
+    float: left;
+    border: 1px solid #cfcfcf;
+    width: 66px;
+    height: 37.5px;
+    line-height: 35.5px;
+    text-align: center;
+    margin-left: -1px;    
+    box-sizing: border-box;
+}
+
+.connect_period_btn li:first-child,
+.connect_period_btn li:last-child{
+    width: 56px;
+}
+
+ul,li{    
+    list-style: none;
+    cursor: pointer;
+}
+
+.selected{
+    background: #f25e5e;    
+}
+
+/*버튼 파트*/
+.btn_part {
+    width: 1592px;
+    height: 206px;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+}
+
+.and_or_radio_btn {
+    width: 391px;
+    height: 108.5px;
+    margin: 0 auto;
+}
+
+.and_or_radio_btn .and{
+    position: absolute;
+    top:  41.1px;
+    left: 26.5px;
+    font-size: 26px;
+}
+
+.and_or_radio_btn .or{
+    position: absolute;
+    top:  41.1px;
+    left: 267.5px;
+    font-size: 26px;
+}
+
+.and_container {
+    width: 150px;
+    display: inline-block;
+}
+
+.or_container{
+    width: 150px;
+    display: inline-block;
+}
+/*조회, 초기화 버튼*/
+.view_refresh_btn{
+    width: 391px;
+    margin: 0 auto;
+}
+
+.view_refresh_btn input{
+    color: #fff;
+}
+
+.view_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;
+    background: #f25e5e;    
+    border: none;    
+}
+
+.refresh_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;    
+    background: #F2A766;    
+    border: none; 
+    margin-left: 84px;
+}
+/**/
+.edit_delete_btn{
+    width: 391px;
+    margin: 0 auto;
+}
+
+.edit_delete_btn input{
+    color: #fff;
+}
+
+.edit_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;
+    background: #f25e5e;    
+    border: none;    
+}
+
+.delete_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;    
+    background: #F2A766;    
+    border: none; 
+    margin-left: 84px;
+}
+
+.macat_sideMenu_load {
+    
+}

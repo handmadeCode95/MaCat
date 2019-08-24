@@ -1,0 +1,59 @@
+/*탭메뉴*/
+#item_tab{
+    width:1080px;
+    margin:0 auto;
+    text-align:center;    
+    border-top: 2px solid #707070;
+    
+    padding-bottom: 48px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    
+    border-bottom: 2px solid #707070;    
+}
+.tab-titles{
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;    
+    width: 100%;
+}
+
+/* Float the list items side by side */
+.tab-titles li {
+    float: left;
+    width: 25%;
+}
+/* Style the links inside the list items */
+.tab-titles li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    transition:0s;
+}
+/* Style the tab content */
+.tabcontent {
+    border-top: 2px solid #707070;
+    display: none;
+    background-color:#ffffff;    
+}
+
+ul.tab-titles li.current > a{
+    width: 100%;
+    color: white;
+    background: #f25e5e;
+}
+
+.tabcontent.current {
+    display: block;
+}
+
+.product_tab_container-tabmenu {
+    position: relative;
+    display: grid;
+    float: left;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+        <title>Document</title>
+    <link rel="stylesheet" href="/resources/css/top_button.css">
+    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+<!--  추가구현 필요내용 : 사용자 해상도가 달라져도 같은 위치에 있도록  -->
+    <script type="text/javascript">
+        $(window).scroll( function() {
+            if ($(this).scrollTop() > 200) {
+                $('.top').fadeIn();
+            } else {
+                $('.top').fadeOut();
+            }
+        });        
+        $('.top').click( function() {
+            $('html, body').animate({
+                scrollTop : 0 }, 400 );
+            return false;
+        });                
+        /*$(document).ready(function()
+        {
+            var speed = 500; // 스크롤속도
+            $(".top").css("cursor", "pointer").click(function()
+            {
+                $('body, html').animate({scrollTop:0}, speed);
+            });
+        });     */
+        
+    </script>
+</head>
+<body>    
+    <div class="top_button">
+        <a href="#" class="top">
+            <img src="resources/img/top_button.png" alt="top_button">
+        </a>
+    </div>
+</body>
+</html>

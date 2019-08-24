@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="/resources/css/normalize.css">
+	<link rel="stylesheet" href="/resources/css/macat_notice.css">
+	<link rel="stylesheet" href="/resources/css/spacing.css">
+
+	<script type="text/javascript" src="/resources/js/jquery-3.4.1.min.js"></script>
+	<!-- 고정헤더 불러오기 -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#macat_header").load("macat_header.html");
+		});
+	</script>
+</head>
+
+<body>
+	<!-- 고정헤더 불러오기 -->
+	<div id="macat_header"></div>
+	<!-- 여백-->
+	<div class="spacing"></div>
+
+	<section id="wrap">
+		<div class="contents">
+			<div class="board">
+				<div class="board_title">
+					<div id="path">
+						<ol>
+							<li>홈</li>
+							<li>게시판</li>
+							<li>
+								<strong>공지사항</strong>
+							</li>
+						</ol>
+					</div>
+					<div id="title">
+						<h2>공지사항</h2>
+						<p>공지사항 입니다.</p>
+					</div>
+				</div>
+				<div class="board_list">
+					<table class="board_list_main">
+						<caption>게시판 목록</caption>
+						<colgroup>
+							<col style="width:70px;">
+							<col style="width:auto;">
+							<col style="width:84px;">
+							<col style="width:77px;">
+							<col style="width:55px;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">작성자</th>
+								<th scope="col">작성일</th>
+								<th scope="col">조회</th>
+							</tr>
+						</thead>
+						<tbody id="not_main_list">
+							<tr>
+								<td>공지</td>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>작성일</td>
+								<td>조회</td>
+							</tr>
+						</tbody>
+						<tbody id="not_sub_list">
+							<tr>
+								<td>1</td>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>작성일</td>
+								<td>조회</td>
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+			<form action="">
+				<div id="not_search_bar">
+					<fieldset>
+						<legend>게시글 검색</legend>
+						<p> 검색어
+							<select name="" id="search_date">
+								<option value="">일주일</option>
+								<option value="">한달</option>
+								<option value="">세달</option>
+								<option value="">전체</option>
+							</select>
+							<select name="" id="search_key">
+								<option value="">제목</option>
+								<option value="">내용</option>
+							</select>
+							<input id="search_text_box" type="text">
+							<a href="#"><img src="resources/img/mcat_search.png" alt=""></a>
+						</p>
+					</fieldset>
+				</div>
+			</form>
+			<tr>
+				<td colspan="17">
+					<ol id="paging">
+
+						<li>
+							<a class="page">
+								<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
+								<input type="hidden" name="cPage">
+							</a>
+						</li>
+
+						<li class="now">1</li>
+						<li>
+							<a class="page">
+								<input type="hidden" name="cPage">
+							</a>
+						</li>
+
+						<li>
+							<a class="page">
+								<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">
+								<input type="hidden" name="cPage">
+							</a>
+						</li>
+					</ol>
+				</td>
+			</tr>
+		</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+## 완료된 파일
+
+## 개인참조용 파일
+paginate.html
+star_rating.html
+test.html
+test2.html
