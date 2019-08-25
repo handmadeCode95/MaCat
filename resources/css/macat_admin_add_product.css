@@ -19,37 +19,15 @@
 * {
     font-family: 'THEjunggt130';
 }
+
 /*ul, li 기본 스타일 없애기*/
-ul, li{
+ul,
+li {
     text-decoration: none;
     list-style: none;
 }
 
 /*임시 사이드메뉴*/
-header {
-    height: 60px;
-    width: 1920px;
-    background: #402F61;
-    color: #ffffff;
-    margin: auto;
-    /*텍스트 세로 중앙정렬*/
-    line-height: 60px;
-    box-sizing: border-box;
-}
-
-header h1 {
-    padding-left: 40px;
-}
-
-aside {
-    height: 100%;
-    width: 208px;
-    float: left;
-    text-align: center;
-    line-height: 80px;
-    background: #5C5173;
-}
-
 main {
     width: 1920px;
     height: 2447px;
@@ -209,6 +187,7 @@ option {
 
     direction: rtl;
 }
+
 /*정가 원 선택박스*/
 .tag_price .won_percnt_box {
     display: inline-block;
@@ -251,6 +230,7 @@ option {
     margin: 0 auto;
     padding: 0;
 }
+
 /*원, % 텍스트 위치 조정*/
 .won_percnt_box li {
     float: left;
@@ -330,6 +310,7 @@ option {
     display: inline-block;
     width: 40px;
 }
+
 /*'개' box 텍스트 위치 조절*/
 .left_stock_box li {
     float: left;
@@ -389,75 +370,97 @@ option {
     vertical-align: middle;
 }
 
-input[type="checkbox"]#test_1 + label {    
+input[type="checkbox"]#test_1 + label {
     background: #ff0000;
 }
+
 input[type="checkbox"]#test_2 + label {
     background: #8D192B;
 }
+
 input[type="checkbox"]#test_3 + label {
     background: #F89B00;
 }
+
 input[type="checkbox"]#test_4 + label {
     background: #FFD700;
 }
+
 input[type="checkbox"]#test_5 + label {
     background: #F7E600;
 }
+
 input[type="checkbox"]#test_6 + label {
     background: #BFFF00;
 }
+
 input[type="checkbox"]#test_7 + label {
     background: #008000;
 }
+
 input[type="checkbox"]#test_8 + label {
     background: #6A8518;
 }
+
 input[type="checkbox"]#test_9 + label {
     background: #83DCB7;
 }
+
 input[type="checkbox"]#test_10 + label {
     background: #50BCDF;
 }
+
 input[type="checkbox"]#test_11 + label {
     background: #0000FF;
 }
+
 input[type="checkbox"]#test_12 + label {
     background: #000080;
 }
+
 input[type="checkbox"]#test_13 + label {
     background: #660099;
 }
+
 input[type="checkbox"]#test_14 + label {
     background: #EDACB1;
 }
+
 input[type="checkbox"]#test_15 + label {
     background: #FF3399;
 }
+
 input[type="checkbox"]#test_16 + label {
     background: #E5C89C;
 }
+
 input[type="checkbox"]#test_17 + label {
     background: #C68A12;
 }
+
 input[type="checkbox"]#test_18 + label {
     background: #964B00;
 }
+
 input[type="checkbox"]#test_19 + label {
     background: #FFFFFF;
     border: 1px solid black;
     width: 18px;
     height: 18px;
 }
+
 input[type="checkbox"]#test_20 + label {
     background: #ECE6CC;
 }
+
 input[type="checkbox"]#test_21 + label {
     background: #808080;
 }
+
 input[type="checkbox"]#test_22 + label {
     background: #392F31;
 }
+
 input[type="checkbox"]#test_23 + label {
     background: #000000;
 }
@@ -485,18 +488,20 @@ input[type="checkbox"]#test_23:checked + label {
     background-image: url(/resources/img/mcat-check-white.png);
     background-size: 100%;
 }
+
 input[type="checkbox"]#test_6:checked + label,
 input[type="checkbox"]#test_19:checked + label,
 input[type="checkbox"]#test_20:checked + label {
     background-image: url("/resources/img/mcat-check-black.png");
 }
+
 /*상품이미지 파트*/
 .product_image {
     width: 1645px;
     height: 461px;
     background: #ffffff;
     margin: 16px 40px 14px 27px;
-    padding-top: 19px;    
+    padding-top: 19px;
 }
 
 .main_image_part {
@@ -518,15 +523,80 @@ input[type="checkbox"]#test_20:checked + label {
     display: table;
 }
 
-.main_image_part span, .sub_image_part span{
+.main_image_part span,
+.sub_image_part span {
     margin-left: 10px;
     margin-right: 20px;
     margin-top: 15px;
     float: left;
 }
+/*이미지 추가 관련 css*/
+.cover_layer {
+    width: 150px;
+    height: 200px;
+    margin-top: 15px;
+    margin-right: 15px;
+    float: left;
+}
+
+#preview-main, #preview-sub1, #preview-sub2, #preview-sub3 {
+    width: 150px;
+    height: 150px;
+    float: left;
+    border: 2px solid #cfcfcf;
+    display: inline-block;
+}
+
+#preview-main img,
+#preview-sub1 img,
+#preview-sub2 img,
+#preview-sub3 img{
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.preview_underBox {
+    width: 150px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+}
+
+.preview_underBox input {
+    display: none;
+}
+
+.preview_underBox button {
+    margin-top: 4px;
+}
+
+/*파일 미리보기 삭제*/
+.btn-delete-main,
+.btn-delete-sub1,
+.btn-delete-sub2,
+.btn-delete-sub3{
+    width: 50px;
+    height: 30px;
+    background-color: #5c5173;
+    color: #ffffff;
+    border: none;
+}
+
+/*파일 추가버튼*/
+.preview-file_upload-main,
+.preview-file_upload-sub1,
+.preview-file_upload-sub2,
+.preview-file_upload-sub3{
+    width: 50px;
+    height: 30px;
+    color: #ffffff;
+    background-color: #5c5173;
+    border: none;
+}
 
 /*메인 이미지 박스*/
-.main_image_box{
+.main_image_box {
     width: 152px;
     height: 152px;
     border: 2px solid #CFCFCF;
@@ -536,21 +606,22 @@ input[type="checkbox"]#test_20:checked + label {
     line-height: 150px;
     /*가로중앙 정렬용*/
     text-align: center;
-    
+
     background: url(/resources/img/mcat_add_image.png) no-repeat;
     background-position: center;
     background-size: 10%;
 }
-/*input 숨김*/
-.main_image_box input{
-    display: none;    
-}
 
-#imgAttach{
+/*input 숨김*/
+.main_image_box input {
     display: none;
 }
 
-.main_image_box .for_filling_in{
+#imgAttach {
+    display: none;
+}
+
+.main_image_box .for_filling_in {
     width: 100%;
     height: 100%;
     vertical-align: middle;
@@ -558,7 +629,7 @@ input[type="checkbox"]#test_20:checked + label {
     padding: 0;
 }
 
-.sub_image_box{
+.sub_image_box {
     width: 152px;
     height: 152px;
     border: 2px solid #CFCFCF;
@@ -568,23 +639,27 @@ input[type="checkbox"]#test_20:checked + label {
     line-height: 150px;
     /*가로중앙 정렬용*/
     text-align: center;
-    
+
     background: url(/resources/img/mcat_add_image.png) no-repeat;
     background-position: center;
     background-size: 10%;
 }
-.sub_image_box:nth-child(3){
+
+.sub_image_box:nth-child(3) {
     margin-left: 20px;
     margin-right: 20px;
 }
-.sub_image_box input{
+
+.sub_image_box input {
     display: none;
 }
-.sub_image_box .for_filling_in{
+
+.sub_image_box .for_filling_in {
     width: 100%;
-    height: 100%;        
+    height: 100%;
     vertical-align: middle;
 }
+
 /* 배송정보*/
 .delivery_info {
     width: 1645px;
@@ -593,6 +668,7 @@ input[type="checkbox"]#test_20:checked + label {
     margin: 16px 40px 14px 27px;
     padding-top: 19px;
 }
+
 /*배송비 파트*/
 .delivery_pay {
     width: 1592px;
@@ -814,11 +890,6 @@ input[type="checkbox"]#test_20:checked + label {
 }
 
 /*선택시 색상변경*/
-.selected{
-    background: #f25e5e;    
-}
-
-
-#form1:hover{
-    display: block;
+.selected {
+    background: #f25e5e;
 }
