@@ -1,10 +1,10 @@
 @font-face{
     font-family : 'THEjunggt130';
     src : local('THEjunggt130'),
-        url('/resources/font/THEjunggt130.woff2') format('woff2'),
-        url('/resources/font/THEjunggt130.woff') format('woff'),
-        url('/resources/font/THEjunggt130.otf') format('opentype'),
-        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
 }
 
 #pagingDiv{

@@ -3,16 +3,16 @@
 @font-face {
 	font-family: 'THEjunggt130';
 	src: local('THEjunggt130'),
-		url('resources/font/THEjunggt130.woff2') format('woff2'),
-		url('resources/font/THEjunggt130.woff') format('woff'),
-		url('resources/font/THEjunggt130.otf') format('opentype');
+		url('../font/THEjunggt130.woff2') format('woff2'),
+		url('../font/THEjunggt130.woff') format('woff'),
+		url('../font/THEjunggt130.otf') format('opentype');
 }			
 @font-face {
 	font-family: '서울남산 장체EB';
 	src: local('서울남산 장체EB'),
-		url('resources/font/서울남산 장체EB.woff2') format('woff2'),
-		url('resources/font/서울남산 장체EB.woff') format('woff'),
-		url('resources/font/서울남산 장체EB.ttf') format('truetype');
+		url('../font/서울남산 장체EB.woff2') format('woff2'),
+		url('../font/서울남산 장체EB.woff') format('woff'),
+		url('../font/서울남산 장체EB.ttf') format('truetype');
 }
 
 /*reset*/
@@ -126,10 +126,10 @@ header nav {
 .navInner ul > li > a span {
     position: absolute; right: 2.844%; top: 50%;
     width: 15px; height: 8px; margin-top: -4px;
-    background: url(resources/img/mcat-arrow-nav-bottom.png) no-repeat; background-size: contain;
+    background: url(../img/mcat-arrow-nav-bottom.png) no-repeat; background-size: contain;
 }
 .navInner ul > li.open > a span {
-    background-image: url(resources/img/mcat-arrow-nav-top.png);
+    background-image: url(../img/mcat-arrow-nav-top.png);
 }
 .navInner .wrap {
     display: none;
@@ -157,7 +157,7 @@ header nav {
 .searchWrap form > button {
     position: absolute; top: 95px; left: 34.667%;
     width: 25px; height: 25px;
-    background: url(resources/img/mcat-icon-search1.png) no-repeat; background-size: contain;
+    background: url(../img/mcat-icon-search1.png) no-repeat; background-size: contain;
 }
 
 .searchOn {
@@ -175,17 +175,17 @@ header nav {
 	background: #fff; margin: 11px 2.26%; padding: 8px; border-radius: 3px; border: currentColor; border: 2px solid #f25e5e; width: 66.66%; height: 32px; color: #000; font-size: 1.6rem; vertical-align: middle;
 }
 .searchOn button {
-	background: url("resources/img/mcat-icon-search1.png") no-repeat center; background-size: 25px; width: 25px; height: 25px;
+	background: url("../img/mcat-icon-search1.png") no-repeat center; background-size: 25px; width: 25px; height: 25px;
 }
 .membersBtn {
     position: absolute; top: 95px; right: 34.667%;
     width: 25px; height: 25px;
-    background: url(resources/img/mcat-icon-myinfo.png) no-repeat; background-size: contain;
+    background: url(../img/mcat-icon-myinfo.png) no-repeat; background-size: contain;
 }
 .basketBtn {
     position: absolute; top: 93px; right: 10.667%;
     width: 27px; height: 27px;
-    background: url(resources/img/mcat-icon-shopping-cart-color.png) no-repeat; background-size: contain;
+    background: url(../img/mcat-icon-shopping-cart-color.png) no-repeat; background-size: contain;
 }
 /*header end*/
 

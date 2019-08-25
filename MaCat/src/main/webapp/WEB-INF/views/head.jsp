@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-		<link href="resources/img/mcat-favicon.ico" rel="shortcut icon" type="image/x-icon">
+		<link href="resources/img/logos/mcat-favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link rel="stylesheet" href="resources/css/normalize.css">
 		<link rel="stylesheet" href="resources/css/head.css">
 		<script src="resources/js/jquery-3.4.1.min.js"></script>
@@ -24,7 +24,7 @@
 	        <div class="menu">
 	            <div class="navWrap">
 	            <!--로고-->
-	            <h1><a href="#"><img src="resources/img/mcat-logo-footer.png" alt="MaCat"></a></h1>
+	            <h1><a href="#"><img src="resources/img/logos/mcat-logo.png" alt="MaCat"></a></h1>
 	            <div class="line"><span></span></div>
 	
 	            <!--메뉴button-->
@@ -45,8 +45,8 @@
 	                <!-- /검색 -->
 	                <!--로그인-->
 	                <div class="pc">
-	                    <a href="#">로그인</a>
-	                    <a href="#">회원가입</a>
+	                    <a href="login.mcat">로그인</a>
+	                    <a href="join.mcat">회원가입</a>
 	                </div>
 	            </div>
 	            <!--searchWrap end-->

@@ -231,11 +231,11 @@ public class MaCatController {
 	
 	
 	// 회원 정보 조회로 이동
-	@RequestMapping("mbers_manage.mcat")
+	@RequestMapping("mbers_manager.mcat")
 	public ModelAndView getMembersCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "MbersDTO";
-		ModelAndView mv = new ModelAndView("admin/members/management");
+		ModelAndView mv = new ModelAndView("admin/members/manager");
 		Paging paging = new Paging();
 		count = dao.getMbersCount();
 		paging.getPaging(paging, count, cPage);

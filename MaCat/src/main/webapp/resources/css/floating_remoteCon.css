@@ -2,10 +2,10 @@
 @font-face{
     font-family : 'THEjunggt120';
     src : local('THEjunggt120'),
-        url('/resources/font/THEjunggt120.woff2') format('woff2'),
-        url('/resources/font/THEjunggt120.woff') format('woff'),
-        url('/resources/font/THEjunggt120.otf') format('opentype'),
-        url('/resources/font/THEjunggt120.eot') format('embedded-opentype');
+        url('../font/THEjunggt120.woff2') format('woff2'),
+        url('../font/THEjunggt120.woff') format('woff'),
+        url('../font/THEjunggt120.otf') format('opentype'),
+        url('../font/THEjunggt120.eot') format('embedded-opentype');
 }
 
 .floating_remoteCon {

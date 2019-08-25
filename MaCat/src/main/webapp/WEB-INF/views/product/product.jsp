@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
-<html lang="kr">
+<html lang="ko">
 
 	<head>
 	    <meta charset="UTF-8">

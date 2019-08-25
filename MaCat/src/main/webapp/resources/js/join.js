@@ -1,14 +1,13 @@
 //생년월일 input 변경
 $(document).ready(function() {
-    setTimeout(function() {
-        $("#birthday_placeholder").mouseover(function() {
-            $("#birthday_placeholder").replaceWith("<input type='date' id='birthday' class='fadeIn birthday' name='birthday'>");
-        }); 
-    }, 3000);
+    $("#birthday_placeholder").focus(function() {
+        $("#birthday_placeholder").replaceWith("<input type='date' id='birthday' name='mber_birthday_dt'>");
+        $("#birthday").focus();
+    }); 
 });
 
 //카카오 우편번호 API 함수
-function searchZoneode() {
+function searchZip() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.

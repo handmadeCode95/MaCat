@@ -101,19 +101,16 @@ $(function() {
 	};
 	
 	
-	// 검색 영역 체크박스 체크시 인풋 활성화/비활성화
-	$("input[name=search_chk]").change(function() {
-		if ($(this).prop("checked")) {
-			$("." + this.value).attr("disabled", false);
-		} else {
-			$("." + this.value).attr("disabled", true);
-			$("." + this.value).val(null);
-		}
-	});
-
+    $("li").each(function() {
+        $(this).click(function() {
+            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+        });
+    });
+	
 	
 	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화
-	$(document).on("change", "input[name=mbers]", function(){
+	$(document).on("change", ".chkbox", function(){
 		if ($(this).prop("checked")){
 			$("."+this.value).attr("disabled", false);
 		}else{
@@ -123,9 +120,9 @@ $(function() {
 	
 
 	// 전체 체크
-	$(".all").change(function(){
+	$("#allCheck").change(function(){
 		$(".chkbox").prop("checked", this.checked);
-		$("input[name=mbers]").trigger("change");
+		$(".chkbox").trigger("change");
 	});
 	
 	
@@ -155,7 +152,7 @@ $(function() {
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: $().toJSON($("#searchForm > *:not(input[name=search_chk])")),
+            data		: $().toJSON($("#searchForm)")),
             success		: function(data) {
             				  $().getTable(data);
             			  },
@@ -198,7 +195,7 @@ $(function() {
             contentType : "application/json",
             data		: mbersDTO,
             success		: function(data) {
-            				  $(".all").prop("checked", false);
+            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
             			  },
             error		: function(error) {
@@ -218,7 +215,7 @@ $(function() {
             contentType : "application/json",
             data		: $().toJSON($(".chkbox:checked")),
             success		: function(data) {
-            				  $(".all").prop("checked", false);
+            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
 			              },
             error		: function(error) {

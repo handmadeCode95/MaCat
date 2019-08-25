@@ -1,19 +1,19 @@
 @font-face{
     font-family : 'THEjunggt130';
     src : local('THEjunggt130'),
-        url('../font/THEjunggt130.woff2') format('woff2'),
-        url('../font/THEjunggt130.woff') format('woff'),
-        url('../font/THEjunggt130.otf') format('opentype'),
-        url('../font/THEjunggt130.eot') format('embedded-opentype');
+        url('../../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../../font/THEjunggt130.woff') format('woff'),
+        url('../../../font/THEjunggt130.otf') format('opentype'),
+        url('../../../font/THEjunggt130.eot') format('embedded-opentype');
 }
 
 @font-face{
     font-family : '서울남산 장체EB';
     src : local('서울남산 장체EB'),
-        url('../font/서울남산 장체EB.woff2') format('woff2'),
-        url('../font/서울남산 장체EB.woff') format('woff'),
-        url('../font/서울남산 장체EB.otf') format('truetype'),        
-        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+        url('../../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../../../font/서울남산 장체EB.eot') format('embedded-opentype');
 }
 
 * {
