@@ -1,3 +1,4 @@
+/*관리자 페이지 내의 체크박스모양 : F25e5e 색상 적용*/
 .checks {
     position: relative;
 }
@@ -49,4 +50,59 @@
     /*content: '\2714';  */ /* 체크표시 유니코드 사용 */
     background: #f25e5e;
     border: 1px solid #f25e5e;
+}
+
+/*쇼핑카트 내 디자인 적용 */
+
+.cart_list_main {
+    position: relative;
+}
+
+/* 실제 체크박스는 화면에서 숨김 */
+.cart_list_main input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.cart_list_main input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+/* 체크박스 모양 결정*/
+.cart_list_main input[type="checkbox"] + label:before {
+    /* 가짜 체크박스 */
+    content: ' ';
+    display: inline-block;
+    width: 14px;
+    /* 체크박스의 너비를 지정 */
+    height: 14px;
+    /* 체크박스의 높이를 지정 */
+    line-height: 14px;
+    /* 세로정렬을 위해 높이값과 일치 */
+    margin: -2px 8px 0 0;
+    text-align: center;
+    vertical-align: middle;
+    background: #fafafa;
+    border: 1px solid #707070;
+}
+
+.cart_list_main input[type="checkbox"] + label:active:before,
+.cart_list_main input[type="checkbox"]:checked + label:active:before {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* 체크박스를 체크했을때 */
+.cart_list_main input[type="checkbox"]:checked + label:before { 
+    /*content: '\2714';  */ /* 체크표시 유니코드 사용 */
+    background: #5C5173;
+    border: 1px solid #5C5173;
 }

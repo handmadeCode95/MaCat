@@ -20,6 +20,12 @@
     font-family: 'THEjunggt130';
 }
 
+a{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+
 #wrap {
     width: 1024px;
     min-width: 960px;
@@ -33,6 +39,11 @@ caption{
 }
 
 /*타이틀*/
+.shoppingCart_title{
+    margin-bottom: 48px;
+    text-align: center;
+}
+
 .shoppingCart_title span{
     font-size: 50px;
 }
@@ -56,36 +67,57 @@ caption{
     border-bottom: 1px solid #5C5173;
     height: 44px;
 }
-
-.cart_list_main thead tr th{
+/*상품이미지 제목 가리기*/
+.cart_list_main thead tr th span{
+    display: none;
 }
+
+/*상품명 제목 배열*/
+.cart_list_main thead tr th:nth-child(3){
+    text-align: left;
+}
+
 .cart_list_main thead tr th:first-child{
     text-align: center;
 }
 
-.cart_list_main #main_list tr{
+.cart_list_main tbody tr{
 	height: 164px;
     border-bottom: 2px solid #5C5173;
 }
 
-.cart_list_main #main_list tr td{
+.cart_list_main tbody tr td{
 	font-size: 11px;
 }
 
-.cart_list_main #main_list tr td img{
+.cart_list_main tbody tr td img{
 	width: 90px;
     height: 90px;
 }
 
-.cart_list_main #main_list tr td:nth-child(3){
+.cart_list_main tbody tr td:nth-child(3){
 	padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
+    padding-bottom: 20px;
 }
 
 #cart_list_none{
     display: none;
 }
+
+/*상품명 내 카테고리 버튼*/
+.category_box{
+    position: relative;
+    width: 60px;
+    height: 25px;
+    border: 1px solid #707070;
+    text-align: center;
+    line-height: 25px;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
 /*장바구니 가격파트*/
 .cart_total_price{
     width: 513px;
@@ -161,3 +193,31 @@ table.price_result td {
     margin-left: 46px;
     color: white;
 }
+/*주문, 삭제, 위시리스트 박스*/
+.cart-order_del_wishList_box {
+    width: 970px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.cart-order_del_wishList_box span{
+    width: 140px;
+    background-color: #ffffff;
+    color: #5C5173;
+    border: none;
+    cursor: pointer;
+    float: left;    
+}
+/*글자간 수직선 디자인 : 위치조정은 left로*/
+.cart-order_del_wishList_box span hr{
+    width:0; 
+    height:20px; 
+    position: relative;
+    left: 115px;
+    list-style-image: none;
+    border: 1px solid #5c5173;       
+    float: left;
+}
+

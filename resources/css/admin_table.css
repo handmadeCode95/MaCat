@@ -16,8 +16,7 @@
     line-height: 60px; 
     font-size: 22px;
     display: inherit;
-    color: #E25E5E;
-    
+    color: #E25E5E;    
 }
 
 /*테이블 바깥 div 사이즈*/
@@ -85,7 +84,6 @@ table.type11 th {
 .zip_code{
     width: 72.5px;
 }*/
-
 
 table.type11 th:first-child {
     width: 40px;    

@@ -9,12 +9,64 @@
     <link rel="stylesheet" href="/resources/css/macat_shoppingCart.css">
     <!--여백-->
     <link rel="stylesheet" href="/resources/css/spacing.css">
-    <link rel="stylesheet" href="/resources/css/macat_mypage.css">
+    <!--체크박스 모양-->
+    <link rel="stylesheet" href="/resources/css/checkbox.css">
+            
     <script type="text/javascript" src="/resources/js/jquery-3.4.1.min.js"></script>
-    <!-- 고정헤더 불러오기 -->
+ 
     <script type="text/javascript">
+//        고정헤더 불러오기
         $(document).ready(function() {
             $("#macat_header").load("macat_header.html");
+        });        
+        //전체선택 체크박스 클릭 
+        $(function(){ 
+           $("#cart_allCheck").click(function(){
+                if( $("#cart_allCheck").prop("checked") ){ 
+                    $("input[id=cart_chk]").prop("checked",true); 
+                } else {  
+                    $("input[id=cart_chk]").prop("checked",false); 
+                }   
+           });
+        });        
+        
+        function allCheckFunc( obj ) {
+		$("[name=cartchkAll]").prop("checked", $(obj).prop("checked") );
+        }
+
+    /* 체크박스 체크시 전체선택 체크 여부 : 하나 선택해제하면
+    전체선택 체크박스 체크표시가 해제됨*/
+        function oneCheckFunc( obj )
+        {
+            var allObj = $("[name=cartchkAll]");
+            var objName = $(obj).attr("name");
+
+            if( $(obj).prop("checked") )
+            {
+                checkBoxLength = $("[name="+ objName +"]").length;
+                checkedLength = $("[name="+ objName +"]:checked").length;
+
+                if( checkBoxLength == checkedLength ) {
+                    allObj.prop("checked", true);
+                } else {
+                    allObj.prop("checked", false);
+                }
+            }
+            else
+            {
+                allObj.prop("checked", false);
+            }
+        }
+
+        $(function(){
+            $("[name=cartchkAll]").click(function(){
+                allCheckFunc( this );
+            });
+            $("[name=cartOne]").each(function(){
+                $(this).click(function(){
+                    oneCheckFunc( $(this) );
+                });
+            });
         });
     </script>
 </head>
@@ -43,22 +95,47 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                        <input name="mbers" type="checkbox" id="allCheck"></th>
-                        <th scope="col">상품이미지</th>
+                        <input name="cartchkAll" type="checkbox" id="cart_allCheck"><label for="cart_allCheck"></label></th>
+                        <th scope="col"><span>상품이미지</span></th>
                         <th scope="col">상품명</th>
                         <th scope="col">수량</th>
                         <th scope="col">금액</th>
                         <th scope="col">배송비</th>
                     </tr>
                 </thead>
-                <tbody id="main_list">
+                <tbody>
                     <tr>
-                        <td>1</td>
+                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
                         <td><img src="/resources/img/macat_food01.png" alt=""></td>
-                        <td>상품문의</td>
+                        <td>
+                        <div class="category_box">food</div>
+                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
+                        </td>
                         <td>1</td>
-                        <td>10,000</td>
-                        <td>2,500</td>
+                        <td id="cart_product_price">10,000</td>
+                        <td id="cart_delivery_pay">2,500</td>
+                    </tr>
+                    <tr>
+                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
+                        <td><img src="/resources/img/macat_food01.png" alt=""></td>
+                        <td>
+                        <div class="category_box">food</div>
+                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
+                        </td>
+                        <td>1</td>
+                        <td id="cart_product_price">10,000</td>
+                        <td id="cart_delivery_pay">2,500</td>
+                    </tr>
+                    <tr>
+                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
+                        <td><img src="/resources/img/macat_food01.png" alt=""></td>
+                        <td>
+                        <div class="category_box">food</div>
+                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
+                        </td>
+                        <td>1</td>
+                        <td id="cart_product_price">10,000</td>
+                        <td id="cart_delivery_pay">2,500</td>
                     </tr>
                 </tbody>			
                 <tbody id="cart_list_none">
@@ -69,6 +146,17 @@
             </table>
         </div>
         
+        <div class="cart-order_del_wishList_box">           <!--
+           <button type="button">선택상품주문</button>
+           <button type="button">선택상품삭제</button>
+           <button type="button">위시리스트</button>  -->           
+            <span>선택상품주문 <hr /> </span>      
+           
+            <span>선택상품삭제 <hr class="second"/></span>
+            
+            <span>위시리스트</span>                    
+        </div>
+        <!--합계 테이블-->
         <div class="cart_total_price">
             <table class="price_result">
                <tr>

@@ -137,8 +137,7 @@ main{
     width: 311px;
     height: 153px;
     float: left;
-    margin-top: 13.5px;
-    
+    margin-top: 13.5px;    
 }
 
 .searching_term_middle{
@@ -299,8 +298,4 @@ ul,li{
     background: #F2A766;    
     border: none; 
     margin-left: 84px;
-}
-
-.macat_sideMenu_load {
-    
 }
