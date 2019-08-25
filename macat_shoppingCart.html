@@ -23,9 +23,9 @@
         $(function(){ 
            $("#cart_allCheck").click(function(){
                 if( $("#cart_allCheck").prop("checked") ){ 
-                    $("input[id=cart_chk]").prop("checked",true); 
+                    $("input[name=cartOne]").prop("checked",true); 
                 } else {  
-                    $("input[id=cart_chk]").prop("checked",false); 
+                    $("input[name=cartOne]").prop("checked",false); 
                 }   
            });
         });        
@@ -34,7 +34,7 @@
 		$("[name=cartchkAll]").prop("checked", $(obj).prop("checked") );
         }
 
-    /* 체크박스 체크시 전체선택 체크 여부 : 하나 선택해제하면
+/*     체크박스 체크시 전체선택 체크 여부 : 하나 선택해제하면
     전체선택 체크박스 체크표시가 해제됨*/
         function oneCheckFunc( obj )
         {
@@ -95,7 +95,9 @@
                 <thead>
                     <tr>
                         <th scope="col">
-                        <input name="cartchkAll" type="checkbox" id="cart_allCheck"><label for="cart_allCheck"></label></th>
+                            <input name="cartchkAll" type="checkbox" id="cart_allCheck">
+                            <label for="cart_allCheck" />
+                        </th>
                         <th scope="col"><span>상품이미지</span></th>
                         <th scope="col">상품명</th>
                         <th scope="col">수량</th>
@@ -105,7 +107,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
+                        <td>
+                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk1">
+                            <label for="cart_chk1" />
+                        </td>
                         <td><img src="/resources/img/macat_food01.png" alt=""></td>
                         <td>
                         <div class="category_box">food</div>
@@ -116,7 +121,10 @@
                         <td id="cart_delivery_pay">2,500</td>
                     </tr>
                     <tr>
-                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
+                        <td>
+                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk2">
+                            <label for="cart_chk2" />
+                        </td>
                         <td><img src="/resources/img/macat_food01.png" alt=""></td>
                         <td>
                         <div class="category_box">food</div>
@@ -127,7 +135,10 @@
                         <td id="cart_delivery_pay">2,500</td>
                     </tr>
                     <tr>
-                        <td><input name="cartOne" class="chkbox" type="checkbox" id="cart_chk"><label for="cart_chk"></label></td>
+                        <td>
+                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk3">
+                            <label for="cart_chk3" />
+                        </td>
                         <td><img src="/resources/img/macat_food01.png" alt=""></td>
                         <td>
                         <div class="category_box">food</div>

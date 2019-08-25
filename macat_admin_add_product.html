@@ -322,10 +322,12 @@
                         <img id="LoadImg_sub2" alt="" class="for_filling_in" onclick="document.all.imgAttach_sub2.click(); document.all.file2_sub2.value = document.all.imgAttach_sub2.value">
                     </div>   
                     <!--3번 이미지-->
+                    <div style="width: 100px; height: 100px; position: relative; border: 1px solid black; float: left;">
                     <form id="form1" runat="server">
-                        <input type='file' id="imgInp" />
+                        <input type='file' id="imgInp" style="display: none;"/>
                         <img id="blah" src="#" alt="your image" />
                     </form>
+                    </div>
                     
                     <!--<div class="sub_image_box">
                          <input type="file" name="imgAttach_sub3" id="imgAttach_sub3" onchange="LoadImg_sub3(this);" accept=".jpg, .png">
