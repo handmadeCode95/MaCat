@@ -24,7 +24,6 @@
         url('../../font/서울남산 장체EB.otf') format('truetype'),        
         url('../../font/서울남산 장체EB.eot') format('embedded-opentype');
 }
-
 /*메인 컨텐츠 세션*/
 .main_contents_section {
     width: 1024px;
@@ -36,7 +35,6 @@
 }
 
 .best_item-title_img_container {
-	margin-top: 17px;
     width: 1024px;
     display: inline-block;
     text-align: center;
@@ -67,7 +65,7 @@
     margin: 0 auto;*/
     position: relative;
     display: inline-block;
-    background-image: url(../../img/cat01.jpg);
+/*    background-image: url(/resources/img/cat01.jpg);*/
     width: 477px;
     height: 280px;
     background-size: cover;
@@ -83,41 +81,60 @@
     transform: translate(-50%, -50%);
     font-size: 24px;
     color: white;
+    text-shadow: 2px 2px 6px #000000;
     z-index: 2;
     text-align: center;
     width: 480px;
+    
 }
-
+/* 마우스오버 시 뿌옇게 됨  */
 .cat_product_image:hover {
     cursor: pointer;
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 /*좌측 상품 소개란*/
 .img_cat_product {
     position: absolute;
     height: 100%;
-    width: 101%;
-    background-color: rgba(0, 0, 0, 0.4);
+    width: 100.8%;
+/*    background-color: rgba(0, 0, 0, 0.4);*/
     z-index: 1;
+}
+
+.img_cat_product a{
+    width: inherit;
+    height: inherit;
+}
+
+.img_cat_product a img{
+    width: inherit;
+    height: inherit;
 }
 
 /*우측 상품소개란 : 이미지 변경용 (덮어씌움)*/
 .brand_img {
-    background-image: url(../../img/cat02.jpg);
+/*    background-image: url(/resources/img/cat02.jpg);*/
     background-size: cover;
     height: 280px;
     width: 477px;
-    z-index: 3;
+    z-index: 1;
 }
 
 .img_brand_product {
     position: absolute;
     height: 100%;
-    width: 100.8%;
-    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+/*    background-color: rgba(0, 0, 0, 0.4);*/
     z-index: 1;
-    margin-left: -2px
+}
+.img_brand_product a{
+    width: inherit;
+    height: inherit;
+}
+.img_brand_product img{
+    width: inherit;
+    height: inherit;
 }
 
 /*실제 상품 보여주는 곳*/
@@ -133,7 +150,7 @@
     width: 1024px;
 }
 
-.main_contents .contents_ul {
+.contents_ul {
     display: inline-block;
     /*내부 li 중앙정렬용 text-align*/
     text-align: center;
@@ -151,12 +168,10 @@
     width: 240px;
     margin: 20px 5px 5px;
 }
-
 /*상품파트 하단 li 태그 설정*/
 #category_product li {
     display: block;
 }
-
 /*상품 이미지 크기 획일화*/
 #product_img {
     width: 240px;
@@ -181,8 +196,7 @@
     
     position: relative;
     display: grid;
-    font-size: 15px;
-    
+    font-size: 15px;    
 }
 
 /* 상품명 위치조정*/
@@ -194,6 +208,20 @@ a strong {
 
 /* 상품가격 위치조정 */
 .price {
+    height: 40px;
+}
+
+.price p {    
+    float: left;
+    width: 50%;
+    padding: 10px 10px 10px 10px;
+    margin: 0 auto;
+    line-height: 20px;
+}
+
+.price .space {
+    float: right;
+    width: 100px;
     height: 40px;
 }
 
@@ -237,7 +265,7 @@ footer {
     height: 200px;
     margin: 20px auto;
     font-size: 50px;
-
+    z-index: 20;
 }
 
 .title p {
@@ -247,6 +275,7 @@ footer {
     display: inline-block;
     color: #F25E5E;    
 }
+
 
 .best_item-title_img_container ul {
     float: right;
@@ -270,23 +299,25 @@ footer {
     float: right;
     font-size: 21px;
     font-family: 'THEjunggt120';
+    
     line-height: 30px;
 }
 
+/* 카테고리 색상 변경 */
 .sub_category a{
-	margin-left: 37px;
+   margin-left: 37px;
 }
 
 .sub_category a:hover{
-	color: #F2A766;
+   color: #F2A766;
 }
 
 .sub_category a:first-child{
-	margin-left: 0px;
+   margin-left: 0px;
 }
 
 #selectedCtgry{
-	color: #F25E5E;
+   color: #F25E5E;
 }
 
 .title_container {
@@ -295,41 +326,31 @@ footer {
     padding: 15px 0px 15px 0px;
 }
 
-.remoteCon_name {
-    line-height: 29px;
-}
-
-.floating_remoteCon img {
-    padding: 10px 5px 0 5px;
-    width: 80px;
-    height: 65px;
+.product_title {
+    height: 40px;    
 }
 
 .img_ratio_container {
     display: flex;
     align-items: center;    
-    height: 200px;
-    
+    height: 200px;    
 }
 
-.price p {    
-    float: left;
-    width: 50%;
-    padding: 10px 10px 10px 10px;
-    margin: 0 auto;
-    line-height: 20px;
+/*불러온 리모콘 위치 조정*/
+.remoteCon_load {
+    position: fixed;
+    right: 50%;
+    top: 210px;
+    margin-right: -625px;
+    text-align: center;
+    font-family: 'THEjunggt120';
+    font-size: 15px;
 }
 
-.product_title {
-    height: 40px;    
+/*불러온 top 버튼 위치 조정*/
+.top_btn_load {
+    position: fixed;
+    right: 52%;
+    top: 860px;
+    margin-right: -586px;    
 }
-
-.price .space {
-    float: right;
-    width: 20%;
-    height: 40px;
-}
-
-
-
-

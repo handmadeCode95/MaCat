@@ -1,19 +1,19 @@
 @font-face{
     font-family : 'THEjunggt130';
     src : local('THEjunggt130'),
-        url('../../../font/THEjunggt130.woff2') format('woff2'),
-        url('../../../font/THEjunggt130.woff') format('woff'),
-        url('../../../font/THEjunggt130.otf') format('opentype'),
-        url('../../../font/THEjunggt130.eot') format('embedded-opentype');
+        url('/resources/font/THEjunggt130.woff2') format('woff2'),
+        url('/resources/font/THEjunggt130.woff') format('woff'),
+        url('/resources/font/THEjunggt130.otf') format('opentype'),
+        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
 }
 
 @font-face{
     font-family : '서울남산 장체EB';
     src : local('서울남산 장체EB'),
-        url('../../../font/서울남산 장체EB.woff2') format('woff2'),
-        url('../../../font/서울남산 장체EB.woff') format('woff'),
-        url('../../../font/서울남산 장체EB.otf') format('truetype'),        
-        url('../../../font/서울남산 장체EB.eot') format('embedded-opentype');
+        url('/resources/font/서울남산 장체EB.woff2') format('woff2'),
+        url('/resources/font/서울남산 장체EB.woff') format('woff'),
+        url('/resources/font/서울남산 장체EB.otf') format('truetype'),        
+        url('/resources/font/서울남산 장체EB.eot') format('embedded-opentype');
 }
 
 * {
@@ -24,6 +24,7 @@
     margin: 0;
     padding: 0;        
 }
+/*임시 사이드메뉴*/
 header{
     height: 60px;
     width: 1920px; 
@@ -108,6 +109,7 @@ main{
     height: 223px;
     margin-top: 28px;
 }
+
 .member_info_right{
     float: left;
     width: 300px;
@@ -135,8 +137,7 @@ main{
     width: 311px;
     height: 153px;
     float: left;
-    margin-top: 13.5px;
-    
+    margin-top: 13.5px;    
 }
 
 .searching_term_middle{
@@ -231,7 +232,7 @@ ul,li{
 }
 
 .and_or_radio_btn .or{
-     position: absolute;
+    position: absolute;
     top:  41.1px;
     left: 267.5px;
     font-size: 26px;
@@ -246,10 +247,14 @@ ul,li{
     width: 150px;
     display: inline-block;
 }
-
+/*조회, 초기화 버튼*/
 .view_refresh_btn{
     width: 391px;
     margin: 0 auto;
+}
+
+.view_refresh_btn input{
+    color: #fff;
 }
 
 .view_btn{
@@ -268,26 +273,29 @@ ul,li{
     border: none; 
     margin-left: 84px;
 }
-
-
-
-/*회원정보 테이블 파트*/
-.member_info_table_title {
-     width: 1645px;
-    height: 60px;
-    background: #ffffff;
-    margin: 16px 40px 14px 27px; 
+/**/
+.edit_delete_btn{
+    width: 391px;
+    margin: 0 auto;
 }
 
-.member_info_table_title span{
-    line-height: 60px; 
-    margin: 16px 0px 18px 26px;
-    font-size: 22px;
+.edit_delete_btn input{
+    color: #fff;
 }
 
-.info_table {
-    width: 1645px;
-    height: 630px;
-    background: #ffffff;    
-    margin: 0px 40px 26px 27px;     
+.edit_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;
+    background: #f25e5e;    
+    border: none;    
+}
+
+.delete_btn{
+    width: 150px;
+    height: 52px;
+    font-size: 20px;    
+    background: #F2A766;    
+    border: none; 
+    margin-left: 84px;
 }

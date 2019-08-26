@@ -24,14 +24,16 @@ a {text-decoration: none;}
 button {border: none; background: none; text-indent: -9999px;}
 img {border: none;}
 html {font-size: 0.625em;/*10px,pxtoem.com*/}
-body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
+body {font-family: "서울남산 장체EB", sans-serif; line-height: 1;}
 .blind {position: absolute; top: -9999px; left: -9999px;}
 .clear:after {content: ""; display: block; clear: both;}
 .pc {display: none;}
 
 /* header */
-.menu iframe {
-    position: fixed; z-index: 1;
+/* 헤더가 항상 최상위에 오도록 z-index : 9999; 변경 */
+.menu {
+    position: fixed; 
+    z-index: 9999;
     display: block;
     width: 100%;
     height: 130px;

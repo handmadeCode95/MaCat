@@ -212,20 +212,19 @@ public class MaCatController {
 	
 	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
 	
-
-
-	@RequestMapping("cookie_cart.mcat")
-	@ResponseBody
-	public void getCookieCart(@RequestBody String prduct_sq, HttpServletResponse response,
-			@CookieValue(required = false, name = "cart_product") String cart_product) {
-		if (cart_product == null) {
-			response.addCookie(setCookie("cart_product", prduct_sq, 60 * 60 * 24));
-		}else {
-			
-		}
-		
-	}
-	
+//
+//	@RequestMapping("cookie_cart.mcat")
+//	@ResponseBody
+//	public void getCookieCart(@RequestBody String prduct_sq, HttpServletResponse response,
+//			@CookieValue(required = false, name = "cart_product") String cart_product) {
+//		if (cart_product == null) {
+//			response.addCookie(setCookie("cart_product", prduct_sq, 60 * 60 * 24));
+//		}else {
+//			
+//		}
+//		
+//	}
+//	
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
 	

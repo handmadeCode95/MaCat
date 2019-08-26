@@ -20,13 +20,13 @@
 	    <link rel="stylesheet" href="resources/css/admin/members/admin_table.css">
 	    <!--input text입력창 조절 css-->
 	    <link rel="stylesheet" href="resources/css/admin/members/input_textarea.css">
+	    <!-- 페이징 -->
+	    <link rel="stylesheet" href="resources/css/paging.css">	    
 	    <!-- 스크립트 -->
-	    <script src="resources/js/admin/members/manager.js"></script>
+	    <script type="text/javascript" src="resources/js/admin/members/manager.js"></script>
 	
-	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <!-- checked 속성 poly-checked 추가 -->
-	    
-	    <!-- checkbox 전체선택 쿼리 -->
+	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
+	    <!-- checkbox 전체선택 쿼리 포함 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
 	</head>
 
@@ -183,38 +183,22 @@
 	                    <div class="table_wrap">
 	                        <table class="type11" id="checkbox_js">
 	                            <colgroup>
-	                                <col width="40" />
-	                                <!--체크박스-->
-	                                <col width="80" />
-	                                <!--회원번호-->
-	                                <col width="80" />
-	                                <!--이름-->
-	                                <col width="50" />
-	                                <!--성별-->
-	                                <col width="140" />
-	                                <!--아이디-->
-	                                <col width="140" />
-	                                <!--비번-->
-	                                <col width="140" />
-	                                <!--폰번호-->
-	                                <col width="140" />
-	                                <!--전화번호-->
-	                                <col width="100" />
-	                                <!--우편번호-->
-	                                <col width="300" />
-	                                <!--주소-->
-	                                <col width="300" />
-	                                <!--상세주소-->
-	                                <col width="240" />
-	                                <!--이메일-->
-	                                <col width="100" />
-	                                <!--생년월일-->
-	                                <col width="100" />
-	                                <!--가입일-->
-	                                <col width="100" />
-	                                <!--접속일-->
-	                                <col width="100" />
-	                                <!--포인트-->
+	                                <col width="40" />	<!--체크박스-->
+	                                <col width="80" />	<!--회원번호-->
+	                                <col width="80" />	<!--이름-->
+	                                <col width="50" />	<!--성별-->
+	                                <col width="140" />	<!--아이디-->
+	                                <col width="140" />	<!--비번-->
+	                                <col width="140" />	<!--폰번호-->
+	                                <col width="140" />	<!--전화번호-->
+	                                <col width="100" />	<!--우편번호-->
+	                                <col width="300" />	<!--주소-->
+	                                <col width="300" />	<!--상세주소-->
+	                                <col width="240" />	<!--이메일-->
+	                                <col width="100" />	<!--생년월일-->
+	                                <col width="100" />	<!--가입일-->
+	                                <col width="100" />	<!--접속일-->
+	                                <col width="100" />	<!--포인트-->
 	                            </colgroup>
 	                            <thead>
 	                                <tr>

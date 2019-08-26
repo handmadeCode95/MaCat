@@ -1,3 +1,54 @@
+/*회원정보 테이블 파트 : 타이틀*/
+.member_info_table_title {
+     width: 1645px;
+    height: 60px;
+    background: #ffffff;
+    margin: 16px 40px 14px 27px; 
+}
+
+.member_info_table_title span{
+    line-height: 60px; 
+    margin: 16px 0px 18px 26px;
+    font-size: 22px;
+}
+
+.member_info_table_title span p{
+    line-height: 60px; 
+    font-size: 22px;
+    display: inherit;
+    color: #E25E5E;    
+}
+
+/*테이블 바깥 div 사이즈*/
+.info_table {
+    width: 1596px;
+    height: 630px;
+    background: #ffffff;    
+    margin: 0px 40px 26px 27px;    
+    padding-top: 34px;
+    padding-right: 23px;
+    padding-left: 26px;
+}
+
+.info_table .table_wrap{
+    overflow: auto;
+    width: 100%;    
+    height: 565px;
+    display: block;
+}
+
+.info_table .table_wrap table {
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0px 23px 0px 0px;
+    padding-top: 34px;
+    
+    width: 1592px;  
+    
+    table-layout: fixed;
+}
+
+
 table.type11 {
     border-collapse: separate;
     text-align: center;
@@ -61,4 +112,20 @@ table.type11 td {
     background: #FFFFFF;
     
     font-size: 15px;    
+}
+/*테이블 내 input*/
+.info_table .table_wrap .type11 tbody tr td input{
+    width: 95%;
+    text-align: center;
+    border: none;    
+}
+/*disable 일때 = 기본값*/
+input[disabled='disabled']{
+    background: #fff;
+    color : #000;
+}
+/*회원정보 테이블 수정상태일 때*/
+#searchResult input{
+    color: #f2a766;     
+    background: #fff;
 }
