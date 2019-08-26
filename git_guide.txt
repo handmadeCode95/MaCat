@@ -14,3 +14,6 @@ $ git branch -a
 > 요 상태면 checkout 가능
 6) git checkout 가길원하는브랜치명
 7) 변경됨을 확인
+
+git config core.quotepath false
+: 한글 인코딩
