@@ -19,8 +19,8 @@
 
 * {
     font-family: '서울남산 장체EB';
-}
-/*상단고정 헤더 > macat_header.css*/
+}/*
+상단고정 헤더 > macat_header.css
 body{
     font-family: Arial, "맑은 고딕", sans-serif;
     line-height: 1;
@@ -28,7 +28,7 @@ body{
 
 header {
     font-family: '서울남산 장체EB';
-}
+}*/
 
 /*메인 컨텐츠 세션*/
 .main_contents_section {
