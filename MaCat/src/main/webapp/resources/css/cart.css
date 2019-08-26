@@ -1,0 +1,224 @@
+@font-face {
+    font-family: 'THEjunggt130';
+    src: local('THEjunggt130'),
+        url('/resources/font/THEjunggt130.woff2') format('woff2'),
+        url('/resources/font/THEjunggt130.woff') format('woff'),
+        url('/resources/font/THEjunggt130.otf') format('opentype'),
+        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: '서울남산 장체EB';
+    src: local('서울남산 장체EB'),
+        url('/resources/font/서울남산 장체EB.woff2') format('woff2'),
+        url('/resources/font/서울남산 장체EB.woff') format('woff'),
+        url('/resources/font/서울남산 장체EB.otf') format('truetype'),
+        url('/resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+a{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+
+#wrap {
+    width: 1024px;
+    min-width: 960px;
+    height: auto;
+    /*요소 중앙정렬*/
+    margin: 0 auto;
+}
+
+caption{
+	display: none;
+}
+
+/*타이틀*/
+.shoppingCart_title{
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.shoppingCart_title span{
+    font-size: 50px;
+}
+
+/*바디부분*/
+.cart_list{
+	margin-top: 30px;
+    width: 970px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+.cart_list_main{
+	width: inherit;
+	border-bottom: 2px solid #F25E5E;
+}
+/*테이블 헤드파트*/
+.cart_list_main thead tr{
+    border-top: 5px solid #5C5173;
+    border-bottom: 1px solid #5C5173;
+    height: 44px;
+}
+/*상품이미지 제목 가리기*/
+.cart_list_main thead tr th span{
+    display: none;
+}
+
+/*상품명 제목 배열*/
+.cart_list_main thead tr th:nth-child(3){
+    text-align: left;
+}
+
+.cart_list_main thead tr th:first-child{
+    text-align: center;
+}
+
+.cart_list_main tbody tr{
+	height: 164px;
+    border-bottom: 2px solid #5C5173;
+}
+
+.cart_list_main tbody tr td{
+	font-size: 11px;
+}
+
+.cart_list_main tbody tr td img{
+	width: 90px;
+    height: 90px;
+}
+
+.cart_list_main tbody tr td:nth-child(3){
+	padding-left: 10px;
+	text-align: left;
+	font-size: 12px;
+    padding-bottom: 20px;
+}
+
+#cart_list_none{
+    display: none;
+}
+
+/*상품명 내 카테고리 버튼*/
+.category_box{
+    position: relative;
+    width: 60px;
+    height: 25px;
+    border: 1px solid #707070;
+    text-align: center;
+    line-height: 25px;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+/*장바구니 가격파트*/
+.cart_total_price{
+    width: 513px;
+    border-top: 5px solid #5C5173;
+    border-bottom: 2px solid #5c5173;
+    margin: 0 auto;
+    padding: 0;   
+    
+    margin-top: 110px;
+}
+
+.cart_total_price table tr th{
+    text-align: left;
+}
+.cart_total_price table tr td{
+    text-align: right;
+}
+/*장바구니 가격 테이블 전체 마진*/
+table.price_result {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    margin: 32px 22px 15px 22px;
+}
+
+table.price_result {
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+}
+/*텍스트 파트 : 왼쪽*/
+table.price_result th {
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;    
+}
+
+table.price_result tr:last-child th, tr:last-child td{
+    border-top : 1px solid #5c5173;
+}
+/*가격파트 : 오른쪽*/
+table.price_result td {
+    width: 800px;
+    height: 40px;
+    line-height: 40px; 
+    font-size: 18px;
+    vertical-align: top;
+}
+
+/*버튼 파트*/
+.cart_btn_container{
+    width: 513px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 63px;
+}
+
+.shopping_go{
+    width: 230px;
+    height: 62px;
+    font-size: 22px;
+    background: #ffffff;    
+    border: 1px solid #5c5173;  
+    color: #5C5173;
+}
+
+.order_go{
+    width: 230px;
+    height: 62px;
+    font-size: 22px;    
+    background: #5c5173;    
+    border: none; 
+    margin-left: 46px;
+    color: white;
+}
+/*주문, 삭제, 위시리스트 박스*/
+.cart-order_del_wishList_box {
+    width: 970px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.cart-order_del_wishList_box span{
+    width: 140px;
+    background-color: #ffffff;
+    color: #5C5173;
+    border: none;
+    cursor: pointer;
+    float: left;    
+}
+/*글자간 수직선 디자인 : 위치조정은 left로*/
+.cart-order_del_wishList_box span hr{
+    width:0; 
+    height:20px; 
+    position: relative;
+    left: 115px;
+    list-style-image: none;
+    border: 1px solid #5c5173;       
+    float: left;
+}
+

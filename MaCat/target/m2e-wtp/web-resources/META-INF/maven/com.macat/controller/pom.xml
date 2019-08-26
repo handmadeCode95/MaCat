@@ -155,7 +155,7 @@
 			<version>2.0.1</version>
 		</dependency>
 		
-		<!-- JSON -->
+		<!-- Jackson -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
@@ -185,6 +185,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
 		<!-- Apache download -->
 		<dependency>
 			<groupId>commons-io</groupId>

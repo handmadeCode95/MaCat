@@ -12,7 +12,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="MbersDTO">
-		INSERT INTO MEMBERS_TB VALUES(MBER_SEQ.NEXTVAL, #{mber_id}, #{mber_pw}, #{mber_nm}, #{mber_email}, #{mber_birthday_dt}, #{mber_phone_no}, #{mber_tel_no}, 1000000, SYSDATE, SYSDATE, #{mber_zip_no}, #{mber_adres}, #{mber_detail_adres}, 1)
+		INSERT INTO MEMBERS_TB VALUES(MBER_SEQ.NEXTVAL, #{mber_birthday_dt}, SYSDATE, SYSDATE, 0, #{mber_gender}, #{mber_zip_no}, #{mber_id}, #{mber_pw}, 'WHITE', #{mber_nm}, #{mber_email}, #{mber_phone_no}, #{mber_adres}, #{mber_tel_no}, #{mber_detail_adres})
 	</insert>
 	
 	<!-- 접속일 업데이트 -->

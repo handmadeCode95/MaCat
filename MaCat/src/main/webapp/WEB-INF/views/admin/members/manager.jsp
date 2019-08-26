@@ -22,11 +22,9 @@
 	    <link rel="stylesheet" href="resources/css/admin/members/input_textarea.css">
 	    <!-- 스크립트 -->
 	    <script src="resources/js/admin/members/manager.js"></script>
-	
+		<!-- jQuery -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <!-- checked 속성 poly-checked 추가 -->
-	    
-	    <!-- checkbox 전체선택 쿼리 -->
+	    <!-- checkbox 전체선택 스크립트 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
 	</head>
 

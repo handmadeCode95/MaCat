@@ -1,25 +1,31 @@
 package com.macat.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macat.service.DAO;
 import com.macat.service.FaqSearchDTO;
+import com.macat.service.FileUpload;
 import com.macat.service.FaqDTO;
 import com.macat.service.MbersSearchDTO;
 import com.macat.service.MbersDTO;
@@ -213,17 +219,10 @@ public class MaCatController {
 	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
 	
 
-
-	@RequestMapping("cookie_cart.mcat")
-	@ResponseBody
-	public void getCookieCart(@RequestBody String prduct_sq, HttpServletResponse response,
-			@CookieValue(required = false, name = "cart_product") String cart_product) {
-		if (cart_product == null) {
-			response.addCookie(setCookie("cart_product", prduct_sq, 60 * 60 * 24));
-		}else {
-			
-		}
-		
+	// 장바구니로 이동
+	@RequestMapping("cart.mcat")
+	public ModelAndView getCartCmd() {
+		return new ModelAndView("cart");
 	}
 	
 	
@@ -286,6 +285,33 @@ public class MaCatController {
 		mv.addObject("qna_ctgries", dao.getQnaCtgriesList());
 		mv.addObject("faq", dao.getFaqList(paging.getBegin(), paging.getEnd()));
 		mv.addObject("paging", paging);
+		return mv;
+	}
+	
+	
+	// 로그인 페이지로 이동
+	@RequestMapping("product_reg.mcat")
+	public ModelAndView getProductRegCmd() {
+		return new ModelAndView("admin/product/reg");
+	}
+	
+	
+	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
+	
+	
+	@RequestMapping(value = "file_upload.mcat", method = RequestMethod.POST)
+	public ModelAndView getfileUploadCmd(MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
+		ModelAndView mv = new ModelAndView("file_upload");
+		MultipartFile imgfile = multipartRequest.getFile("Filedata");
+		Calendar cal = Calendar.getInstance();
+		String fileName = imgfile.getOriginalFilename();
+		String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		String replaceName = cal.getTimeInMillis() + fileType;  
+		
+		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/upload";
+		FileUpload.fileUpload(imgfile, path, replaceName);
+		mv.addObject("path", path);
+		mv.addObject("filename", replaceName);
 		return mv;
 	}
 

@@ -171,6 +171,7 @@ table.price_result td {
 /*버튼 파트*/
 .cart_btn_container{
     width: 513px;
+    height: 150px;
     margin: 0 auto;
     margin-top: 63px;
 }
@@ -220,4 +221,3 @@ table.price_result td {
     border: 1px solid #5c5173;       
     float: left;
 }
-

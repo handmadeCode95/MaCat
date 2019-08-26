@@ -34,8 +34,8 @@
 	                <div id="birthday_and_gender">	
 	                	<input type="text" id="birthday_placeholder" class="fadeIn sixth" placeholder="생년월일">
 	                	<div id="gender">
-	                		<input type="radio" id="man" class="fadeIn ninth" name="mber_gender"><label for="man" class="fadeIn ninth">남</label>
-	                		<input type="radio" id="woman" class="fadeIn ninth" name="mber_gender"><label for="woman" class="fadeIn ninth">여</label>
+	                		<input type="radio" id="man" class="fadeIn ninth" name="mber_gender" value="남"><label for="man" class="fadeIn ninth">남</label>
+	                		<input type="radio" id="woman" class="fadeIn ninth" name="mber_gender" value="여"><label for="woman" class="fadeIn ninth">여</label>
 	                	</div>
 	                </div><br>
 	                <input type="text" id="phone" class="fadeIn seventh" name="mber_phone_no" placeholder="핸드폰번호"><br>
