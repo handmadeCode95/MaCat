@@ -1,0 +1,16 @@
+## git pull 다른 브랜치 가져오기
+1) 받아올 로컬파일 생성
+2) git init
+3) git remote add origin 해당git주소
+4) git pull origin 가져올브랜치명
+5) git branch -a 
+: 브랜치 상태 확인하기
+$ git branch -a
+* master
+  remotes/origin/front_page
+  remotes/origin/jungmin
+  remotes/origin/macat_wd48
+  remotes/origin/master
+> 요 상태면 checkout 가능
+6) git checkout 가길원하는브랜치명
+7) 변경됨을 확인
