@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>결제 페이지</title>
+    <!--여백-->
+    <link rel="stylesheet" href="resources/css/spacing.css">
+    <!--초기화-->
+    <link rel="stylesheet" href="resources/css/normalize.css">
+    <!-- 크롬 탭 로고 -->
+    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
+    <!--결제 페이지 css-->
+    <link rel="stylesheet" href="resources/css/macat_order_page.css">
+    <!--결제페이지 탭메뉴-->
+    <link rel="stylesheet" href="resources/css/order_page_tab_menu.css">
+    <!-- 탭메뉴 속 내부테이블 디자인 -->
+    <link rel="stylesheet" href="resources/css/order_page_tables.css">
+    <!--라디오버튼-->
+    <link rel="stylesheet" href="resources/css/radiobutton_order_page.css">
+
+    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+    <!-- 고정헤더 불러오기 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#macat_header").load("macat_header.html");
+        });
+        /*주소지*/
+        $(function() {
+            $('ul.tab-titles li').click(function() {
+                var activeTab = $(this).attr('data-tab-titles');
+                $('ul.tab-titles li').removeClass('current');
+                $('.tabcontent').removeClass('current');
+                $(this).addClass('current');
+                $('#' + activeTab).addClass('current');
+            })
+        });
+
+        /*결제수단*/
+        $(function() {
+            $('ul.payment_tab-titles li').click(function() {
+                var activeTab = $(this).attr('data-tab-titles');
+                $('ul.payment_tab-titles li').removeClass('current');
+                $('.payment_tabcontent').removeClass('current');
+                $(this).addClass('current');
+                $('#' + activeTab).addClass('current');
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <!-- 고정헤더 불러오기 -->
+    <div id="macat_header"></div>
+    <!-- 여백-->
+    <div class="order_spacing"></div>
+
+    <main>
+        <h2>ORDER</h2>
+        <!--메인 결제창 : 주소, 쿠폰, 결제수단, 구매상품 목록-->
+        <section id="order_main">
+            <!--주소지 선택창 -->
+            <!--탭 메뉴 시작-->
+            <div class="tab" id="item_tab">
+                <ul class="tab-titles" id="tab-titles">
+                    <li class="current" data-tab-titles="adress_lately">
+                        <a href="#Redirect">최근주소지</a></li>
+                    <li data-tab-titles="adress_home">
+                        <a href="#Redirect">집</a></li>
+                    <li data-tab-titles="adress_company">
+                        <a href="#Redirect">회사</a></li>
+                    <li data-tab-titles="adress_new">
+                        <a href="#Redirect">신규주소지</a></li>
+                </ul>
+                <!--최근 주소지-->
+                <div id="adress_lately" class="tabcontent current">
+                    <div class="delivery_adress_table">
+                        <table class="order_adress_table">
+                            <tr>
+                                <th scope="row">수령자명</th>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">우편번호</th>
+                                <td>
+                                    <input type="text">
+                                    <button class="zip_code_btn">우편번호 찾기</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주소</th>
+                                <td><input class="adress_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">상세주소</th>
+                                <td><input class="adress_more_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">배송메세지</th>
+                                <td><input class="order_msg_input" type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--집 주소지-->
+                <div id="adress_home" class="tabcontent">
+                    <div class="delivery_adress_table">
+                        <table class="order_adress_table">
+                            <tr>
+                                <th scope="row">수령자명</th>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">우편번호</th>
+                                <td><input type="text"><button class="zip_code_btn">우편번호 찾기</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주소</th>
+                                <td><input class="adress_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">상세주소</th>
+                                <td><input class="adress_more_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">배송메세지</th>
+                                <td><input class="order_msg_input" type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--회사 주소지-->
+                <div id="adress_company" class="tabcontent">
+                    <div class="delivery_adress_table">
+                        <table class="order_adress_table">
+                            <tr>
+                                <th scope="row">수령자명</th>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">우편번호</th>
+                                <td><input type="text"><button class="zip_code_btn">우편번호 찾기</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주소</th>
+                                <td><input class="adress_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">상세주소</th>
+                                <td><input class="adress_more_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">배송메세지</th>
+                                <td><input class="order_msg_input" type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--신규 주소지-->
+                <div id="adress_new" class="tabcontent">
+                    <div class="delivery_adress_table">
+                        <table class="order_adress_table">
+                            <tr>
+                                <th scope="row">수령자명</th>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">우편번호</th>
+                                <td>
+                                    <input type="text">
+                                    <button class="zip_code_btn">우편번호 찾기</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주소</th>
+                                <td><input class="adress_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">상세주소</th>
+                                <td><input class="adress_more_input" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">배송메세지</th>
+                                <td><input class="order_msg_input" type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--주소지 끝-->
+            </div>
+            <!--탭 메뉴 끝-->
+
+            <!--쿠폰 선택창-->
+            <div class="coupon_table_container">
+                <table class="coupon_table">
+                    <tr>
+                        <th scope="row">쿠폰선택하기</th>
+                        <td>
+                            <select name="수량선택" id="">
+                                <option value="0">쿠폰0</option>
+                                <option value="1">쿠폰1</option>
+                                <option value="2">쿠폰2</option>
+                                <option value="3">쿠폰3</option>
+                                <option value="4">쿠폰4</option>
+                                <option value="5">쿠폰5</option>
+                                <option value="6">쿠폰6</option>
+                                <option value="7">쿠폰7</option>
+                                <option value="8">쿠폰8</option>
+                                <option value="9">쿠폰9</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">포인트 사용</th>
+                        <td>
+                            <input class="point_use" type="text">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--쿠폰선택창 끝-->
+
+            <!--결제수단 선택 탭-->
+            <div class="tab" id="payment_tab">
+                <ul class="payment_tab-titles" id="payment_tab-titles">
+                    <li class="current" data-tab-titles="payment_choice">                       
+                         <div class="radio">
+                            <input id="tab-credit_card" name="payment" type="radio">
+                            <label for="tab-credit_card">신용카드/체크카드</label>
+                        </div>
+                    </li>
+                    <li data-tab-titles="bank_deposit">
+                        <div class="radio">
+                            <input id="tab-bank_deposit" name="payment" type="radio">
+                            <label for="tab-bank_deposit">무통장입금</label>
+                        </div>
+                    </li>
+                </ul>
+
+                <!--신용카드/체크카드-->
+                <div id="payment_choice" class="payment_tabcontent current">
+                    <!--신용카드.체크카드 선택-->
+                    <div class="payment_choice">
+                        <div class="payment_choice_container">
+                            <table class="payment_choice_table">
+                                <!--첫째줄-->
+                                <tr>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio1" name="payment" type="radio">
+                                            <label for="payment_radio1"></label>
+                                        </div>
+                                    <td>현대카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio2" name="payment" type="radio">
+                                            <label for="payment_radio2"></label>
+                                        </div>
+                                    <td>KB국민카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio3" name="payment" type="radio">
+                                            <label for="payment_radio3"></label>
+                                        </div>
+                                    <td>신한카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio4" name="payment" type="radio">
+                                            <label for="payment_radio4"></label>
+                                        </div>
+                                    <td>삼성카드</td>
+                                </tr>
+                                <!--둘째줄-->
+                                <tr>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <div class="radio-wrap">
+                                                <input id="payment_radio5" name="payment" type="radio">
+                                                <label for="payment_radio5"></label>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>롯데카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio6" name="payment" type="radio">
+                                            <label for="payment_radio6"></label>
+                                        </div>
+                                    <td>우리카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio7" name="payment" type="radio">
+                                            <label for="payment_radio7"></label>
+                                        </div>
+                                    <td>하나카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio8" name="payment" type="radio">
+                                            <label for="payment_radio8"></label>
+                                        </div>
+                                    <td>비씨카드</td>
+                                </tr>
+                                <!--셋째줄-->
+                                <tr>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio9" name="payment" type="radio">
+                                            <label for="payment_radio9"></label>
+                                        </div>
+                                    </th>
+                                    <td>NH농협카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio10" name="payment" type="radio">
+                                            <label for="payment_radio10"></label>
+                                        </div>
+                                    <td>씨티카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio11" name="payment" type="radio">
+                                            <label for="payment_radio11"></label>
+                                        </div>
+                                    <td>BC카드</td>
+                                    <th class="radio_box" scope="row">
+                                        <div class="radio-wrap">
+                                            <input id="payment_radio12" name="payment" type="radio">
+                                            <label for="payment_radio12"></label>
+                                        </div>
+                                    <td>카카오뱅크</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--신용카드/체크카드 선택 끝-->
+
+                </div>
+                <!--무통장입금-->
+                <div id="bank_deposit" class="payment_tabcontent">
+                    <!--무통장 입금-->
+                    <div class="bank_deposit">
+                        <div class="bank_deposit-container">
+                            <table class="bank_deposit-table">
+                                <!--첫째줄-->
+                                <tr>
+                                    <td>기업은행</td>
+                                    <td>KB국민은행</td>
+                                    <td>NH농협은행</td>
+                                    <td>신한은행</td>
+                                    <td>SC은행</td>
+                                    <td>우리은행</td>
+                                </tr>
+                                <!--둘째줄-->
+                                <tr>
+                                    <td>하나은행</td>
+                                    <td>씨티은행</td>
+                                    <td>카카오뱅크</td>
+                                    <td>부산은행</td>
+                                    <td>대구은행</td>
+                                    <td>광주은행</td>
+                                </tr>
+                                <!--셋째줄-->
+                                <tr>
+                                    <td>전북은행</td>
+                                    <td>경남은행</td>
+                                    <td>수협은행</td>
+                                    <td>새마을금고</td>
+                                    <td>우체국</td>
+                                    <td>기타은행</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 무통장 끝 -->
+            </div>
+            <!--탭 메뉴 끝-->
+
+            <!--구매상품 목록 보여주기-->
+            
+        </section>
+        
+        <!--사이드 결제창 : 결제금액, 결제동의-->
+        <aside id="order_side">
+
+        </aside>
+    </main>
+
+</body></html>

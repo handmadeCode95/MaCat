@@ -22,9 +22,9 @@
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
-    
+    -ms-user-select: none;    
 }
+
 /* 라디오버튼 모양 결정*/
 .and_or_radio_btn input[type="radio"] + label:before{
     content: '';

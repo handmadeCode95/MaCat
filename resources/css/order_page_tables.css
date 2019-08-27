@@ -1,0 +1,228 @@
+/*주소지 테이블 시작*/
+/*바깥 div*/
+.delivery_adress_table{
+    width: 670px;
+    height: 168px;
+    margin: 0;
+    padding: 5px;
+}
+
+table.order_adress_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+     width: 660px;
+}
+
+/*좌측 메뉴 설명란*/
+table.order_adress_table th {
+    font-size: 12px; 
+    text-align: right;
+    width: 130px;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;    
+}
+/*우측 input 입력란*/
+table.order_adress_table td {
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;
+    vertical-align: middle;
+}
+/*테이블 내부 input 사이즈*/
+.delivery_adress_table .order_adress_table input{
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    background: #ffffff;
+    border: 1px solid #5C5173;
+}
+/*주소, 상세주소, 배송메세지*/
+.delivery_adress_table .order_adress_table .adress_input, 
+.delivery_adress_table .order_adress_table .adress_more_input,
+.delivery_adress_table .order_adress_table .order_msg_input{
+    width: 300px;
+}
+/*우편번호 버튼*/
+.zip_code_btn{
+    border: 1px solid #5c5173;
+    background: #ffffff;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 25px;    
+}
+/*주소지 테이블 끝*/
+
+/*쿠폰 테이블*/
+/*바깥 div*/
+.coupon_table_container{
+    width: 690px;
+    height: 94px;
+    margin: 0;
+    border-bottom: 2px solid #5c5173;
+}
+
+table.coupon_table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 690px;
+}
+
+/*좌측 메뉴 설명란*/
+table.coupon_table th {
+    font-size: 18px; 
+    text-align: right;
+    width: 290px;
+    height: 20px;
+    line-height: 20px;
+    padding: 10px 10px 10px 0px;
+}
+/*우측 input 입력란*/
+table.coupon_table td {
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 10px 10px 10px 10px;
+}
+
+/*쿠폰 테이블 내 select, option 디자인*/
+/*선택 콤보박스 화살표, 내부 텍스트 조정*/
+select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 200px;
+    font-size: 18px;
+    color: #777;
+    height: 18px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    -webkit-appearance: none;
+    background: url(/resources/img/mcat_arrow_down_final.png) no-repeat 100% 50%;
+    text-align: center;
+    text-align-last: right;
+    padding-right: 30px;
+    border: none;
+    border-bottom: 1px solid #5c5173;
+}
+
+option {
+    direction: rtl;
+    text-align-last: right;
+}
+/*포인트 사용*/
+.point_use{
+    width: 170px;
+    height: 18px;
+    line-height: 18px;
+    background: #ffffff;
+    border: 1px solid #5C5173;
+}
+
+.coupon_table_container .coupon_table input.point_use{
+    background: url(/resources/img/mcat_point_font.png) no-repeat 100% 50%;
+    direction: rtl;
+    padding-right: 30px;
+}
+/*쿠폰 테이블 끗*/
+
+/*결제선택 테이블*/
+.payment_choice{
+    display: inline-block;
+    width: 690px;
+    height: 240px;
+    line-height: 240px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+/*바깥 div*/
+.payment_choice_container{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 624px;
+    height: 180px;
+    margin: 0;
+}
+
+table.payment_choice_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    width: 624px;
+    height: 180px;
+}
+
+/*라디오버튼 감싼 부분*/
+table.payment_choice_table th {
+    font-size: 12px; 
+    text-align: right;
+    width: 46px;
+    height: 60px;
+    line-height: 60px;    
+    border-collapse: collapse;
+}
+/*제목 감싼 부분*/
+table.payment_choice_table td {
+    width: 110px;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 9px;
+    vertical-align: middle;
+    border-collapse: collapse;
+    border-right: 1px solid #5c5173;
+    font-size: 16px;
+}
+
+table.payment_choice_table tr {
+    border: 1px solid #5c5173;
+}
+/*결제선택 테이블 끝*/
+
+/*무통장 테이블*/
+.bank_deposit{
+    display: inline-block;
+    width: 690px;
+    height: 240px;
+    line-height: 240px;
+    border: 1px solid black;
+    text-align: center;
+}
+.bank_deposit-container{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 624px;
+    height: 180px;
+    margin: 0;
+}
+table.bank_deposit-table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    width: 624px;
+    height: 180px;
+}
+
+/*라디오버튼 감싼 부분*/
+
+/*제목 감싼 부분*/
+table.bank_deposit-table td {
+    width: 110px;
+    height: 60px;
+    line-height: 60px;
+    border-collapse: collapse;
+    border-right: 1px solid #5c5173;
+    text-align: center;
+    font-size: 16px;
+}
+
+table.bank_deposit-table tr {
+    border: 1px solid #5c5173;
+}
