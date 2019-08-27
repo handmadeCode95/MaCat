@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>마캣 관리자 페이지</title>
+    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
     <!-- 초기화 -->
     <link rel="stylesheet" href="/resources/css/normalize.css">    
     <!-- 관리자페이지 css -->
@@ -85,10 +86,21 @@
                                     <label for="member_no" style="margin-right: 13px;">회원번호</label>
                                     <input type="text">
                                 </div>
-                                <div class="checks">
+                                <!--콤보박스 : 회원등급-->
+                                <div class="checks members">
                                     <input type="checkbox" id="member_grade">
                                     <label for="member_grade" style="margin-right: 13px;">회원등급</label>
-                                    <input type="text">
+                                    <select name="" class="category_depth_1">
+                                        <option value="0">등급선택</option>
+                                        <option value="1">브론즈</option>
+                                        <option value="2">실버</option>
+                                        <option value="3">골드</option>
+                                        <option value="4">플레티넘</option>
+                                        <option value="5">다이아</option>
+                                        <option value="6">마스터</option>
+                                        <option value="7">그랜드 마스터</option>
+                                        <option value="8">챌린저</option>
+                                    </select>             
                                 </div>
                                 <div class="checks">
                                     <input type="checkbox" id="phone_num">
@@ -206,6 +218,7 @@
                                 <col width="100" /><!--가입일-->
                                 <col width="100" /><!--접속일-->
                                 <col width="100" /><!--포인트-->
+                                <!--회원등급 : mber_grad 1개-->
                             </colgroup>
                             <thead>
                                 <tr>
@@ -228,6 +241,96 @@
                                 </tr>
                             </thead>
                             <tbody id="searchResult">
+                                <tr id="">
+                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
+                                    <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
+                                    <td><input name="mber_nm" class="chkbox" type="text" value="손석배"></td>
+                                    <td>남</td>
+                                    <td><input name="mber_id" type="text" value="sonseokbae" ></td>
+                                    <td><input name="mber_pw" type="password" value="testpw1234" placeholder=""></td>
+                                    <td><input name="mber_phone_no" type="text" value="01012345678" disabled="disabled"></td>
+                                    <td><input name="mber_tel_no" type="text" value="0331234567"></td>
+                                    <td><input name="mber_zip_no" type="text" value="12345"></td>
+                                    <td><input name="mber_adres" type="text" value="서울시 서울시 서울시 서울시 서울시"></td>
+                                    <td><input name="mber_detail_adres" type="text" value="상세주소 상세주소3 상세주소3"></td>
+                                    <td><input name="mber_email" type="text" value="testemail@gmail.com"></td>
+                                    <td>1990-08-30</td>
+                                    <td>2019-04-16</td>
+                                    <td>2019-08-02</td>
+                                    <td>1,000,000p</td>
+                                </tr>
+                                <tr id="">
+                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
+                                    <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
+                                    <td><input name="mber_nm" class="chkbox" type="text" value="손석배"></td>
+                                    <td>남</td>
+                                    <td><input name="mber_id" type="text" value="sonseokbae" ></td>
+                                    <td><input name="mber_pw" type="password" value="testpw1234" placeholder=""></td>
+                                    <td><input name="mber_phone_no" type="text" value="01012345678" disabled="disabled"></td>
+                                    <td><input name="mber_tel_no" type="text" value="0331234567"></td>
+                                    <td><input name="mber_zip_no" type="text" value="12345"></td>
+                                    <td><input name="mber_adres" type="text" value="서울시 서울시 서울시 서울시 서울시"></td>
+                                    <td><input name="mber_detail_adres" type="text" value="상세주소 상세주소3 상세주소3"></td>
+                                    <td><input name="mber_email" type="text" value="testemail@gmail.com"></td>
+                                    <td>1990-08-30</td>
+                                    <td>2019-04-16</td>
+                                    <td>2019-08-02</td>
+                                    <td>1,000,000p</td>
+                                </tr>
+                                <tr id="">
+                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
+                                    <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
+                                    <td><input name="mber_nm" class="chkbox" type="text" value="손석배"></td>
+                                    <td>남</td>
+                                    <td><input name="mber_id" type="text" value="sonseokbae" ></td>
+                                    <td><input name="mber_pw" type="password" value="testpw1234" placeholder=""></td>
+                                    <td><input name="mber_phone_no" type="text" value="01012345678" disabled="disabled"></td>
+                                    <td><input name="mber_tel_no" type="text" value="0331234567"></td>
+                                    <td><input name="mber_zip_no" type="text" value="12345"></td>
+                                    <td><input name="mber_adres" type="text" value="서울시 서울시 서울시 서울시 서울시"></td>
+                                    <td><input name="mber_detail_adres" type="text" value="상세주소 상세주소3 상세주소3"></td>
+                                    <td><input name="mber_email" type="text" value="testemail@gmail.com"></td>
+                                    <td>1990-08-30</td>
+                                    <td>2019-04-16</td>
+                                    <td>2019-08-02</td>
+                                    <td>1,000,000p</td>
+                                </tr>
+                                <tr id="">
+                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
+                                    <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
+                                    <td><input name="mber_nm" class="chkbox" type="text" value="손석배"></td>
+                                    <td>남</td>
+                                    <td><input name="mber_id" type="text" value="sonseokbae" ></td>
+                                    <td><input name="mber_pw" type="password" value="testpw1234" placeholder=""></td>
+                                    <td><input name="mber_phone_no" type="text" value="01012345678" disabled="disabled"></td>
+                                    <td><input name="mber_tel_no" type="text" value="0331234567"></td>
+                                    <td><input name="mber_zip_no" type="text" value="12345"></td>
+                                    <td><input name="mber_adres" type="text" value="서울시 서울시 서울시 서울시 서울시"></td>
+                                    <td><input name="mber_detail_adres" type="text" value="상세주소 상세주소3 상세주소3"></td>
+                                    <td><input name="mber_email" type="text" value="testemail@gmail.com"></td>
+                                    <td>1990-08-30</td>
+                                    <td>2019-04-16</td>
+                                    <td>2019-08-02</td>
+                                    <td>1,000,000p</td>
+                                </tr>
+                                <tr id="">
+                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
+                                    <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
+                                    <td><input name="mber_nm" class="chkbox" type="text" value="손석배"></td>
+                                    <td>남</td>
+                                    <td><input name="mber_id" type="text" value="sonseokbae" ></td>
+                                    <td><input name="mber_pw" type="password" value="testpw1234" placeholder=""></td>
+                                    <td><input name="mber_phone_no" type="text" value="01012345678" disabled="disabled"></td>
+                                    <td><input name="mber_tel_no" type="text" value="0331234567"></td>
+                                    <td><input name="mber_zip_no" type="text" value="12345"></td>
+                                    <td><input name="mber_adres" type="text" value="서울시 서울시 서울시 서울시 서울시"></td>
+                                    <td><input name="mber_detail_adres" type="text" value="상세주소 상세주소3 상세주소3"></td>
+                                    <td><input name="mber_email" type="text" value="testemail@gmail.com"></td>
+                                    <td>1990-08-30</td>
+                                    <td>2019-04-16</td>
+                                    <td>2019-08-02</td>
+                                    <td>1,000,000p</td>
+                                </tr>
                                 <tr id="">
                                     <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk"></td>
                                     <td><input name="mber_sq" class="chkbox" type="hidden">1001</td>
