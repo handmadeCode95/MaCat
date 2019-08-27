@@ -1,19 +1,19 @@
-## git pull ╢ы╦╔ ╨Й╥ёд║ ╟║а╝©ю╠Б
-1) ╧ч╬ф©ц ╥ндцфдюо ╩Щ╪╨
+## git pull К▀╓К╔╦ К╦▄К·°Л╧≤ Й╟─Л═╦Л≤╓Й╦╟
+1) К╟⌡Л∙└Л≤╛ К║°Л╩╛ М▐╢К█■ Л┐²Л└╠
 2) git init
-3) git remote add origin гь╢Гgitаж╪р
-4) git pull origin ╟║а╝©ц╨Й╥ёд║╦М
+3) git remote add origin М∙╢К▀╧gitЛё╪Л├▄
+4) git pull origin Й╟─Л═╦Л≤╛К╦▄К·°Л╧≤К╙┘
 5) git branch -a 
-: ╨Й╥ёд║ ╩Себ х╝юнго╠Б
+: К╦▄К·°Л╧≤ Л┐│М┐° М≥∙Л²╦М∙≤Й╦╟
 $ git branch -a
 * master
   remotes/origin/front_page
   remotes/origin/jungmin
   remotes/origin/macat_wd48
   remotes/origin/master
-> ©Д ╩Себ╦И checkout ╟║╢и
-6) git checkout ╟║╠Ф©Ьго╢б╨Й╥ёд║╦М
-7) ╨╞╟Ф╣йю╩ х╝юн
+> Л ■ Л┐│М┐°К╘╢ checkout Й╟─К┼╔
+6) git checkout Й╟─Й╦╦Л⌡░М∙≤К┼■К╦▄К·°Л╧≤К╙┘
+7) КЁ─Й╡╫К░╗Л²└ М≥∙Л²╦
 
 git config core.quotepath false
-: гя╠ш юндз╣Ы
+: М∙°Й╦─ Л²╦Л╫■К■╘
