@@ -17,3 +17,9 @@ $ git branch -a
 
 git config core.quotepath false
 : 한글 인코딩
+
+> git reset [--soft/mixed/hard] <TARGET_VERSION>
+
+soft : index, work tree 둘다 유지합니다. 약간의 오타만 수정하여 다시 커밋하고 싶을때 유용합니다.
+mixed : 미지정시 기본값, index는 취소 work tree만 유지합니다.
+hard : index, tree 모두 제거 합니다
