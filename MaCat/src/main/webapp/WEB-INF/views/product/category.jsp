@@ -87,7 +87,7 @@
 						<h2>고양이 사료 & 상품 이미지</h2>
 					</div>
 					<div class="img_cat_product">
-						<a href="macat_product_category.html"> 
+						<a href="macat_product_category.jsp"> 
 							<img src="resources/img/cat01.jpg" alt="고양이사료 카테고리이미지">
 						</a>
 					</div>
@@ -98,7 +98,7 @@
 						<h2>브랜드 사료 & 상품 이미지</h2>
 					</div>
 					<div class="img_brand_product">
-						<a href="macat_product_category.html">
+						<a href="macat_product_category.jsp">
 							<img src="resources/img/cat02.jpg" alt="브랜드사료 카테고리이미지">
 						</a>
 					</div>

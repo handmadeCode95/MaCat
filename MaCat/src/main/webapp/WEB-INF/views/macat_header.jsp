@@ -22,14 +22,17 @@
 						<li><a href="">이벤트</a></li>
 						<li><a href="">마캣 기획전</a></li>
 						<li><a href="">카테고리</a></li>
-						<li id="icon"><a href="#"> <img
-								src="resources/img/mcat-icon-shopping-cart-color.png" alt="">
+						<!-- 쇼핑카트 -->
+						<li id="icon"><a href="#"> 
+							<img	src="resources/img/mcat-icon-shopping-cart-color.png" alt="">
 						</a></li>
-						<li id="icon"><a href="#"> <img
-								src="resources/img/mcat-icon-myinfo.png" alt="">
+						<!-- 마이페이지 -->
+						<li id="icon"><a href="#"> 
+							<img src="resources/img/mcat-icon-myinfo.png" alt="">
+						<!-- 검색창 -->
 						</a></li>
-						<li id="icon"><a href="#" id="search_bar"> <img
-								src="resources/img/mcat-icon-search1.png" alt="">
+						<li id="icon"><a href="#" id="search_bar">
+							<img src="resources/img/mcat-icon-search1.png" alt="">
 						</a></li>
 					</ul>
 				</div>

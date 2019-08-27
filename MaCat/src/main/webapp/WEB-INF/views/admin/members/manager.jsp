@@ -81,7 +81,18 @@
 	                                <div class="checks">
 	                                    <input type="checkbox" id="member_grade">
 	                                    <label for="member_grade" style="margin-right: 13px;">회원등급</label>
-	                                    <input type="text" name="mber_grad_nm">
+	                                    <select name="mber_grad_nm" class="category_depth_1">
+                                        <option value="0">등급선택</option>
+                                        <option value="1">브론즈</option>
+                                        <option value="2">실버</option>
+                                        <option value="3">골드</option>
+                                        <option value="4">플레티넘</option>
+                                        <option value="5">다이아</option>
+                                        <option value="6">마스터</option>
+                                        <option value="7">그랜드 마스터</option>
+                                        <option value="8">챌린저</option>
+                                    </select>       
+	                                    <!-- <input type="text" name=""> -->
 	                                </div>
 	                                <div class="checks">
 	                                    <input type="checkbox" id="phone_num">

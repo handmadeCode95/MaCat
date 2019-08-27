@@ -135,7 +135,30 @@ public class MaCatController {
 		mv.addObject("paging", paging);
 		return mv;
 	}
+	/*////////////////////////////////// 회원 마이페이지 //////////////////////////////////*/
 	
+	// 마이페이지 이동
+	@RequestMapping("macat_mypage.mcat")
+	public ModelAndView getMyPageCmd() {
+		return new ModelAndView("member/macat_mypage");
+	}
+	
+	// 마이페이지 > 주문내역 페이지
+	@RequestMapping("macat_mypage_order_inquiry_page.mcat")
+	public ModelAndView getOrderInquiryCmd() {
+		return new ModelAndView("member/macat_mypage_order_inquiry_page");
+	}
+	
+	// 마이페이지 > 게시물 관리 페이지
+	@RequestMapping("macat_mypage_boardManage.mcat")
+	public ModelAndView getBoardManageCmd() {
+		return new ModelAndView("member/macat_mypage_boardManage");
+	}
+	// 마이페이지 > 게시물 관리 페이지
+	@RequestMapping("macat_mypage_deliveryAdress.mcat")
+	public ModelAndView getDeliveryAdressCmd() {
+		return new ModelAndView("member/macat_mypage_deliveryAdress");
+	}
 	
 	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
 	
@@ -533,7 +556,6 @@ public class MaCatController {
 	
 	/*////////////////////////////////// 고객 문의 관리 //////////////////////////////////*/
 
-	
 	// 고객 문의 페이징
 	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
