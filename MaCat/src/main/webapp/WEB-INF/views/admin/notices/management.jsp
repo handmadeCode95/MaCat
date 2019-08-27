@@ -55,14 +55,14 @@
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
-							<c:when test="${empty notices}">
+							<c:when test="${empty notsDTO}">
 								<tr>
 									<td colspan="4"><h3>등록된 공지사항이 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
-								<c:forEach var="i" items="${notices}">
+								<c:forEach var="i" items="${notsDTO}">
 									<tr id="${i.not_sq}">
 										<td><input type="checkbox" class="chkbox" name="nots" value="${i.not_sq}"></td>
 										<td>${i.not_sq}</td>
@@ -71,8 +71,8 @@
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
-								<c:if test="${fn:length(notices) % 10 != 0}">
-									<c:forEach begin="1" end="${10 - (fn:length(notices) % 10)}">
+								<c:if test="${fn:length(notsDTO) % 10 != 0}">
+									<c:forEach begin="1" end="${10 - (fn:length(notsDTO) % 10)}">
 										<tr>
 											<%-- 공백 삽입 --%>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -89,19 +89,19 @@
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>
-										<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
+										<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
 											<li class="disable">◀</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - 1}"></a></li>
+											<li><a class="page">◀<input type="hidden" name="cPage" value="${pageDTO.beginBlock - 1}"></a></li>
 										</c:otherwise>
 									</c:choose>
 									
 									<%-- 블록안에 들어간 페이지번호들 --%>
-									<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="i">
+									<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}" step="1" var="i">
 										<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
 										<c:choose>
-											<c:when test="${i == paging.nowPage}">
+											<c:when test="${i == pageDTO.nowPage}">
 												<li class="now">${i}</li>
 											</c:when>
 											<c:otherwise>
@@ -112,11 +112,11 @@
 									
 									<%-- 다음 --%>
 									<c:choose>
-										<c:when test="${paging.endBlock >= paging.totalPage}">
+										<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
 											<li class="disable">▶</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">▶<input type="hidden" name="cPage" value="${paging.beginBlock + paging.pagePerBlock}"></a></li>
+											<li><a class="page">▶<input type="hidden" name="cPage" value="${pageDTO.beginBlock + pageDTO.pagePerBlock}"></a></li>
 										</c:otherwise>
 									</c:choose>
 								</ol>

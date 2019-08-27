@@ -24,12 +24,15 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macat.service.DAO;
+import com.macat.service.DateDTO;
+import com.macat.service.DateUtil;
 import com.macat.service.FaqSearchDTO;
 import com.macat.service.FileUpload;
 import com.macat.service.FaqDTO;
 import com.macat.service.MbersSearchDTO;
 import com.macat.service.MbersDTO;
 import com.macat.service.NotsSearchDTO;
+import com.macat.service.PageDTO;
 import com.macat.service.Paging;
 import com.macat.service.ProductsDTO;
 import com.macat.service.QnaSearchDTO;
@@ -119,26 +122,26 @@ public class MaCatController {
 		this.cPage = cPage;
 		
 		// 메인쪽으로 이동
-		session.setAttribute("categories", dao.getCategories());
+		session.setAttribute("ctgriesDTO", dao.getCategories());
 		
 		ModelAndView mv = new ModelAndView("product/category");
-		Paging paging = new Paging(20);
+		PageDTO pageDTO = new PageDTO(20);
 
 		
 		if (ctgry_level > 0) {
 			count = dao.getProductsCount(ctgry_nm);
-			paging.getPaging(paging, count, cPage);
-			mv.addObject("products", dao.getProductsList(ctgry_nm, paging.getBegin(), paging.getEnd()));
+			Paging.getPage(pageDTO, count, cPage);
+			mv.addObject("productsDTO", dao.getProductsList(ctgry_nm, pageDTO.getBegin(), pageDTO.getEnd()));
 		}else {
 			count = dao.getProductsCount(ctgry_group);
-			paging.getPaging(paging, count, cPage);
-			mv.addObject("products", dao.getProductsList(ctgry_group, paging.getBegin(), paging.getEnd()));
+			Paging.getPage(pageDTO, count, cPage);
+			mv.addObject("productsDTO", dao.getProductsList(ctgry_group, pageDTO.getBegin(), pageDTO.getEnd()));
 		}
 		
 		mv.addObject("ctgry_group", ctgry_group);
 		mv.addObject("ctgry_level", ctgry_level);
 		mv.addObject("ctgry_nm", ctgry_nm);
-		mv.addObject("paging", paging);
+		mv.addObject("pageDTO", pageDTO);
 		return mv;
 	}
 	
@@ -208,10 +211,10 @@ public class MaCatController {
 		// 상품 색상
 		productsDTO.setColors(dao.getColors(prduct_sq));
 		
-		mv.addObject("product_imgs", dao.getProductImages(prduct_sq));
+		mv.addObject("imagesDTO", dao.getProductImages(prduct_sq));
 		mv.addObject("more_product", dao.getProductsList(productsDTO.getCtgry_nm(), 1, 5));
 		mv.addObject("review_cnt", dao.getReviewsCount());
-		mv.addObject("product", productsDTO);
+		mv.addObject("productsDTO", productsDTO);
 		return mv;
 	}
 	
@@ -235,12 +238,20 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "MbersDTO";
 		ModelAndView mv = new ModelAndView("admin/members/manager");
-		Paging paging = new Paging();
+		DateDTO dateDTO = new DateDTO();
+		dateDTO.setToday(DateUtil.getToday());
+		dateDTO.setOneWeekAgo(DateUtil.addDate(-7));
+		dateDTO.setOneMonthAgo(DateUtil.addMonth(-1));
+		dateDTO.setThreeMonthAgo(DateUtil.addMonth(-3));
+		dateDTO.setSixMonthAgo(DateUtil.addMonth(-6));
+		dateDTO.setOneYearAgo(DateUtil.addYear(-1));
+		PageDTO pageDTO = new PageDTO();
 		count = dao.getMbersCount();
-		paging.getPaging(paging, count, cPage);
+		Paging.getPage(pageDTO, count, cPage);
+		mv.addObject("dateDTO", dateDTO);
 		mv.addObject("mber_grad", dao.getMberGradList());
-		mv.addObject("members", dao.getMbersList(paging.getBegin(), paging.getEnd()));
-		mv.addObject("paging", paging);
+		mv.addObject("mbersDTO", dao.getMbersList(pageDTO.getBegin(), pageDTO.getEnd()));
+		mv.addObject("pageDTO", pageDTO);
 		return mv;
 	}
 
@@ -250,11 +261,11 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
 		ModelAndView mv = new ModelAndView("admin/notices/management");
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		count = dao.getNotsCount();
-		paging.getPaging(paging, count, cPage);
-		mv.addObject("notices", dao.getNotsList(paging.getBegin(), paging.getEnd()));
-		mv.addObject("paging", paging);
+		Paging.getPage(pageDTO, count, cPage);
+		mv.addObject("notsDTO", dao.getNotsList(pageDTO.getBegin(), pageDTO.getEnd()));
+		mv.addObject("pageDTO", pageDTO);
 		return mv;
 	}
 
@@ -264,12 +275,12 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "QnaDTO";
 		ModelAndView mv = new ModelAndView("admin/qna/management");
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		count = dao.getQnaCount();
-		paging.getPaging(paging, count, cPage);
+		Paging.getPage(pageDTO, count, cPage);
 		mv.addObject("qna_ctgries", dao.getQnaCtgriesList());
-		mv.addObject("qna", dao.getQnaList(paging.getBegin(), paging.getEnd()));
-		mv.addObject("paging", paging);
+		mv.addObject("qnaDTO", dao.getQnaList(pageDTO.getBegin(), pageDTO.getEnd()));
+		mv.addObject("pageDTO", pageDTO);
 		return mv;
 	}
 	
@@ -279,12 +290,12 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "FaqDTO";
 		ModelAndView mv = new ModelAndView("admin/faq/management");
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		count = dao.getFaqCount();
-		paging.getPaging(paging, count, cPage);
+		Paging.getPage(pageDTO, count, cPage);
 		mv.addObject("qna_ctgries", dao.getQnaCtgriesList());
-		mv.addObject("faq", dao.getFaqList(paging.getBegin(), paging.getEnd()));
-		mv.addObject("paging", paging);
+		mv.addObject("faqDTO", dao.getFaqList(pageDTO.getBegin(), pageDTO.getEnd()));
+		mv.addObject("pageDTO", pageDTO);
 		return mv;
 	}
 	
@@ -322,30 +333,30 @@ public class MaCatController {
 	// 회원 정보 페이징
 	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
+	public Map<String, Object> getMbersPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		paging.getPaging(paging, count, cPage);
-		map.put("paging", paging);
+		Paging.getPage(pageDTO, count, cPage);
+		map.put("pageDTO", pageDTO);
 		
 		map.put("mber_grad", dao.getMberGradList());
 
 		switch (usedDTO) {
 		case "MbersDTO":
-			map.put("members", dao.getMbersList(paging.getBegin(), paging.getEnd()));
+			map.put("mbersDTO", dao.getMbersList(pageDTO.getBegin(), pageDTO.getEnd()));
 			break;
 		default:
-			mbersSearchDTO.setBegin(paging.getBegin());
-			mbersSearchDTO.setEnd(paging.getEnd());
+			mbersSearchDTO.setBegin(pageDTO.getBegin());
+			mbersSearchDTO.setEnd(pageDTO.getEnd());
 			switch (usedDTO) {
 			case "MbersSearchDTO_and":
-				map.put("members", dao.getMbersAndSearch(mbersSearchDTO));
+				map.put("mbersDTO", dao.getMbersAndSearch(mbersSearchDTO));
 				break;
 			case "MbersSearchDTO_or":
-				map.put("members", dao.getMbersOrSearch(mbersSearchDTO));
+				map.put("mbersDTO", dao.getMbersOrSearch(mbersSearchDTO));
 				break;
 			}
 		}
@@ -372,7 +383,7 @@ public class MaCatController {
 			mbersSearchDTO.setMber_reg_dt_end(mbersSearchDTO.getMber_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 
 		switch (mbersSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -385,20 +396,20 @@ public class MaCatController {
 			break;
 		}
 
-		paging.getPaging(paging, count, null);
-		map.put("paging", paging);
-		mbersSearchDTO.setBegin(paging.getBegin());
-		mbersSearchDTO.setEnd(paging.getEnd());
+		Paging.getPage(pageDTO, count, null);
+		map.put("pageDTO", pageDTO);
+		mbersSearchDTO.setBegin(pageDTO.getBegin());
+		mbersSearchDTO.setEnd(pageDTO.getEnd());
 		this.mbersSearchDTO = mbersSearchDTO; // 페이징을 위한 검색 기록 저장
 		
 		map.put("mber_grad", dao.getMberGradList());
 
 		switch (mbersSearchDTO.getAnd_or_chk()) {
 		case "and":
-			map.put("members", dao.getMbersAndSearch(mbersSearchDTO));
+			map.put("mbersDTO", dao.getMbersAndSearch(mbersSearchDTO));
 			break;
 		case "or":
-			map.put("members", dao.getMbersOrSearch(mbersSearchDTO));
+			map.put("mbersDTO", dao.getMbersOrSearch(mbersSearchDTO));
 			break;
 		}
 
@@ -414,7 +425,7 @@ public class MaCatController {
 				dao.getMbersUpdate(j);
 			}
 		}
-		return getMbersPagingCmd(cPage);
+		return getMbersPageDTOCmd(cPage);
 	}
 
 	// 회원 탈퇴
@@ -439,7 +450,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getMbersPagingCmd(cPage);
+		return getMbersPageDTOCmd(cPage);
 	}
 
 	
@@ -449,28 +460,28 @@ public class MaCatController {
 	// 공지사항 페이징
 	@RequestMapping(value = "nots_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
+	public Map<String, Object> getNotsPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		paging.getPaging(paging, count, cPage);
-		map.put("paging", paging);
+		Paging.getPage(pageDTO, count, cPage);
+		map.put("pageDTO", pageDTO);
 		
 		switch (usedDTO) {
 		case "NotsDTO":
-			map.put("notices", dao.getNotsList(paging.getBegin(), paging.getEnd()));
+			map.put("notsDTO", dao.getNotsList(pageDTO.getBegin(), pageDTO.getEnd()));
 			break;
 		default:
-			notsSearchDTO.setBegin(paging.getBegin());
-			notsSearchDTO.setEnd(paging.getEnd());
+			notsSearchDTO.setBegin(pageDTO.getBegin());
+			notsSearchDTO.setEnd(pageDTO.getEnd());
 			switch (usedDTO) {
 			case "NotsSearchDTO_and":
-				map.put("notices", dao.getNotsAndSearch(notsSearchDTO));
+				map.put("notsDTO", dao.getNotsAndSearch(notsSearchDTO));
 				break;
 			case "NotsSearchDTO_or":
-				map.put("notices", dao.getNotsOrSearch(notsSearchDTO));
+				map.put("notsDTO", dao.getNotsOrSearch(notsSearchDTO));
 				break;
 			}
 		}
@@ -489,7 +500,7 @@ public class MaCatController {
 			notsSearchDTO.setNot_reg_dt_end(notsSearchDTO.getNot_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 
 		switch (notsSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -502,18 +513,18 @@ public class MaCatController {
 			break;
 		}
 
-		paging.getPaging(paging, count, null);
-		map.put("paging", paging);
-		notsSearchDTO.setBegin(paging.getBegin());
-		notsSearchDTO.setEnd(paging.getEnd());
+		Paging.getPage(pageDTO, count, null);
+		map.put("pageDTO", pageDTO);
+		notsSearchDTO.setBegin(pageDTO.getBegin());
+		notsSearchDTO.setEnd(pageDTO.getEnd());
 		this.notsSearchDTO = notsSearchDTO; // 페이징을 위한 검색 기록 저장
 
 		switch (notsSearchDTO.getAnd_or_chk()) {
 		case "and":
-			map.put("notices", dao.getNotsAndSearch(notsSearchDTO));
+			map.put("notsDTO", dao.getNotsAndSearch(notsSearchDTO));
 			break;
 		case "or":
-			map.put("notices", dao.getNotsOrSearch(notsSearchDTO));
+			map.put("notsDTO", dao.getNotsOrSearch(notsSearchDTO));
 			break;
 		}
 
@@ -554,7 +565,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getNotsPagingCmd(cPage);
+		return getNotsPageDTOCmd(cPage);
 	}
 
 	
@@ -564,28 +575,28 @@ public class MaCatController {
 	// 고객 문의 페이징
 	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
+	public Map<String, Object> getQnaPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		paging.getPaging(paging, count, cPage);
-		map.put("paging", paging);
+		Paging.getPage(pageDTO, count, cPage);
+		map.put("pageDTO", pageDTO);
 
 		switch (usedDTO) {
 		case "QnaDTO":
-			map.put("qna", dao.getQnaList(paging.getBegin(), paging.getEnd()));
+			map.put("qnaDTO", dao.getQnaList(pageDTO.getBegin(), pageDTO.getEnd()));
 			break;
 		default:
-			qnaSearchDTO.setBegin(paging.getBegin());
-			qnaSearchDTO.setEnd(paging.getEnd());
+			qnaSearchDTO.setBegin(pageDTO.getBegin());
+			qnaSearchDTO.setEnd(pageDTO.getEnd());
 			switch (usedDTO) {
 			case "QnaSearchDTO_and":
-				map.put("qna", dao.getQnaAndSearch(qnaSearchDTO));
+				map.put("qnaDTO", dao.getQnaAndSearch(qnaSearchDTO));
 				break;
 			case "QnaSearchDTO_or":
-				map.put("qna", dao.getQnaOrSearch(qnaSearchDTO));
+				map.put("qnaDTO", dao.getQnaOrSearch(qnaSearchDTO));
 				break;
 			}
 		}
@@ -604,7 +615,7 @@ public class MaCatController {
 			qnaSearchDTO.setQna_reg_dt_end(qnaSearchDTO.getQna_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 
 		switch (qnaSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -617,18 +628,18 @@ public class MaCatController {
 			break;
 		}
 
-		paging.getPaging(paging, count, null);
-		map.put("paging", paging);
-		qnaSearchDTO.setBegin(paging.getBegin());
-		qnaSearchDTO.setEnd(paging.getEnd());
+		Paging.getPage(pageDTO, count, null);
+		map.put("pageDTO", pageDTO);
+		qnaSearchDTO.setBegin(pageDTO.getBegin());
+		qnaSearchDTO.setEnd(pageDTO.getEnd());
 		this.qnaSearchDTO = qnaSearchDTO; // 페이징을 위한 검색 기록 저장
 
 		switch (qnaSearchDTO.getAnd_or_chk()) {
 		case "and":
-			map.put("qna", dao.getQnaAndSearch(qnaSearchDTO));
+			map.put("qnaDTO", dao.getQnaAndSearch(qnaSearchDTO));
 			break;
 		case "or":
-			map.put("qna", dao.getQnaOrSearch(qnaSearchDTO));
+			map.put("qnaDTO", dao.getQnaOrSearch(qnaSearchDTO));
 			break;
 		}
 
@@ -657,7 +668,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getQnaPagingCmd(cPage);
+		return getQnaPageDTOCmd(cPage);
 	}
 
 	// 문의 보기로 이동
@@ -680,28 +691,28 @@ public class MaCatController {
 	// FAQ 페이징
 	@RequestMapping(value = "faq_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getFaqPagingCmd(@RequestBody String cPage) {
+	public Map<String, Object> getFaqPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		paging.getPaging(paging, count, cPage);
-		map.put("paging", paging);
+		Paging.getPage(pageDTO, count, cPage);
+		map.put("pageDTO", pageDTO);
 
 		switch (usedDTO) {
 		case "FaqDTO":
-			map.put("faq", dao.getFaqList(paging.getBegin(), paging.getEnd()));
+			map.put("faqDTO", dao.getFaqList(pageDTO.getBegin(), pageDTO.getEnd()));
 			break;
 		default:
-			faqSearchDTO.setBegin(paging.getBegin());
-			faqSearchDTO.setEnd(paging.getEnd());
+			faqSearchDTO.setBegin(pageDTO.getBegin());
+			faqSearchDTO.setEnd(pageDTO.getEnd());
 			switch (usedDTO) {
 			case "FaqSearchDTO_and":
-				map.put("faq", dao.getFaqAndSearch(faqSearchDTO));
+				map.put("faqDTO", dao.getFaqAndSearch(faqSearchDTO));
 				break;
 			case "FaqSearchDTO_or":
-				map.put("faq", dao.getFaqOrSearch(faqSearchDTO));
+				map.put("faqDTO", dao.getFaqOrSearch(faqSearchDTO));
 				break;
 			}
 		}
@@ -714,7 +725,7 @@ public class MaCatController {
 	@ResponseBody
 	public Map<String, Object> getFaqSearchCmd(@RequestBody FaqSearchDTO faqSearchDTO) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Paging paging = new Paging();
+		PageDTO pageDTO = new PageDTO();
 
 		switch (faqSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -727,18 +738,18 @@ public class MaCatController {
 			break;
 		}
 
-		paging.getPaging(paging, count, null);
-		map.put("paging", paging);
-		faqSearchDTO.setBegin(paging.getBegin());
-		faqSearchDTO.setEnd(paging.getEnd());
+		Paging.getPage(pageDTO, count, null);
+		map.put("pageDTO", pageDTO);
+		faqSearchDTO.setBegin(pageDTO.getBegin());
+		faqSearchDTO.setEnd(pageDTO.getEnd());
 		this.faqSearchDTO = faqSearchDTO; // 페이징을 위한 검색 기록 저장
 
 		switch (faqSearchDTO.getAnd_or_chk()) {
 		case "and":
-			map.put("faq", dao.getFaqAndSearch(faqSearchDTO));
+			map.put("faqDTO", dao.getFaqAndSearch(faqSearchDTO));
 			break;
 		case "or":
-			map.put("faq", dao.getFaqOrSearch(faqSearchDTO));
+			map.put("faqDTO", dao.getFaqOrSearch(faqSearchDTO));
 			break;
 		}
 		
@@ -767,7 +778,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getFaqPagingCmd(cPage);
+		return getFaqPageDTOCmd(cPage);
 	}
 
 	// FAQ 보기로 이동

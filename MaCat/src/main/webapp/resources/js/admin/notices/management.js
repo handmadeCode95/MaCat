@@ -5,7 +5,7 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "notices") {
+			if (key === "notsDTO") {
 				$.each(value, function(k, v){
 					result += "<tr id='" + v["not_sq"] + "'>";
 					result += "<td><input type='checkbox' class='chkbox' name='nots' value='" + v["not_sq"] + "'></td>";
@@ -13,27 +13,27 @@ $(function() {
 					result += "<td><a href='nots_update.mcat'>" + v["not_sj"] + "</a></td>";
 					result += "<td>" + v["not_reg_dt"].substring(0, 10) + "</td>";
 				});
-			}else if (key === "paging"){
-				var paging = value;
+			}else if (key === "pageDTO"){
+				var pageDTO = value;
 				
-				if (paging.beginBlock <= paging.pagePerBlock){
+				if (pageDTO.beginBlock <= pageDTO.pagePerBlock){
 					pagingResult += '<li class="disable">◀</li>';
 				}else {
-					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (paging.beginBlock - 1) + '"></a></li>';
+					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock - 1) + '"></a></li>';
 				}
 				  
-				for (var i = paging.beginBlock; i <= paging.endBlock; i++) {
-					if (i == paging.nowPage) {
+				for (var i = pageDTO.beginBlock; i <= pageDTO.endBlock; i++) {
+					if (i == pageDTO.nowPage) {
 						pagingResult += '<li class="now">' + i + '</li>';
 					}else{
 						pagingResult += '<li><a class="page">' + i + '<input type="hidden" name="cPage" value="' + i + '"></a></li>';
 					}
 				}
 				  
-				if (paging.endBlock >= paging.totalPage){
+				if (pageDTO.endBlock >= pageDTO.totalPage){
 					pagingResult += '<li class="disable">▶</li>';
 				}else {
-					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (paging.beginBlock + paging.pagePerBlock) + '"></a></li>';
+					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '"></a></li>';
 				}
 			}
 		});

@@ -5,7 +5,7 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "reviewsVO") {
+			if (key === "reviewsDTO") {
 				$.each(value, function(k, v){
 					result += "<tr id='" + v["re_sn"] + "'>";
 					result += "<td><input type='checkbox' class='chkbox' name='res' value='" + v["re_sn"] + "'></td>";
@@ -30,27 +30,27 @@ $(function() {
 					result += "<td>" + v["re_reg_date"].substring(0, 10) + "</td>";
 					result += "<td>" + v["re_rdcnt"] + "</td>";
 				});
-			}else if (key === "paging"){
-				var paging = value;
+			}else if (key === "pagingDTO"){
+				var pagingDTO = value;
 				
-				if (paging.beginBlock <= paging.pagePerBlock){
+				if (pagingDTO.beginBlock <= pagingDTO.pagePerBlock){
 					pagingResult += '<li class="disable">◀</li>';
 				}else {
-					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (paging.beginBlock - paging.pagePerBlock + 4) + '"></a></li>';
+					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (pagingDTO.beginBlock - pagingDTO.pagePerBlock + 4) + '"></a></li>';
 				}
 				  
-				for (var i = paging.beginBlock; i <= paging.endBlock; i++) {
-					if (i == paging.nowPage) {
+				for (var i = pagingDTO.beginBlock; i <= pagingDTO.endBlock; i++) {
+					if (i == pagingDTO.nowPage) {
 						pagingResult += '<li class="now">' + i + '</li>';
 					}else{
 						pagingResult += '<li><a class="page">' + i + '<input type="hidden" name="cPage" value="' + i + '"></a></li>';
 					}
 				}
 				  
-				if (paging.endBlock >= paging.totalPage){
+				if (pagingDTO.endBlock >= pagingDTO.totalPage){
 					pagingResult += '<li class="disable">▶</li>';
 				}else {
-					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (paging.beginBlock + paging.pagePerBlock) + '"></a></li>';
+					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (pagingDTO.beginBlock + pagingDTO.pagePerBlock) + '"></a></li>';
 				}
 			}
 		});

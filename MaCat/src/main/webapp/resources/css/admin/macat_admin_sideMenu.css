@@ -51,7 +51,18 @@ ul{
 	color: #FFFFFF;
 }
 
-#service{
+/*각 하위메뉴 디자인*/
+#prd, #mem, #service, #board, #ctg {
+    position: relative;
+    display: none;
+    top: 64px;
+    padding-top: 21px;
+    width: 208px;
+    height: 236px;
+    background: #402F61;
+    z-index: 999;    
+}
+/* #service{
 	position: relative;
 	display: none;
 	top: 64px;
@@ -59,7 +70,7 @@ ul{
 	width: 208px;
 	height: 236px;
 	background: #402F61;
-}
+} */
 
 .side-item > img{
 	position: relative;
@@ -85,6 +96,8 @@ ul{
 
 .header > img{
 	position: relative;
+	width : 103px;
+	height : 37px;
 	left: 18px;
 	top: 12px;
 }
@@ -96,6 +109,12 @@ ul{
 	font-size: 22px;
 	color: #FFFFFF;
 }
+
+.side-bar-menu .side-item ul#prd,
+ul#mem, ul#service, ul#board, ul#ctg{
+    display: none;
+}
+
 
 .rotatedUp{
 	transform: rotate(180deg);

@@ -3,7 +3,7 @@ package com.macat.service;
 public class MbersSearchDTO {
 	
 	private String mber_sq, mber_id, mber_nm, mber_birthday_dt_start, mber_birthday_dt_end, mber_gender, mber_reg_dt_start, mber_reg_dt_end,
-					mber_conect_dt_start, mber_conect_dt_end, mber_phone_no, mber_grad_nm, and_or_chk;
+					mber_conect_dt_start, mber_conect_dt_end, mber_phone_no, mber_grad_nm, mber_tel_no, and_or_chk;
 	private int begin, end; // 페이징
 	
 	public MbersSearchDTO() {
@@ -13,7 +13,8 @@ public class MbersSearchDTO {
 	public MbersSearchDTO(String mber_sq, String mber_id, String mber_nm, String mber_birthday_dt_start,
 			String mber_birthday_dt_end, String mber_gender, String mber_reg_dt_start, String mber_reg_dt_end,
 			String mber_conect_dt_start, String mber_conect_dt_end, String mber_phone_no, String mber_grad_nm,
-			String and_or_chk, int begin, int end) {
+			String mber_tel_no, String and_or_chk, int begin,
+			int end) {
 		super();
 		this.mber_sq = mber_sq;
 		this.mber_id = mber_id;
@@ -27,6 +28,7 @@ public class MbersSearchDTO {
 		this.mber_conect_dt_end = mber_conect_dt_end;
 		this.mber_phone_no = mber_phone_no;
 		this.mber_grad_nm = mber_grad_nm;
+		this.mber_tel_no = mber_tel_no;
 		this.and_or_chk = and_or_chk;
 		this.begin = begin;
 		this.end = end;
@@ -128,6 +130,14 @@ public class MbersSearchDTO {
 		this.mber_grad_nm = mber_grad_nm;
 	}
 
+	public String getMber_tel_no() {
+		return mber_tel_no;
+	}
+
+	public void setMber_tel_no(String mber_tel_no) {
+		this.mber_tel_no = mber_tel_no;
+	}
+
 	public String getAnd_or_chk() {
 		return and_or_chk;
 	}
@@ -152,6 +162,4 @@ public class MbersSearchDTO {
 		this.end = end;
 	}
 
-	
-	
 }
