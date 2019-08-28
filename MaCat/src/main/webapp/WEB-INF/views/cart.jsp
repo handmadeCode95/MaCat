@@ -135,7 +135,17 @@
 	                        <div class="category_box">food</div>
 	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
 	                        </td>
-	                        <td>1</td>
+	                        <td>
+		                        <!--수량 증가/감소 쿼리-->
+	                            <div class="number">
+	                                <a href="#" id="decreaseQuantity">
+	                                <img src="resources/img/mcat_substract.png" alt="sub"></a>   
+	                                <span id="numberUpDown">1</span>
+	                                <a href="#" id="increaseQuantity">
+	                                    <img src="resources/img/mcat_add.png" alt="add">
+	                                </a>
+	                            </div>
+                            </td>
 	                        <td id="cart_product_price">10,000</td>
 	                        <td id="cart_delivery_pay">2,500</td>
 	                    </tr>
@@ -196,5 +206,38 @@
 	        </div>
 	    </section>
 	</body>
-
+ <script type="text/javascript">
+    $(function(){
+        // 감소(-)버튼 눌렀을 때
+        $('#decreaseQuantity').click(function(e){
+            e.preventDefault();
+            // stat 변수에 #numberUpDown 이 있는 태그의 내용을 가져옴
+            var stat = $('#numberUpDown').text();
+            // num에 stat를 int 로 변환해서 담음
+            var num = parseInt(stat,10);
+                num--;
+            // 최소값 : num에 1을 최소값으로 넣어줌
+            if(num<=0){
+                alert('더 이상 줄일수 없습니다.');
+                num =1;
+            }
+            // #numberUpDown 태그 내용을 num으로 바꿈
+            $('#numberUpDown').text(num);                    
+        });
+        
+        // 증가(+)버튼 눌렀을 때
+        $('#increaseQuantity').click(function(e){
+            e.preventDefault();
+            var stat = $('#numberUpDown').text();
+            var num = parseInt(stat,10);
+                num++;
+        // 최대값
+        if(num>10){
+            alert('더 이상 늘릴수 없습니다.');
+            num=10;
+        }
+            $('#numberUpDown').text(num);
+        });
+    });
+</script>
 </html>

@@ -1,19 +1,19 @@
 @font-face {
     font-family: 'THEjunggt130';
     src: local('THEjunggt130'),
-        url('/resources/font/THEjunggt130.woff2') format('woff2'),
-        url('/resources/font/THEjunggt130.woff') format('woff'),
-        url('/resources/font/THEjunggt130.otf') format('opentype'),
-        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
+        url('resources/font/THEjunggt130.woff2') format('woff2'),
+        url('resources/font/THEjunggt130.woff') format('woff'),
+        url('resources/font/THEjunggt130.otf') format('opentype'),
+        url('resources/font/THEjunggt130.eot') format('embedded-opentype');
 }
 
 @font-face {
     font-family: '서울남산 장체EB';
     src: local('서울남산 장체EB'),
-        url('/resources/font/서울남산 장체EB.woff2') format('woff2'),
-        url('/resources/font/서울남산 장체EB.woff') format('woff'),
-        url('/resources/font/서울남산 장체EB.otf') format('truetype'),
-        url('/resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+        url('resources/font/서울남산 장체EB.woff2') format('woff2'),
+        url('resources/font/서울남산 장체EB.woff') format('woff'),
+        url('resources/font/서울남산 장체EB.otf') format('truetype'),
+        url('resources/font/서울남산 장체EB.eot') format('embedded-opentype');
 }
 
 * {
@@ -171,6 +171,7 @@ table.price_result td {
 /*버튼 파트*/
 .cart_btn_container{
     width: 513px;
+    height: 150px;
     margin: 0 auto;
     margin-top: 63px;
 }
@@ -221,3 +222,39 @@ table.price_result td {
     float: left;
 }
 
+/*수량 증감 기능*/
+div.number{
+    display: inline-block;    
+    text-align: center;
+    width: 80px;
+    height: 20px;
+    margin: 0 auto;
+}
+/*숫자 크기*/
+div.number span{
+    font-size: 15px;
+}
+/*감소버튼 a 태그*/
+div.number a#decreaseQuantity{
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+/*증가버튼 a태그*/
+div.number a#increaseQuantity{
+    width: 20px;
+    height: 20px;
+    float: right;
+}
+/*감소버튼 img*/
+div.number a#decreaseQuantity img{
+    width: 15px;
+    height: 15px; 
+    float: left;
+}
+/*증가버튼 img*/
+div.number a#increaseQuantity img{
+    width: 15px;
+    height: 15px;    
+    float: right;
+}
