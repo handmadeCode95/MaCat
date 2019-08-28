@@ -7,6 +7,8 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>장바구니</title>
+	    <!-- 미니 로고 -->
+	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!--normalize-->
 	    <link rel="stylesheet" href="/resources/css/normalize.css">
 	    <!--장바구니 css-->
