@@ -83,27 +83,29 @@ main{
 	background-color: #FFFFFF;
 	margin: 14px 40px 16px 27px;
 	text-align: center;
+    border: 1px solid red;
 }
-
+/*상품제목 출력파트 텍스트 부분*/
 .detail_text_area p{
 	text-align: left;
 	padding-top: 20px;
 	margin-left: 38px;
 	font-size: 15px;
 }
-
+/*라인*/
 #border_item{
 	margin: 0 auto;
 	margin-top: 15px;
 	border-top: 1px solid #707070;
 	width: 1592px;
 }
-
+/*내부 textarea 폼*/
 .detail_text_area textarea{
 	resize: none;
 	margin: 20px 0px 20px;
 	width: 1569px;
 	height: 751px;
+    border: 1px solid black;
 }
 
 .submit_or_back_btn{

@@ -22,8 +22,8 @@
 * {
     font-family: 'THEjunggt130';
 	list-style: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 caption{
@@ -88,14 +88,9 @@ thead{
 }
 
 h2{
-	display: inline;
 	font-size: 17px;
-	
 }
-h2 ~ p{
-	display: inline;
-	font-size: 0.75em;
-}
+
 
 .board_list{
 	margin-top: 30px;
@@ -107,45 +102,42 @@ h2 ~ p{
 }
 
 .board_list_main thead tr{
-	border-bottom: 2px solid #CFCFCF;
+	border-bottom: 2px solid gray;
 }
 
 .board_list_main thead tr th{
 	padding: 9px 0px 7px;
 }
 
-.board_list_main #not_main_list tr{
+.board_list_main #main_list tr{
 	height: 32px;
 }
 
-.board_list_main #not_main_list tr td{
+.board_list_main #main_list tr td{
 	padding: 11px 0px 10px;
 	font-size: 11px;
 }
 
-.board_list_main #not_main_list tr td:nth-child(2){
+.board_list_main #main_list tr td:nth-child(2){
 	padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
 }
 
-.board_list_main #not_sub_list tr{
-	height: 32px;
+#main_list tr:nth-child(odd){
+	cursor: pointer;
 }
 
-.board_list_main #not_sub_list tr td{
-	padding: 11px 0px 10px;
-	font-size: 11px;
+#main_list tr:nth-child(2n){
+	display: none;
 }
 
-.board_list_main #not_sub_list tr td:nth-child(2){
-	padding-left: 10px;
-	text-align: left;
-	font-size: 12px;
+#main_list_none{
+	display: none;
 }
 
 form{
-	text-align: left;
+	text-align: center;
 }
 
 fieldset{
@@ -175,77 +167,4 @@ fieldset a img{
     font-size: 12px;
     padding: 3px 4px;
 	border: 1px solid rgb(213, 213, 213);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-table {
-	width: 500px;
-	margin: 0 auto;
-}
-
-table,
-tr,
-th,
-td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-div {
-	text-align: center;
-	margin: 0 auto;
-}
-
-ol#paging {
-	list-style: none;
-	float: right;
-	left: -50%;
-	position: relative;
-	margin-top: 0px;
-}
-
-ol#paging li {
-	float: left;
-	margin-right: 8px;
-	left: 50%;
-	position: relative;
-	margin-top: 0px;
-}
-
-ol#paging li a {
-	display: block;
-	padding: 3px 7px;
-	color: #2f313e;
-}
-
-ol#paging li a:hover {
-	background: #F2A766;
-	color: white;
-}
-
-.disable {
-	padding: 3px 7px;
-	color: silver;
-}
-
-.now {
-	padding: 3px 7px;
-	background: #F25E5E;
-	color: white;
 }

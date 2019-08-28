@@ -47,6 +47,7 @@ thead{
 	vertical-align: middle;
 }
 
+/*wrap 내부 전체 설정*/
 #wrap {
     width: 1024px;
     min-width: 960px;
@@ -56,12 +57,13 @@ thead{
     text-align: center;
 }
 
+
 .contents {
 	width: 1024px;
 }
 
 
-.board_title{
+.adress_title{
 	height: 71px;
 }
 
@@ -71,10 +73,6 @@ thead{
 	height: 30px;
 }
 
-#path ol{
-	list-style-type: none;
-}
-
 #path ol > li{
 	display: inline;
 	font-size: 12px;
@@ -82,7 +80,7 @@ thead{
 
 #title{
 	min-height: 30px;
-	margin: 10px 0 20px;
+	margin-top: 10px;
     border-bottom: 2px solid #F25E5E;
 	text-align: left;
 }
@@ -90,162 +88,92 @@ thead{
 h2{
 	display: inline;
 	font-size: 17px;
-	
-}
-h2 ~ p{
-	display: inline;
-	font-size: 0.75em;
 }
 
-.board_list{
+.adress_list{
 	margin-top: 30px;
 }
 
-.board_list_main{
+.adress_list_main{
 	width: 1024px;
 	border-bottom: 2px solid #F25E5E;
 }
 
-.board_list_main thead tr{
+.adress_list_main thead tr{
 	border-bottom: 2px solid #CFCFCF;
 }
 
-.board_list_main thead tr th{
+.adress_list_main thead tr th{
 	padding: 9px 0px 7px;
+	font-size: 13px;
 }
 
-.board_list_main #not_main_list tr{
+.adress_list_main #adr_main_list tr{
 	height: 32px;
 }
 
-.board_list_main #not_main_list tr td{
+.adress_list_main #adr_main_list tr td{
+	text-align: center;
 	padding: 11px 0px 10px;
 	font-size: 11px;
 }
 
-.board_list_main #not_main_list tr td:nth-child(2){
+.board_list_main #adr_main_list tr td:nth-child(7){
 	padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
 }
 
-.board_list_main #not_sub_list tr{
-	height: 32px;
+
+/*주소가 없을 때 나오는 tbody css*/
+.list_none{
+	height: 119px;
+	text-align: center;
+	display: none
 }
 
-.board_list_main #not_sub_list tr td{
-	padding: 11px 0px 10px;
-	font-size: 11px;
+.list_none > tr > td{
+	padding: 50px 0px 50px;
 }
 
-.board_list_main #not_sub_list tr td:nth-child(2){
-	padding-left: 10px;
+.del_or_new_btn{
+	height: 50px;
+	padding: 10px 0px 10px;
+}
+
+#left_del_btn > a , #right_cre_btn > a{
+	font-size: 13px;
+}
+
+#left_del_btn{
+	float: left;
+}
+
+#right_cre_btn{
+	float: right;
+}
+
+.precautions{
+	height: 135px;
+	border: 2px solid #F25E5E;
+}
+
+.precautions > h3{
+	padding: 9px 0px 6px 10px;
 	text-align: left;
-	font-size: 12px;
-}
-
-form{
-	text-align: left;
-}
-
-fieldset{
 	font-size: 14px;
 }
 
-fieldset a img{
-	position: relative;
-	top: 8px;
-	width: 59px;
-	height: 24px;
-}
-
-#search_date{
-	margin: 0px 2px 0px 22px;
-	width: 72px;
-	height: 24px;
-}
-
-#search_key{
-	width: 72px;
-	height: 24px;
-}
-
-#search_text_box{
-	height: 17px;
-    font-size: 12px;
-    padding: 3px 4px;
-	border: 1px solid rgb(213, 213, 213);
+.precautions .precautions_list{
+	padding-top: 28px;
+	border-top: 2px solid #CFCFCF;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-table {
-	width: 500px;
-	margin: 0 auto;
+.precautions_list ol li{
+	padding: 5px 0px 5px 25px;
+	text-align: left;
+	font-size: 12px;
 }
 
-table,
-tr,
-th,
-td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
 
-div {
-	text-align: center;
-	margin: 0 auto;
-}
-
-ol#paging {
-	list-style: none;
-	float: right;
-	left: -50%;
-	position: relative;
-	margin-top: 0px;
-}
-
-ol#paging li {
-	float: left;
-	margin-right: 8px;
-	left: 50%;
-	position: relative;
-	margin-top: 0px;
-}
-
-ol#paging li a {
-	display: block;
-	padding: 3px 7px;
-	color: #2f313e;
-}
-
-ol#paging li a:hover {
-	background: #F2A766;
-	color: white;
-}
-
-.disable {
-	padding: 3px 7px;
-	color: silver;
-}
-
-.now {
-	padding: 3px 7px;
-	background: #F25E5E;
-	color: white;
-}

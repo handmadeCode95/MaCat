@@ -39,10 +39,6 @@ ul{
 	height: 88px;
 }
 
-.side-bar-menu .side-item:last-child{
-	margin-left: 31.5px;
-}
-
 .side-item{
 	cursor: pointer;
 }
@@ -54,7 +50,6 @@ ul{
 	cursor: pointer;
 	color: #FFFFFF;
 }
-
 
 .side-item > img{
 	position: relative;
