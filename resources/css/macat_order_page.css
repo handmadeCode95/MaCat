@@ -25,7 +25,7 @@ body{
 main{
     width: 1080px;
     min-width: 960px;
-    height: auto;
+    height: 1024px;
     /*요소 중앙정렬*/
     margin: 0 auto;      
     text-align: center;
@@ -45,10 +45,10 @@ main h2{
     height: 790px;  
 }
 /*우측 aside*/
-#order_side{
+#total_price_agreement{
     float: right;
     width: 290px;
     height: 790px;
-    border: 1px solid black;
     margin-right: 30px;
 }
+/*결제정보동의 체크박스 디자인*/

@@ -90,6 +90,10 @@ table.coupon_table td {
     vertical-align: middle;
     padding: 10px 10px 10px 10px;
 }
+/*사용가능 포인트 부분*/
+table.coupon_table td span{
+    font-size: 10px;
+}
 
 /*쿠폰 테이블 내 select, option 디자인*/
 /*선택 콤보박스 화살표, 내부 텍스트 조정*/
@@ -135,9 +139,8 @@ option {
 .payment_choice{
     display: inline-block;
     width: 690px;
-    height: 240px;
-    line-height: 240px;
-    border: 1px solid black;
+    height: 200px;
+    line-height: 200px;
     text-align: center;
 }
 
@@ -189,9 +192,8 @@ table.payment_choice_table tr {
 .bank_deposit{
     display: inline-block;
     width: 690px;
-    height: 240px;
-    line-height: 240px;
-    border: 1px solid black;
+    height: 200px;
+    line-height: 200px;
     text-align: center;
 }
 .bank_deposit-container{
@@ -225,4 +227,178 @@ table.bank_deposit-table td {
 
 table.bank_deposit-table tr {
     border: 1px solid #5c5173;
+}
+
+/*무통장입금 파트 선택시 색상변환*/
+.selected{
+    background: #5c5173;    
+    color: #ffffff;
+}
+/*무통장 테이블 끝*/
+
+/*구매상품목록 테이블*/
+/*테이블 바깥 div*/
+.ordered_product_list{
+    width: 690px;
+    height: 200px;
+    margin: 0 auto;
+}
+/*테이블 자체*/
+.ordered_product_list-table{
+    width: 690px;
+    height: 165px;
+    margin: 0 auto;
+}
+
+
+/*테이블 헤드파트*/
+.ordered_product_list-table thead tr{
+    background: #5c5173;
+    color: #ffffff;
+    height: 26px;
+    font-size: 10px;
+}
+.ordered_product_list-table thead tr th span{
+    float: left;
+    margin-left: 20px;
+}
+
+.ordered_product_list-table tbody tr{
+	height: 55px;
+    border-bottom: 2px solid #5C5173;
+}
+/*테이블 내부 폰트 크기*/
+.ordered_product_list-table tbody tr td{
+    padding: 0;
+    margin: 0;
+	font-size: 11px;
+}
+/*상품정보 테이블 이미지 크기*/
+.ordered_product_list-table tbody tr td img{
+	width: 45px;
+    height: 45px;
+}
+/*구매상품목록 끝*/
+
+/*최종결제정보 목록 테이블*/
+/*바깥 div*/
+.total_price_container{
+    width: 260px;
+    height: 210px;
+    padding: 15px;
+    border-top: 5px solid #5c5173;
+}
+
+/*최종가격 테이블 전체 마진*/
+table.total_price_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    border-spacing: 1px;
+    text-align: left;
+}
+/*텍스트 파트 : 왼쪽*/
+table.total_price_table th {
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;    
+}
+/*가격파트 : 오른쪽*/
+table.total_price_table td {
+    width: 50%;
+    height: 40px;
+    line-height: 40px; 
+    font-size: 18px;
+    text-align: right;
+}
+/*결제예정금액 열 크기 조정*/
+table.total_price_table tr:last-child th,
+table.total_price_table tr:last-child td{       
+    line-height: 60px;
+    border-collapse: collapse;
+    border-top : 1px solid #5c5173;
+    border-bottom: 2px solid #5C5173;
+}
+/*결제예정금액 폰트 색상*/
+table.total_price_table tr:last-child td:last-child {
+    font-size: 30px;
+    color: #F25E5E;    
+}
+/*결제하기 버튼*/
+.total_price_btn_conatiner{
+    width: 260px;
+    padding-top: 20px;
+    margin: 0;    
+}
+
+.total_price_btn_conatiner input.order_go{
+    width: 230px;
+    height: 62px;
+    line-height: 25px;
+    font-size: 25px;
+    border: none;
+    background: #5c5173;
+    color: #ffffff;
+}
+/*최종가격 테이블 끝*/
+
+/*결제동의 테이블*/
+/*결제동의 테이블 바깥 div*/
+.payment_agreement_conatiner{
+    margin-top: 364px;
+    vertical-align: bottom;
+    width: 270px;
+    height: 210px;
+    padding: 0px 10px 0px 10px;
+}
+
+.payment_agreement_conatiner span{
+    display: inline-block;
+    width: 270px;
+    height: 30px;
+    line-height: 30px;
+    background: #5c5173;
+    color: #ffffff;    
+    margin-left: -10px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+
+/*결제동의 테이블 전체 마진*/
+table.payment_agreement_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 15px;
+    border-spacing: 1px;
+    text-align: left;
+}
+/*텍스트 파트 : 왼쪽*/
+table.payment_agreement_table th {
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    padding-right: 10px;
+    font-size: 15px;    
+    text-align: right;
+    
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+table.payment_agreement_table th:last-child{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 2px solid #5c5173;
+    border-bottom: 2px solid #5c5173;
+} 
+
+/*설명문 파트 : 오른쪽*/
+table.payment_agreement_table td {
+    width: 100%;
+    height: 40px;
+    line-height: 100%; 
+    font-size: 10px;
 }

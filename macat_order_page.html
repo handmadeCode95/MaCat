@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="resources/css/order_page_tables.css">
     <!--라디오버튼-->
     <link rel="stylesheet" href="resources/css/radiobutton_order_page.css">
-
+    <!--체크박스  css-->
+    <link rel="stylesheet" href="resources/css/checkbox.css">
+    
     <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
     <!-- 고정헤더 불러오기 -->
     <script type="text/javascript">
@@ -47,6 +49,31 @@
             })
         });
     </script>
+      <!--무통장입금 선택쿼리문-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".bank_deposit-table tr.tr1 td").click(function() {
+                $(this).addClass("selected");
+                $(this).siblings().removeClass("selected");
+                $(".bank_deposit-table tr.tr2 td").removeClass("selected");
+                $(".bank_deposit-table tr.tr3 td").removeClass("selected");
+            });
+
+            $(".bank_deposit-table tr.tr2 td").click(function() {
+                $(this).addClass("selected");
+                $(this).siblings().removeClass("selected");
+                $(".bank_deposit-table tr.tr1 td").removeClass("selected");
+                $(".bank_deposit-table tr.tr3 td").removeClass("selected");
+            });
+
+            $(".bank_deposit-table tr.tr3 td").click(function() {
+                $(this).addClass("selected");
+                $(this).siblings().removeClass("selected");
+                $(".bank_deposit-table tr.tr1 td").removeClass("selected");
+                $(".bank_deposit-table tr.tr2 td").removeClass("selected");
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -72,6 +99,7 @@
                     <li data-tab-titles="adress_new">
                         <a href="#Redirect">신규주소지</a></li>
                 </ul>
+
                 <!--최근 주소지-->
                 <div id="adress_lately" class="tabcontent current">
                     <div class="delivery_adress_table">
@@ -213,6 +241,7 @@
                         <th scope="row">포인트 사용</th>
                         <td>
                             <input class="point_use" type="text">
+                            <span>사용가능 포인트 : <span>300</span> p</span>
                         </td>
                     </tr>
                 </table>
@@ -222,8 +251,8 @@
             <!--결제수단 선택 탭-->
             <div class="tab" id="payment_tab">
                 <ul class="payment_tab-titles" id="payment_tab-titles">
-                    <li class="current" data-tab-titles="payment_choice">                       
-                         <div class="radio">
+                    <li class="current" data-tab-titles="payment_choice">
+                        <div class="radio">
                             <input id="tab-credit_card" name="payment" type="radio">
                             <label for="tab-credit_card">신용카드/체크카드</label>
                         </div>
@@ -331,8 +360,9 @@
                         </div>
                     </div>
                     <!--신용카드/체크카드 선택 끝-->
-
                 </div>
+              
+
                 <!--무통장입금-->
                 <div id="bank_deposit" class="payment_tabcontent">
                     <!--무통장 입금-->
@@ -340,7 +370,7 @@
                         <div class="bank_deposit-container">
                             <table class="bank_deposit-table">
                                 <!--첫째줄-->
-                                <tr>
+                                <tr class="tr1">
                                     <td>기업은행</td>
                                     <td>KB국민은행</td>
                                     <td>NH농협은행</td>
@@ -349,7 +379,7 @@
                                     <td>우리은행</td>
                                 </tr>
                                 <!--둘째줄-->
-                                <tr>
+                                <tr class="tr2">
                                     <td>하나은행</td>
                                     <td>씨티은행</td>
                                     <td>카카오뱅크</td>
@@ -358,7 +388,7 @@
                                     <td>광주은행</td>
                                 </tr>
                                 <!--셋째줄-->
-                                <tr>
+                                <tr class="tr3">
                                     <td>전북은행</td>
                                     <td>경남은행</td>
                                     <td>수협은행</td>
@@ -375,12 +405,108 @@
             <!--탭 메뉴 끝-->
 
             <!--구매상품 목록 보여주기-->
-            
-        </section>
-        
-        <!--사이드 결제창 : 결제금액, 결제동의-->
-        <aside id="order_side">
+            <div class="ordered_product_list">
+                <table class="ordered_product_list-table">
+                    <colgroup>
+                        <col style="width:45px;">
+                        <col style="width:250px;">
+                        <col style="width:60px;">
+                        <col style="width:60px;">
+                        <col style="width:60px;">
+                    </colgroup>
+                    <!--테이블 제목-->
+                    <thead>
+                        <tr>
+                            <th colspan="5" scope="col"><span>상품정보</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--상품명, 수량, 금액, 배송비 행-->
+                        <tr>
+                            <td></td>
+                            <td>상품명</td>
+                            <td>수량</td>
+                            <td>금액</td>
+                            <td>배송비</td>
+                        </tr>
+                        <!--구매상품 목록 행-->
+                        <tr>
+                            <td><img src="/resources/img/macat_food01.png" alt=""></td>
+                            <td><a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
+                            </td>
+                            <td>1</td>
+                            <td id="cart_product_price">10,000</td>
+                            <td id="cart_delivery_pay">2,500</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/resources/img/macat_food01.png" alt=""></td>
+                            <td><a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
+                            </td>
+                            <td>1</td>
+                            <td id="cart_product_price">10,000</td>
+                            <td id="cart_delivery_pay">2,500</td>
+                        </tr>
+                    </tbody>
 
+                </table>
+            </div>
+        </section>
+
+        <!--사이드 결제창 : 결제금액, 결제동의-->
+        <aside id="total_price_agreement">
+            <!--총 결제금액 출력 테이블-->
+            <div class="total_price_container">
+                <table class="total_price_table">
+                    <tr>
+                        <th>총 상품가격</th>
+                        <td>20,000원</td>
+                    </tr>
+                    <tr>
+                        <th>배송비</th>
+                        <td>5,000원</td>
+                    </tr>
+                    <tr>
+                        <th>결제예정금액</th>
+                        <td>25,000원</td>
+                    </tr>
+                </table>
+                <!--결제 버튼-->
+                <div class="total_price_btn_conatiner">
+                    <input class="order_go" type="button" value="결제하기" />
+                </div>
+            </div>
+
+            <!--결제동의 테이블-->
+            <div class="payment_agreement_conatiner">
+               <span>결제정보제공동의 내용</span>
+                <table class="payment_agreement_table">                   
+                    <tr>
+                        <th>제공받는자</th>
+                        <td>마캣컴퍼니</td>
+                    </tr>
+                    <tr>
+                        <th>제공목적</th>
+                        <td>상품 및 배송, 반품, 환불,고객상담 등 정보통신서비스제공계약 및 전자상거래(통신판매)
+                        계약의 이행을 위해 필요한 업무의 처리</td>
+                    </tr>
+                    <tr>
+                        <th>동의항목</th>
+                        <td>ID, 성명, 전화번호, 휴대전화번호, 배송지 주소, 이메일 주소(선택시)</td>
+                    </tr>
+                    <tr>
+                        <th>정보보유기간</th>
+                        <td>결제정보제공 동의 후 1개월</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <div class="order_payment_agreement_input_box">
+                                <input type="checkbox" id="agreement_input">
+                                <label for="agreement_input">결제정보제공에 동의합니다</label>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
         </aside>
     </main>
 
