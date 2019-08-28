@@ -1,5 +1,7 @@
 package com.macat.service;
 
+import com.macat.dto.PageDTO;
+
 public class Paging {
 
 	public static void getPage(PageDTO paging, int count, String cPage) {

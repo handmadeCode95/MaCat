@@ -24,7 +24,7 @@
 	</bean>
 	
 	<!-- DAO -->
-	<bean id="dao" class="com.macat.service.DAO">
+	<bean id="dao" class="com.macat.dao.DAO">
 	   <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	

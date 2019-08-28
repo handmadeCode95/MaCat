@@ -9,6 +9,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Document</title>
+	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!--초기화-->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <link rel="stylesheet" href="resources/css/spacing.css">
@@ -195,14 +196,14 @@
 	                         href="db_cart.mcat?prduct_sq=${productsDTO.prduct_sq}&mber_sq=${sessionScope.loginData.mber_sq}"-->
 	                        <c:choose>
 	                        	<c:when test="${empty sessionScope.loginData}">
-		                        	<a href="javascript:setCookie('cart', ${productsDTO.prduct_sq}, 1);">
+		                        	<a href="javascript:setCookie(${productsDTO.prduct_sq},	'${productsDTO.ctgry_nm}', ${productsDTO.prduct_price}, ${productsDTO.prduct_dlvy_price}, '${productsDTO.prduct_nm}', '${productsDTO.prduct_thumb_nm}', ${productsDTO.prduct_dc}, ${productsDTO.prduct_dc_pt}, ${productsDTO.prduct_dced_price}, 'cart', 1);">
 		                            	<li class="cart">
 		                                	<img src="resources/img/mcat_cart.png" alt="">
 		                            	</li>
 		                        	</a>
 		                        </c:when>
 		                        <c:otherwise>
-		                        	<a href="javascript:void(0);" id="cart_btn">
+		                        	<a href="javascript:addCart(${productsDTO.prduct_sq}, ${sessionScope.loginData.mber_sq})">
 			                            <li class="cart">
 			                                <img src="resources/img/mcat_cart.png" alt="">
 			                            </li>

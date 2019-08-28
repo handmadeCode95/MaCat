@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -7,6 +8,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>장바구니</title>
+	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!--normalize-->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!--장바구니 css-->
@@ -17,66 +19,10 @@
 	    <link rel="stylesheet" href="resources/css/checkbox.css">
 	            
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	 
-	    <script type="text/javascript">
-	//        고정헤더 불러오기
-	        $(document).ready(function() {
-	            $("#macat_header").load("macat_header.html");
-	        });        
-	        //전체선택 체크박스 클릭 
-	        $(function(){ 
-	           $("#cart_allCheck").click(function(){
-	                if( $("#cart_allCheck").prop("checked") ){ 
-	                    $("input[name=cartOne]").prop("checked",true); 
-	                } else {  
-	                    $("input[name=cartOne]").prop("checked",false); 
-	                }   
-	           });
-	        });        
-	        
-	        function allCheckFunc( obj ) {
-			$("[name=cartchkAll]").prop("checked", $(obj).prop("checked") );
-	        }
-	
-	/*     체크박스 체크시 전체선택 체크 여부 : 하나 선택해제하면
-	    전체선택 체크박스 체크표시가 해제됨*/
-	        function oneCheckFunc( obj )
-	        {
-	            var allObj = $("[name=cartchkAll]");
-	            var objName = $(obj).attr("name");
-	
-	            if( $(obj).prop("checked") )
-	            {
-	                checkBoxLength = $("[name="+ objName +"]").length;
-	                checkedLength = $("[name="+ objName +"]:checked").length;
-	
-	                if( checkBoxLength == checkedLength ) {
-	                    allObj.prop("checked", true);
-	                } else {
-	                    allObj.prop("checked", false);
-	                }
-	            }
-	            else
-	            {
-	                allObj.prop("checked", false);
-	            }
-	        }
-	
-	        $(function(){
-	            $("[name=cartchkAll]").click(function(){
-	                allCheckFunc( this );
-	            });
-	            $("[name=cartOne]").each(function(){
-	                $(this).click(function(){
-	                    oneCheckFunc( $(this) );
-	                });
-	            });
-	        });
-	    </script>
+	    <script type="text/javascript" src="resources/js/cart.js"></script>
 	</head>
 	<body>
-	     <!-- 고정헤더 불러오기 -->
-	    <div id="macat_header"></div>
+	    <div id="macat_header"><%@ include file="head.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="cart_spacing"></div>
 	
@@ -99,65 +45,45 @@
 	                <thead>
 	                    <tr>
 	                        <th scope="col">
-	                            <input name="cartchkAll" type="checkbox" id="cart_allCheck">
-	                            <label for="cart_allCheck" />
+	                            <input type="checkbox" id="cart_allCheck" checked>
+	                            <label for="cart_allCheck"></label>
 	                        </th>
 	                        <th scope="col"><span>상품이미지</span></th>
 	                        <th scope="col">상품명</th>
+	                        <th scope="col">색상</th>
 	                        <th scope="col">수량</th>
 	                        <th scope="col">금액</th>
 	                        <th scope="col">배송비</th>
 	                    </tr>
 	                </thead>
-	                <tbody>
-	                    <tr>
-	                        <td>
-	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk1">
-	                            <label for="cart_chk1" />
-	                        </td>
-	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
-	                        <td>
-	                        <div class="category_box">food</div>
-	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
-	                        </td>
-	                        <td>1</td>
-	                        <td id="cart_product_price">10,000</td>
-	                        <td id="cart_delivery_pay">2,500</td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk2">
-	                            <label for="cart_chk2" />
-	                        </td>
-	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
-	                        <td>
-	                        <div class="category_box">food</div>
-	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
-	                        </td>
-	                        <td>1</td>
-	                        <td id="cart_product_price">10,000</td>
-	                        <td id="cart_delivery_pay">2,500</td>
-	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk3">
-	                            <label for="cart_chk3" />
-	                        </td>
-	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
-	                        <td>
-	                        <div class="category_box">food</div>
-	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
-	                        </td>
-	                        <td>1</td>
-	                        <td id="cart_product_price">10,000</td>
-	                        <td id="cart_delivery_pay">2,500</td>
-	                    </tr>
+	                <tbody id="cart_result">
+	                	<c:choose>
+	                		<c:when test="${!empty cartsDTO}">
+		                		<c:forEach var="i" items="${cartsDTO}" varStatus="vs">
+				                    <tr>
+				                        <td>
+				                            <input name="carts" class="chkbox" type="checkbox" id="${vs.index}" checked>
+				                            <label for="${vs.index}"></label>
+				                        </td>
+				                        <td><img src="resources/img/${i.prduct_thumb_nm}" alt=""></td>
+				                        <td>
+				                        <div class="category_box">${i.ctgry_nm}</div>
+				                            <a href="macat_product.html">${i.prduct_nm}</a>
+				                        </td>
+				                        <td>${i.cart_color}</td>
+				                        <td>${i.cart_amt}</td>
+				                        <td id="cart_product_price">${i.prduct_dced_price}</td>
+				                        <td id="cart_delivery_pay">${i.prduct_dlvy_price}</td>
+				                    </tr>
+			                    </c:forEach>
+		                    </c:when>
+			                <c:otherwise>
+			                    <tr>
+			                        <td colspan="6">장바구니가 비었습니다.</td>
+			                    </tr>
+		                    </c:otherwise>
+	                	</c:choose>
 	                </tbody>			
-	                <tbody id="cart_list_none">
-	                    <tr>
-	                        <td colspan="6">장바구니가 비었습니다.</td>
-	                    </tr>
-	                </tbody>
 	            </table>
 	        </div>
 	        
@@ -174,18 +100,44 @@
 	        <!--합계 테이블-->
 	        <div class="cart_total_price">
 	            <table class="price_result">
-	               <tr>
-	                   <th>장바구니 합계</th>
-	                    <td>10,000원</td>                   
-	               </tr>
-	                <tr>
-	                   <th>배송비</th>
-	                    <td>2,500원</td>                   
-	               </tr>
-	                <tr>
-	                   <th>총 결제금액</th>
-	                    <td>12,500원</td>                   
-	               </tr>                
+	            	<c:choose>
+	            		<c:when test="${!empty totalPrice}">
+	            			<tr>
+			                    <th>장바구니 합계</th>
+			                    <td>${totalPrice}원</td>                   
+			                </tr>
+			                <tr>
+			                    <th>배송비</th>
+			                    <td>${mostDlvyPrice}원</td>                   
+			                </tr>
+			                <tr>
+			                    <th>할인금액</th>
+			                    <td>${totalDC}원</td>                   
+			                </tr>  
+			                <tr>
+			                    <th>총 결제금액</th>
+			                    <td>${totalPrice - totalDC + mostDlvyPrice}원</td>                   
+			                </tr>
+	            		</c:when>
+	            		<c:otherwise>
+	            			<tr>
+			                    <th>장바구니 합계</th>
+			                    <td>0원</td>                   
+			                </tr>
+			                <tr>
+			                    <th>배송비</th>
+			                    <td>0원</td>                   
+			                </tr>
+			                <tr>
+			                    <th>할인금액</th>
+			                    <td>0원</td>                   
+			                </tr>  
+			                <tr>
+			                    <th>총 결제금액</th>
+			                    <td>0원</td>                   
+			                </tr>  
+	            		</c:otherwise>
+	            	</c:choose>
 	            </table>            
 	        </div>
 	        

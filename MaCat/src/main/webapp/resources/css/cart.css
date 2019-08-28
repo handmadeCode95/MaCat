@@ -59,7 +59,6 @@ caption{
 
 .cart_list_main{
 	width: inherit;
-	border-bottom: 2px solid #F25E5E;
 }
 /*테이블 헤드파트*/
 .cart_list_main thead tr{
@@ -100,10 +99,6 @@ caption{
 	text-align: left;
 	font-size: 12px;
     padding-bottom: 20px;
-}
-
-#cart_list_none{
-    display: none;
 }
 
 /*상품명 내 카테고리 버튼*/
@@ -156,9 +151,11 @@ table.price_result th {
     font-size: 18px;    
 }
 
+/*
 table.price_result tr:last-child th, tr:last-child td{
     border-top : 1px solid #5c5173;
 }
+*/
 /*가격파트 : 오른쪽*/
 table.price_result td {
     width: 800px;
@@ -221,4 +218,3 @@ table.price_result td {
     border: 1px solid #5c5173;       
     float: left;
 }
-

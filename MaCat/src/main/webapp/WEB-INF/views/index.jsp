@@ -10,10 +10,11 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+		<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 		<script type="text/javascript">
 			$(function() {
 				//$(location).attr("href", "category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
-				$(location).attr("href", "product_reg.mcat");
+				$(location).attr("href", "cart.mcat?mber_sq=1");
 			});
 		</script>
 	</head>

@@ -1,8 +1,16 @@
 /*헤더 - 세션간 공간확보용*/
 .spacing {
-    height: 180px;
+    height: 160px;
 }
 
 .mypage {
     height: 200px;
+}
+
+.cart_spacing {
+    height: 210px;
+}
+
+.order_spacing {
+    height: 250px;
 }

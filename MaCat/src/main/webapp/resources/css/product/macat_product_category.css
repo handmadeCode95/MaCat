@@ -182,8 +182,6 @@
 
 /* 상품명,가격 박스크기 조절용*/
 .title_price_container {
-	font-family: '서울남산 장체EB';
-	
     margin: 0 auto;
     height: 80px;
     width: 240px;
@@ -199,6 +197,10 @@
     font-size: 15px;    
 }
 
+.title_price_container a {
+	font-family: '서울남산 장체EB';
+}
+
 /* 상품명 위치조정*/
 a strong {
     display: block;
@@ -212,10 +214,10 @@ a strong {
 }
 
 .price p {    
+	font-family: '서울남산 장체EB';
     float: left;
     width: 50%;
     padding: 10px 10px 10px 10px;
-    margin: 0 auto;
     line-height: 20px;
 }
 

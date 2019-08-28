@@ -17,7 +17,7 @@
 	<div class="floating_remoteCon">
 		<div class="remoteCon_name">최근 본 상품</div>
 		<div>
-			<c:if test="${cookie.viewedProductSq1 != null}">
+			<c:if test="${!empty cookie.viewedProductSq1}">
 				<a
 					href="product.mcat?prduct_sq=${cookie.viewedProductSq1.value}&prduct_thumb_nm=${cookie.viewedProductThumb1.value}">
 					<img src="resources/img/${cookie.viewedProductThumb1.value}" alt="">
@@ -25,7 +25,7 @@
 			</c:if>
 		</div>
 		<div>
-			<c:if test="${cookie.viewedProductSq2 != null}">
+			<c:if test="${!empty cookie.viewedProductSq2}">
 				<a
 					href="product.mcat?prduct_sq=${cookie.viewedProductSq2.value}&prduct_thumb_nm=${cookie.viewedProductThumb2.value}">
 					<img src="resources/img/${cookie.viewedProductThumb2.value}" alt="">
@@ -33,7 +33,7 @@
 			</c:if>
 		</div>
 		<div>
-			<c:if test="${cookie.viewedProductSq3 != null}">
+			<c:if test="${!empty cookie.viewedProductSq3}">
 				<a
 					href="product.mcat?prduct_sq=${cookie.viewedProductSq3.value}&prduct_thumb_nm=${cookie.viewedProductThumb3.value}">
 					<img src="resources/img/${cookie.viewedProductThumb3.value}" alt="">

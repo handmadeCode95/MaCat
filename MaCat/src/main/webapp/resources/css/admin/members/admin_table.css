@@ -16,7 +16,8 @@ input[type=password] {
     font-size: 22px;
 }
 
-.member_info_table_title span p{
+#mbers_count{
+	font-weight: normal;
     line-height: 60px; 
     font-size: 22px;
     display: inherit;

@@ -8,6 +8,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>회원 정보 관리</title>
+	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->
@@ -175,7 +176,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="member_info_table_title">
-	                <span>회원정보 (총 <p>1,837</p> 명)</span>
+	                <span>회원정보 (총 <b id="mbers_count">${mbers_count}</b> 명)</span>
 	            </div>
 	            <div id="members" class="info_table">
 	                <form>
@@ -201,7 +202,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input name="mbers" type="checkbox" id="allCheck"></th>
+	                                    <th><input type="checkbox" id="allCheck"></th>
 	                                    <th scope="col">회원번호</th>
 	                                    <th scope="col">이름</th>
 	                                    <th scope="col">성별</th>

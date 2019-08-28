@@ -2,6 +2,7 @@ package com.macat.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -23,20 +24,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.macat.service.DAO;
-import com.macat.service.DateDTO;
+import com.macat.dao.DAO;
+import com.macat.dto.CartsDTO;
+import com.macat.dto.DateDTO;
+import com.macat.dto.FaqDTO;
+import com.macat.dto.FaqSearchDTO;
+import com.macat.dto.MbersDTO;
+import com.macat.dto.MbersSearchDTO;
+import com.macat.dto.NotsSearchDTO;
+import com.macat.dto.PageDTO;
+import com.macat.dto.ProductsDTO;
+import com.macat.dto.QnaDTO;
+import com.macat.dto.QnaSearchDTO;
 import com.macat.service.DateUtil;
-import com.macat.service.FaqSearchDTO;
 import com.macat.service.FileUpload;
-import com.macat.service.FaqDTO;
-import com.macat.service.MbersSearchDTO;
-import com.macat.service.MbersDTO;
-import com.macat.service.NotsSearchDTO;
-import com.macat.service.PageDTO;
 import com.macat.service.Paging;
-import com.macat.service.ProductsDTO;
-import com.macat.service.QnaSearchDTO;
-import com.macat.service.QnaDTO;
+import com.macat.service.PriceUtil;
 
 @Controller
 public class MaCatController {
@@ -99,14 +102,17 @@ public class MaCatController {
 	@RequestMapping(value = "mber_join.mcat", method = RequestMethod.POST)
 	public ModelAndView getJoinCmd(MbersDTO mbersDTO) {
 		// 테스트맨 생성기
-		/*
-		 * mbersDTO.setEmail(mbersDTO.getEmail() + mbersDTO.getEmail_end()); String id =
-		 * mbersDTO.getId(); for (int i = 1; i <= 50; i++) { mbersDTO.setId(id + i);
-		 * dao.getJoin(mbersDTO); }
-		 */
-
+		
 		mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
-		dao.getJoin(mbersDTO);
+		String id = mbersDTO.getMber_id();
+		for (int i = 1; i <= 100; i++) {
+			mbersDTO.setMber_id(id + i);
+			dao.getJoin(mbersDTO);
+		}
+		 
+
+		//mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
+		//dao.getJoin(mbersDTO);
 		return new ModelAndView("redirect:login.mcat");
 	}
 
@@ -145,6 +151,44 @@ public class MaCatController {
 		return mv;
 	}
 	
+	// 장바구니로 이동
+	@RequestMapping("cart.mcat")
+	public ModelAndView getCartCmd(String mber_sq) {
+		ModelAndView mv = new ModelAndView("cart");
+		if (mber_sq != null) {
+			List<CartsDTO> cartList = dao.getCarts(mber_sq);
+			int totalPrice = 0;
+			int totalDC = 0;
+			int mostDlvyPrice = 0;
+
+			for (CartsDTO i : cartList) {
+				int dc = PriceUtil.getDc(i.getPrduct_price(), i.getPrduct_dc(), i.getPrduct_dc_pt(), i.getCart_amt());
+				int price = i.getPrduct_price() * i.getCart_amt();
+
+				totalDC += dc;
+				totalPrice += price;
+				i.setPrduct_dced_price(price - dc);
+
+				if (mostDlvyPrice < i.getPrduct_dlvy_price()) {
+					mostDlvyPrice = i.getPrduct_dlvy_price();
+				}
+			}
+
+			if (totalPrice - totalDC > 50000) {
+				for (CartsDTO i : cartList) {
+					i.setPrduct_dlvy_price(0);
+				}
+				mostDlvyPrice = 0;
+			}
+
+			mv.addObject("totalPrice", totalPrice);
+			mv.addObject("totalDC", totalDC);
+			mv.addObject("mostDlvyPrice", mostDlvyPrice);
+			mv.addObject("cartsDTO", cartList);
+		}
+		return mv;
+	}
+
 	
 	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
 	
@@ -222,11 +266,7 @@ public class MaCatController {
 	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
 	
 
-	// 장바구니로 이동
-	@RequestMapping("cart.mcat")
-	public ModelAndView getCartCmd() {
-		return new ModelAndView("cart");
-	}
+	// 장바구니 담기
 	
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
@@ -238,6 +278,7 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "MbersDTO";
 		ModelAndView mv = new ModelAndView("admin/members/manager");
+		
 		DateDTO dateDTO = new DateDTO();
 		dateDTO.setToday(DateUtil.getToday());
 		dateDTO.setOneWeekAgo(DateUtil.addDate(-7));
@@ -245,9 +286,11 @@ public class MaCatController {
 		dateDTO.setThreeMonthAgo(DateUtil.addMonth(-3));
 		dateDTO.setSixMonthAgo(DateUtil.addMonth(-6));
 		dateDTO.setOneYearAgo(DateUtil.addYear(-1));
-		PageDTO pageDTO = new PageDTO();
+		
+		PageDTO pageDTO = new PageDTO(50);
 		count = dao.getMbersCount();
 		Paging.getPage(pageDTO, count, cPage);
+		mv.addObject("mbers_count", count);
 		mv.addObject("dateDTO", dateDTO);
 		mv.addObject("mber_grad", dao.getMberGradList());
 		mv.addObject("mbersDTO", dao.getMbersList(pageDTO.getBegin(), pageDTO.getEnd()));
@@ -333,14 +376,15 @@ public class MaCatController {
 	// 회원 정보 페이징
 	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMbersPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(50);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		Paging.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
+		map.put("mbers_count", count);
 		
 		map.put("mber_grad", dao.getMberGradList());
 
@@ -383,7 +427,7 @@ public class MaCatController {
 			mbersSearchDTO.setMber_reg_dt_end(mbersSearchDTO.getMber_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(50);
 
 		switch (mbersSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -398,6 +442,7 @@ public class MaCatController {
 
 		Paging.getPage(pageDTO, count, null);
 		map.put("pageDTO", pageDTO);
+		map.put("mbers_count", count);
 		mbersSearchDTO.setBegin(pageDTO.getBegin());
 		mbersSearchDTO.setEnd(pageDTO.getEnd());
 		this.mbersSearchDTO = mbersSearchDTO; // 페이징을 위한 검색 기록 저장
@@ -425,7 +470,7 @@ public class MaCatController {
 				dao.getMbersUpdate(j);
 			}
 		}
-		return getMbersPageDTOCmd(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 
 	// 회원 탈퇴
@@ -450,7 +495,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getMbersPageDTOCmd(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 
 	
@@ -460,7 +505,7 @@ public class MaCatController {
 	// 공지사항 페이징
 	@RequestMapping(value = "nots_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getNotsPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -565,7 +610,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getNotsPageDTOCmd(cPage);
+		return getNotsPagingCmd(cPage);
 	}
 
 	
@@ -575,7 +620,7 @@ public class MaCatController {
 	// 고객 문의 페이징
 	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getQnaPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -668,7 +713,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getQnaPageDTOCmd(cPage);
+		return getQnaPagingCmd(cPage);
 	}
 
 	// 문의 보기로 이동
@@ -691,7 +736,7 @@ public class MaCatController {
 	// FAQ 페이징
 	@RequestMapping(value = "faq_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getFaqPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getFaqPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -778,7 +823,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getFaqPageDTOCmd(cPage);
+		return getFaqPagingCmd(cPage);
 	}
 
 	// FAQ 보기로 이동

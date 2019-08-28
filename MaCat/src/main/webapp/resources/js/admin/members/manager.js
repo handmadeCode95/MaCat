@@ -4,6 +4,7 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var mbers_count;
 		$.each(data, function(key, value){
 			if (key === "mbersDTO") {
 				$.each(value, function(k, v){
@@ -63,12 +64,17 @@ $(function() {
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-		}
-	});
-	$("#searchResult").empty();
-	$("#searchResult").append(result);
+			}else if (key === "mbers_count"){
+				mbers_count = value;
+			}
+		});
+		$("#searchResult").empty();
+		$("#searchResult").append(result);
 		$("#paging").empty();
 		$("#paging").append(pagingResult);
+		$("#mbers_count").empty();
+		$("#mbers_count").append(mbers_count);
+		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
 	
@@ -171,9 +177,15 @@ $(function() {
 		if ($(this).prop("checked")){
 			$("."+this.value).attr("disabled", false);
 			$("."+this.value).css("color", "#F2A766");
-		}else{
+			
+			// 체크 안된 값이 없으면 allCheck 체크박스도 체크
+			if ($(".chkbox:not(:checked)").length == 0) $("#allCheck").prop("checked", true);
+		}else {
 			$("."+this.value).attr("disabled", true);
 			$("."+this.value).css("color", "#000");
+			
+			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
+			$("#allCheck").prop("checked", false);
 		}
 	});
 	
@@ -255,7 +267,6 @@ $(function() {
             contentType : "application/json",
             data		: mbersDTO,
             success		: function(data) {
-            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
             			  },
             error		: function(error) {
@@ -275,7 +286,6 @@ $(function() {
             contentType : "application/json",
             data		: $().toJSON($(".chkbox:checked")),
             success		: function(data) {
-            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
 			              },
             error		: function(error) {

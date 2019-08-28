@@ -30,6 +30,11 @@
 		SELECT * FROM QNA_CTGRIES_TB ORDER BY QC_ORD
 	</select>
 	
+	<!-- 장바구니 조회 -->
+	<select id="cart" resultType="CartsDTO" parameterType="String">
+		SELECT * FROM CARTS_VIEW WHERE MBER_SQ = #{mber_sq} ORDER BY CART_SQ
+	</select>
+	
 	
 	<!--=========================== 카테고리 ===========================-->
 	
@@ -48,11 +53,12 @@
 	<!--=========================== 상품 조회 ===========================-->
 	
 	
-	<!-- 전체 상품 갯수 -->
+	<!-- 카테고리 그룹별 상품 갯수 -->
 	<select id="products_group_list_count" resultType="int" parameterType="int">
 		SELECT COUNT(*) FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group}
 	</select>
 	
+	<!-- 카테고리별 상품 갯수 -->
 	<select id="products_list_count" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm}
 	</select>
