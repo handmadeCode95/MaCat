@@ -6,31 +6,43 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>주문내역</title>
+    <title>Document</title>
     <!--여백-->
-    <link rel="stylesheet" href="resources/css/spacing.css">    
+    <link rel="stylesheet" href="resources/css/spacing.css">
+    <!-- macat_mypage_2nd.css-->
+    <link rel="stylesheet" href="resources/css/macat_mypage.css">
     <!--초기화-->
     <link rel="stylesheet" href="resources/css/normalize.css">
+    <!--주문조회-->
+    <link rel="stylesheet" href="resources/css/macat_order_inquiry_page.css">
+    <!--탭메뉴-->
+    <link rel="stylesheet" href="resources/css/tab_menu-order_inquiry.css">
     <!--displaynone-->
     <link rel="stylesheet" href="resources/css/displaynone.css">
-	<!-- 페이징 -->
-	<link rel="stylesheet" href="resources/css/paging.css">	 
-    <!--탭메뉴-->
-    <link rel="stylesheet" href="resources/css/member/tab_menu-order_inquiry.css">
-	<!--주문조회-->
-    <link rel="stylesheet" href="resources/css/member/macat_order_inquiry_page.css">
-    <!-- macat_mypage_2nd.css-->
-    <link rel="stylesheet" href="resources/css/member/macat_mypage.css">	
     <!--min file-->
     <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
- 	<!--탭메뉴 쿼리-->
- 	<script type="text/javascript" src="resources/js/product/product.js"></script>
-
-
+    <!-- 고정헤더 불러오기 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#macat_header").load("macat_header.html");
+        });
+    </script>
+    <!--탭메뉴 쿼리-->
+    <script type="text/javascript">
+        $(function() {
+            $('ul.tab-titles li').click(function() {
+                var activeTab = $(this).attr('data-tab-titles');
+                $('ul.tab-titles li').removeClass('current');
+                $('.tabcontent').removeClass('current');
+                $(this).addClass('current');
+                $('#' + activeTab).addClass('current');
+            })
+        });
+    </script>
     <!--기간선택 쿼리-->
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".state_select_btn li").each(function() {
+            $("li").each(function() {
                 $(this).click(function() {
                     $(this).addClass("selected");
                     //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
@@ -40,13 +52,11 @@
             });
         });
     </script>
-    
+    <!--페이징-->
 </head>
 <body>
     <!-- 고정헤더 불러오기 -->
-	<div id="macat_header">
-		<%@ include file="../head.jsp"%>
-	</div>
+    <div id="macat_header"></div>
     <!-- 여백-->
     <div class="spacing"></div>
 
@@ -213,60 +223,7 @@
                                 <p class="message">주문 내역이 없습니다.</p>
                                 <!--클래스명 displaynone 추가하면 안보임, 제이쿼리..-->
                             </div>
-                            
-                            <div id="pagingDiv">
-							<%-- 페이징 --%>
-							<ol id="paging">
-								<%-- 이전 --%>
-								<c:choose>
-									<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-										<li class="pagingDisable"><img
-											src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li><a class="page"
-											href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
-												<img src="resources/img/mcat-arrow-slider-left-grey.png"
-												height="10px">
-										</a></li>
-									</c:otherwise>
-								</c:choose>
-				
-								<%-- 블록안에 들어간 페이지번호들 --%>
-								<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}"
-									step="1" var="i">
-									<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
-									<c:choose>
-										<c:when test="${i == paging.nowPage}">
-											<li class="nowPage">${i}</li>
-										</c:when>
-										<c:otherwise>
-											<li><a class="page"
-												href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-				
-								<%-- 다음 --%>
-								<c:choose>
-									<c:when test="${paging.endBlock >= paging.totalPage}">
-										<li class="pagingDisable"><img
-											src="resources/img/mcat-arrow-slider-right-grey.png"
-											height="10px"></li>
-									</c:when>
-									<c:otherwise>
-										<li><a class="page"
-											href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
-												<img src="resources/img/mcat-arrow-slider-right-grey.png"
-												height="10px">
-										</a></li>
-									</c:otherwise>
-								</c:choose>
-							</ol>
-						</div>
-                            <!-- 페이징 -->
-                            <!-- <div class="paginate">
+                            <div class="paginate">
                                 <a href="#Redirect">
                                     <img src="resources/img/btn_page_first.gif" alt="첫 페이지">
                                 </a>
@@ -285,8 +242,7 @@
                                     <img src="resources/img/btn_page_last.gif" alt="마지막 페이지">
                                 </a>
                             </div>
-                        </div> -->
-                        
+                        </div>
                         <!--취소반품교환 내역 파트-->
                         <div id="tab2" class="tabcontent">
                             <!-- 주문상태 선택 파트-->
@@ -311,9 +267,9 @@
                                     ~
                                     <!--검색 종료 날짜-->
                                     <input id="history_end_date" class="fText" type="text" value="yyyy-mm-dd">
-                                   
+                                    <button type="button">
                                         <img src="resources/img/calender.png" alt="달력보기">
-                                    
+                                    </button>
                                     <input type="image" src="resources/img/but_search.gif">
                                 </fieldset>
                                 <ul class="describe">
@@ -354,16 +310,23 @@
                                     </thead>
                                     <tbody class="center">
                                         <tr class>
-                                            <td class="number">주문일자입력파트
-                                                <p><a href="#Redirect" class="line">[상품번호입력파트]</a></p>
+                                            <td class="number">
+                                                주문일자입력파트
+                                                <p>
+                                                    <a href="#Redirect" class="line">[상품번호입력파트]</a>
+                                                </p>
                                                 <a href="#Redirect" class onclick="페이지 이동  function">
-                                                    <img src="resources/img/btn_order_cancel.gif" alt=""></a>
+                                                    <img src="resources/img/btn_order_cancel.gif" alt="">
+                                                </a>
                                                 <a href="#Redirect" class onclick="페이지 이동  function">
-                                                    <img src="resources/img/btn_order_cancel2.gif" alt=""></a>
+                                                    <img src="resources/img/btn_order_cancel2.gif" alt="">
+                                                </a>
                                                 <a href="#Redirect" class onclick="페이지 이동  function">
-                                                    <img src="resources/img/btn_order_exchange.gif" alt=""></a>
+                                                    <img src="resources/img/btn_order_exchange.gif" alt="">
+                                                </a>
                                                 <a href="#Redirect" class onclick="페이지 이동  function">
-                                                <img src="resources/img/btn_order_return.gif" alt=""></a>
+                                                    <img src="resources/img/btn_order_return.gif" alt="">
+                                                </a>
                                             </td>
                                             <td class="thumb">
                                                 <a href="상품페이지로 이동합니다">
@@ -395,7 +358,9 @@
                                                     <img src="resources/img/btn_order_retract2.gif" alt="반품철회"></a>
                                             </td>
                                             <td>
-                                                <p><a href="" class="line">[상세정보]</a></p>
+                                                <p>
+                                                    <a href="" class="line">[상세정보]</a>
+                                                </p>
                                                 <p>-</p>
                                             </td>
                                         </tr>
@@ -405,8 +370,6 @@
                                 <!--클래스명 displaynone 추가하면 안보임, 제이쿼리..-->
                                 <p class="message">취소/반품/교환 내역이 없습니다.</p>
                             </div>
-                            <!-- 상품정보 게시글 모음 -->
-                            
                             <div class="paginate">
                                 <a href="#Redirect">
                                     <img src="resources/img/btn_page_first.gif" alt="첫 페이지">
@@ -414,7 +377,11 @@
                                 <a href="#Redirect">
                                     <img src="resources/img/btn_page_prev.gif" alt="이전 페이지">
                                 </a>
-                                <ol><li><a href="" class="this">1</a></li></ol>
+                                <ol>
+                                    <li>
+                                        <a href="" class="this">1</a>
+                                    </li>
+                                </ol>
                                 <a href="#Redirect">
                                     <img src="resources/img/btn_page_next.gif" alt="다음 페이지">
                                 </a>
@@ -422,11 +389,8 @@
                                     <img src="resources/img/btn_page_last.gif" alt="마지막 페이지">
                                 </a>
                             </div>
-                            
                         </div>
-                        <!-- 취소반품교환 파트 end -->
                     </div>
-                    <!-- 탭메뉴 속 end -->
 
                 </div>
             </div>

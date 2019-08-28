@@ -24,18 +24,15 @@
 	                });
 	            });
 	        });
-	        /*관리자 사이드메뉴*/
-	        $(document).ready(function() {
-	            $(".macat_sideMenu_load").load("macat_admin_sideMenu.html")
-	        });
 	    </script>
 	    <!-- checkbox 전체선택 쿼리 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
+	    
 	</head>
 	
 	<body>
-	   <!--관리자 페이지 사이드메뉴 불러오기-->
-	    <div class="macat_sideMenu_load"></div>    
+    <!--관리자 페이지 사이드메뉴 불러오기-->
+    <div class="macat_sideMenu_load"><%@ include file="../macat_admin_sideMenu.jsp" %></div>  
 	   
 	    <main>
 	        <section class="wrap">
@@ -44,10 +41,13 @@
 	            </div>
 	            <div class="detail_text_area">
 	            	<p>상품제목출력파트</p>
+	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
-	            	<form action="contentsForm">
-	            		<textarea id="txtContent" name="contents"></textarea>
-	            	</form>
+		            	<div class="smartEditor_container">
+		            		<form action="contentsForm">
+			            		<textarea id="txtContent" name="contents"></textarea>
+			            	</form>
+		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
 	            	<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료">
@@ -56,6 +56,7 @@
 	        </section>        
 	    </main>
 	</body>
+	<!-- 스마트 에디터 -->
 	<script type="text/javascript">
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({

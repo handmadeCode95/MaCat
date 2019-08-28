@@ -22,13 +22,11 @@
 * {
     font-family: 'THEjunggt130';
 	list-style: none;
+	margin: 0px;
+	padding: 0px;
 }
 
-caption{
-	display: none;
-}
-
-legend{
+caption , legend{
 	display: none;
 }
 
@@ -36,15 +34,12 @@ colgroup{
 	display: table-column-group;
 }
 
-div fieldset{
-	border-style: none;
-}
-
 thead{
 	display: table-header-group;
 	vertical-align: middle;
 }
 
+/*wrap 내부 전체 설정*/
 #wrap {
     width: 1024px;
     min-width: 960px;
@@ -54,12 +49,13 @@ thead{
     text-align: center;
 }
 
+
 .contents {
 	width: 1024px;
 }
 
 
-.board_title{
+.wish-list-title{
 	height: 71px;
 }
 
@@ -80,81 +76,97 @@ thead{
 
 #title{
 	min-height: 30px;
-	margin: 10px 0 20px;
+	margin-top: 10px;
     border-bottom: 2px solid #F25E5E;
 	text-align: left;
 }
 
 h2{
+	display: inline;
 	font-size: 17px;
+	
 }
 
-
-.board_list{
+.wish-list-menu{
 	margin-top: 30px;
 }
 
-.board_list_main{
+.wish-list-main{
 	width: 1024px;
 	border-bottom: 2px solid #F25E5E;
 }
 
-.board_list_main thead tr{
+.wish-list-main thead tr{
 	border-bottom: 2px solid #CFCFCF;
 }
 
-.board_list_main thead tr th{
+.wish-list-main thead tr th{
 	padding: 9px 0px 7px;
+	font-size: 13px;
 }
 
-.board_list_main #main_list tr{
+.wish-list-main #wish-list-main-menu tr{
 	height: 32px;
 }
 
-.board_list_main #main_list tr td{
+.wish-list-main #wish-list-main-menu tr td{
+	text-align: center;
 	padding: 11px 0px 10px;
 	font-size: 11px;
 }
 
-.board_list_main #main_list tr td:nth-child(3){
+.wish-list_main #wish-list-main-menu tr td li{
+    font-size: 11px;
+}
+
+.wish-list-main #wish-list-main-menu tr td:nth-child(3){
 	padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
 }
 
-#main_list_none{
+
+/*주소가 없을 때 나오는 tbody css*/
+.list_none{
+	height: 119px;
+	text-align: center;
 	display: none;
 }
 
-form{
-	text-align: center;
+.list_none > tr > td{
+	padding: 50px 0px 50px;
 }
 
-fieldset{
-	font-size: 14px;
+.btn{
+	height: 50px;
+	padding: 10px 20px 10px 20px;
 }
 
-fieldset a img{
-	position: relative;
-	top: 8px;
-	width: 59px;
-	height: 24px;
+#new-post-btn{
+	float: right;
 }
 
-#search_date{
-	margin: 0px 2px 0px 22px;
-	width: 72px;
-	height: 24px;
+.search-bar{
+    float: left;
+    height: 108px;
+    padding: 20px 10px 20px;
 }
 
-#search_key{
-	width: 72px;
-	height: 24px;
+.search-bar p{
+    text-align: left;
+    font-size: 0.75em;
 }
 
-#search_text_box{
-	height: 17px;
-    font-size: 12px;
-    padding: 3px 4px;
-	border: 1px solid rgb(213, 213, 213);
+.search-bar select{
+    height: 24px;
+    font-size: 100%;
+}
+
+.search-bar input{
+	height: 20px;
+}
+
+.search-bar a img{
+    position: relative;
+    top: 9px;
 }

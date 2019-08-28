@@ -307,6 +307,18 @@ public class MaCatController {
 	}
 	
 	
+	// 관리자 상품등록 페이지로 이동
+	@RequestMapping("add_product.mcat")
+	public ModelAndView getAddProductCmd() {
+		return new ModelAndView("admin/product/add_product");
+	}
+	
+	// 관리자 상품등록 상세입력 페이지로 이동
+	@RequestMapping("add_product_info.mcat")
+	public ModelAndView getAddProductInfoCmd() {
+		return new ModelAndView("admin/product/add_product-detail_info");
+	}
+	
 	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
 	
 	
@@ -791,6 +803,46 @@ public class MaCatController {
 		return new ModelAndView("admin/faq/view");
 	}
 	
+	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/
+	// 구매후기 페이지 이동
+	@RequestMapping("review.mcat")
+	public ModelAndView getReviewCmd() {
+		return new ModelAndView("member/review");
+	}
+	
+	// 마이페이지 이동
+	@RequestMapping("mypage.mcat")
+	public ModelAndView getMyPageCmd() {
+		return new ModelAndView("member/mypage");
+	}
+	
+	// 마이페이지 - 주문내역관리 이동
+	@RequestMapping("mypage_order_inquiry.mcat")
+	public ModelAndView getOrderInquiryCmd() {
+		return new ModelAndView("member/mypage_order_inquiry");
+	}
+	
+	// 마이페이지 - 프로필 관리 이동	
+	
+	// 마이페이지 - 찜목록 관리 이동
+	@RequestMapping("mypage_wishlist.mcat")
+	public ModelAndView getWishListCmd() {
+		return new ModelAndView("member/mypage_wishlist");
+	}
+	
+	// 마이페이지 - 마일리지 이동
+	
+	// 마이페이지 - 게시물 관리 페이지 이동
+	@RequestMapping("mypage_post_management.mcat")
+	public ModelAndView getPostManageCmd() {
+		return new ModelAndView("member/mypage_post_management");
+	}
+	
+	// 마이페이지 - 배송주소록 관리 이동
+	@RequestMapping("mypage_deliveryAdress.mcat")
+	public ModelAndView getDeliveryAdressCmd() {
+		return new ModelAndView("member/mypage_deliveryAdress");
+	}
 	
 	/*////////////////////////////////// 기타 메소드 //////////////////////////////////*/
 

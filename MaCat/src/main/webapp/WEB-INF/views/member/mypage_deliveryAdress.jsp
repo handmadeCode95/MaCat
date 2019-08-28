@@ -8,17 +8,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
+	
 	<link rel="stylesheet" href="resources/css/normalize.css">
+	<!-- 이상없음 -->
 	<link rel="stylesheet" href="resources/css/member/macat_mypage_deliveryAdress.css">
+	
 	<link rel="stylesheet" href="resources/css/spacing.css">
 
-	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	
+	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	
 </head>
 
 <body>
-	    <!-- 고정헤더 불러오기 -->
-	    <div id="macat_header"><%@ include file="../head.jsp" %></div>
+    <!-- 고정헤더 불러오기 -->
+    <div id="macat_header"><%@ include file="../head.jsp" %></div>
 	<!-- 여백-->
 	<div class="spacing"></div>
 

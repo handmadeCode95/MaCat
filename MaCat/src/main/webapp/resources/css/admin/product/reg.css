@@ -70,6 +70,7 @@ main{
     background: #ffffff;
     margin: 16px 40px 14px 27px;    
 }
+
 .member_management span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
@@ -80,7 +81,7 @@ main{
 .detail_text_area {
 	width: 1645px;
 	height: 846px;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	margin: 14px 40px 16px 27px;
 	text-align: center;
 }
@@ -91,19 +92,30 @@ main{
 	margin-left: 38px;
 	font-size: 15px;
 }
+/* 스마트에디터를 감싸는 div 선언하여 중앙정렬시킴 */
+.detail_text_area .smartEditor_container{
+	width : 1569px;
+	height: 751px;
+	margin:  0 auto;
+	padding: 0;
+}
 
+/*내부 textarea 폼*/
+.detail_text_area .smartEditor_container textarea{
+	margin: 0 auto;
+	padding: 0;
+	margin: 20px 0px 20px 0;
+	width: 1560px;
+	height: 680px;
+}
+
+/* 구분선 */
 #border_item{
 	margin: 0 auto;
 	margin-top: 15px;
+	margin-bottom : 20px;
 	border-top: 1px solid #707070;
 	width: 1592px;
-}
-
-#txtContent{
-	resize: none;
-	margin: 20px 0px 20px;
-	width: 1569px;
-	height: 751px;
 }
 
 .submit_or_back_btn{

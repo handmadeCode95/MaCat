@@ -3,24 +3,27 @@
 @font-face{
     font-family : 'THEjunggt130';
     src : local('THEjunggt130'),
-        url('resources/font/THEjunggt130.woff2') format('woff2'),
-        url('resources/font/THEjunggt130.woff') format('woff'),
-        url('resources/font/THEjunggt130.otf') format('opentype'),
-        url('resources/font/THEjunggt130.eot') format('embedded-opentype');
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
 }
+
 
 @font-face{
     font-family : '서울남산 장체EB';
     src : local('서울남산 장체EB'),
-        url('resources/font/서울남산 장체EB.woff2') format('woff2'),
-        url('resources/font/서울남산 장체EB.woff') format('woff'),
-        url('resources/font/서울남산 장체EB.otf') format('truetype'),        
-        url('resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+        url('../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
 }
 
 * {
     font-family: 'THEjunggt130';
 	list-style: none;
+	margin: 0px;
+	padding: 0px;
 }
 
 caption{
@@ -70,10 +73,6 @@ thead{
 	height: 30px;
 }
 
-#path ol{
-	list-style-type: none;
-}
-
 #path ol > li{
 	display: inline;
 	font-size: 12px;
@@ -81,7 +80,7 @@ thead{
 
 #title{
 	min-height: 30px;
-	margin: 10px 0 20px;
+	margin-top: 10px;
     border-bottom: 2px solid #F25E5E;
 	text-align: left;
 }
@@ -89,11 +88,6 @@ thead{
 h2{
 	display: inline;
 	font-size: 17px;
-	
-}
-h2 ~ p{
-	display: inline;
-	font-size: 0.75em;
 }
 
 .adress_list{
@@ -102,7 +96,6 @@ h2 ~ p{
 
 .adress_list_main{
 	width: 1024px;
-	height : 30px;
 	border-bottom: 2px solid #F25E5E;
 }
 
@@ -161,28 +154,26 @@ h2 ~ p{
 }
 
 .precautions{
-    width: 1024px;
 	height: 135px;
 	border: 2px solid #F25E5E;
 }
 
 .precautions > h3{
-	margin-left: 10px;
+	padding: 9px 0px 6px 10px;
 	text-align: left;
 	font-size: 14px;
 }
 
 .precautions .precautions_list{
-   border-top: 2px solid #CFCFCF;
-   width : inherit;
-   height: 90px;
+	padding-top: 28px;
+	border-top: 2px solid #CFCFCF;
 }
 
 
 .precautions_list ol li{
-	position: relative;
-	right: 15px;
-	padding: 2px 0px 2px;
+	padding: 5px 0px 5px 25px;
 	text-align: left;
 	font-size: 12px;
 }
+
+

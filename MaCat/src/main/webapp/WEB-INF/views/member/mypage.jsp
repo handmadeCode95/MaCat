@@ -106,7 +106,7 @@
         <!--마우스 오버시 남아있는 이미지 여백 투명하게..-->
         <div id="myshopMain">
             <ul>
-                <a href="macat_mypage_order_inquiry_page.mcat">
+                <a href="mypage_order_inquiry.mcat">
                     <li class="icon_li">                        
                         <img src="resources/img/schedule_icon.png" alt="주문내역_페이지">
                     </li>
@@ -122,7 +122,7 @@
                 </a>    
             </ul>
             <ul>
-                <a href="">
+                <a href="mypage_wishlist.mcat">
                     <li class="icon_li">
                         <img src="resources/img/wishList_icon.png" alt="찜_리스트_페이지">
                     </li>
@@ -138,7 +138,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="macat_mypage_boardManage.mcat">
+                <a href="mypage_post_management.mcat">
                     <li class="icon_li">
                         <img src="resources/img/board_icon.png" alt="게시물관리_페이지">
                     </li>
@@ -146,7 +146,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="macat_mypage_deliveryAdress.mcat">
+                <a href="mypage_deliveryAdress.mcat">
                     <li class="icon_li">
                         <img src="resources/img/schedule_icon.png" alt="배송주소록_페이지">
                     </li>
