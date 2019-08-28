@@ -8,15 +8,15 @@
 	    <meta charset="UTF-8">
 	    <title>장바구니</title>
 	    <!--normalize-->
-	    <link rel="stylesheet" href="/resources/css/normalize.css">
+	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!--장바구니 css-->
-	    <link rel="stylesheet" href="/resources/css/macat_shoppingCart.css">
+	    <link rel="stylesheet" href="resources/css/cart.css">
 	    <!--여백-->
-	    <link rel="stylesheet" href="/resources/css/spacing.css">
+	    <link rel="stylesheet" href="resources/css/spacing.css">
 	    <!--체크박스 모양-->
-	    <link rel="stylesheet" href="/resources/css/checkbox.css">
+	    <link rel="stylesheet" href="resources/css/checkbox.css">
 	            
-	    <script type="text/javascript" src="/resources/js/jquery-3.4.1.min.js"></script>
+	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	 
 	    <script type="text/javascript">
 	//        고정헤더 불러오기
@@ -74,7 +74,6 @@
 	        });
 	    </script>
 	</head>
-	
 	<body>
 	     <!-- 고정헤더 불러오기 -->
 	    <div id="macat_header"></div>
@@ -116,7 +115,7 @@
 	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk1">
 	                            <label for="cart_chk1" />
 	                        </td>
-	                        <td><img src="/resources/img/macat_food01.png" alt=""></td>
+	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
 	                        <td>
 	                        <div class="category_box">food</div>
 	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
@@ -130,7 +129,7 @@
 	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk2">
 	                            <label for="cart_chk2" />
 	                        </td>
-	                        <td><img src="/resources/img/macat_food01.png" alt=""></td>
+	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
 	                        <td>
 	                        <div class="category_box">food</div>
 	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
@@ -144,7 +143,7 @@
 	                            <input name="cartOne" class="chkbox" type="checkbox" id="cart_chk3">
 	                            <label for="cart_chk3" />
 	                        </td>
-	                        <td><img src="/resources/img/macat_food01.png" alt=""></td>
+	                        <td><img src="resources/img/macat_food01.png" alt=""></td>
 	                        <td>
 	                        <div class="category_box">food</div>
 	                            <a href="macat_product.html">고고 캣푸드 내츄럴 본 아이돌</a>
@@ -166,7 +165,7 @@
 	           <button type="button">선택상품주문</button>
 	           <button type="button">선택상품삭제</button>
 	           <button type="button">위시리스트</button>  -->           
-	            <span>선택상품주문 <hr /> </span>      
+	            <span>선택상품주문 <hr /> </span>     
 	           
 	            <span>선택상품삭제 <hr class="second"/></span>
 	            
@@ -196,5 +195,5 @@
 	        </div>
 	    </section>
 	</body>
-
+	
 </html>

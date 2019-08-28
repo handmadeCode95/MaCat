@@ -205,33 +205,9 @@ ul,li{
 }
 
 .selected{
+	color: #ffffff;
     background: #f25e5e;    
 }
-
-/*회원등급 콤보박스 (select-option)*/
-select {
-    display: block;
-    border: 1px solid #ccc;
-    width: 188px;
-    height: 35px;
-    font-size: 15px;
-    color: #777;
-    line-height: 15px;
-    -webkit-appearance: none;
-    background: url('/resources/img/mcat_arrow_down_final.png') no-repeat 95% 50%;
-    text-align: center;
-    text-align-last: right;
-    padding-right: 30px;
-    float: right;
-    margin-bottom: 1px;
-    margin-right: 10px;
-}
-
-option {
-    direction: rtl;
-    text-align-last: right;
-}
-
 
 /*버튼 파트*/
 .btn_part {
@@ -272,6 +248,7 @@ option {
     width: 150px;
     display: inline-block;
 }
+
 /*조회, 초기화 버튼*/
 .view_refresh_btn{
     width: 391px;
@@ -298,6 +275,7 @@ option {
     border: none; 
     margin-left: 84px;
 }
+
 /**/
 .edit_delete_btn{
     width: 391px;

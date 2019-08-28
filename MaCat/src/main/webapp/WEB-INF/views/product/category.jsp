@@ -51,14 +51,14 @@
 								${ctgry_nm}
 							</c:otherwise>
 					</c:choose>
-					<c:forEach var="i" items="${sessionScope.categories}">
+					<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
 						<c:if test="${i.ctgry_level eq 0 && ctgry_group eq i.ctgry_group}">
 							<p>-${i.ctgry_nm}</p>
 						</c:if>
 					</c:forEach>
 				</div>
 				<div class="sub_category">
-					<c:forEach var="i" items="${sessionScope.categories}">
+					<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
 						<c:if test="${ctgry_group eq i.ctgry_group}">
 							<%-- a태그 시작 --%>
 							<a
@@ -87,7 +87,7 @@
 						<h2>고양이 사료 & 상품 이미지</h2>
 					</div>
 					<div class="img_cat_product">
-						<a href="macat_product_category.jsp"> 
+						<a href="macat_product_category.html"> 
 							<img src="resources/img/cat01.jpg" alt="고양이사료 카테고리이미지">
 						</a>
 					</div>
@@ -98,7 +98,7 @@
 						<h2>브랜드 사료 & 상품 이미지</h2>
 					</div>
 					<div class="img_brand_product">
-						<a href="macat_product_category.jsp">
+						<a href="macat_product_category.html">
 							<img src="resources/img/cat02.jpg" alt="브랜드사료 카테고리이미지">
 						</a>
 					</div>
@@ -110,7 +110,7 @@
 		<div class="product_container">
 			<div class="container_position">
 				<ul class="contents_ul">
-					<c:forEach var="i" items="${products}">
+					<c:forEach var="i" items="${productsDTO}">
 						<li id="category_product">
 							<div>
 								<!--상품 이미지 링크 -->
@@ -158,14 +158,14 @@
 			<ol id="paging">
 				<%-- 이전 --%>
 				<c:choose>
-					<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-						<li class="pagingDisable"><img
+					<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
+						<li class="pageDTODisable"><img
 							src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li><a class="page"
-							href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
+							href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${pageDTO.beginBlock - 1}">
 								<img src="resources/img/mcat-arrow-slider-left-grey.png"
 								height="10px">
 						</a></li>
@@ -173,11 +173,11 @@
 				</c:choose>
 
 				<%-- 블록안에 들어간 페이지번호들 --%>
-				<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}"
+				<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}"
 					step="1" var="i">
 					<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
 					<c:choose>
-						<c:when test="${i == paging.nowPage}">
+						<c:when test="${i == pageDTO.nowPage}">
 							<li class="nowPage">${i}</li>
 						</c:when>
 						<c:otherwise>
@@ -189,14 +189,14 @@
 
 				<%-- 다음 --%>
 				<c:choose>
-					<c:when test="${paging.endBlock >= paging.totalPage}">
-						<li class="pagingDisable"><img
+					<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
+						<li class="pageDTODisable"><img
 							src="resources/img/mcat-arrow-slider-right-grey.png"
 							height="10px"></li>
 					</c:when>
 					<c:otherwise>
 						<li><a class="page"
-							href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
+							href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${pageDTO.beginBlock + pageDTO.pagePerBlock}">
 								<img src="resources/img/mcat-arrow-slider-right-grey.png"
 								height="10px">
 						</a></li>

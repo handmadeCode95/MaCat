@@ -155,11 +155,11 @@ header nav {
 }
 /*mobile nav end*/
 
+
 .searchWrap form > button {
     position: absolute; top: 95px; left: 34.667%;
     width: 25px; height: 25px;
     background: url(../img/mcat-icon-search1.png) no-repeat; background-size: contain;
-    cursor : pointer;
 }
 
 .searchOn {
@@ -182,16 +182,12 @@ header nav {
 .membersBtn {
     position: absolute; top: 95px; right: 34.667%;
     width: 25px; height: 25px;
-    background: url("../img/mcat-icon-myinfo.png") no-repeat; background-size: contain;
-    overflow : visible;
-    cursor : pointer;
+    background: url(../img/mcat-icon-myinfo.png) no-repeat; background-size: contain;
 }
 .basketBtn {
     position: absolute; top: 93px; right: 10.667%;
     width: 27px; height: 27px;
-    background: url("../img/mcat-icon-shopping-cart-color.png") no-repeat; background-size: contain;
-    
-    cursor : pointer;
+    background: url(../img/mcat-icon-shopping-cart-color.png) no-repeat; background-size: contain;
 }
 /*header end*/
 

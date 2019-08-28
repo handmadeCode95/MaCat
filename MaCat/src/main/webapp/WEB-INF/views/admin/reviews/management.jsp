@@ -126,19 +126,19 @@
 								<ol id="paging">
 									<%-- 이전 --%>
 									<c:choose>
-										<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
+										<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
 											<li class="disable">◀</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">◀<input type="hidden" name="cPage" value="${paging.beginBlock - paging.pagePerBlock + 4}"></a></li>
+											<li><a class="page">◀<input type="hidden" name="cPage" value="${pageDTO.beginBlock - pageDTO.pagePerBlock + 4}"></a></li>
 										</c:otherwise>
 									</c:choose>
 									
 									<%-- 블록안에 들어간 페이지번호들 --%>
-									<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="i">
+									<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}" step="1" var="i">
 										<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
 										<c:choose>
-											<c:when test="${i == paging.nowPage}">
+											<c:when test="${i == pageDTO.nowPage}">
 												<li class="now">${i}</li>
 											</c:when>
 											<c:otherwise>
@@ -149,11 +149,11 @@
 									
 									<%-- 다음 --%>
 									<c:choose>
-										<c:when test="${paging.endBlock >= paging.totalPage}">
+										<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
 											<li class="disable">▶</li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="page">▶<input type="hidden" name="cPage" value="${paging.beginBlock + paging.pagePerBlock}"></a></li>
+											<li><a class="page">▶<input type="hidden" name="cPage" value="${pageDTO.beginBlock + pageDTO.pagePerBlock}"></a></li>
 										</c:otherwise>
 									</c:choose>
 								</ol>

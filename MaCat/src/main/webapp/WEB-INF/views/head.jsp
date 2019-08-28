@@ -52,11 +52,11 @@
 	            <!--searchWrap end-->
 	            <!--회원정보-->
 	            <div class="members">
-	                <button type="button" class="membersBtn" onclick="location.href= 'macat_mypage.mcat' ">회원정보</button>
+	                <button type="button" class="membersBtn">회원정보</button>
 	            </div>
 	            <!--장바구니-->
 	            <div class="basket">
-	                <button type="button" class="basketBtn" onclick="location.href= 'macat_shoppingCart.mcat' ">장바구니</button>
+	                <button type="button" class="basketBtn">장바구니</button>
 	            </div>
 	            <!--주메뉴-->
 	            <nav>

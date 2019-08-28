@@ -27,4 +27,11 @@
 	<bean id="dao" class="com.macat.service.DAO">
 	   <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
+	
+	<!-- upload -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding" value="UTF-8" />
+			<property name="maxUploadSize" value="104857600" />
+	</bean>
 </beans>
