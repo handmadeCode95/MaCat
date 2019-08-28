@@ -153,6 +153,7 @@ h2 ~ p{
 
 #left_del_btn{
 	float: left;
+    width: 
 }
 
 #right_cre_btn{
@@ -160,6 +161,7 @@ h2 ~ p{
 }
 
 .precautions{
+    width: 1024px;
 	height: 135px;
 	border: 2px solid #F25E5E;
 }
@@ -171,7 +173,8 @@ h2 ~ p{
 }
 
 .precautions .precautions_list{
-	border-top: 2px solid #CFCFCF;
+   border-top: 2px solid #CFCFCF;
+   height: 90px;
 }
 
 

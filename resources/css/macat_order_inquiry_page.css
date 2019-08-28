@@ -63,18 +63,27 @@ a{
     border-left: 3px solid #f25e5e;
     padding-left: 12px;    
 }
-
+/*전체 주문처리상태 박스*/
 .base_box {
     float: left;
     width: 1024px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
     color: rgb(0,0,0);
     padding: 20px;
     
     border-width: 5px;
     border-style: solid;
     border-color: #707070;
+}
+
+/*콤보박스*/
+.base_box .state_select {
+    float: left;
+    display: inline-block;
+    padding: 0 12px 0 0 ;
+    margin: 0 5px 0 2px;    
 }
 
 /*주문상태 선택 파트 : 헤더부분*/
@@ -85,6 +94,25 @@ a{
     margin-top: 20px;
 }
 
+fieldset > button{
+    width: 14px;
+    height: 14px;
+    margin: 0 5px 0 2px;    
+}
+
+fieldset img{
+    vertical-align: middle;
+    height: 20px;
+    width: 20px;
+}
+
+button{
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
 legend{
     visibility: hidden;
     position: absolute;
@@ -92,13 +120,6 @@ legend{
     height: 0;    
 }
 
-/*선택 박스*/
-.base_box .state_select {
-    float: left;
-    display: inline-block;
-    padding: 0 12px 0 0 ;
-    margin: 0 5px 0 2px;    
-}
 
 select{
     height: 24px;
@@ -147,28 +168,14 @@ ul, li{
     font-size: 12px;
 }
 
-fieldset > button{
-    width: 14px;
-    height: 14px;
-    margin: 0 5px 0 2px;    
-}
 
-button{
-    overflow: visible;
-    padding: 0;
-    border: 0;
-    cursor: pointer;
-}
 
-fieldset img{
-    vertical-align: middle;
-    height: 20px;
-    width: 20px;
-}
+
 
 input, select{
     vertical-align: middle;
 }
+/*주문처리 상태 박스 아래 설명문*/
 
 .order_state_box ul.describe{  
     color: #707070;    

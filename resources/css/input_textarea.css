@@ -3,6 +3,7 @@
     width: 188px;
     height: 35px;
     margin-bottom: 16px;
+    border: 1px solid #f25e5e;
 }
 /*생일 기간*/
 div .birth_box1{
