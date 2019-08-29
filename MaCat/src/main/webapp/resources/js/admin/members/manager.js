@@ -1,4 +1,4 @@
-$(function() {
+﻿$(function() {
 	
 	// AJAX 처리시 tbody에 출력할 값
 	$.fn.getTable = function(data) {
@@ -157,7 +157,6 @@ $(function() {
 		}
 	});
 	
-	
 	// 검색 영역 인풋 클릭시 인풋 활성화/비활성화, 포커싱
 	$(".inputClickListener").click(function() {
 		if (!$(this).siblings(".search").prop("checked")){
@@ -171,7 +170,6 @@ $(function() {
 		}
 	});
     
-	
 	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화 + 색상변경
 	$(document).on("change", ".chkbox", function(){
 		if ($(this).prop("checked")){
@@ -186,6 +184,7 @@ $(function() {
 			
 			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
 			$("#allCheck").prop("checked", false);
+
 		}
 	});
 	

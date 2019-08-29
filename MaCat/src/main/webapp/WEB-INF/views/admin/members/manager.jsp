@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -25,6 +25,8 @@
 	    <link rel="stylesheet" href="resources/css/paging.css">	    
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
+
+	    <!-- 관리자 쿼리  -->
 	    <script type="text/javascript" src="resources/js/admin/members/manager.js"></script>
 	    <!-- checkbox 전체선택 쿼리 포함 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>

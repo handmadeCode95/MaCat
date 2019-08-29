@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -24,7 +24,7 @@
 	
 	<body>
 	    <!-- 고정헤더 불러오기 -->
-	    <div id="macat_header"><%@ include file="../head.jsp" %></div>
+	    <div id="macat_header"><%@ include file="../header.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="spacing"></div>
 	
@@ -197,6 +197,7 @@
 	                        <c:choose>
 	                        	<c:when test="${empty sessionScope.loginData.mber_sq}">
 		                        	<a href="javascript:setCookie(${productsDTO.prduct_sq},	'${productsDTO.ctgry_nm}', ${productsDTO.prduct_price}, ${productsDTO.prduct_dlvy_price}, '${productsDTO.prduct_nm}', '${productsDTO.prduct_thumb_nm}', ${productsDTO.prduct_dc}, ${productsDTO.prduct_dc_pt}, ${productsDTO.prduct_dced_price}, 'cart', 1);">
+
 		                            	<li class="cart">
 		                                	<img src="resources/img/mcat_cart.png" alt="">
 		                            	</li>
@@ -329,6 +330,9 @@
 	            </table>
 	        </div>
 	    </section>
+	    
+	    <footer><%@ include file ="../footer.jsp" %>
+	    </footer>
 	</body>
 
 </html>

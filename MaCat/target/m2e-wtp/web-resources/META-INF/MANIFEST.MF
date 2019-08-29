@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Built-By: user
+<<<<<<< HEAD
 Build-Jdk: 1.8.0_201
+=======
+Build-Jdk: 1.8.0_221
+>>>>>>> macat_wd48
 Created-By: Maven Integration for Eclipse
 

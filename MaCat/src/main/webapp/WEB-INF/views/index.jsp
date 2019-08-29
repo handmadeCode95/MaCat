@@ -1,4 +1,4 @@
-<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+﻿<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,8 +13,9 @@
 		<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 		<script type="text/javascript">
 			$(function() {
-				//$(location).attr("href", "category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
-				$(location).attr("href", "cart.mcat?mber_sq=1");
+				$(location).attr("href","main.mcat");
+				// $(location).attr("href", "category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
+				//$(location).attr("href", "product_reg.mcat");
 			});
 		</script>
 	</head>

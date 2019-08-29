@@ -7,7 +7,7 @@
 }			
 @font-face {
 	font-family: '서울남산 장체EB';
-		src: local('서울남산 장체EB'),
+	src: local('서울남산 장체EB'),
 		url('../../font/서울남산 장체EB.woff2') format('woff2'),
 		url('../../font/서울남산 장체EB.woff') format('woff'),
 		url('../../font/서울남산 장체EB.ttf') format('truetype');
@@ -51,6 +51,7 @@ ul{
 	color: #FFFFFF;
 }
 
+<<<<<<< HEAD
 /*각 하위메뉴 디자인*/
 #prd, #mem, #service, #board, #ctg {
     position: relative;
@@ -72,6 +73,8 @@ ul{
 	background: #402F61;
 } */
 
+=======
+>>>>>>> macat_wd48
 .side-item > img{
 	position: relative;
 	left: 163px;
@@ -80,7 +83,15 @@ ul{
 	height: 13px;
 }
 
-.side-item > ul > li{
+.prd{
+	display: none;
+	padding: 0px 0px 17px 0px;
+	width: 208px;
+	background: #402F61;
+}
+
+
+.prd > li{
 	padding-top: 17px;
 	padding-left: 38px;
 	font-size: 16px;

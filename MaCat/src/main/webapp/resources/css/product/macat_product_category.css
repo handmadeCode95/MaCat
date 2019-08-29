@@ -1,4 +1,4 @@
-@font-face{
+﻿@font-face{
     font-family : 'THEjunggt130';
     src : local('THEjunggt130'),
         url('../../font/THEjunggt130.woff2') format('woff2'),
@@ -214,10 +214,10 @@ a strong {
 }
 
 .price p {    
-	font-family: '서울남산 장체EB';
     float: left;
     width: 50%;
     padding: 10px 10px 10px 10px;
+    margin: 0 auto;
     line-height: 20px;
 }
 

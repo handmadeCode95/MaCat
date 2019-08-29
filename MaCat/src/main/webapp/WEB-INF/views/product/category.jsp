@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -26,7 +26,7 @@
 <body>
 	<!-- 고정헤더 불러오기 -->
 	<div id="macat_header">
-		<%@ include file="../head.jsp"%>
+		<%@ include file="../header.jsp"%>
 	</div>
 	<!-- 여백-->
 	<div class="spacing"></div>
@@ -207,41 +207,8 @@
 	</section>
 
 	<footer>
-		<%-- <%@ include file="../foot.jsp" %> --%>
+		<%@ include file="../footer.jsp" %>
 	</footer>
-	<!--top 버튼 : 구버전-->
-	<!-- <div class="top_button">
-		<a href=""><img src="resources/img/top_button.png" alt=""></a>
-	</div> -->
-	<!-- 플로팅 메뉴 : 리모콘 - 구버전-->
-	<%-- <div class="floating_remoteCon">
-		<div class="remoteCon_name">최근 본 상품</div>
-		<div>
-			<c:if test="${cookie.viewedProductSq1 != null}">
-				<a
-					href="product.mcat?prduct_sq=${cookie.viewedProductSq1.value}&prduct_thumb_nm=${cookie.viewedProductThumb1.value}">
-					<img src="resources/img/${cookie.viewedProductThumb1.value}" alt="">
-				</a>
-			</c:if>
-		</div>
-		<div>
-			<c:if test="${cookie.viewedProductSq2 != null}">
-				<a
-					href="product.mcat?prduct_sq=${cookie.viewedProductSq2.value}&prduct_thumb_nm=${cookie.viewedProductThumb2.value}">
-					<img src="resources/img/${cookie.viewedProductThumb2.value}" alt="">
-				</a>
-			</c:if>
-		</div>
-		<div>
-			<c:if test="${cookie.viewedProductSq3 != null}">
-				<a
-					href="product.mcat?prduct_sq=${cookie.viewedProductSq3.value}&prduct_thumb_nm=${cookie.viewedProductThumb3.value}">
-					<img src="resources/img/${cookie.viewedProductThumb3.value}" alt="">
-				</a>
-			</c:if>
-		</div>
-	</div> --%>
-
 </body>
 
 </html>
