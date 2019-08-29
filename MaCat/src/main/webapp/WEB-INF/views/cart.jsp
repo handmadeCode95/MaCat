@@ -42,7 +42,7 @@
 	    <script type="text/javascript" src="resources/js/cart.js"></script>
 	</head>
 	<body>
-	    <div id="macat_header"><%@ include file="head.jsp" %></div>
+	    <div id="macat_header"><%@ include file="header.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="cart_spacing"></div>
 	 

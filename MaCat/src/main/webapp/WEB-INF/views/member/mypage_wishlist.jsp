@@ -24,7 +24,7 @@
 <body>
     <!-- 고정헤더 불러오기 -->
 	<div id="macat_header">
-		<%@ include file="../head.jsp"%>
+		<%@ include file="../header.jsp"%>
 	</div>
     <!-- 여백-->
     <div class="spacing"></div>
