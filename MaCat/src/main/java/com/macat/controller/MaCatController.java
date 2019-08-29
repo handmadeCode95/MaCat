@@ -305,6 +305,18 @@ public class MaCatController {
 		return mv;
 	}
 	
+	// 상품관리로 이동
+	@RequestMapping("product_manage.mcat")
+	public ModelAndView getPrductManageCmd(String cPage) {
+		this.cPage = cPage;
+		usedDTO = "ProductsDTO";
+		ModelAndView mv = new ModelAndView("admin/product/product_manager");
+		PageDTO pageDTO = new PageDTO();
+		 
+		
+		return mv;
+	}
+	
 	
 	// 로그인 페이지로 이동
 	@RequestMapping("product_reg.mcat")

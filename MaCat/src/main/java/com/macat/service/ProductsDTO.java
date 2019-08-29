@@ -5,8 +5,8 @@ import java.util.List;
 public class ProductsDTO {
 	
 	private String prduct_sq, prduct_reg_dt, prduct_dom_dt, prduct_amt, prduct_view_cnt,
-				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, prduct_qa, prduct_thumb_nm,
-				   ctgry_nm, prduct_cd, prduct_cn;
+				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, 
+				   prduct_qa, prduct_thumb_nm, ctgry_nm, prduct_cd, prduct_cn;
 	private float prduct_rating_avg;
 	private int prduct_ctgry_group, prduct_rating_round, prduct_price, prduct_dlvy_price, prduct_point, prduct_dced_price,
 				prduct_save_pt = 0, prduct_save = 0, prduct_dc_pt = 0, prduct_dc = 0;
