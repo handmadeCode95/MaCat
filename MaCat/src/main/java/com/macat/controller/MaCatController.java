@@ -162,8 +162,8 @@ public class MaCatController {
 			int mostDlvyPrice = 0;
 
 			for (CartsDTO i : cartList) {
-				int dc = PriceUtil.getDc(i.getPrduct_price(), i.getPrduct_dc(), i.getPrduct_dc_pt(), i.getCart_amt());
-				int price = i.getPrduct_price() * i.getCart_amt();
+				int dc = PriceUtil.getDc(i.getPrduct_price(), i.getPrduct_dc(), i.getPrduct_dc_pt());
+				int price = i.getPrduct_price();
 
 				totalDC += dc;
 				totalPrice += price;
@@ -265,8 +265,29 @@ public class MaCatController {
 	
 	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
 	
+	
+	boolean overlap;
 
-	// 장바구니 담기
+	// 장바구니 중복 체크
+	@RequestMapping(value = "cart_overlap.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean isOverlapCmd(@RequestBody Map<String, Object> requestMap) {
+		overlap = dao.getCartOverlap(requestMap) > 0 ?true :false; 
+		return overlap;
+	}
+	
+	// 장바구니 수량 추가
+	@RequestMapping(value = "add_cart.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public int addCartCmd(@RequestBody Map<String, Object> requestMap) {
+		int result = 0;
+		if (overlap) {
+			result = dao.getCartAmtUpdate(requestMap);
+		}else {
+			result = dao.getAddCart(requestMap);
+		}
+		return result;
+	}
 	
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/

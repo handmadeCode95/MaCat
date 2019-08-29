@@ -195,7 +195,7 @@
 	                        <!-- href="cookie_cart.mcat?prduct_sq=${productsDTO.prduct_sq}"
 	                         href="db_cart.mcat?prduct_sq=${productsDTO.prduct_sq}&mber_sq=${sessionScope.loginData.mber_sq}"-->
 	                        <c:choose>
-	                        	<c:when test="${empty sessionScope.loginData}">
+	                        	<c:when test="${empty sessionScope.loginData.mber_sq}">
 		                        	<a href="javascript:setCookie(${productsDTO.prduct_sq},	'${productsDTO.ctgry_nm}', ${productsDTO.prduct_price}, ${productsDTO.prduct_dlvy_price}, '${productsDTO.prduct_nm}', '${productsDTO.prduct_thumb_nm}', ${productsDTO.prduct_dc}, ${productsDTO.prduct_dc_pt}, ${productsDTO.prduct_dced_price}, 'cart', 1);">
 		                            	<li class="cart">
 		                                	<img src="resources/img/mcat_cart.png" alt="">
@@ -203,7 +203,7 @@
 		                        	</a>
 		                        </c:when>
 		                        <c:otherwise>
-		                        	<a href="javascript:addCart(${productsDTO.prduct_sq}, ${sessionScope.loginData.mber_sq})">
+		                        	<a href="javascript:isOverlap(${productsDTO.prduct_sq}, ${sessionScope.loginData.mber_sq})">
 			                            <li class="cart">
 			                                <img src="resources/img/mcat_cart.png" alt="">
 			                            </li>

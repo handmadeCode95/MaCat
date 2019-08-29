@@ -98,6 +98,21 @@
 		UPDATE PRODUCTS_TB SET PRDUCT_VIEW_CNT = (SELECT PRDUCT_VIEW_CNT FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}) + 1 WHERE PRDUCT_SQ = #{prduct_sq}
 	</update>
 	
+	<!-- 장바구니 중복 체크 -->
+	<select id="cart_overlap" resultType="int" parameterType="Map">
+		SELECT COUNT(*) FROM CARTS_TB WHERE PRDUCT_SQ = #{prduct_sq} AND MBER_SQ = #{mber_sq} AND CART_COLOR = #{cart_color}
+	</select>
+	
+	<!-- 장바구니 수량 추가 -->
+	<update id="cart_amt_update" parameterType="Map">
+		UPDATE CARTS_TB SET CART_AMT = CART_AMT + #{cart_amt} WHERE PRDUCT_SQ = #{prduct_sq} AND MBER_SQ = #{mber_sq} AND CART_COLOR = #{cart_color}
+	</update>
+	
+	<!-- 장바구니 추가 -->
+	<insert id="add_cart" parameterType="Map">
+		INSERT INTO CARTS_TB VALUES(CARTS_SEQ.NEXTVAL, #{prduct_sq}, #{mber_sq}, #{cart_amt}, #{cart_color})
+	</insert>
+	
 	
 	<!--=========================== 회원 정보 관리 ===========================-->
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -25,7 +26,7 @@
 	    <div id="macat_header"><%@ include file="head.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="cart_spacing"></div>
-	
+	 
 	    <section id="wrap">
 	        <div class="shoppingCart_title">
 	            <span>CART</span>
@@ -62,8 +63,15 @@
 		                		<c:forEach var="i" items="${cartsDTO}" varStatus="vs">
 				                    <tr>
 				                        <td>
-				                            <input name="carts" class="chkbox" type="checkbox" id="${vs.index}" checked>
-				                            <label for="${vs.index}"></label>
+					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}">					                            <label for="${vs.count}"></label>
+					                        <input type="hidden" name="prduct_sq" class="${vs.count}" value="${i.prduct_sq}" disabled>
+					                        <input type="hidden" name="cart_color" class="${vs.count}" value="${i.cart_color}" disabled>
+					                           
+					                        <input type="hidden" name="prduct_price" class="${vs.count}" value="${i.prduct_price}" disabled>
+					                        <input type="hidden" name="prduct_dlvy_price" class="${vs.count}" value="${i.prduct_dlvy_price}" disabled>
+					                        <input type="hidden" name="prduct_dced_price" class="${vs.count}" value="${i.prduct_dced_price}" disabled>
+					                        <input type="hidden" name="prduct_dc_pt" class="${vs.count}" value="${i.prduct_dc_pt}" disabled>
+					                        <input type="hidden" name="prduct_dc" class="${vs.count}" value="${i.prduct_dc}" disabled>
 				                        </td>
 				                        <td><img src="resources/img/${i.prduct_thumb_nm}" alt=""></td>
 				                        <td>
@@ -71,15 +79,15 @@
 				                            <a href="macat_product.html">${i.prduct_nm}</a>
 				                        </td>
 				                        <td>${i.cart_color}</td>
-				                        <td>${i.cart_amt}</td>
-				                        <td id="cart_product_price">${i.prduct_dced_price}</td>
-				                        <td id="cart_delivery_pay">${i.prduct_dlvy_price}</td>
+				                        <td><fmt:formatNumber value="${i.cart_amt}" pattern="#,###"></fmt:formatNumber></td>
+				                        <td id="cart_product_price"><fmt:formatNumber value="${i.prduct_dced_price}" pattern="#,###"></fmt:formatNumber></td>
+				                        <td id="cart_delivery_pay"><fmt:formatNumber value="${i.prduct_dlvy_price}" pattern="#,###"></fmt:formatNumber></td>
 				                    </tr>
 			                    </c:forEach>
 		                    </c:when>
 			                <c:otherwise>
 			                    <tr>
-			                        <td colspan="6">장바구니가 비었습니다.</td>
+			                        <td colspan="7">장바구니가 비었습니다.</td>
 			                    </tr>
 		                    </c:otherwise>
 	                	</c:choose>
@@ -104,19 +112,19 @@
 	            		<c:when test="${!empty totalPrice}">
 	            			<tr>
 			                    <th>장바구니 합계</th>
-			                    <td>${totalPrice}원</td>                   
+			                    <td><fmt:formatNumber value="${totalPrice}" pattern="#,###"></fmt:formatNumber>원</td>                   
 			                </tr>
 			                <tr>
 			                    <th>배송비</th>
-			                    <td>${mostDlvyPrice}원</td>                   
+			                    <td><fmt:formatNumber value="${mostDlvyPrice}" pattern="#,###"></fmt:formatNumber>원</td>                   
 			                </tr>
 			                <tr>
 			                    <th>할인금액</th>
-			                    <td>${totalDC}원</td>                   
+			                    <td><fmt:formatNumber value="${totalDC}" pattern="#,###"></fmt:formatNumber>원</td>                   
 			                </tr>  
 			                <tr>
 			                    <th>총 결제금액</th>
-			                    <td>${totalPrice - totalDC + mostDlvyPrice}원</td>                   
+			                    <td><fmt:formatNumber value="${totalPrice - totalDC + mostDlvyPrice}" pattern="#,###"></fmt:formatNumber>원</td>                   
 			                </tr>
 	            		</c:when>
 	            		<c:otherwise>

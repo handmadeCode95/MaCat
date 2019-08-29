@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.macat.dto.CartsDTO;
 import com.macat.dto.CtgriesDTO;
@@ -136,6 +137,21 @@ public class DAO {
 	// 상품 조회수 업
 	public int getProductViewCntUp(String prduct_sq) {
 		return sqlSessionTemplate.update("product_view_cnt_up", prduct_sq);
+	}
+	
+	// 장바구니 중복 체크
+	public int getCartOverlap(Map<String, Object> map) {
+		return sqlSessionTemplate.selectOne("cart_overlap", map);
+	}
+	
+	// 장바구니 수량 추가
+	public int getCartAmtUpdate(Map<String, Object> map) {
+		return sqlSessionTemplate.update("cart_amt_update", map);
+	}
+	
+	// 장바구니 추가
+	public int getAddCart(Map<String, Object> map) {
+		return sqlSessionTemplate.insert("add_cart", map);
 	}
 	
 	
