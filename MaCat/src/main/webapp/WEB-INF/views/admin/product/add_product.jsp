@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>관리자 상품등록 페이지</title>
     <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
     <!--초기화-->
     <link rel="stylesheet" href="resources/css/normalize.css">
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="resources/css/admin/product/macat_admin_add_product.css">
 
     <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-
-    <!-- checked 속성 poly-checked 추가 -->
+    <!-- 카테고리 파트 select 문, 단위선택 박스 색상변경, 이미지 미리보기, -->
+    <script type="text/javascript" src="resources/js/admin/product/add_product.js"></script>    
 
 </head>
 <body>
@@ -58,9 +58,9 @@
                 <div class="price_choice_box">
                     <div class="tag_price">
                         <span>정가</span>
-                        <input type="text" class="tag_price_input" name="cm_monthly_fee" id="cm_monthly_fee" value="0" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
+                        <input type="text" class="tag_price_input" name="cm_monthly_fee" id="cm_monthly_fee" value="" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
                         <!-- 단위선택 박스 -->
-                        <div class="won_percnt_box selected">
+                        <div class="won_percnt_box">
                             <ul>
                                 <li>원</li>
                             </ul>
@@ -68,11 +68,11 @@
                     </div>
                     <div class="discount_price">
                         <span>할인</span>
-                        <input type="text" class="discount_price_input" name="cm_monthly_fee" id="cm_monthly_fee" value="0" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
+                        <input type="text" class="discount_price_input" name="cm_monthly_fee" id="cm_monthly_fee" value="" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
                         <!-- 단위선택 박스 : 기본값 원 -->
                         <div class="won_percnt_box">
                             <ul>
-                                <li class="selected">원</li>
+                                <li>원</li>
                                 <li>%</li>
                             </ul>
                         </div>
@@ -89,7 +89,7 @@
                 <div class="available_stock_container">
                     <div class="left_stock">
                         <span>재고</span>
-                        <input type="text" class="left_stock_input" name="cm_monthly_fee" id="cm_monthly_fee" value="0" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
+                        <input type="text" class="left_stock_input" name="cm_monthly_fee" id="cm_monthly_fee" value="" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
                         <!-- 단위선택 박스 -->
                         <div class="left_stock_box">
                             <ul><li>개</li></ul>
@@ -102,43 +102,50 @@
                 <span>상품색상</span>
                 <div class="color_palette">
                     <div class="palette_box">
-                        <input name="palette_chk" type="checkbox" id="test_1" onclick="count_ck(this);" value="레드">
+                        <input name="palette_chk" type="checkbox" id="test_1" onclick="count_ck(this.name);" value="레드">
                         <label for="test_1"></label>
-                        <input name="palette_chk" type="checkbox" id="test_2" onclick="count_ck(this);" value="버건디">
+                        <input name="palette_chk" type="checkbox" id="test_2" onclick="count_ck(this.name);" value="버건디">
                         <label for="test_2"></label>
-                        <input name="palette_chk" type="checkbox" id="test_3" onclick="count_ck(this);" value="오렌지">
+                        <input name="palette_chk" type="checkbox" id="test_3" onclick="count_ck(this.name);" value="오렌지">
                         <label for="test_3"></label>
-                        <input name="palette_chk" type="checkbox" id="test_4" onclick="count_ck(this);" value="골드">
+                        <input name="palette_chk" type="checkbox" id="test_4" onclick="count_ck(this.name);" value="골드">
                         <label for="test_4"></label>
-                        <input name="palette_chk" type="checkbox" id="test_5" onclick="count_ck(this);" value="옐로우">
+                        <input name="palette_chk" type="checkbox" id="test_5" onclick="count_ck(this.name);" value="옐로우">
                         <label for="test_5"></label>
-                        <input name="palette_chk" type="checkbox" id="test_6" onclick="count_ck(this);" value="라임">
+                        <input name="palette_chk" type="checkbox" id="test_6" onclick="count_ck(this.name);" value="라임">
                         <label for="test_6"></label>
-                        <input name="palette_chk" type="checkbox" id="test_7" onclick="count_ck(this);" value="그린">
+                        <input name="palette_chk" type="checkbox" id="test_7" onclick="count_ck(this.name);" value="그린">
                         <label for="test_7"></label>
-                        <input name="palette_chk" type="checkbox" id="test_8" onclick="count_ck(this);" value="카키">
+                        <input name="palette_chk" type="checkbox" id="test_8" onclick="count_ck(this.name);" value="카키">
                         <label for="test_8"></label>
-                        <input name="palette_chk" type="checkbox" id="test_9" onclick="count_ck(this);" value="민트">
+                        <input name="palette_chk" type="checkbox" id="test_9" onclick="count_ck(this.name);" value="민트">
                         <label for="test_9"></label>
-                        <input name="palette_chk" type="checkbox" id="test_10" onclick="count_ck(this);" value="스카이블루"><label for="test_10"></label>
-                        <input name="palette_chk" type="checkbox" id="test_11" onclick="count_ck(this);" value="블루">
+                        <input name="palette_chk" type="checkbox" id="test_10" onclick="count_ck(this.name);" value="스카이블루">
+                        <label for="test_10"></label>
+                        <input name="palette_chk" type="checkbox" id="test_11" onclick="count_ck(this.name);" value="블루">
                         <label for="test_11"></label>
-                        <input name="palette_chk" type="checkbox" id="test_12" onclick="count_ck(this);" value="네이비"><label for="test_12"></label>
-                        <input name="palette_chk" type="checkbox" id="test_13" onclick="count_ck(this);" value="퍼플">
+                        <input name="palette_chk" type="checkbox" id="test_12" onclick="count_ck(this.name);" value="네이비">
+                        <label for="test_12"></label>
+                        <input name="palette_chk" type="checkbox" id="test_13" onclick="count_ck(this.name);" value="퍼플">
                         <label for="test_13"></label>
-                        <input name="palette_chk" type="checkbox" id="test_14" onclick="count_ck(this);" value="인디핑크"><label for="test_14"></label>
-                        <input name="palette_chk" type="checkbox" id="test_15" onclick="count_ck(this);" value="핑크">
+                        <input name="palette_chk" type="checkbox" id="test_14" onclick="count_ck(this.name);" value="인디핑크">
+                        <label for="test_14"></label>
+                        <input name="palette_chk" type="checkbox" id="test_15" onclick="count_ck(this.name);" value="핑크">
                         <label for="test_15"></label>
-                        <input name="palette_chk" type="checkbox" id="test_16" onclick="count_ck(this);" value="베이지"><label for="test_16"></label>
-                        <input name="palette_chk" type="checkbox" id="test_17" onclick="count_ck(this);" value="카멜">
+                        <input name="palette_chk" type="checkbox" id="test_16" onclick="count_ck(this.name);" value="베이지">
+                        <label for="test_16"></label>
+                        <input name="palette_chk" type="checkbox" id="test_17" onclick="count_ck(this.name);" value="카멜">
                         <label for="test_17"></label>
-                        <input name="palette_chk" type="checkbox" id="test_18" onclick="count_ck(this);" value="브라운"><label for="test_18"></label>
-                        <input name="palette_chk" type="checkbox" id="test_19" onclick="count_ck(this);" value="화이트"><label for="test_19"></label>
-                        <input name="palette_chk" type="checkbox" id="test_20" onclick="count_ck(this);" value="아이보리"><label for="test_20"></label>
-                        <input name="palette_chk" type="checkbox" id="test_21" onclick="count_ck(this);" value="그레이"><label for="test_21"></label>
-                        <input name="palette_chk" type="checkbox" id="test_22" onclick="count_ck(this);" value="차콜">
+                        <input name="palette_chk" type="checkbox" id="test_18" onclick="count_ck(this.name);" value="브라운">
+                        <label for="test_18"></label>
+                        <input name="palette_chk" type="checkbox" id="test_19" onclick="count_ck(this.name);" value="화이트">
+                        <label for="test_19"></label>
+                        <input name="palette_chk" type="checkbox" id="test_20" onclick="count_ck(this.name);" value="아이보리">
+                        <label for="test_20"></label>
+                        <input name="palette_chk" type="checkbox" id="test_21" onclick="count_ck(this.name);" value="그레이"><label for="test_21"></label>
+                        <input name="palette_chk" type="checkbox" id="test_22" onclick="count_ck(this.name);" value="차콜">
                         <label for="test_22"></label>
-                        <input name="palette_chk" type="checkbox" id="test_23" onclick="count_ck(this);" value="블랙">
+                        <input name="palette_chk" type="checkbox" id="test_23" onclick="count_ck(this.name);" value="블랙">
                         <label for="test_23"></label>
                     </div>
                 </div>
@@ -189,116 +196,6 @@
                         </div>   
                     </div>  
                 </div>
-     <!--    <script type="text/javascript">              
-            /*숩긴 input을 다른 버튼에서 실행하게 하기*/
-            $(".preview-file_upload-main").click(function(e){
-                e.preventDefault();
-                $(".inp-img-main").click();
-            });      
-            $(".preview-file_upload-sub1").click(function(e){
-                e.preventDefault();
-                $(".inp-img-sub1").click();
-            }); 
-            $(".preview-file_upload-sub2").click(function(e){
-                e.preventDefault();
-                $(".inp-img-sub2").click();
-            }); 
-            $(".preview-file_upload-sub3").click(function(e){
-                e.preventDefault();
-                $(".inp-img-sub3").click();
-            }); 
-
-            // 등록 이미지 등록 미리보기
-            function readInputFile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#preview-main').html("<img src=" + e.target.result + ">");
-                }
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $(".inp-img-main").on('change', function() {
-                readInputFile(this);
-            });
-            /*추가1*/
-            function readInputFile_sub1(input) {
-            if (input.files && input.files[0]) {
-                var reader_sub1 = new FileReader();
-                reader_sub1.onload = function(e) {
-                    $('#preview-sub1').html("<img src=" + e.target.result + ">");
-                }
-                reader_sub1.readAsDataURL(input.files[0]);
-                }
-            }
-            $(".inp-img-sub1").on('change', function() {
-                readInputFile_sub1(this);
-            });
-           /*추가2*/
-            function readInputFile_sub2(input) {
-            if (input.files && input.files[0]) {
-                var reader_sub2 = new FileReader();
-                reader_sub2.onload = function(e) {
-                    $('#preview-sub2').html("<img src=" + e.target.result + ">");
-                }
-                reader_sub2.readAsDataURL(input.files[0]);
-                }
-            }
-            $(".inp-img-sub2").on('change', function() {
-                readInputFile_sub2(this);
-            });
-            /*추가3*/
-             function readInputFile_sub3(input) {
-            if (input.files && input.files[0]) {
-                var reader_sub3 = new FileReader();
-                reader_sub3.onload = function(e) {
-                    $('#preview-sub3').html("<img src=" + e.target.result + ">");
-                }
-                reader_sub3.readAsDataURL(input.files[0]);
-                }
-            }
-            $(".inp-img-sub3").on('change', function() {
-                readInputFile_sub3(this);
-            });
-
-            // 등록 이미지 삭제 ( input file reset )
-            function resetInputFile($input, $preview) {
-            var agent = navigator.userAgent.toLowerCase();
-            if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-                // ie 일때
-                $input.replaceWith($input.clone(true));
-                $preview.empty();
-            } else {
-                //other
-                $input.val("");
-                $preview.empty();
-                }
-            }
-
-            $(".btn-delete-main").click(function(event) {
-                var $input = $(".inp-img-main");
-                var $preview = $('#preview-main');
-                resetInputFile($input, $preview);
-            });      
-
-            $(".btn-delete-sub1").click(function(event) {
-                var $input = $(".inp-img-sub1");
-                var $preview = $('#preview-sub1');
-                resetInputFile($input, $preview);
-            });  
-
-            $(".btn-delete-sub2").click(function(event) {
-                var $input = $(".inp-img-sub2");
-                var $preview = $('#preview-sub2');
-                resetInputFile($input, $preview);
-            }); 
-
-            $(".btn-delete-sub3").click(function(event) {
-                var $input = $(".inp-img-sub3");
-                var $preview = $('#preview-sub3');
-                resetInputFile($input, $preview);
-            });           
-        </script>             -->
             </div>             
             <!--배송정보 파트-->
             <div class="delivery_info">
@@ -306,7 +203,7 @@
                 <!--배송비-->
                 <div class="delivery_pay">                  
                     <span>배송비</span>
-                    <input type="text" class="pay_input" name="cm_monthly_fee" id="cm_monthly_fee" value="0" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
+                    <input type="text" class="pay_input" name="cm_monthly_fee" id="cm_monthly_fee" value="" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
                     <!-- 단위선택 박스 -->
                     <div class="pay_box">
                         <ul><li>원</li></ul>
@@ -331,7 +228,7 @@
                 <span>적립</span>
                 <div class="mileage_box">
                    <span>적립금</span>
-                    <input type="text" class="mileage_input" name="cm_monthly_fee" id="cm_monthly_fee" value="0" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
+                    <input type="text" class="mileage_input" name="cm_monthly_fee" id="cm_monthly_fee" value="" onkeyUp="this.value = SetComma(this.value)" onfocus="this.value = SetComma(this.value)">
                     <!-- 단위선택 박스 -->
                     <div class="mileage_btn_box">
                         <ul>
@@ -385,7 +282,6 @@
         </section>            
     </main>
 </body>
-    <!-- 카테고리 파트 select 문, 단위선택 박스 색상변경, 이미지 미리보기, -->
-    <script type="text/javascript" src="resources/js/admin/product/add_product.js"></script>    
+
 
 </html>

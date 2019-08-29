@@ -65,6 +65,11 @@ public class MaCatController {
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
+	// 메인 페이지로 이동
+	@RequestMapping("main.mcat")
+	public ModelAndView getMainCmd() {
+		return new ModelAndView("main");
+	}
 	
 	// 로그인 페이지로 이동
 	@RequestMapping("login.mcat")
@@ -84,7 +89,8 @@ public class MaCatController {
 		ModelAndView mv;
 		MbersDTO loginMber = dao.getLogin(mbersDTO);
 		if (loginMber != null) {
-			mv = new ModelAndView("admin/main");
+//			mv = new ModelAndView("admin/main"); // 관리자 메인으로 이동
+			mv = new ModelAndView("main");
 			session.setAttribute("loginData", loginMber);
 			dao.getLoginRecord(mbersDTO);
 			return mv;
@@ -304,9 +310,8 @@ public class MaCatController {
 	@RequestMapping("product_reg.mcat")
 	public ModelAndView getProductRegCmd() {
 		return new ModelAndView("admin/product/reg");
-	}
-	
-	
+	}	
+
 	// 관리자 상품등록 페이지로 이동
 	@RequestMapping("add_product.mcat")
 	public ModelAndView getAddProductCmd() {

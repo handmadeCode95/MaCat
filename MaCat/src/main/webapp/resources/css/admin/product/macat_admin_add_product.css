@@ -1,19 +1,19 @@
 @font-face {
     font-family: 'THEjunggt130';
     src: local('THEjunggt130'),
-        url('/resources/font/THEjunggt130.woff2') format('woff2'),
-        url('/resources/font/THEjunggt130.woff') format('woff'),
-        url('/resources/font/THEjunggt130.otf') format('opentype'),
-        url('/resources/font/THEjunggt130.eot') format('embedded-opentype');
+        url('../../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../../font/THEjunggt130.woff') format('woff'),
+        url('../../../font/THEjunggt130.otf') format('opentype'),
+        url('../../../font/THEjunggt130.eot') format('embedded-opentype');
 }
 
 @font-face {
     font-family: '서울남산 장체EB';
     src: local('서울남산 장체EB'),
-        url('/resources/font/서울남산 장체EB.woff2') format('woff2'),
-        url('/resources/font/서울남산 장체EB.woff') format('woff'),
-        url('/resources/font/서울남산 장체EB.otf') format('truetype'),
-        url('/resources/font/서울남산 장체EB.eot') format('embedded-opentype');
+        url('../../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../../font/서울남산 장체EB.otf') format('truetype'),
+        url('../../../font/서울남산 장체EB.eot') format('embedded-opentype');
 }
 
 * {
@@ -106,7 +106,7 @@ select {
     color: #777;
     line-height: 15px;
     -webkit-appearance: none;
-    background: url("resources/img/mcat_arrow_down_final.png") no-repeat 95% 50%;
+    background: url('../../../img/mcat_arrow_down_final.png') no-repeat 95% 50%;
     text-align: center;
     text-align-last: right;
     padding-right: 30px;
@@ -485,14 +485,14 @@ input[type="checkbox"]#test_18:checked + label,
 input[type="checkbox"]#test_21:checked + label,
 input[type="checkbox"]#test_22:checked + label,
 input[type="checkbox"]#test_23:checked + label {
-    background-image: url("resources/img/mcat-check-white.png");
+    background-image: url('../../../img/mcat-check-white.png');
     background-size: 100%;
 }
 
 input[type="checkbox"]#test_6:checked + label,
 input[type="checkbox"]#test_19:checked + label,
 input[type="checkbox"]#test_20:checked + label {
-    background-image: url("resources/img/mcat-check-black.png");
+    background-image: url('../../../img/mcat-check-black.png');
 }
 
 /*상품이미지 파트*/
@@ -607,7 +607,7 @@ input[type="checkbox"]#test_20:checked + label {
     /*가로중앙 정렬용*/
     text-align: center;
 
-    background: url("resources/img/mcat_add_image.png") no-repeat;
+    background: url("../../../img/mcat_add_image.png") no-repeat;
     background-position: center;
     background-size: 10%;
 }
@@ -640,7 +640,7 @@ input[type="checkbox"]#test_20:checked + label {
     /*가로중앙 정렬용*/
     text-align: center;
 
-    background: url("resources/img/mcat_add_image.png") no-repeat;
+    background: url("../../../img/mcat_add_image.png") no-repeat;
     background-position: center;
     background-size: 10%;
 }
@@ -889,7 +889,7 @@ input[type="checkbox"]#test_20:checked + label {
     border: none;
 }
 
-/*선택시 색상변경*/
+/*선택시 색상변경 : 사이드메뉴 선택시에도 영향을 줌*/
 .selected {
-    background: #f25e5e;
+
 }

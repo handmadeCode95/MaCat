@@ -23,7 +23,7 @@
 	
 	<body>
 	    <!-- 고정헤더 불러오기 -->
-	    <div id="macat_header"><%@ include file="../head.jsp" %></div>
+	    <div id="macat_header"><%@ include file="../header.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="spacing"></div>
 	
@@ -328,6 +328,9 @@
 	            </table>
 	        </div>
 	    </section>
+	    
+	    <footer><%@ include file ="../footer.jsp" %>
+	    </footer>
 	</body>
 
 </html>

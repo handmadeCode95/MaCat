@@ -1,6 +1,5 @@
-
 /*////////////////// 카테고리 연계 쿼리 //////////////////*/
-// 1차 카테고리 선택 시 연계될 2차 카테고리 목록 쿼리
+// 정상 작동
 function categoryChange(e) {
   var food = ["건식사료", "습식사료", "우유/분유", "저칼로리사료"];
   var snack = ["캔", "소시지/건어물", "스낵", "츄르"];
@@ -33,7 +32,7 @@ function categoryChange(e) {
 }
 
 /*//////////////////  단위선택 박스 색상변경 쿼리 //////////////////*/
-
+// 정상 작동
 $(document).ready(function() {
     $("li").each(function() {
         $(this).click(function() {
@@ -44,21 +43,24 @@ $(document).ready(function() {
 });
 
 /*////////////////// 이미지 미리보기 쿼리 //////////////////*/
-
+// 정상 작동
 $(document).ready(function(){	
 	// 숨긴 input을 다른 버튼에서 실행하게 하기
 	$(".preview-file_upload-main").click(function(e){
 	    e.preventDefault();
 	    $(".inp-img-main").click();
 	});      
+	
 	$(".preview-file_upload-sub1").click(function(e){
 	    e.preventDefault();
 	    $(".inp-img-sub1").click();
 	}); 
+	
 	$(".preview-file_upload-sub2").click(function(e){
 	    e.preventDefault();
 	    $(".inp-img-sub2").click();
 	}); 
+	
 	$(".preview-file_upload-sub3").click(function(e){
 	    e.preventDefault();
 	    $(".inp-img-sub3").click();
@@ -165,6 +167,7 @@ $(document).ready(function(){
 
 
 /*////////////////// 상품명 글자수 입력 제한 쿼리 //////////////////*/
+// 정상 작동
 function chkword(obj, maxByte) {
     var strValue = obj.value;
     var strLen = strValue.length;
@@ -193,6 +196,7 @@ function chkword(obj, maxByte) {
 }
 
 /*////////////////// input 입력되는 숫자 콤마(,) 처리 쿼리 //////////////////*/
+// 정상 작동
 function SetComma(str) {
     str = str.replace(/,/g, '');
     var retValue = "";
@@ -207,21 +211,18 @@ function SetComma(str) {
 }
 
 /*////////////////// 색상선택 파트 체크박스 선택 수 제한 쿼리  //////////////////*/
-$(document).ready(function (){
-	function count_ck(obj){
-	    var chkbox = document.getElementsByName("palette_chk");
-	    var chkCnt = 0;            
-	    for(var i=0;i<chkbox.length; i++){
-	        if(chkbox[i].checked){
-	            chkCnt++;
-	        }
-	    }
-	    if(chkCnt>10){
-	        alert("색상은 10개까지 선택하실 수 있습니다");
-	        obj.checked = false;
-	        return false;
-	    }
-	}
-
-});
-
+// 정상 작동
+function count_ck(obj){
+    var chkbox = document.getElementsByName("palette_chk");
+    var chkCnt = 0;            
+    for(var i=0;i<chkbox.length; i++){
+        if(chkbox[i].checked){
+            chkCnt++;
+        }
+    }
+    if(chkCnt > 10){
+        alert("색상은 10개까지 선택하실 수 있습니다");
+        obj.checked = false;
+        return false;
+    }
+}
