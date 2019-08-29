@@ -32,9 +32,9 @@ function categoryChange(e) {
 }
 
 /*//////////////////  단위선택 박스 색상변경 쿼리 //////////////////*/
-// 정상 작동
+// 정상 작동 : 사이드메뉴 영향을 미치니 주의
 $(document).ready(function() {
-    $("li").each(function() {
+    $("div > ul > li").each(function() {
         $(this).click(function() {
             $(this).addClass("selected"); 
             $(this).siblings().removeClass("selected"); 

@@ -5,7 +5,7 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "productsDTO") {
+			if (key === "ProductsDTO") {
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["prduct_sq"] + '">';
 					result += '<td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"></td>';

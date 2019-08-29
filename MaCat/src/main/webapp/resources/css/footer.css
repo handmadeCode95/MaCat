@@ -32,6 +32,19 @@ body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
 .clear:after {content: ""; display: block; clear: both;}
 .pc {display: none;}
 
+
+/* header : css 미적용 상태*/
+
+/*header macat logo*/
+/*img 감싸는 h1 크기, 위치 지정*/
+h1 {
+    position: absolute;  width: 100px; left:50%; margin-left: -50px; top:21px;
+}
+/*헤더 중앙 메인로고 img 크기 조정*/
+h1 img {
+    width: 100%;
+}
+
 /* footer */
 footer {
     background: #f25e5e; bottom: 0; width: 100%;

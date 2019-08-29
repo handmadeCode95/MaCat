@@ -82,7 +82,7 @@
     font-size: 24px;
     color: white;
     text-shadow: 2px 2px 6px #000000;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
     width: 480px;
     
@@ -99,7 +99,6 @@
     height: 100%;
     width: 100.8%;
 /*    background-color: rgba(0, 0, 0, 0.4);*/
-    z-index: 1;
 }
 
 .img_cat_product a{
@@ -118,7 +117,6 @@
     background-size: cover;
     height: 280px;
     width: 477px;
-    z-index: 1;
 }
 
 .img_brand_product {
@@ -126,7 +124,6 @@
     height: 100%;
     width: 100%;
 /*    background-color: rgba(0, 0, 0, 0.4);*/
-    z-index: 1;
 }
 .img_brand_product a{
     width: inherit;
@@ -206,6 +203,10 @@ a strong {
     line-height: 20px;
 }
 
+.product_title a{
+    font-family: '서울남산 장체EB';
+}
+
 /* 상품가격 위치조정 */
 .price {
     height: 40px;
@@ -213,10 +214,11 @@ a strong {
 
 .price p {    
     float: left;
-    width: 50%;
+    width: 150px;
     padding: 10px 10px 10px 10px;
     margin: 0 auto;
     line-height: 20px;
+    font-family: '서울남산 장체EB';
 }
 
 .price .space {
@@ -258,16 +260,6 @@ a {
 }
 
 /* 하단 footer */
-footer {
-    display: block;
-    text-align: center;
-    background-color: #F25E5E;
-    height: 200px;
-    margin: 20px auto;
-    font-size: 50px;
-    z-index: 20;
-}
-
 .title p {
     margin: 0;
     padding: 0;

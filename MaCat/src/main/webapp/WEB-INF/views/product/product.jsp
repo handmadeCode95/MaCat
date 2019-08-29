@@ -19,6 +19,18 @@
 	    <link rel="stylesheet" href="resources/css/product/macat_product_category_infoTable.css">
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	    <script type="text/javascript" src="resources/js/product/product.js"></script>
+	    <script type="text/javascript">
+			function funName(src){
+				$('div.main_img img').attr({"src":src});
+			}
+
+			$(document).ready(function){
+				$('.back').click(function(){
+					$('.slide_choice')
+
+				});
+			}
+	    </script>
 	</head>
 	
 	<body>
@@ -47,15 +59,15 @@
 	                </div>
 	                <!--왼쪽 : 이미지 파트-->
 	                <div class="img_choice">
+	                 	<img src="resources/img/mcat-arrow-slider-left-grey.png" class="back" onclick="funName('resources/img/macat_food01.png')">
 	                    <div class="slide_choice">
-	                        <img src="resources/img/mcat-arrow-slider-left-grey.png" alt="">
 	                        <c:forEach var="i" items="${imagesDTO}" varStatus="vs">
 	                        	<c:if test="${i.img_thumb_fl > 0}">
 	                        		<img src="resources/img/${i.img_nm}" alt="썸네일${vs.count}">
 	                        	</c:if>
-	                        </c:forEach>
-	                        <img src="resources/img/mcat-arrow-slider-right-grey.png" alt="">
+	                        </c:forEach>	                        
 	                    </div>
+	                     <img src="resources/img/mcat-arrow-slider-right-grey.png" class="next" onclick="funName('resources/img/macat_food02.png')">
 	                </div>
 	            </div>
 	            <!--오른쪽 정보 파트-->

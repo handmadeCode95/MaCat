@@ -73,7 +73,7 @@ p {
     border-top: 1px solid #CFCFCF;
     margin: 0 auto;
     margin-top: 68px;
-
+	position: relative;
     width: 400px;
     height: 80px;
 }
@@ -84,19 +84,38 @@ p {
     margin: 0 auto;
     margin-top: 30px;
 }
-/*썸네일 좌측버튼*/
-.slide_choice img:first-child{
+
+.img_choice img.back{
     width: 10px;
-    height: 20px;
-    margin-bottom: 20px;
-}
-/*썸네일 우측버튼*/
-.slide_choice img:last-child{
-    width: 10px;
-    height: 20px;
-    margin-bottom: 20px;
+    height: 20px;    
+    float: left;
+    cursor: pointer;
 }
 
+.img_choice img.back{
+    display: inline-block;
+    float: left;
+    position: absolute;
+    top: 50px;
+    left: 0;    
+}
+
+.img_choice img.next{
+    display: inline-block;
+    float: right;
+    position: absolute;
+    top: -40px;
+    right: 0;    
+    cursor: pointer;
+}
+
+.img_choice img.next{
+    position: relative;
+    width: 10px;
+    height: 20px;    
+    line-height: 20px;
+    float: right;
+}
 
 .slide_choice img {
     width: 50px;

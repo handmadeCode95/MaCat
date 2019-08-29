@@ -5,28 +5,17 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "productsDTO") {
+			if (key === "qnaDTO") {
 				$.each(value, function(k, v){
-					result += '<tr id="' + v["prduct_sq"] + '">';
-					result += '<td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"></td>';
-					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>1001</td>';
-					result += '<td>' + v["prduct_cd"] + '</td>';
-					result += '<td>' + v["ctgry_nm"] + '</td>';
-					result += '<td><a href="product.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
-					result += '<td>' + v["prduct_price"] + '</td>';
-					result += '<td>' + v["prduct_dc"] + '</td>';
-					result += '<td>' + v["prduct_dlvy_price"] + '</td>';
-					result += '<td>' + v["prduct_maker"] + '</td>';
-					result += '<td>' + v["prduct_coo"] + '</td>';
-					result += '<td>' + v["prduct_matr"] + '</td>';
-					result += '<td>' + v["prduct_reg_dt"].substring(0, 10) + '</td>';
-					result += '<td>' + v["prduct_dc_pt"] + '</td>';
-					result += '<td>' + v["prduct_save_pt"] + '</td>';
-					result += '<td>' + v["prduct_save"] + '</td>';
-					result += '<td>' + v["prduct_view_cnt"] + '</td>';
-					result += '<td>' + v["prduct_rating_avg"] + '</td>';
-					result += '<td>' + v["prduct_sale_sum"] + '</td>';
-					result += '<td>' + v["prduct_amt"] + '</td>';
+					result += '<tr id="' + v["qna_sq"] + '">';
+					result += '<td>' + v["qna_ans_st"] + '</td>';
+					result += '<td>' + v["qc_nm"] + '</td>';
+					result += '<td>' + v["qna_sq"] + '</td>';
+					result += '<td><a href="qna_manage.mcat?qna_sj="' + v["qna_sj"] + '">' + v["qna_sj"] + '</a></td>';
+					result += '<td>' + v["qna_nm"] + '</td>';
+					result += '<td>' + v["qna_id"] + '</td>';
+					result += '<td>' + v["qna_reg_dt"] + '</td>';
+					result += '<td>' + v["qna_view_cnt"] + '</td>';
 					//result += "<option>등급선택</option>";
 					//$.each(data.mber_grad, function(mgKey, mgValue) {
 					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";

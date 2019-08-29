@@ -1,0 +1,48 @@
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+#pagingDiv{
+	margin: 15px;
+	height: 25px; 
+	font-family : 'THEjunggt130';
+	font-size: 15px;
+}
+
+#paging {
+	list-style: none;
+	float: right;
+	left: -50%;
+	position: relative;
+	margin-top: 0px;
+}
+#paging li {
+	float: left; 
+	margin-right: 8px;
+	left: 50%;
+	position: relative;
+	margin-top: 0px;
+}
+#paging li a {
+	display: block;
+	padding: 3px 7px;
+	color: #2f313e;
+}
+#paging li a:hover {
+	background: #F2A766;
+	color: white;
+}
+.pagingDisable {
+	padding: 3px 7px;
+	color: silver;
+}
+.nowPage {
+	padding: 3px 7px;
+	background: #F25E5E;
+	color: white;
+}

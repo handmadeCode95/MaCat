@@ -891,5 +891,5 @@ input[type="checkbox"]#test_20:checked + label {
 
 /*선택시 색상변경 : 사이드메뉴 선택시에도 영향을 줌*/
 .selected {
-
+	background: #f25e5e;
 }
