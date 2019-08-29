@@ -1,3 +1,7 @@
+input[type=password] {
+    font-family: 'Arial';
+}
+
 /*회원정보 테이블 파트 : 타이틀*/
 .member_info_table_title {
      width: 1645px;
@@ -118,14 +122,6 @@ table.type11 td {
     width: 95%;
     text-align: center;
     border: none;    
-}
-/*disable 일때 = 기본값*/
-input[disabled='disabled']{
-    background: #fff;
-    color : #000;
-}
-/*회원정보 테이블 수정상태일 때*/
-#searchResult input{
-    color: #f2a766;     
     background: #fff;
 }
+

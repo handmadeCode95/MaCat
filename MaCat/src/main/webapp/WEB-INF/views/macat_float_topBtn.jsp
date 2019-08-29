@@ -14,7 +14,7 @@
 <!--  추가구현 필요내용 : 사용자 해상도가 달라져도 같은 위치에 있도록  -->
     <script type="text/javascript">
     // 일정 길이 이상 스크롤 다운할 때 top버튼 나타남    
-    $ function(document){
+    $(function(document){
         $(window).scroll( function() {
             if ($(this).scrollTop() > 200) {
                 $('.top').fadeIn();
@@ -28,7 +28,7 @@
                 scrollTop : 0 }, 400 );
             return false;
         });       
-    }
+    });
     </script>
 </head>
 <body>    

@@ -59,14 +59,14 @@
 					</thead>
 					<tbody id="searchResult">
 						<c:choose>
-							<c:when test="${empty faq}">
+							<c:when test="${empty faqDTO}">
 								<tr>
 									<td colspan="4"><h3>조회된 문의가 없습니다.</h3></td>
 								</tr>
 							</c:when>
 							
 							<c:otherwise>
-								<c:forEach var="i" items="${faq}">
+								<c:forEach var="i" items="${faqDTO}">
 									<tr id="${i.faq_sq}">
 										<td><input type="checkbox" class="chkbox" name="faqs" value="${i.faq_sq}"></td>
 										<td>${i.qc_nm}</td>
@@ -75,8 +75,8 @@
 								</c:forEach>
 								
 								<%-- 빈칸 추가 --%>
-								<c:if test="${fn:length(faq) % 10 != 0}">
-									<c:forEach begin="1" end="${10 - (fn:length(faq) % 10)}">
+								<c:if test="${fn:length(faqDTO) % 10 != 0}">
+									<c:forEach begin="1" end="${10 - (fn:length(faqDTO) % 10)}">
 										<tr>
 											<%-- 공백 삽입 --%>
 											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>

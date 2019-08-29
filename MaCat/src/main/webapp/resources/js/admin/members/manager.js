@@ -5,62 +5,62 @@ $(function() {
 		var result = "";
   	    var pagingResult = "";
 		$.each(data, function(key, value){
-			if (key === "members") {
+			if (key === "mbersDTO") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["mber_sq"] + "'><td><input type='checkbox' class='chkbox' name='mbers' value='" + v["mber_sq"] + "'></td>";
-					result += "<td><input type='hidden' class='" + v["mber_sq"] + "' name='mber_sq' value='" + v["mber_sq"] + "' disabled>" + v["mber_sq"] + "</td>";
-					result += "<td>" + v["mber_id"] + "</td>";
-					result += "<td><input type='password' class='" + v["mber_sq"] + "' name='mber_pw' value='" + v["mber_pw"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_nm' value='" + v["mber_nm"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_email' value='" + v["mber_email"] + "' disabled></td>";
-					result += "<td>" + v["mber_birthday_dt"].substring(0, 10) + "</td>";
-					result += "<td>" + v["mber_gender"] + "</td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_phone_no' value='" + v["mber_phone_no"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_tel_no' value='" + v["mber_tel_no"] + "' disabled></td>";
-					result += "<td>" + v["mber_point_sum"] + "</td>";
-					result += "<td>" + v["mber_reg_dt"].substring(0, 10) + "</td>";
-					result += "<td>" + v["mber_conect_dt"].substring(0, 10) + "</td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_zip_no' value='" + v["mber_zip_no"] + "' minlength='5' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_adres' value='" + v["mber_adres"] + "' disabled></td>";
-					result += "<td><input type='text' class='" + v["mber_sq"] + "' name='mber_detail_adres' value='" + v["mber_detail_adres"] + "' disabled></td>";
-					result += "<td><select class='" + v["mber_sq"] + "' name='mber_grad_nm' disabled>";
-					result += "<option>등급선택</option>";
-					$.each(data.mber_grad, function(mgKey, mgValue) {
-						result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					})
+					result += '<tr id="' + v["mber_sq"] + '">';
+					result += '<td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"></td>';
+					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled>1001</td>';
+					result += '<td><input name="mber_nm" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_nm"] + '" disabled></td>';
+					result += '<td>' + v["mber_gender"] + '</td>';
+					result += '<td>' + v["mber_id"] + '</td>';
+					result += '<td><input name="mber_pw" class="' + v["mber_sq"] + '" type="password" value="' + v["mber_pw"] + '" disabled></td>';
+					result += '<td><input name="mber_phone_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_phone_no"] + '" disabled></td>';
+					result += '<td><input name="mber_tel_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_tel_no"] + '" disabled></td>';
+					result += '<td><input name="mber_zip_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_zip_no"] + '" disabled></td>';
+					result += '<td><input name="mber_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_adres"] + '" disabled></td>';
+					result += '<td><input name="mber_detail_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_detail_adres"] + '" disabled></td>';
+					result += '<td><input name="mber_email" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_email"] + '" disabled></td>';
+					result += '<td>' + v["mber_birthday_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_reg_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_conect_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_point_sum"] + 'p</td></tr>';
+					//result += "<option>등급선택</option>";
+					//$.each(data.mber_grad, function(mgKey, mgValue) {
+					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
+					//})
 					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					result += "</select></td></tr>";
+					//result += "</select></td></tr>";
 				});
-			}else if (key === "paging"){
-				var paging = value;
+			}else if (key === "pageDTO"){
+				var pageDTO = value;
 				
-				if (paging.beginBlock <= paging.pagePerBlock){
+				if (pageDTO.beginBlock <= pageDTO.pagePerBlock){
 					pagingResult += '<li class="disable">';
 					pagingResult +=	'<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">'
 					pagingResult += '</li>';
 				}else {
 					pagingResult += '<li><a class="page">';
 					pagingResult += '<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">';
-					pagingResult += '<input type="hidden" name="cPage" value="' + (paging.beginBlock - 1) + '">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock - 1) + '">';
 					pagingResult += '</a></li>';
 				}
 				  
-				for (var i = paging.beginBlock; i <= paging.endBlock; i++) {
-					if (i == paging.nowPage) {
+				for (var i = pageDTO.beginBlock; i <= pageDTO.endBlock; i++) {
+					if (i == pageDTO.nowPage) {
 						pagingResult += '<li class="now">' + i + '</li>';
 					}else{
 						pagingResult += '<li><a class="page">' + i + '<input type="hidden" name="cPage" value="' + i + '"></a></li>';
 					}
 				}
 				  
-				if (paging.endBlock >= paging.totalPage){
+				if (pageDTO.endBlock >= pageDTO.totalPage){
 					pagingResult += '<li class="disable">';
 					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
 					pagingResult += '</li>';
 				}else {
 					pagingResult += '<li><a class="page">';
 					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
-					pagingResult += '<input type="hidden" name="cPage" value="' + (paging.beginBlock + paging.pagePerBlock) + '">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
 		}
@@ -101,20 +101,79 @@ $(function() {
 	};
 	
 	
-    $("li").each(function() {
+    $(".join_period_li").each(function() {
         $(this).click(function() {
             $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
             $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+            $("#join_date").prop("checked", false); // 기간 input 초기화
+    		$("#join_date").trigger("change");		// 기간 input 초기화
+    		$(this).children().attr("disabled", false); // 히든값
+    		$(this).siblings().children().attr("disabled", true);
         });
     });
+    
+    
+    $(".connect_period_li").each(function() {
+        $(this).click(function() {
+            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+            $("#connect_term").prop("checked", false);  // 기간 input 초기화
+    		$("#connect_term").trigger("change");		// 기간 input 초기화
+    		$(this).children().attr("disabled", false); // 히든값
+    		$(this).siblings().children().attr("disabled", true);
+        });
+    });
+    
+    
+    $("#join_date").change(function(){
+        if($("#join_date").is(":checked")){
+        	$(".join_period_li").removeClass("selected");
+        }
+    });
+    
+    
+    $("#connect_term").change(function(){
+        if($("#connect_term").is(":checked")){
+        	$(".connect_period_li").removeClass("selected");
+        }
+    });
+    
+
+    // 검색 영역 체크박스 체크시 인풋 활성화/비활성화, 포커싱
+	$(".search").change(function() {
+		if ($(this).prop("checked")) {
+			$("." + this.value).attr("disabled", false);
+			$("." + this.value + ":first").focus();
+		} else {
+			$("." + this.value).attr("disabled", true);
+			$("." + this.value).val(null);
+			$("." + this.value).removeClass("active");
+		}
+	});
 	
 	
-	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화
+	// 검색 영역 인풋 클릭시 인풋 활성화/비활성화, 포커싱
+	$(".inputClickListener").click(function() {
+		if (!$(this).siblings(".search").prop("checked")){
+			$(this).siblings(".search").prop("checked", true);
+			$(this).siblings(".search").trigger("change");
+		}
+		if (!$(this).parents("div").siblings(".search").prop("checked")) {
+			$(this).parents("div").siblings(".search").prop("checked", true);
+			$(this).parents("div").siblings(".search").trigger("change");
+			$(this).children().focus();
+		}
+	});
+    
+	
+	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화 + 색상변경
 	$(document).on("change", ".chkbox", function(){
 		if ($(this).prop("checked")){
 			$("."+this.value).attr("disabled", false);
+			$("."+this.value).css("color", "#F2A766");
 		}else{
 			$("."+this.value).attr("disabled", true);
+			$("."+this.value).css("color", "#000");
 		}
 	});
 	
@@ -147,12 +206,13 @@ $(function() {
 	
 	// 회원 검색 AJAX
 	$("#searchBtn").click(function() {
+		console.log($().toJSON($("#searchForm")));
 		$.ajax({
 			url			: "mbers_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: $().toJSON($("#searchForm)")),
+            data		: $().toJSON($("#searchForm")),
             success		: function(data) {
             				  $().getTable(data);
             			  },
@@ -187,8 +247,8 @@ $(function() {
 	    data = {mbersDTO : arr};
 	    // JSON형태로 직렬화
 	    var mbersDTO = JSON.stringify(data);
-	    
-		$.ajax({
+
+	    $.ajax({
 			url			: "mbers_update.mcat",
             type		: "POST",
             dataType	: "json",

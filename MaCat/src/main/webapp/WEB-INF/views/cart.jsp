@@ -1,8 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-
 <html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니</title>
+    <!--normalize-->
+    <link rel="stylesheet" href="resources/css/normalize.css">
+    <!--장바구니 css-->
+    <link rel="stylesheet" href="resources/css/cart.css">
+    <!--여백-->
+    <link rel="stylesheet" href="resources/css/spacing.css">
+    <!--체크박스 모양-->
+    <link rel="stylesheet" href="resources/css/checkbox.css">
+            
+    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+ 	<!-- 체크박스 전체선택 -->
+    <script type="text/javascript" src="resources/js/cart.js"></script>
+</head>
+<body>
+	<!-- 고정헤더 불러오기 -->
+	<div id="macat_header"><%@ include file="header.jsp"%></div>
+	<!-- 여백-->
+	<div class="cart_spacing"></div>
 
 	<head>
 	    <meta charset="UTF-8">
