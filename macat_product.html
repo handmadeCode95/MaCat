@@ -59,16 +59,28 @@
                 </div>
                 <!--왼쪽 : 이미지 파트-->
                 <div class="img_choice">
-                    <div class="slide_choice">
-                       <img src="/resources/img/mcat-arrow-slider-left-grey.png" alt="">
+                   <img src="/resources/img/mcat-arrow-slider-left-grey.png" class="back" alt="">
+                    <div class="slide_choice">                       
                         <img src="/resources/img/macat_food01.png" alt="썸네일1">
-                        <img src="/resources/img/macat_food01.png" alt="썸네일2">
-                        <img src="/resources/img/macat_food01.png" alt="썸네일3">
-                        <img src="/resources/img/macat_food01.png" alt="썸네일4">
-                        <img src="/resources/img/mcat-arrow-slider-right-grey.png" alt="">
+                        <img src="/resources/img/macat_food02.png" alt="썸네일2">
+                        <img src="/resources/img/macat_food03.png" alt="썸네일3">
+                        <img src="/resources/img/macat_food04.png" alt="썸네일4">                       
                     </div>
+                    <img src="/resources/img/mcat-arrow-slider-right-grey.png" class="next" alt="">
                 </div>
             </div>
+            
+            <script type="text/javascript">
+                $(function(){
+                    $('.next').click(function(){
+                        $('div.main_img img').attr({"src":"/resources/img/macat_food02.png"});
+                    });
+                    
+                    $('.back').click(function(){
+                        $('div.main_img img').attr({"src":"/resources/img/macat_food01.png"});
+                    });
+                });
+            </script>
             <!--오른쪽 정보 파트-->
             <div class="info_part">
                 <div class="product_title">

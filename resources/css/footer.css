@@ -32,6 +32,29 @@ body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
 .clear:after {content: ""; display: block; clear: both;}
 .pc {display: none;}
 
+
+/* header : css 미적용 상태*/
+.navWrap {
+    position: fixed; top: 0; left: 0;
+    z-index: 1; background: #fff; width: 100%; height: 130px;
+    border-bottom: 1px solid #5c5173;
+}
+/*메뉴 선 그리기*/
+.navWrap > .line span {
+    position: fixed; 
+    width: 100%; top: 78px;
+    border-top: 3px solid #f25e5e;
+}
+/*header macat logo*/
+/*img 감싸는 h1 크기, 위치 지정*/
+h1 {
+    position: absolute;  width: 100px; left:50%; margin-left: -50px; top:21px;
+}
+/*헤더 중앙 메인로고 img 크기 조정*/
+h1 img {
+    width: 100%;
+}
+
 /* footer */
 footer {
     background: #f25e5e; bottom: 0; width: 100%;
@@ -69,12 +92,19 @@ footer small {
 }
 
 /*gte 768*/
-@media screen and (min-width:768px) {    
-    /* footer */
-    h1 {
-    width: 200px; margin-left: -100px;
+@media screen and (min-width:768px) {      
+    .navWrap {
+        height: 175px;
+    }
+    .navWrap > .line span {
+        top:105px;
     }
     
+    h1 {
+        width: 200px; margin-left: -100px;
+    }
+
+    /* footer */    
     .copy p {
         float: left; margin: 29px 25px;
     }

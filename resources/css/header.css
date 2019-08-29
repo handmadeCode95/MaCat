@@ -32,7 +32,7 @@ body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
 /* header : css 미적용 상태*/
 .navWrap {
     position: fixed; top: 0; left: 0;
-    z-index: 1; background: #fff; width: 100%; height: 130px;
+    z-index: 2; background: #fff; width: 100%; height: 130px;
     border-bottom: 1px solid #5c5173;
 }
 /*메뉴 선 그리기*/
@@ -200,8 +200,6 @@ header {
 /*gte 768*/
 @media screen and (min-width:768px) {
     /*  header  */
-    body {overflow-x: hidden;}
-    
     .navWrap {
         height: 175px;
     }
@@ -211,6 +209,7 @@ header {
     h1 {
         width: 200px; margin-left: -100px;
     }
+    /*버튼*/
     .navBtn {
         top: 128px;
     }
@@ -223,6 +222,7 @@ header {
     .navBtn span:nth-child(3) {
         transform: translateY(11px);
     }
+    /*검색버튼*/
     .searchWrap form > button {
         top: 123px; width: 35px; height: 35px;
     }
