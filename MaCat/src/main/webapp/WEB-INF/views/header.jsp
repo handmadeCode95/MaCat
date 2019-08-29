@@ -28,21 +28,31 @@
                     <form action="#" method="get">
                         <button type="button">검색</button>
                         <div class="searchOn">
-                            <a href="#" class="close">취소</a>
-                            <input type="search" placeholder="검색어"> <button type="submit">검색하기</button>
+                            <a href="javascript:void(0)" class="close">취소</a>
+                            <input type="search" placeholder="검색어"> <button onclick="alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">검색하기</button>
                         </div>
-                    </form>
+                    </form><!--  -->
                     <!-- /검색 -->
                     <!--로그인-->
                     <div class="pc">
-                        <a href="login.mcat">로그인</a>
-                        <a href="join.mcat">회원가입</a>
+                    	<c:choose>
+                    		<c:when test="${empty sessionScope.loginData.mber_sq}">
+                    			<a href="login.mcat">로그인</a>
+                    			<a href="join.mcat">회원가입</a>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<a href="javascript:confirm('로그아웃 하시겠습니까?') ?location.href='logout.mcat' :retrun">로그아웃</a>
+                    		</c:otherwise>
+                    	</c:choose>
+                        <c:if test="${!empty sessionScope.loginData.mber_grad_nm and sessionScope.loginData.mber_grad_nm eq '관리자'}">
+                        	<a href="mbers_manager.mcat">관리자 센터</a>
+                        </c:if>
                     </div>
                 </div>
                 <!--searchWrap end-->
                 <!--회원정보-->
                 <div class="members">
-                    <button type="button" class="membersBtn" onclick="location.href='mypage.mcat'">회원정보</button>
+                    <button type="button" class="membersBtn" onclick="isLogin(${!empty sessionScope.loginData.mber_sq}, 'mypage.mcat')">회원정보</button>
                 </div>
                 <!--장바구니-->
                 <div class="basket">
@@ -76,7 +86,14 @@
                                             </div>
                                             <!--wrapNav left end-->
                                             <div class="right">
-                                                <ol>
+                                            	<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
+                                            		<c:if test="${i.ctgry_level eq 0}">
+	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
+	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
+                                            		</c:if>
+                                            	</c:forEach>
+                                               <!--  <ol>
                                                     <li><a href="#">사료</a></li>
                                                     <li><a href="#">간식</a></li>
                                                 </ol>
@@ -88,7 +105,7 @@
                                                 <ol>
                                                     <li><a href="#">위생/목욕</a></li>
                                                     <li><a href="#">화장실</a></li>
-                                                </ol>
+                                                </ol> -->
                                             </div>
                                             <!--wrapNav right end-->
                                         </div>
@@ -104,26 +121,21 @@
                                     <div class="wrapInner clear">
                                         <div class="wrapNav">
                                             <div class="left">
-                                                <ol>
-                                                    <li><a href="#">NEW</a></li>
-                                                    <li><a href="#">PRODUCTS</a></li>
-                                                </ol>
-                                            </div>
-                                            <!--wrapNav left end-->
+	                                            <ol>
+	                                                <li><a href="#">NEW</a></li>
+	                                                <li><a href="#">PRODUCTS</a></li>
+	                                            </ol>
+	                                        </div>
+	                                        <!--wrapNav left end-->
                                             <div class="right">
-                                                <ol>
-                                                    <li><a href="#">사료</a></li>
-                                                    <li><a href="#">간식</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">장난감</a></li>
-                                                    <li><a href="#">생활용품</a></li>
-                                                    <li><a href="#">의류</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">위생/목욕</a></li>
-                                                    <li><a href="#">화장실</a></li>
-                                                </ol>
+                                            	<!-- 신상품 기준으로 정렬해야함 -->
+                                                <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
+                                            		<c:if test="${i.ctgry_level eq 0}">
+	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
+	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
+                                            		</c:if>
+                                            	</c:forEach>
                                             </div>
                                             <!--wrapNav right end-->
                                         </div>
@@ -138,13 +150,13 @@
                                         <div class="wrapNav">
                                             <div class="left" id="coupLeft">
                                                 <ol>
-                                                    <li><a href="">마캣쿠폰</a></li>
-                                                    <li><a href="">Coupon</a></li>
+                                                    <li><a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">마캣쿠폰</a></li>
+                                                    <li><a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">Coupon</a></li>
                                                 </ol>
                                             </div>
                                             <div class="right" id="coupRight">
                                                 <ol>
-                                                    <li><a href="">바로가기</a></li>
+                                                    <li><a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">바로가기</a></li>
                                                 </ol>
                                             </div>
                                         </div>
@@ -158,27 +170,22 @@
                                 <div class="wrap">
                                     <div class="wrapInner clear">
                                         <div class="wrapNav">
-                                            <div class="left">
+                                        	<div class="left">
                                                 <ol>
-                                                    <li><a href="#">FREE</a></li>
-                                                    <li><a href="#">DELIVERY</a></li>
-                                                </ol>
+	                                                <li><a href="#">FREE</a></li>
+	                                                <li><a href="#">DELIVERY</a></li>
+	                                            </ol>
                                             </div>
                                             <!--wrapNav left end-->
                                             <div class="right">
-                                                <ol>
-                                                    <li><a href="#">사료</a></li>
-                                                    <li><a href="#">간식</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">장난감</a></li>
-                                                    <li><a href="#">생활용품</a></li>
-                                                    <li><a href="#">의류</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">위생/목욕</a></li>
-                                                    <li><a href="#">화장실</a></li>
-                                                </ol>
+                                            	<!-- 무배상품만 불러와야함 -->
+                                                <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
+                                            		<c:if test="${i.ctgry_level eq 0}">
+	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
+	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
+                                            		</c:if>
+                                            	</c:forEach>
                                             </div>
                                             <!--wrapNav right end-->
                                         </div>
@@ -200,19 +207,14 @@
                                             </div>
                                             <!--wrapNav left end-->
                                             <div class="right">
-                                                <ol>
-                                                    <li><a href="#">사료</a></li>
-                                                    <li><a href="#">간식</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">장난감</a></li>
-                                                    <li><a href="#">생활용품</a></li>
-                                                    <li><a href="#">의류</a></li>
-                                                </ol>
-                                                <ol>
-                                                    <li><a href="#">위생/목욕</a></li>
-                                                    <li><a href="#">화장실</a></li>
-                                                </ol>
+                                                <!-- 할인상품만 불러와야함 -->
+                                                <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
+                                            		<c:if test="${i.ctgry_level eq 0}">
+	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
+	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
+                                            		</c:if>
+                                            	</c:forEach>
                                             </div>
                                             <!--wrapNav right end-->
                                         </div>

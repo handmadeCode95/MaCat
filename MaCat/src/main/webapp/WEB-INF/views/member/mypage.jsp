@@ -38,11 +38,11 @@
             <ul>
                 <li>
                    <strong class="title">가용적립금</strong>
-                   <strong class="data">0 point</strong>                    
+                   <strong class="data">${sessionScope.mber_point_sum} point</strong>                    
                 </li>
                 <li>
                    <strong class="title">총 적립금</strong>
-                   <strong class="data">0 point</strong>                    
+                   <strong class="data">${sessionScope.mber_point_sum} point</strong>                    
                 </li>
                 <li>
                    <strong class="title">사용적립금</strong>
@@ -70,34 +70,34 @@
                 <ul class="order">
                     <li>
                         <strong>입금전</strong>
-                        <a href="" class="count">0</a>
+                        <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count">0</a>
                     </li>
                     <li>
                         <strong>배송준비중</strong>
-                        <a href="" class="count">0</a>
+                        <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count">0</a>
                     </li>
                     <li>
                         <strong>배송중</strong>
-                        <a href="" class="count">0</a>
+                        <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count">0</a>
                     </li>
                     <li>
                         <strong>배송완료</strong>
-                        <a href="" class="count">0</a>
+                        <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count">0</a>
                     </li>
                 </ul>
                 <!-- 여기도 숫자는 주문조회 페이지로 이동시킴-->
                 <ul class="cs">
                     <li><p class="icoDot"></p>
                     <strong>취소 : </strong>
-                    <a href="" class="count"><span>0</span></a>
+                    <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count"><span>0</span></a>
                     </li>
                     <li><p class="icoDot"></p>
                     <strong>교환 : </strong>
-                    <a href="" class="count"><span>0</span></a>
+                    <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count"><span>0</span></a>
                     </li>
                     <li><p class="icoDot"></p>
                     <strong>반품 : </strong>
-                    <a href="" class="count"><span>0</span></a>
+                    <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')" class="count"><span>0</span></a>
                     </li>
                 </ul>
             </div>
@@ -106,7 +106,7 @@
         <!--마우스 오버시 남아있는 이미지 여백 투명하게..-->
         <div id="myshopMain">
             <ul>
-                <a href="mypage_order_inquiry.mcat">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">                        
                         <img src="resources/img/schedule_icon.png" alt="주문내역_페이지">
                     </li>
@@ -114,7 +114,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">
                         <img src="resources/img/memberInfo_icon.png" alt="회원정보_페이지">
                     </li>
@@ -122,7 +122,7 @@
                 </a>    
             </ul>
             <ul>
-                <a href="mypage_wishlist.mcat">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">
                         <img src="resources/img/wishList_icon.png" alt="찜_리스트_페이지">
                     </li>
@@ -130,7 +130,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">
                         <img src="resources/img/mileage_icon.png" alt="적립금확인_페이지">
                     </li>
@@ -138,7 +138,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="mypage_post_management.mcat">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">
                         <img src="resources/img/board_icon.png" alt="게시물관리_페이지">
                     </li>
@@ -146,7 +146,7 @@
                 </a>
             </ul>
             <ul>
-                <a href="mypage_deliveryAdress.mcat">
+                <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
                     <li class="icon_li">
                         <img src="resources/img/schedule_icon.png" alt="배송주소록_페이지">
                     </li>

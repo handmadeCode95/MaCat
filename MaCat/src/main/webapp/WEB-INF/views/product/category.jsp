@@ -52,7 +52,7 @@
 							</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
-						<c:if test="${i.ctgry_level eq 0 && ctgry_group eq i.ctgry_group}">
+						<c:if test="${i.ctgry_level eq 0 and ctgry_group eq i.ctgry_group}">
 							<p>-${i.ctgry_nm}</p>
 						</c:if>
 					</c:forEach>
@@ -61,18 +61,18 @@
 					<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
 						<c:if test="${ctgry_group eq i.ctgry_group}">
 							<%-- a태그 시작 --%>
-							<a
-								href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}"
+							<a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}"
 								<c:if test="${ctgry_nm eq i.ctgry_nm}">
 										id="selectedCtgry"
 									</c:if>>
-								<%-- a태그 내용부분 --%> <c:choose>
+								<%-- a태그 내용부분 --%>
+								<c:choose>
 									<c:when test="${i.ctgry_level < 1}">
-											전체
-										</c:when>
+										전체
+									</c:when>
 									<c:otherwise>
-											${i.ctgry_nm}
-										</c:otherwise>
+										${i.ctgry_nm}
+									</c:otherwise>
 								</c:choose>
 							</a>
 							<%-- a태그 끝 --%>
@@ -132,7 +132,7 @@
 									<div class="price">
 										<!-- 좋아요버튼 -->
 										<div class="like_btn">
-											<a href=""><img src="resources/img/like_btn.png" alt=""></a>
+											<a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')"><img src="resources/img/like_btn.png" alt=""></a>
 										</div>
 										<p>
 											<fmt:formatNumber value="${i.prduct_price}" pattern="#,###"></fmt:formatNumber>

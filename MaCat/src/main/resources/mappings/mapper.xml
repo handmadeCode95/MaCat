@@ -39,14 +39,14 @@
 	<!--=========================== 카테고리 ===========================-->
 	
 	
-	<!-- 카테고리 그룹 조회 -->
+	<!-- 카테고리 전체 조회 -->
 	<select id="categories" resultType="CtgriesDTO">
-		SELECT * FROM CTGRIES_TB ORDER BY CTGRY_ORD
+		SELECT * FROM CTGRIES_TB ORDER BY CTGRY_GROUP, CTGRY_LEVEL, CTGRY_ORD
 	</select>
 	
 	<!-- 카테고리 그룹 조회 -->
 	<select id="ctgry_group" resultType="CtgriesDTO" parameterType="int">
-		SELECT * FROM CTGRIES_TB WHERE CTGRY_GROUP = #{ctgry_group} ORDER BY CTGRY_ORD
+		SELECT * FROM CTGRIES_TB WHERE CTGRY_GROUP = #{ctgry_group} ORDER BY CTGRY_GROUP, CTGRY_LEVEL, CTGRY_ORD
 	</select>
 	
 	

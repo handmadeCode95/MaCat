@@ -3,8 +3,6 @@
 import java.io.File;
 import java.io.IOException;
 
-import java.util.ArrayList;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,7 +74,8 @@ public class MaCatController {
 
 	// 메인 페이지로 이동
 	@RequestMapping("main.mcat")
-	public ModelAndView getMainCmd() {
+	public ModelAndView getMainCmd(HttpSession session) {
+		session.setAttribute("ctgriesDTO", dao.getCategories());
 		return new ModelAndView("main");
 	}
 	
@@ -96,7 +97,6 @@ public class MaCatController {
 		ModelAndView mv;
 		MbersDTO loginMber = dao.getLogin(mbersDTO);
 		if (loginMber != null) {
-//			mv = new ModelAndView("admin/main"); // 관리자 메인으로 이동
 			mv = new ModelAndView("main");
 			session.setAttribute("loginData", loginMber);
 			dao.getLoginRecord(mbersDTO);
@@ -107,22 +107,27 @@ public class MaCatController {
 			return mv;
 		}
 	}
-
+	
+	@RequestMapping("logout.mcat")
+	public ModelAndView getLogout(HttpSession session) {
+		session.removeAttribute("loginData");
+		return new ModelAndView("main");
+	}
+	
 	// 회원가입
 	@RequestMapping(value = "mber_join.mcat", method = RequestMethod.POST)
 	public ModelAndView getJoinCmd(MbersDTO mbersDTO) {
 		// 테스트맨 생성기
-		
-		mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
-		String id = mbersDTO.getMber_id();
-		for (int i = 1; i <= 100; i++) {
-			mbersDTO.setMber_id(id + i);
-			dao.getJoin(mbersDTO);
-		}
+		//mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
+		//String id = mbersDTO.getMber_id();
+		//for (int i = 1; i <= 100; i++) {
+		//	mbersDTO.setMber_id(id + i);
+		//	dao.getJoin(mbersDTO);
+		//}
 		 
 
-		//mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
-		//dao.getJoin(mbersDTO);
+		mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
+		dao.getJoin(mbersDTO);
 		return new ModelAndView("redirect:login.mcat");
 	}
 
@@ -134,15 +139,11 @@ public class MaCatController {
 	
 	// 카테고리 페이지로 이동
 	@RequestMapping("category.mcat")
-	public ModelAndView getCategoryCmd(HttpSession session, String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
+	public ModelAndView getCategoryCmd(String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
 		this.cPage = cPage;
-		
-		// 메인쪽으로 이동
-		session.setAttribute("ctgriesDTO", dao.getCategories());
 		
 		ModelAndView mv = new ModelAndView("product/category");
 		PageDTO pageDTO = new PageDTO(20);
-
 		
 		if (ctgry_level > 0) {
 			count = dao.getProductsCount(ctgry_nm);
@@ -300,6 +301,12 @@ public class MaCatController {
 
 	}
 	
+	// 결제페이지로 이동
+	@RequestMapping("order.mcat")
+	public ModelAndView getOrderCmd() {
+		return new ModelAndView("macat_order_page");
+	}
+	
 	
 	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
 	
@@ -391,7 +398,7 @@ public class MaCatController {
 	
 	// 관리자 상품등록 상세입력 페이지로 이동
 	@RequestMapping("add_product_info.mcat")
-	public ModelAndView getAddProductInfoCmd() {
+	public ModelAndView getAddProductInfoCmd(@ModelAttribute ProductsDTO productsDTO) {
 		return new ModelAndView("admin/product/add_product-detail_info");
 	}
 
@@ -891,6 +898,7 @@ public class MaCatController {
 	}
 	
 	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/
+	
 	// 구매후기 페이지 이동
 	@RequestMapping("review.mcat")
 	public ModelAndView getReviewCmd() {
@@ -930,6 +938,7 @@ public class MaCatController {
 	public ModelAndView getDeliveryAdressCmd() {
 		return new ModelAndView("member/mypage_deliveryAdress");
 	}
+	
 	
 	/*////////////////////////////////// 기타 메소드 //////////////////////////////////*/
 

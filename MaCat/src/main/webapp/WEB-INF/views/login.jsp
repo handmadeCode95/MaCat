@@ -25,7 +25,9 @@
             <div id="formContent">
                 <%-- 로고 --%>
                 <div class="fadeIn first">
-                	<img src="resources/img/logos/mcat-logo.png" id="icon" alt="MaCat" />
+               		<a href="main.mcat">
+                		<img src="resources/img/logos/mcat-logo.png" id="icon" alt="MaCat" />
+                	</a>
                 </div>
                 <%-- 로그인 폼 --%>
                 <form name="f" action="login_ok.mcat" method="post" onsubmit="return loginChk()">

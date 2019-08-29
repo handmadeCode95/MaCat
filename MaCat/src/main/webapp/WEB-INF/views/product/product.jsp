@@ -184,7 +184,7 @@
 	                <div class="btn_container">
 	                    <ul>
 	                        <!-- 찜리스트 추가 & 추가성공 alert 창만 출력-->
-	                        <a href="">
+	                        <a href="javascript:alert('준비 중인 서비스입니다.\n이용에 불편을 드려 죄송합니다.')">
 	                            <li class="like_btn">
 	                                <img src="resources/img/mcat_heart_shape.png" alt="">
 	                            </li>
@@ -214,7 +214,7 @@
 	                    </ul>
 	                    <ul>
 	                        <!-- 구매하기 : 결제 페이지로 이동 -->
-	                        <a href="">
+	                        <a href="javascript:isLogin(${!empty sessionScope.loginData.mber_sq}, 'order.mcat')">
 	                            <li class="buying">
 	                                <img src="resources/img/mcat_buying.png" alt="">
 	                            </li>
