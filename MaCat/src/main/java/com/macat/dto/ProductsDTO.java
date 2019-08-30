@@ -2,16 +2,20 @@ package com.macat.dto;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductsDTO {
 	
 	private String prduct_sq, prduct_reg_dt, prduct_dom_dt, prduct_amt, prduct_view_cnt,
 				   prduct_sale_sum, prduct_as, prduct_maker, prduct_coo, prduct_matr, prduct_size, prduct_nm, prduct_qa, prduct_thumb_nm,
-				   ctgry_nm, prduct_cd, prduct_cn;
+				   ctgry_nm, prduct_cd, prduct_cn, main_img_nm, sub_img1_nm, sub_img2_nm, sub_img3_nm;
 	private float prduct_rating_avg;
 	private int prduct_ctgry_group, prduct_rating_round, prduct_price, prduct_dlvy_price, prduct_point, prduct_dced_price,
 				prduct_save_pt = 0, prduct_save = 0, prduct_dc_pt = 0, prduct_dc = 0;
 	private List<String> colors;
-	
+	private MultipartFile main_img, sub_img1, sub_img2, sub_img3;
+
+
 	public ProductsDTO() {
 
 	}
@@ -19,9 +23,11 @@ public class ProductsDTO {
 	public ProductsDTO(String prduct_sq, String prduct_reg_dt, String prduct_dom_dt, String prduct_amt,
 			String prduct_view_cnt, String prduct_sale_sum, String prduct_as, String prduct_maker, String prduct_coo,
 			String prduct_matr, String prduct_size, String prduct_nm, String prduct_qa, String prduct_thumb_nm,
-			String ctgry_nm, String prduct_cd, String prduct_cn, float prduct_rating_avg, int prduct_ctgry_group,
+			String ctgry_nm, String prduct_cd, String prduct_cn, String main_img_nm, String sub_img1_nm,
+			String sub_img2_nm, String sub_img3_nm, float prduct_rating_avg, int prduct_ctgry_group,
 			int prduct_rating_round, int prduct_price, int prduct_dlvy_price, int prduct_point, int prduct_dced_price,
-			int prduct_save_pt, int prduct_save, int prduct_dc_pt, int prduct_dc, List<String> colors) {
+			int prduct_save_pt, int prduct_save, int prduct_dc_pt, int prduct_dc, List<String> colors,
+			MultipartFile main_img, MultipartFile sub_img1, MultipartFile sub_img2, MultipartFile sub_img3) {
 		super();
 		this.prduct_sq = prduct_sq;
 		this.prduct_reg_dt = prduct_reg_dt;
@@ -40,6 +46,10 @@ public class ProductsDTO {
 		this.ctgry_nm = ctgry_nm;
 		this.prduct_cd = prduct_cd;
 		this.prduct_cn = prduct_cn;
+		this.main_img_nm = main_img_nm;
+		this.sub_img1_nm = sub_img1_nm;
+		this.sub_img2_nm = sub_img2_nm;
+		this.sub_img3_nm = sub_img3_nm;
 		this.prduct_rating_avg = prduct_rating_avg;
 		this.prduct_ctgry_group = prduct_ctgry_group;
 		this.prduct_rating_round = prduct_rating_round;
@@ -52,6 +62,10 @@ public class ProductsDTO {
 		this.prduct_dc_pt = prduct_dc_pt;
 		this.prduct_dc = prduct_dc;
 		this.colors = colors;
+		this.main_img = main_img;
+		this.sub_img1 = sub_img1;
+		this.sub_img2 = sub_img2;
+		this.sub_img3 = sub_img3;
 	}
 
 	public String getPrduct_sq() {
@@ -284,6 +298,70 @@ public class ProductsDTO {
 
 	public void setColors(List<String> colors) {
 		this.colors = colors;
+	}
+
+	public MultipartFile getMain_img() {
+		return main_img;
+	}
+
+	public void setMain_img(MultipartFile main_img) {
+		this.main_img = main_img;
+	}
+
+	public MultipartFile getSub_img1() {
+		return sub_img1;
+	}
+
+	public void setSub_img1(MultipartFile sub_img1) {
+		this.sub_img1 = sub_img1;
+	}
+
+	public MultipartFile getSub_img2() {
+		return sub_img2;
+	}
+
+	public void setSub_img2(MultipartFile sub_img2) {
+		this.sub_img2 = sub_img2;
+	}
+
+	public MultipartFile getSub_img3() {
+		return sub_img3;
+	}
+
+	public void setSub_img3(MultipartFile sub_img3) {
+		this.sub_img3 = sub_img3;
+	}
+
+	public String getMain_img_nm() {
+		return main_img_nm;
+	}
+
+	public void setMain_img_nm(String main_img_nm) {
+		this.main_img_nm = main_img_nm;
+	}
+
+	public String getSub_img1_nm() {
+		return sub_img1_nm;
+	}
+
+	public void setSub_img1_nm(String sub_img1_nm) {
+		this.sub_img1_nm = sub_img1_nm;
+	}
+
+	public String getSub_img2_nm() {
+		return sub_img2_nm;
+	}
+
+	public void setSub_img2_nm(String sub_img2_nm) {
+		this.sub_img2_nm = sub_img2_nm;
+	}
+
+	public String getSub_img3_nm() {
+		return sub_img3_nm;
+	}
+
+	public void setSub_img3_nm(String sub_img3_nm) {
+		this.sub_img3_nm = sub_img3_nm;
 	}
 	
 }

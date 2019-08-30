@@ -49,7 +49,7 @@
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            	<div class="smartEditor_container">
-		            		<form action="contentsForm">
+		            		<form id="contentsForm">
 			            		<textarea id="txtContent" name="contents"></textarea>
 			            	</form>
 		            	</div>	            	
@@ -73,7 +73,7 @@
 			//기본폰트
 			oEditors.getById["txtContent"].setDefaultFont("나눔고딕", 11);
 	        //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
-	        var contents = '<p>잘나옵니다</p>';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
+	        var contents = '';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
 	        oEditors.getById["txtContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣음
 		    },
 		    fCreator: "createSEditor2"

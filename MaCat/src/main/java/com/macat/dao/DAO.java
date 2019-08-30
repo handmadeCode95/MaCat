@@ -155,6 +155,18 @@ public class DAO {
 	}
 	
 	
+	/*////////////////////////////////// 상품 관리 //////////////////////////////////*/
+	
+	
+	public int getAddProduct(ProductsDTO productsDTO) {
+		return sqlSessionTemplate.insert("add_product", productsDTO);
+	}
+	
+	public int getAddImg(ImagesDTO imagesDTO) {
+		return sqlSessionTemplate.insert("add_img", imagesDTO);
+	}
+	
+	
 	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
 	
 	

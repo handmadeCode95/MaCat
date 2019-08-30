@@ -3,14 +3,14 @@ package com.macat.dto;
 public class ImagesDTO {
 	
 	private String img_sq, img_nm, prduct_sq, event_sq, faq_sq, re_sq, not_sq, qna_sq;
-	private int img_main_fl, img_thumb_fl;
+	private int img_ord, img_main_fl, img_thumb_fl, img_body_fl;
 	
 	public ImagesDTO() {
 
 	}
-
+	
 	public ImagesDTO(String img_sq, String img_nm, String prduct_sq, String event_sq, String faq_sq, String re_sq,
-			String not_sq, String qna_sq, int img_main_fl, int img_thumb_fl) {
+			String not_sq, String qna_sq, int img_ord, int img_main_fl, int img_thumb_fl, int img_body_fl) {
 		super();
 		this.img_sq = img_sq;
 		this.img_nm = img_nm;
@@ -20,8 +20,10 @@ public class ImagesDTO {
 		this.re_sq = re_sq;
 		this.not_sq = not_sq;
 		this.qna_sq = qna_sq;
+		this.img_ord = img_ord;
 		this.img_main_fl = img_main_fl;
 		this.img_thumb_fl = img_thumb_fl;
+		this.img_body_fl = img_body_fl;
 	}
 
 	public String getImg_sq() {
@@ -102,6 +104,22 @@ public class ImagesDTO {
 
 	public void setImg_thumb_fl(int img_thumb_fl) {
 		this.img_thumb_fl = img_thumb_fl;
+	}
+
+	public int getImg_ord() {
+		return img_ord;
+	}
+
+	public void setImg_ord(int img_ord) {
+		this.img_ord = img_ord;
+	}
+
+	public int getImg_body_fl() {
+		return img_body_fl;
+	}
+
+	public void setImg_body_fl(int img_body_fl) {
+		this.img_body_fl = img_body_fl;
 	}
 	
 }

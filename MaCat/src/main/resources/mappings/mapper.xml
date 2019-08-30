@@ -114,6 +114,20 @@
 	</insert>
 	
 	
+	<!--=========================== 상품 관리 ===========================-->
+
+
+	<insert id="add_product">
+		INSERT INTO PRODUCTS_TB VALUES(PRDUCT_SEQ.NEXTVAL, #{ctgry_nm}, #{prduct_reg_dt}, #{prduct_dom_dt}, #{prduct_amt}, #{prduct_price}, #{prduct_dlvy_price},
+			#{prduct_view_cnt}, #{prduct_sale_sum}, #{prduct_as}, #{prduct_maker}, #{prduct_coo}, #{prduct_matr}, #{prduct_size}, #{prduct_nm}, #{prduct_qa}, #{prduct_thumb_nm},
+			#{prduct_cn}, #{prduct_rating_avg}, #{prduct_dc_pt}, #{prduct_save_pt}, #{prduct_ctgry_group}, #{prduct_dc}, #{prduct_save}, #{prduct_cd})
+	</insert>
+	
+	<insert id="add_img">
+		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_body_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
+	</insert>
+
+
 	<!--=========================== 회원 정보 관리 ===========================-->
 	
 	
