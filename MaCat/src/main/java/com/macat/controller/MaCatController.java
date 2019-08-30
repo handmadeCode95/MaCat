@@ -94,8 +94,10 @@ public class MaCatController {
 
 	// 로그인
 	@RequestMapping(value = "login_ok.mcat", method = RequestMethod.POST)
-	public ModelAndView getLoginOkCmd(HttpSession session, MbersDTO mbersDTO) {
+	public ModelAndView getLoginOkCmd(HttpSession session, MbersDTO mbersDTO, HttpServletResponse response) {
 		ModelAndView mv;
+		response.addCookie(setCookie("cart", null, 0)); // 장바구니 쿠키 삭제
+		
 		MbersDTO loginMber = dao.getLogin(mbersDTO);
 		if (loginMber != null) {
 			mv = new ModelAndView("main");
@@ -497,13 +499,6 @@ public class MaCatController {
 		}
 		return new ModelAndView("admin/product/reg");
 	}
-
-=======
-//	@RequestMapping("add_product_info.mcat")
-//	public ModelAndView getAddProductInfoCmd() {
-//		return new ModelAndView("admin/product/add_product-detail_info");
-//	}
->>>>>>> macat_wd48
 	
 	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
 	
