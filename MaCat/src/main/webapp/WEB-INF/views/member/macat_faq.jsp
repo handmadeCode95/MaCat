@@ -1,24 +1,23 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
 	<meta charset="UTF-8">
-	<title>마캣 게시글 관리</title>
-	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
-	
+	<title>고객문의 관리</title>
 	<link rel="stylesheet" href="resources/css/normalize.css">
-	<!-- 실행결과 잘 안맞음; -->
-	<link rel="stylesheet" href="resources/css/member/macat_post_management.css">
-	
+	<link rel="stylesheet" href="resources/css/macat_faq.css">
 	<link rel="stylesheet" href="resources/css/spacing.css">
 
 	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-
-	<script type="text/javascript">		
+	<!-- 고정헤더 불러오기 -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#macat_header").load("macat_header.html");
+		});
+		
 		$(document).ready(function(){
 			$("#main_list > tr:even").click(function(){
 				$(this).next().toggle();
@@ -28,12 +27,10 @@
 </head>
 
 <body>
-    <!-- 고정헤더 불러오기 -->
-	<div id="macat_header">
-		<%@ include file="../header.jsp"%>
-	</div>
-    <!-- 여백-->
-    <div class="spacing"></div>
+	<!-- 고정헤더 불러오기 -->
+	<div id="macat_header"></div>
+	 <!--여백-->
+	<div class="spacing"></div>
 
 	<section id="wrap">
 		<div class="contents">
@@ -71,21 +68,22 @@
 								<td>문의게시판</td>
 							</tr>
 							<tr>
-								<td>A</td>
-								<td>답변내용</td>
+								<td>답변</td>
+								<td>답변 내용 페이지입니다.</td>
 							</tr>
 							<tr>
 								<td>2</td>
 								<td>문의게시판</td>
 							</tr>
 							<tr>
-								<td>A</td>
-								<td>답변내용</td>
+								<td>답변</td>
+								<td>답변 내용 페이지입니다.</td>
 							</tr>
 						</tbody>		
 						<tbody id="main_list_none">
 							<tr>
-								<td colspan="6">게시글이 없습니다.</td>								
+								<td colspan="6">게시글이 없습니다.</td>
+								
 							</tr>
 						</tbody>
 					</table>
@@ -106,8 +104,8 @@
 					</fieldset>
 				</div>
 			</form>
-
 		</div>
 	</section>
 </body>
+
 </html>

@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="resources/css/paging.css">
 	
 	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	
+	<!-- 크롬 탭 로고 -->
 	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 </head>
 

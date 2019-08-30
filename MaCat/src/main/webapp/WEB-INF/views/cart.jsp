@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
+    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
     <!--normalize-->
     <link rel="stylesheet" href="resources/css/normalize.css">
     <!--장바구니 css-->
@@ -45,7 +46,6 @@
 	    <div id="macat_header"><%@ include file="header.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="cart_spacing"></div>
-	 
 	    <section id="wrap">
 	        <div class="shoppingCart_title">
 	            <span>CART</span>
@@ -174,4 +174,38 @@
 	        </div>
 	    </section>
 	</body>
+ <script type="text/javascript">
+    $(function(){
+        // 감소(-)버튼 눌렀을 때
+        $('#decreaseQuantity').click(function(e){
+            e.preventDefault();
+            // stat 변수에 #numberUpDown 이 있는 태그의 내용을 가져옴
+            var stat = $('#numberUpDown').text();
+            // num에 stat를 int 로 변환해서 담음
+            var num = parseInt(stat,10);
+                num--;
+            // 최소값 : num에 1을 최소값으로 넣어줌
+            if(num<=0){
+                alert('더 이상 줄일수 없습니다.');
+                num =1;
+            }
+            // #numberUpDown 태그 내용을 num으로 바꿈
+            $('#numberUpDown').text(num);                    
+        });
+        
+        // 증가(+)버튼 눌렀을 때
+        $('#increaseQuantity').click(function(e){
+            e.preventDefault();
+            var stat = $('#numberUpDown').text();
+            var num = parseInt(stat,10);
+                num++;
+        // 최대값
+        if(num>10){
+            alert('더 이상 늘릴수 없습니다.');
+            num=10;
+        }
+            $('#numberUpDown').text(num);
+        });
+    });
+</script>
 </html>

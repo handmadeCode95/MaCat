@@ -358,7 +358,8 @@ public class MaCatController {
 	public ModelAndView getQnaCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "QnaDTO";
-		ModelAndView mv = new ModelAndView("admin/qna/management");
+//		ModelAndView mv = new ModelAndView("admin/qna/management");
+		ModelAndView mv = new ModelAndView("admin/qna/customer_manager");
 		PageDTO pageDTO = new PageDTO();
 		count = dao.getQnaCount();
 		Paging.getPage(pageDTO, count, cPage);
@@ -383,13 +384,30 @@ public class MaCatController {
 		return mv;
 	}
 	
-	// 관리자 상품등록 페이지로 이동
-	@RequestMapping("add_product.mcat")
-	public ModelAndView getAddProductCmd() {
-		return new ModelAndView("admin/product/add_product");
+	// 상품관리로 이동
+	@RequestMapping("product_manage.mcat")
+	public ModelAndView getPrductManageCmd(String cPage) {
+		this.cPage = cPage;
+		usedDTO = "ProductsDTO";
+		ModelAndView mv = new ModelAndView("admin/product/product_manager");
+		PageDTO pageDTO = new PageDTO();
+		 
+		
+		return mv;
 	}
 	
-	// 관리자 상품등록 상세입력 페이지로 이동
+	// 주문 관리로 이동
+//	@RequestMapping("order_manage.mcat")
+//	public ModelAndView getOdrManageCmd() {
+//		
+//	}
+	
+	// 관리자 상품등록 상세페이지로 이동
+	@RequestMapping("product_reg.mcat")
+	public ModelAndView getProductRegCmd() {
+		return new ModelAndView("admin/product/reg");
+	}
+
 	@RequestMapping(value = "product_reg.mcat", method = RequestMethod.POST)
 	public ModelAndView getAddProductInfoCmd(@ModelAttribute ProductsDTO productsDTO, HttpServletRequest request) {
 		try {
@@ -480,6 +498,12 @@ public class MaCatController {
 		return new ModelAndView("admin/product/reg");
 	}
 
+=======
+//	@RequestMapping("add_product_info.mcat")
+//	public ModelAndView getAddProductInfoCmd() {
+//		return new ModelAndView("admin/product/add_product-detail_info");
+//	}
+>>>>>>> macat_wd48
 	
 	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
 	

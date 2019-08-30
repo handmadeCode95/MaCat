@@ -21,7 +21,7 @@
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	    <script type="text/javascript">
 	        $(document).ready(function() {
-	            $("li").each(function() {
+	            $("div > ul > li").each(function() {
 	                $(this).click(function() {
 	                    $(this).addClass("selected"); 
 	                });

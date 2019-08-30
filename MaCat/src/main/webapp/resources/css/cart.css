@@ -8,22 +8,19 @@
         url('../font/THEjunggt130.woff') format('woff'),
         url('../font/THEjunggt130.otf') format('opentype'),
         url('../font/THEjunggt130.eot') format('embedded-opentype');
-}
 
 @font-face {
     font-family: '서울남산 장체EB';
     src: local('서울남산 장체EB'),
-        url('../font/서울남산 장체EB.woff2') format('woff2'),
+	url('../font/서울남산 장체EB.woff2') format('woff2'),
         url('../font/서울남산 장체EB.woff') format('woff'),
         url('../font/서울남산 장체EB.otf') format('truetype'),
         url('../font/서울남산 장체EB.eot') format('embedded-opentype');
-}
 
 * {
     font-family: 'THEjunggt130';
-    margin: 0 auto;
+margin: 0 auto;
     padding: 0;
-}
 
 a{
     text-decoration: none;
@@ -55,10 +52,10 @@ caption{
 
 /*바디부분*/
 .cart_list{
-	margin-top: 30px;
+    margin-top: 30px;
     width: 970px;
     height : auto;
-    margin: 0 auto;
+margin: 0 auto;
     padding: 0;
     text-align: center;
 }
@@ -98,12 +95,12 @@ table.cart_list_main tbody tr td{
 }
 /* 테이블 내 이미지 */
 table.cart_list_main tbody tr td img{
-	width: 90px;
+width: 90px;
     height: 90px;
 }
 
 table.cart_list_main tbody tr td:nth-child(3){
-	padding-left: 10px;
+padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
     padding-bottom: 20px;
@@ -132,7 +129,7 @@ table.cart_list_main tbody tr td:nth-child(3){
     border-top: 5px solid #5C5173;
     border-bottom: 2px solid #5c5173;
     margin: 0 auto;
-    padding: 0;       
+ padding: 0;   
     margin-top: 110px;
 }
 
@@ -149,10 +146,12 @@ table.price_result {
     text-align: left;
     font-size: 14px;
     margin: 32px 22px 15px 22px;
+
+table.price_result {
+    border-collapse: collapse;
     border-spacing: 1px;
     text-align: left;
 }
-
 /*텍스트 파트 : 왼쪽*/
 table.price_result th {
     width: 50%;

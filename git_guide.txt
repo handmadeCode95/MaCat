@@ -1,3 +1,51 @@
+<<<<<<< HEAD
+﻿## git pull 다른 브랜치 가져오기
+1) 받아올 로컬 폴더 생성
+2) git init
+3) git remote add origin 해당git주소
+4) git pull origin 가져올브랜치명
+5) git branch -a 
+: 브랜치 상태 확인하기
+$ git branch -a
+* master
+  remotes/origin/front_page
+  remotes/origin/jungmin
+  remotes/origin/macat_wd48
+  remotes/origin/master
+> 요 상태면 checkout 가능
+6) git checkout 가길원하는브랜치명
+7) 변경됨을 확인
+
+git config core.quotepath false
+: 한글 인코딩
+
+############ 쌩 기초 ############
+## git 기초 http://wiki.sys4u.co.kr/pages/viewpage.action?pageId=7766499
+## merge, fetch http://wiki.sys4u.co.kr/pages/viewpage.action?pageId=7766780
+1. repository 생성 및 push
+1) Git을 호스팅 해주는 웹 서비스인 Github에 원격저장소를 생성
+2) 로컬저장소 생성해서 프로젝트 공유
+3) remote repository에 push
+
+작업중인 프로젝트 push commit 하기
+1) 프로젝트 선택 - 우클릭 - team - commit
+: 커밋 목록 확인, 커밋 메세지 작성
+(shift + enter : 커밋 메세지 작성 종료 명령, 그냥 엔터로 줄바꿈 됨)
+
+2) 프로젝트 선택 - team - push branch <push할 브랜치명:기본값 master>
+: 경로 등 확인 후 finish, 완료
+
+2. Pull
+1) 프로젝트 선택 > Team > Pull
+: pull할 파일 comment 노출, ok - 동기화 완료
+
+3. Cloning
+다른사람이 Git에 올려놓은 예제 소스코드를 내 local repository에 복사해서 보는 방법에 대해 다룹니다.
+
+1) 이클립스 메뉴 File > import > Git ( Projects from Git ) 선택 후 Next > Clone URI 선택 후 Next : "import projects from Git"
+: uri - 복사하려는 프로젝트 주소 입력 > next
+ Authentication은 public repository 인지 private repository 인지에 따라 필요할 수 있습니다. 
+=======
 ## git pull 다른 브랜치 가져오기
 1) 받아올 로컬 폴더 생성
 2) git init
@@ -90,3 +138,4 @@ ex) merge conflict 발생 후 common.txt 파일 상태
   6 >>>>>>> exp         # 병합하려는 대상인 exp 브랜치의 상태
   7
   8 function c
+>>>>>>> da2809c8b0bf1620c9669905ac8ce0033d9fd135
