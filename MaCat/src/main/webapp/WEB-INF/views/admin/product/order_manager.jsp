@@ -214,7 +214,7 @@
 	                                </tr>
 	                            </thead>
 	                            <tbody id="searchResult">
-	                            <c:forEach>
+	                            <c:forEach var=" " items="">
 		                                <tr id="${i.mber_sq}">
 		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value=""></td>
 		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="" disabled>1001</td>
