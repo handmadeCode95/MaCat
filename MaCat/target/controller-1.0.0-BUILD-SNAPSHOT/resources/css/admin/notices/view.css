@@ -1,0 +1,49 @@
+#bbs table {
+    width:580px;
+    margin-left:10px;
+    margin: 0 auto;
+    border:1px solid black;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+#bbs table caption {
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+#bbs table th {
+    text-align:center;
+    border:1px solid black;
+    padding:4px 10px;
+}
+
+#bbs table td {
+    text-align:left;
+    border:1px solid black;
+    padding:4px 10px;
+}
+
+#ans_write{
+	border: 1px solid blue;
+	width: 580px;
+	margin-left: 30px;
+	margin: auto;
+}
+
+#ans_view{
+	display: table;
+	width: 580px;
+	margin-left: 30px;
+	margin: auto;
+	font-size:16px;
+}
+
+.no {width:15%}
+.subject {width:30%}
+.writer {width:20%}
+.reg {width:20%}
+.hit {width:15%}
+.title{background:lightsteelblue}
+.odd {background:silver}

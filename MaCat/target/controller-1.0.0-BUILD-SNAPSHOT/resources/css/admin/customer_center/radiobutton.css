@@ -1,0 +1,105 @@
+.and_or_radio_btn, .ans_st_radio_btn {
+    position: relative;
+}
+
+/*라디오버튼 화면에서 숨기기*/
+.and_or_radio_btn input[type="radio"],
+.ans_st_radio_btn input[type="radio"]{    
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.and_or_radio_btn input[type="radio"] + label,
+.ans_st_radio_btn input[type="radio"] + label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+}
+/* 라디오버튼 모양 결정*/
+.and_or_radio_btn input[type="radio"] + label:before{
+    content: '';
+    display: inline-block;
+    left: 0;
+    top: -4px;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #cacece;
+    border-radius: 100%;
+}
+/*성별 선택 라디오버튼 디자인*/
+.ans_st_radio_btn input[type="radio"] + label:before{
+    content: '';
+    display: inline-block;
+    left: 0;
+    top: -4px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #cacece;
+    border-radius: 100%;
+}
+
+.and_or_radio_btn input[type="radio"] + label:active:before,
+.and_or_radio_btn input[type="radio"]:checked + label:active:before,
+.ans_st_radio_btn input[type="radio"] + label:active:before,
+.ans_st_radio_btn input[type="radio"]:checked + label:active:before
+{
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.and_or_radio_btn input[type="radio"]:checked + label:before,
+.ans_st_radio_btn input[type="radio"]:checked + label:before{
+    background: #E9ECEE;
+    border-color: #adb8c0;
+}
+
+.and_or_radio_btn input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 24px;
+    height: 24px;
+    background: #f25e5e;
+    border-radius: 100%;
+}
+
+.ans_st_radio_btn input[type="radio"]:checked + label:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 17px;
+    height: 17px;
+    background: #f25e5e;
+    border-radius: 100%;
+}
+
+/*성별 선택 라디오버튼 파트*/
+
+.ans_st_radio_btn{
+    width: 295px;    
+    font-size: 18px;
+    display: table-cell;
+    vertical-align: middle;
+    height: 40px;    
+}
+
+.ans_st_radio_btn label:first-child{
+	font-size: 15px;
+	margin-left: 24px;
+	margin-right: 15px;
+}

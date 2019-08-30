@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.macat.dto.MbersDTO" alias="MbersDTO"/>
+		<typeAlias type="com.macat.dto.MbersSearchDTO" alias="MbersSearchDTO"/>
+		<typeAlias type="com.macat.dto.NotsDTO" alias="NotsDTO"/>
+		<typeAlias type="com.macat.dto.NotsSearchDTO" alias="NotsSearchDTO"/>
+		<typeAlias type="com.macat.dto.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.macat.dto.QnaSearchDTO" alias="QnaSearchDTO"/>
+		<typeAlias type="com.macat.dto.FaqDTO" alias="FaqDTO"/>
+		<typeAlias type="com.macat.dto.FaqSearchDTO" alias="FaqSearchDTO"/>
+		<typeAlias type="com.macat.dto.CtgriesDTO" alias="CtgriesDTO"/>
+		<typeAlias type="com.macat.dto.ProductsDTO" alias="ProductsDTO"/>
+		<typeAlias type="com.macat.dto.ImagesDTO" alias="ImagesDTO"/>
+		<typeAlias type="com.macat.dto.QnaCtgriesDTO" alias="QnaCtgriesDTO"/>
+		<typeAlias type="com.macat.dto.MberGradDTO" alias="MberGradDTO"/>
+		<typeAlias type="com.macat.dto.CartsDTO" alias="CartsDTO"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappings/mapper.xml" />
+	</mappers>
+</configuration>

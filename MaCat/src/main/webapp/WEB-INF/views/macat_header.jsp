@@ -6,7 +6,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Document</title>
+		<title>MaCat</title>
 		<link rel="stylesheet" href="resources/css/macat_header.css">
 		<link rel="stylesheet" href="resources/css/normalize.css">
 	</head>

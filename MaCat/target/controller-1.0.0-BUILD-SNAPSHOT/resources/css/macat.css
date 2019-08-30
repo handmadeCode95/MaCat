@@ -1,0 +1,292 @@
+@charset "utf-8";
+@import url(http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@font-face {
+	font-family: 'THEjunggt130';
+	src: local('THEjunggt130'),
+		url('../font/THEjunggt130.woff2') format('woff2'),
+		url('../font/THEjunggt130.woff') format('woff'),
+		url('../font/THEjunggt130.otf') format('opentype');
+}			
+@font-face {
+    font-family: '서울남산 장체EB';
+    src: local('서울남산 장체EB'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+		url('../font/서울남산 장체EB.ttf') format('truetype');
+}
+
+/*reset*/
+* {margin: 0; padding: 0; box-sizing: border-box;}
+ul, ol {list-style-type: none;}
+hr {display: none;}
+h1 {margin: 0;}
+a {text-decoration: none;}
+button {border: none; background: none; text-indent: -9999px;}
+img {border: none;}
+html {font-size: 0.625em;/*10px,pxtoem.com*/}
+body {font-family: "THEjunggt130", sans-serif; line-height: 1;}
+.blind {position: absolute; top: -9999px; left: -9999px;}
+.clear:after {content: ""; display: block; clear: both;}
+.pc {display: none;}
+
+/* header */
+
+/*header macat logo*/
+/*mobile nav end*/
+
+/*visual : slider part*/
+#carousel_section {
+    overflow: hidden;
+}
+.visual {
+	width: 400%; display: flex; margin-top: 130px;
+    animation: slideBanner 10s infinite;
+}
+/*.visual:hover {
+    animation-play-state: paused;
+}*/
+.visual li {
+	width: 25%;
+}
+.visual > li > a > img {
+	width: 100%;
+	object-fit: contain;
+}
+
+header {
+    margin-bottom: 0;
+}
+
+/*visual end*/
+/*header end*/
+
+/* main */
+.main {
+    position: relative;
+    display: block; margin-bottom: 5px;
+    width: 100%;
+}
+section h2 {
+    text-align: center; margin: 20px; font-size: 2.2rem;
+}
+.main .best {
+   overflow: hidden;
+}
+/*슬라이드 배너*/
+.best .bestInner {
+    width: 400%; display: flex;
+    animation: slideBanner 19s infinite;
+}
+@keyframes slideBanner {
+    0% {margin-left: 0;}
+    16.6% {margin-left: -100%;}
+    33.3% {margin-left: -100%;}
+    50% {margin-left: -200%;}
+    66.6% {margin-left: -200%;}
+    83.3% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+}
+.best .bestInner .slideshow {
+    width: 25%;
+}
+.best .bestInner .slideshow .prodImg img {
+    display: block; margin: 0 auto;
+}
+.best .bestInner .slideshow .prodInfo {
+    margin: 0 auto;
+    width: 400px;
+    background: #fff; padding: 17px; border: 1px solid #5C5173;
+}
+.best .bestInner .slideshow .prodInfo b {
+    font-size: 0.8rem; color: #f25e5e;
+}
+.best .bestInner .slideshow .prodInfo h5 {
+    font-size: 1.8rem; color: #5C5173; margin: 10px 0 10px 0;
+}
+.best .bestInner .slideshow .prodInfo p {
+    font-size: 1.4rem; color: #5C5173; font-weight: bold;
+}
+/*베스트 상품 슬라이드 기능 : 신상품*/
+.main .new, .main .sale {overflow: hidden;}
+.new .newInner {
+    width: 500%; display: flex;
+    animation: slideBest 17s infinite;
+}
+.sale .saleInner {
+    width: 500%; display: flex;
+    animation: slideBest 20s infinite;
+}
+@keyframes slideBest {
+    0% {margin-left: 0;}
+    10% {margin-left: 0;}
+    20% {margin-left: 0;}
+    30% {margin-left: -100%;}
+    40% {margin-left: -100%;}
+    50% {margin-left: -200%;}
+    60% {margin-left: -200%;}
+    70% {margin-left: -300%;}
+    80% {margin-left: -300%;}
+    90% {margin-left: -400%;}
+    100% {margin-left: -400%;}
+}
+.new .newInner > div, .sale .saleInner > div {
+    width: 20%;
+}
+.new .newInner > div .newImg img, .sale .saleInner > div .saleImg img {
+    display: block; margin: 0 auto;
+}
+.new .newInner > div .newInfo, .sale .saleInner > div .saleInfo {
+    margin-left: 0; width: 300px; margin: 0 auto;
+    background: #fff; padding: 17px;
+    border: 1px solid #5c5173;
+}
+.new .newInner > div .newInfo h5, .sale .saleInner > div .saleInfo h5 {
+    font-size: 1.6rem; color: #5c5173;
+    margin-bottom: 10px;
+}
+.new .newInner > div .newInfo p, .sale .saleInner > div .saleInfo p {
+    font-size: 1.4rem; color: #5C5173; font-weight: bold;
+}
+
+.sale .saleInner > div > a > div > p {
+    position: relative;
+}
+
+.sale .saleInner > div > a > div > p > span {
+    position: absolute; width: 20px; height: 2px;
+    background: url(../img/mcat-arrow-sales-long.png) no-repeat; 
+    background-size: contain;
+}
+/* footer */
+
+/*gte 768*/
+@media screen and (min-width:768px) {
+    /*  header  */    
+    .visual {
+        margin-top: 175px;
+    }
+    .visual > li > a > img {
+        height: 100%; width: 100%; vertical-align: top;
+    }
+    /*  header end  */
+    
+    /* 768px main */
+    
+    section h2 { 
+        font-size: 2.2rem; text-align: left; margin:0; padding: 10px; width: 100%;
+    }
+    .main {padding: 20px 0;}
+        /*  main best  */
+    .best .bestInner {
+        display: block; animation: none;   
+        height: 400px; 
+    }
+    .best .bestInner .slideshow {
+        display: inline-block; margin-right: 8px;
+        width: 250px; height: 400px; 
+    }
+    .best .bestInner .slideshow:nth-child(3) {
+        margin-right: 0;
+    }
+    .best .bestInner .slideshow:last-child {
+        position: absolute; top: -9999px; left: -9999px;
+    }
+    .best .bestInner .slideshow .prodImg img {display: block; width: 250px;}
+    .best .bestInner .slideshow .prodInfo {
+        margin-left: 0; width: 250px;
+        background: #fff; padding: 17px; border: 1px solid #5C5173;
+    }
+    .best .bestInner .slideshow .prodInfo b {
+        font-size: 0.8rem; color: #f25e5e;
+    }
+    .best .bestInner .slideshow .prodInfo h5 {
+        font-size: 1.4rem; color: #5C5173; margin: 10px 0 10px 0;
+    }
+    .best .bestInner .slideshow .prodInfo p {
+        font-size: 1.4rem; color: #5C5173; font-weight: bold;
+    }
+        /*    main new    */
+    .main { display: block; left: 50%; margin-left: -384px;}
+    .new .newInner, .sale .saleInner {
+        display: block; animation: none;
+        height: 400px;
+    }
+    .new .newInner > div, .sale .saleInner > div {
+        display: inline-block; margin-right: 8px;
+        width: 300px; height: 400px;
+    }
+    .new .newInner > div:nth-child(4), .sale .saleInner > div:nth-child(4) {
+        margin-right: 0;
+    }
+    .new .newInner > div:last-child, .sale .saleInner > div:last-child {
+        position: absolute; top: -9999px; left: -9999px;
+    }
+    .new .newInner > div .newImg img, .sale .saleInner > div .saleImg img {
+        width: 300px;
+    }
+    .new .newInner > div .newInfo, .sale .saleInner > div .saleInfo  {
+        width: 300px;
+    }
+    .new .newInner > div .newInfo h5, .sale .saleInner > div .saleInfo h5 { font-size: 1.4rem; margin-bottom: 8px;}    
+    /* footer */
+}
+/*768 end*/
+
+@media screen and (min-width:1030px) {
+    /*  reset  */
+
+    /*  header  */
+
+        /* .on */
+
+    /* ----.on end ------ */
+    
+    #carousel_section {
+    overflow: hidden; width: 1024px; margin: 0 auto;
+    }
+    .visual {
+        height: 345px;
+    }
+       /*  main best  */
+    .best .bestInner {
+        display: block; animation: none;   
+        height: 500px; 
+    }
+    .best .bestInner .slideshow {
+        display: inline-block; margin-right: 14px;
+        width: 332px; height: 400px; 
+    }
+    .best .bestInner .slideshow .prodImg img {display: block; width: 332px;}
+    .best .bestInner .slideshow .prodInfo {
+        margin:0 auto; width: 330px;
+    }
+    .best .bestInner .slideshow .prodInfo b {
+        font-size: 1.4rem;
+    }
+    .best .bestInner .slideshow .prodInfo h5 {
+        font-size: 2rem; margin: 12px 0 12px 0;
+    }
+    .best .bestInner .slideshow .prodInfo p {
+        font-size: 1.8rem;
+    }
+         /*    main new    */
+    .main {margin-left: -512px;}
+    
+    .new .newInner > div, .sale .saleInner > div {
+        display: inline-block; margin-right: 8px; float: left;
+        width: 250px; height: 400px;
+    }
+    .new .newInner > div:nth-child(4), .sale .saleInner > div:nth-child(4) {
+        margin-right: 0;
+    }
+    .new .newInner > div .newImg img, .sale .saleInner > div .saleImg img {
+        width: 250px;
+    }
+    .new .newInner > div .newInfo, .sale .saleInner > div .saleInfo  {
+        width: 250px;
+    }
+    .new .newInner > div .newInfo h5, .sale .saleInner > div .saleInfo h5 { font-size: 1.4rem; margin-bottom: 8px;}
+
+    }
+}
+/* media screen 1024px end*/

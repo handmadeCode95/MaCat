@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link href="resources/img/mcat-favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!--여백-->
     <link rel="stylesheet" href="resources/css/spacing.css">
     <!-- macat_mypage_2nd.css-->

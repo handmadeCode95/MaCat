@@ -1,0 +1,291 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+        url('../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+/*태그 기본설정*/
+p, h2, h3{
+    margin: 0;
+    padding: 0;
+    display: block;    
+    font-weight: bold;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
+    display: block;    
+}
+
+body, div{
+    display: block;
+}
+
+li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+strong{
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+#wrap {
+    width: 1024px;
+    min-width: 960px;
+    height: auto;
+    /*요소 중앙정렬*/
+    margin: 0 auto;      
+    text-align: center;
+}
+/*마이페이지 타이틀 파트*/
+.mypage_title {
+    overflow: hidden;
+    width: 960px;
+    height: 220px;
+    border: 1px solid #cfcfcf;
+    border-top: 4px solid #f25e5e;
+    
+    padding: 15px 0 15px 0;
+    margin: 20px auto 0 auto;
+    background-color: #fff;
+    
+    display: inline-block;
+    text-align: left;
+    
+}
+/*좌측 제목타이틀*/
+.mypage_title div {
+    float: left;
+    width: 400px;
+    padding: 0 0 10px 30px;  
+}
+
+.mypage_title div h2 {    
+    font-size: 40px;
+    letter-spacing: -3px; 
+}
+
+.mypage_title div p {    
+    color: #888;
+    padding-left: 2px;
+}
+/*우측 적립금 파트*/
+.mypage_title ul {
+    float: right;
+    display: table;
+    width: 490px;
+    font-size: 0;
+    line-height: 0;
+    
+}
+.mypage_title li {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 15px 5px 2px;
+    font-size: 15px;
+    color: black;
+    line-height: 24px;
+    vertical-align: top;    
+}
+
+.mypage_title li .title {
+    float: left;
+    width: 30%;
+    font-weight: normal;
+}
+
+.mypage_title li .data {
+    float: right;
+    width: 50%;
+    padding: 0 80px 0 0;
+    text-align: right;
+}
+/*나의 주문처리 현황 파트*/
+.orderstate {
+    margin: 40px auto 0;
+    border: 1px solid #cfcfcf;
+    border-top: 4px solid #f25e5e;
+    width: 960px;
+}
+/*주문처리현황 : 제목파트*/
+.orderstate .title {
+    padding: 20px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e9e9e9;
+    background: #f6f6f6;   
+    text-align: left;
+}
+
+.orderstate .title h3 {
+    display: inline-block;
+    padding: 0;
+    font-size: 14px;
+    color: #000;
+}
+
+.orderstate .title .desc {
+    display: inline-block;
+    padding: 0 0 0 4px;
+    font-weight: normal;
+    font-size: 11px;
+    color: #8f8f8f;
+}
+/*주문처리현황 : 상태파트*/
+.orderstate .state {
+    overflow: hidden;
+    padding: 19px 0;
+}
+
+.orderstate .order {
+    float: left;
+    width: 80%;
+}
+
+.orderstate .order li {
+    float: left;
+    width: 25%;
+    text-align: center;
+    padding: 0 0 4px;
+    margin: 0px -1px 0px 0px;
+    border-right: 1px dotted rgb(201, 199, 202);
+}
+
+.orderstate .order li strong {
+    display: block;
+    font-size: 20px;
+    color: rgb(53,53,53);
+    margin: 2px 0px 7px;
+}
+.orderstate .order .count {
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(53,53,53);
+}
+
+.orderstate .cs {
+    float: left;
+    width: 20%;
+}
+
+.orderstate .cs li {
+    margin: 0 0 5px 57px;
+    letter-spacing: 0.04em;
+    word-spacing: 4px;
+}
+
+.orderstate .cs .icoDot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin: 6px 0 0 0;
+    background: #000000;
+    vertical-align: top;
+}
+
+.orderstate .cs strong {
+    font-weight: normal;
+    font-size: 15px;
+    color: #150140;
+}
+
+.orderstate .cs .count {
+    font-weight: bold;
+    color: #000000;
+    padding: 0 0 0 4px;
+    
+}
+
+/*기능페이지 이동모음*/
+#myshopMain {
+    width: 960px;
+    font-size: 15px;
+    overflow: hidden;
+    margin: 40px auto 0px;
+}
+
+#myshopMain ul {
+    width: 300px;
+    height: 155px;
+    float: left;
+    text-align: center;
+    list-style: none;
+    border: 1px solid #cfcfcf;
+    border-top: 4px solid #f25e5e;
+    margin: 0 27px 30px 0;
+    padding: 30px 0px;
+}
+
+#myshopMain ul:nth-child(3n){
+    float: right;
+    margin-right: 0px;
+}
+
+#myshopMain ul:hover {
+    background-color: #f2a766;
+    opacity: 0.5;
+}
+
+#myshopMain ul a li.icon_li img:hover {
+    opacity: 0.9;
+}
+
+#myshopMain a {
+    display: block;
+    text-decoration: none;
+}
+
+#myshopMain ul li.icon_li {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #cfcfcf;
+}
+
+.icon_li {
+    display: inline-block;
+    text-rendering: auto;
+}
+
+#myshopMain ul li {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 500;
+    text-transform: uppercase;/*무조건 대문자로 출력*/
+}
+
+#myshopMain ul li p {
+    font-size: 12px;
+    color: #cfcfcf;
+    font-weight: 300;
+}

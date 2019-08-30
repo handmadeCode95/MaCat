@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+        url('../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+caption , legend{
+	display: none;
+}
+
+colgroup{
+	display: table-column-group;
+}
+
+thead{
+	display: table-header-group;
+	vertical-align: middle;
+}
+
+/*wrap 내부 전체 설정*/
+#wrap {
+    width: 1024px;
+    min-width: 960px;
+    height: auto;
+    /*요소 중앙정렬*/
+    margin: 0 auto;      
+    text-align: center;
+}
+
+
+.contents {
+	width: 1024px;
+}
+
+
+.wish-list-title{
+	height: 71px;
+}
+
+#path{
+	text-align: right;
+	margin-top: 2px;
+	height: 30px;
+}
+
+#path ol{
+	list-style-type: none;
+}
+
+#path ol > li{
+	display: inline;
+	font-size: 12px;
+}
+
+#title{
+	min-height: 30px;
+	margin: 10px 0 20px;
+    border-bottom: 2px solid #F25E5E;
+	text-align: left;
+}
+
+h2{
+	display: inline;
+	font-size: 17px;
+}
+
+.wish-list-menu{
+	margin-top: 30px;
+}
+
+.wish-list-main{
+	width: 1024px;
+	border-bottom: 2px solid #F25E5E;
+}
+
+.wish-list-main thead tr{
+	border-bottom: 2px solid #CFCFCF;
+}
+
+.wish-list-main thead tr th{
+	padding: 9px 0px 7px;
+	font-size: 13px;
+}
+
+.wish-list-main #wish-list-main-menu tr{
+	height: 32px;
+}
+
+.wish-list-main #wish-list-main-menu tr td{
+	text-align: center;
+	padding: 11px 0px 10px;
+	font-size: 11px;
+}
+
+.wish-list_main #wish-list-main-menu tr td li{
+    font-size: 11px;
+}
+
+.wish-list-main #wish-list-main-menu tr td:nth-child(3){
+	padding-left: 10px;
+	text-align: left;
+	font-size: 12px;
+}
+
+/*주소가 없을 때 나오는 tbody css*/
+.list_none{
+	height: 119px;
+	text-align: center;
+	display: none;
+}
+
+.list_none > tr > td{
+	padding: 50px 0px 50px;
+}
+
+.btn{
+	height: 50px;
+	padding: 10px 0px 10px;
+}
+
+.btn img{
+	cursor: pointer;
+}
+
+#left-btn strong{
+    font-size: 12px;
+}
+
+#left-btn img{
+	position: relative;
+	top: 7px;
+}
+
+#left-btn{
+	float: left;
+}
+
+#right-btn{
+	float: right;
+}

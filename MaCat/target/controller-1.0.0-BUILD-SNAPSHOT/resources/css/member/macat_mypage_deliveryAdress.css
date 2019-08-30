@@ -1,0 +1,179 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../font/THEjunggt130.woff2') format('woff2'),
+        url('../font/THEjunggt130.woff') format('woff'),
+        url('../font/THEjunggt130.otf') format('opentype'),
+        url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
+
+
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff') format('woff'),
+        url('../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+caption{
+	display: none;
+}
+
+legend{
+	display: none;
+}
+
+colgroup{
+	display: table-column-group;
+}
+
+div fieldset{
+	border-style: none;
+}
+
+thead{
+	display: table-header-group;
+	vertical-align: middle;
+}
+
+/*wrap 내부 전체 설정*/
+#wrap {
+    width: 1024px;
+    min-width: 960px;
+    height: auto;
+    /*요소 중앙정렬*/
+    margin: 0 auto;      
+    text-align: center;
+}
+
+
+.contents {
+	width: 1024px;
+}
+
+
+.adress_title{
+	height: 71px;
+}
+
+#path{
+	text-align: right;
+	margin-top: 2px;
+	height: 30px;
+}
+
+#path ol > li{
+	display: inline;
+	font-size: 12px;
+}
+
+#title{
+	min-height: 30px;
+	margin-top: 10px;
+    border-bottom: 2px solid #F25E5E;
+	text-align: left;
+}
+
+h2{
+	display: inline;
+	font-size: 17px;
+}
+
+.adress_list{
+	margin-top: 30px;
+}
+
+.adress_list_main{
+	width: 1024px;
+	border-bottom: 2px solid #F25E5E;
+}
+
+.adress_list_main thead tr{
+	border-bottom: 2px solid #CFCFCF;
+}
+
+.adress_list_main thead tr th{
+	padding: 9px 0px 7px;
+	font-size: 13px;
+}
+
+.adress_list_main #adr_main_list tr{
+	height: 32px;
+}
+
+.adress_list_main #adr_main_list tr td{
+	text-align: center;
+	padding: 11px 0px 10px;
+	font-size: 11px;
+}
+
+.board_list_main #adr_main_list tr td:nth-child(7){
+	padding-left: 10px;
+	text-align: left;
+	font-size: 12px;
+}
+
+
+/*주소가 없을 때 나오는 tbody css*/
+.list_none{
+	height: 119px;
+	text-align: center;
+	display: none
+}
+
+.list_none > tr > td{
+	padding: 50px 0px 50px;
+}
+
+.del_or_new_btn{
+	height: 50px;
+	padding: 10px 0px 10px;
+}
+
+#left_del_btn > a , #right_cre_btn > a{
+	font-size: 13px;
+}
+
+#left_del_btn{
+	float: left;
+}
+
+#right_cre_btn{
+	float: right;
+}
+
+.precautions{
+	height: 135px;
+	border: 2px solid #F25E5E;
+}
+
+.precautions > h3{
+	padding: 9px 0px 6px 10px;
+	text-align: left;
+	font-size: 14px;
+}
+
+.precautions .precautions_list{
+	padding-top: 28px;
+	border-top: 2px solid #CFCFCF;
+}
+
+
+.precautions_list ol li{
+	padding: 5px 0px 5px 25px;
+	text-align: left;
+	font-size: 12px;
+}
+
+

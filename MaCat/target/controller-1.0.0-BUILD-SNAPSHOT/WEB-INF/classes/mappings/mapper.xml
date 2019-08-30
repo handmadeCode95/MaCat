@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MaCatMapper">
+	<!--=========================== 메인 ===========================-->
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="MbersDTO" resultType="MbersDTO">
+		SELECT * FROM MEMBERS_TB WHERE MBER_ID = #{mber_id} AND MBER_PW = #{mber_pw}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="MbersDTO">
+		INSERT INTO MEMBERS_TB VALUES(MBER_SEQ.NEXTVAL, #{mber_birthday_dt}, SYSDATE, SYSDATE, 0, #{mber_gender}, #{mber_zip_no}, #{mber_id}, #{mber_pw}, 'WHITE', #{mber_nm}, #{mber_email}, #{mber_phone_no}, #{mber_adres}, #{mber_tel_no}, #{mber_detail_adres})
+	</insert>
+	
+	<!-- 접속일 업데이트 -->
+	<update id="login_record" parameterType="MbersDTO">
+		UPDATE MEMBERS_TB SET MBER_CONECT_DT = SYSDATE WHERE MBER_ID = #{mber_id} AND MBER_PW = #{mber_pw}
+	</update>
+	
+	<!-- 회원 등급 조회 -->
+	<select id="mber_grad_list" resultType="MberGradDTO">
+		SELECT * FROM MBER_GRAD_TB ORDER BY MBER_GRAD_ORD
+	</select>
+	
+	<!-- 문의 카테고리 조회 -->
+	<select id="qna_ctgries_list" resultType="QnaCtgriesDTO">
+		SELECT * FROM QNA_CTGRIES_TB ORDER BY QC_ORD
+	</select>
+	
+	<!-- 장바구니 조회 -->
+	<select id="cart" resultType="CartsDTO" parameterType="String">
+		SELECT * FROM CARTS_VIEW WHERE MBER_SQ = #{mber_sq} ORDER BY CART_SQ
+	</select>
+	
+	
+	<!--=========================== 카테고리 ===========================-->
+	
+	
+	<!-- 카테고리 전체 조회 -->
+	<select id="categories" resultType="CtgriesDTO">
+		SELECT * FROM CTGRIES_TB ORDER BY CTGRY_GROUP, CTGRY_LEVEL, CTGRY_ORD
+	</select>
+	
+	<!-- 카테고리 그룹 조회 -->
+	<select id="ctgry_group" resultType="CtgriesDTO" parameterType="int">
+		SELECT * FROM CTGRIES_TB WHERE CTGRY_GROUP = #{ctgry_group} ORDER BY CTGRY_GROUP, CTGRY_LEVEL, CTGRY_ORD
+	</select>
+	
+	
+	<!--=========================== 상품 조회 ===========================-->
+	
+	
+	<!-- 카테고리 그룹별 상품 갯수 -->
+	<select id="products_group_list_count" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group}
+	</select>
+	
+	<!-- 카테고리별 상품 갯수 -->
+	<select id="products_list_count" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm}
+	</select>
+	
+	<!-- 상품 정보 조회 -->
+	<select id="products_group_list" parameterType="Map" resultType="ProductsDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}		
+	</select>
+	
+	<!-- 상품 정보 조회 -->
+	<select id="products_list" parameterType="Map" resultType="ProductsDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}	
+	</select>
+	
+	<!-- 하나의 상품 정보 가져오기 -->
+	<select id="product" resultType="ProductsDTO">
+		SELECT * FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}
+	</select>
+	
+	<!-- 상품 리뷰 갯수 -->
+	<select id="reviews_count" resultType="int">
+		SELECT COUNT(*) FROM REVIEWS_TB
+	</select>
+	
+	<!-- 상품 색상 가져오기 -->
+	<select id="colors" resultType="String">
+		SELECT COLOR_NM FROM COLORS_TB WHERE PRDUCT_SQ = #{prduct_sq}
+	</select>
+	
+	<!-- 상품 이미지 가져오기 -->
+	<select id="product_img_list" parameterType="String" resultType="ImagesDTO">
+		SELECT * FROM IMAGES_TB WHERE PRDUCT_SQ = #{prduct_sq} ORDER BY IMG_MAIN_FL DESC, IMG_ORD ASC
+	</select>
+	
+	<!-- 상품 조회수 업 -->
+	<update id="product_view_cnt_up" parameterType="String">
+		UPDATE PRODUCTS_TB SET PRDUCT_VIEW_CNT = (SELECT PRDUCT_VIEW_CNT FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}) + 1 WHERE PRDUCT_SQ = #{prduct_sq}
+	</update>
+	
+	<!-- 장바구니 중복 체크 -->
+	<select id="cart_overlap" resultType="int" parameterType="Map">
+		SELECT COUNT(*) FROM CARTS_TB WHERE PRDUCT_SQ = #{prduct_sq} AND MBER_SQ = #{mber_sq} AND CART_COLOR = #{cart_color}
+	</select>
+	
+	<!-- 장바구니 수량 추가 -->
+	<update id="cart_amt_update" parameterType="Map">
+		UPDATE CARTS_TB SET CART_AMT = CART_AMT + #{cart_amt} WHERE PRDUCT_SQ = #{prduct_sq} AND MBER_SQ = #{mber_sq} AND CART_COLOR = #{cart_color}
+	</update>
+	
+	<!-- 장바구니 추가 -->
+	<insert id="add_cart" parameterType="Map">
+		INSERT INTO CARTS_TB VALUES(CARTS_SEQ.NEXTVAL, #{prduct_sq}, #{mber_sq}, #{cart_amt}, #{cart_color})
+	</insert>
+	
+	
+	<!--=========================== 상품 관리 ===========================-->
+
+
+	<insert id="add_product">
+		INSERT INTO PRODUCTS_TB VALUES(PRDUCT_SEQ.NEXTVAL, #{ctgry_nm}, #{prduct_reg_dt}, #{prduct_dom_dt}, #{prduct_amt}, #{prduct_price}, #{prduct_dlvy_price},
+			#{prduct_view_cnt}, #{prduct_sale_sum}, #{prduct_as}, #{prduct_maker}, #{prduct_coo}, #{prduct_matr}, #{prduct_size}, #{prduct_nm}, #{prduct_qa}, #{prduct_thumb_nm},
+			#{prduct_cn}, #{prduct_rating_avg}, #{prduct_dc_pt}, #{prduct_save_pt}, #{prduct_ctgry_group}, #{prduct_dc}, #{prduct_save}, #{prduct_cd})
+	</insert>
+	
+	<insert id="add_img">
+		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_body_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
+	</insert>
+
+
+	<!--=========================== 회원 정보 관리 ===========================-->
+	
+	
+	<!-- 전체 회원 숫자 -->
+	<select id="mbers_count" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS_TB
+	</select>
+	
+	<!-- 회원 정보 가져오기 -->
+	<select id="members" parameterType="Map" resultType="MbersDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB ORDER BY MBER_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 회원 and조건 검색 결과 인원 -->
+	<select id="mbers_and_count" parameterType="MbersSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS_TB
+		<where>
+	  		<if test="mber_nm != null">
+		    	MBER_NM = #{mber_nm}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="mber_id != null">
+		        AND MBER_ID = #{mber_id}
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end != null">
+		        AND MBER_BIRTHDAY_DT BETWEEN TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start == null and mber_birthday_dt_end != null">
+		        AND MBER_BIRTHDAY_DT <![CDATA[ <= ]]> TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end == null">
+		        AND MBER_BIRTHDAY_DT <![CDATA[ >= ]]> TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_gender != null and !mber_gender.equals('전체')">
+		        AND MBER_GENDER = #{mber_gender}
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end != null">
+		        AND MBER_REG_DT BETWEEN TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start == null and mber_reg_dt_end != null">
+		        AND MBER_REG_DT <![CDATA[ <= ]]> TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end == null">
+		        AND MBER_REG_DT <![CDATA[ >= ]]> TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end != null">
+		        AND MBER_CONECT_DT BETWEEN TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start == null and mber_conect_dt_end != null">
+		        AND MBER_CONECT_DT <![CDATA[ <= ]]> TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end == null">
+		        AND MBER_CONECT_DT <![CDATA[ >= ]]> TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_phone_no != null">
+		        AND MBER_PHONE_NO = #{mber_phone_no}
+		    </if>
+		    <if test="mber_tel_no != null">
+		        AND MBER_TEL_NO = #{mber_tel_no}
+		    </if>
+		    <if test="mber_grad_nm != null">
+		        AND MBER_GRAD_NM = #{mber_grad_nm}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 회원 and조건 검색 -->
+	<select id="mbers_and_search" parameterType="MbersSearchDTO" resultType="MbersDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB
+		<where>
+	  		<if test="mber_nm != null">
+		    	MBER_NM = #{mber_nm}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="mber_id != null">
+		        AND MBER_ID = #{mber_id}
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end != null">
+		        AND MBER_BIRTHDAY_DT BETWEEN TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start == null and mber_birthday_dt_end != null">
+		        AND MBER_BIRTHDAY_DT <![CDATA[ <= ]]> TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end == null">
+		        AND MBER_BIRTHDAY_DT <![CDATA[ >= ]]> TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_gender != null and !mber_gender.equals('전체')">
+		        AND MBER_GENDER = #{mber_gender}
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end != null">
+		        AND MBER_REG_DT BETWEEN TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start == null and mber_reg_dt_end != null">
+		        AND MBER_REG_DT <![CDATA[ <= ]]> TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end == null">
+		        AND MBER_REG_DT <![CDATA[ >= ]]> TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end != null">
+		        AND MBER_CONECT_DT BETWEEN TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start == null and mber_conect_dt_end != null">
+		        AND MBER_CONECT_DT <![CDATA[ <= ]]> TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end == null">
+		        AND MBER_CONECT_DT <![CDATA[ >= ]]> TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_phone_no != null">
+		        AND MBER_PHONE_NO = #{mber_phone_no}
+		    </if>
+		    <if test="mber_tel_no != null">
+		        AND MBER_TEL_NO = #{mber_tel_no}
+		    </if>
+		    <if test="mber_grad_nm != null">
+		        AND MBER_GRAD_NM = #{mber_grad_nm}
+		    </if>
+		</where>
+		ORDER BY MBER_SQ DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 회원 or조건 검색 결과 인원 -->
+	<select id="mbers_or_count" parameterType="MbersSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM MEMBERS_TB
+		<where>
+	  		<if test="mber_nm != null">
+		    	MBER_NM = #{mber_nm}
+		    </if>
+		    <if test="mber_sq != null">
+		        OR MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="mber_id != null">
+		        OR MBER_ID = #{mber_id}
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end != null">
+		        OR MBER_BIRTHDAY_DT BETWEEN TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start == null and mber_birthday_dt_end != null">
+		        OR MBER_BIRTHDAY_DT <![CDATA[ <= ]]> TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end == null">
+		        OR MBER_BIRTHDAY_DT <![CDATA[ >= ]]> TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_gender != null and !mber_gender.equals('전체')">
+		        OR MBER_GENDER = #{mber_gender}
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end != null">
+		        OR MBER_REG_DT BETWEEN TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start == null and mber_reg_dt_end != null">
+		        OR MBER_REG_DT <![CDATA[ <= ]]> TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end == null">
+		        OR MBER_REG_DT <![CDATA[ >= ]]> TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end != null">
+		        OR MBER_CONECT_DT BETWEEN TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start == null and mber_conect_dt_end != null">
+		        OR MBER_CONECT_DT <![CDATA[ <= ]]> TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end == null">
+		        OR MBER_CONECT_DT <![CDATA[ >= ]]> TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_phone_no != null">
+		        OR MBER_PHONE_NO = #{mber_phone_no}
+		    </if>
+		    <if test="mber_tel_no != null">
+		        OR MBER_TEL_NO = #{mber_tel_no}
+		    </if>
+		    <if test="mber_grad_nm != null">
+		        OR MBER_GRAD_NM = #{mber_grad_nm}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 회원 or조건 검색 -->
+	<select id="mbers_or_search" parameterType="MbersSearchDTO" resultType="MbersDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM MEMBERS_TB
+		<where>
+	  		<if test="mber_nm != null">
+		    	MBER_NM = #{mber_nm}
+		    </if>
+		    <if test="mber_sq != null">
+		        OR MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="mber_id != null">
+		        OR MBER_ID = #{mber_id}
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end != null">
+		        OR MBER_BIRTHDAY_DT BETWEEN TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start == null and mber_birthday_dt_end != null">
+		        OR MBER_BIRTHDAY_DT <![CDATA[ <= ]]> TO_DATE(#{mber_birthday_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_birthday_dt_start != null and mber_birthday_dt_end == null">
+		        OR MBER_BIRTHDAY_DT <![CDATA[ >= ]]> TO_DATE(#{mber_birthday_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_gender != null and !mber_gender.equals('전체')">
+		        OR MBER_GENDER = #{mber_gender}
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end != null">
+		        OR MBER_REG_DT BETWEEN TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start == null and mber_reg_dt_end != null">
+		        OR MBER_REG_DT <![CDATA[ <= ]]> TO_DATE(#{mber_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_reg_dt_start != null and mber_reg_dt_end == null">
+		        OR MBER_REG_DT <![CDATA[ >= ]]> TO_DATE(#{mber_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end != null">
+		        OR MBER_CONECT_DT BETWEEN TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start == null and mber_conect_dt_end != null">
+		        OR MBER_CONECT_DT <![CDATA[ <= ]]> TO_DATE(#{mber_conect_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_conect_dt_start != null and mber_conect_dt_end == null">
+		        OR MBER_CONECT_DT <![CDATA[ >= ]]> TO_DATE(#{mber_conect_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="mber_phone_no != null">
+		        OR MBER_PHONE_NO = #{mber_phone_no}
+		    </if>
+		    <if test="mber_tel_no != null">
+		        OR MBER_TEL_NO = #{mber_tel_no}
+		    </if>
+		    <if test="mber_grad_nm != null">
+		        OR MBER_GRAD_NM = #{mber_grad_nm}
+		    </if>
+		</where>
+		ORDER BY MBER_SQ DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+		
+	<!-- 회원 정보 수정 임시데이터 MBER_GRAD_NM = WHITE-->
+	<update id="mbers_update" parameterType="MbersDTO">
+		UPDATE MEMBERS_TB SET MBER_NM = #{mber_nm}, MBER_PW = #{mber_pw}, MBER_PHONE_NO = #{mber_phone_no}, MBER_TEL_NO = #{mber_tel_no}, MBER_ZIP_NO = #{mber_zip_no}, MBER_ADRES = #{mber_adres}, MBER_DETAIL_ADRES = #{mber_detail_adres}, MBER_EMAIL = #{mber_email}, MBER_GRAD_NM = 'WHITE' WHERE MBER_SQ = #{mber_sq} 
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="mbers_withdrawal_admin" parameterType="String">
+		DELETE FROM MEMBERS_TB WHERE MBER_SQ = #{mber_sq}
+	</delete>
+	
+	
+	<!--=========================== 공지사항 관리 ===========================-->
+	
+	
+	<!-- 전체 공지 갯수 -->
+	<select id="nots_count" resultType="int">
+		SELECT COUNT(*) FROM NOTICES_TB
+	</select>
+	
+	<!-- 공지사항 가져오기 -->
+	<select id="notices" parameterType="Map" resultType="NotsDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB ORDER BY NOT_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 공지사항 and조건 검색 결과 인원 -->
+	<select id="nots_and_count" parameterType="NotsSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM NOTICES_TB
+		<where>
+	  		<if test="not_sq != null">
+		    	NOT_SQ = #{not_sq}
+		    </if>
+		    <if test="not_sj != null">
+		        AND NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		     <if test="not_reg_dt_start != null and not_reg_dt_end != null">
+		        AND NOT_REG_DT BETWEEN TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start == null and not_reg_dt_end != null">
+		        AND NOT_REG_DT <![CDATA[ <= ]]> TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end == null">
+		        AND NOT_REG_DT <![CDATA[ >= ]]> TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 공지사항 and조건 검색 -->
+	<select id="nots_and_search" parameterType="NotsSearchDTO" resultType="NotsDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB
+		<where>
+	  		<if test="not_sq != null">
+		    	NOT_SQ = #{not_sq}
+		    </if>
+		    <if test="not_sj != null">
+		        AND NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end != null">
+		        AND NOT_REG_DT BETWEEN TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start == null and not_reg_dt_end != null">
+		        AND NOT_REG_DT <![CDATA[ <= ]]> TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end == null">
+		        AND NOT_REG_DT <![CDATA[ >= ]]> TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		ORDER BY NOT_SQ DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 공지사항 or조건 검색 결과 인원 -->
+	<select id="nots_or_count" parameterType="NotsSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM NOTICES_TB
+		<where>
+	  		<if test="not_sq != null">
+		    	NOT_SQ = #{not_sq}
+		    </if>
+		    <if test="not_sj != null">
+		        OR NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="mber_sq != null">
+		        OR MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end != null">
+		        OR NOT_REG_DT BETWEEN TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start == null and not_reg_dt_end != null">
+		        OR NOT_REG_DT <![CDATA[ <= ]]> TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end == null">
+		        OR NOT_REG_DT <![CDATA[ >= ]]> TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 공지사항 or조건 검색 -->
+	<select id="nots_or_search" parameterType="NotsSearchDTO" resultType="NotsDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB
+		<where>
+	  		<if test="not_sq != null">
+		    	NOT_SQ = #{not_sq}
+		    </if>
+		    <if test="not_sj != null">
+		        OR NOT_SJ = #{not_sj}
+		    </if>
+		    <if test="mber_sq != null">
+		        OR MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end != null">
+		        OR NOT_REG_DT BETWEEN TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start == null and not_reg_dt_end != null">
+		        OR NOT_REG_DT <![CDATA[ <= ]]> TO_DATE(#{not_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="not_reg_dt_start != null and not_reg_dt_end == null">
+		        OR NOT_REG_DT <![CDATA[ >= ]]> TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		</where>
+		ORDER BY NOT_SQ DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="nots_delete" parameterType="String">
+		DELETE FROM NOTICES_TB WHERE NOT_SQ = #{not_sq}
+	</delete>
+	
+	
+	<!--=========================== 고객 문의 관리 ===========================-->
+	
+	
+	<!-- 전체 문의 갯수 -->
+	<select id="qna_count" resultType="int">
+		SELECT COUNT(*) FROM QNA_TB
+	</select>
+	
+	<!-- 고객 문의 가져오기 -->
+	<select id="qna" parameterType="Map" resultType="QnaDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end} AND QNA_ANS_ST = 0
+	</select>
+	
+	<!-- 고객 문의 and조건 검색 결과 인원 -->
+	<select id="qna_and_count" parameterType="QnaSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM QNA_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="qna_sq != null">
+		    	AND QNA_SQ = #{qna_sq}
+		    </if>
+		    <if test="qna_sj != null">
+		        AND QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_nm != null">
+		        AND QNA_NM = #{qna_nm}
+		    </if>
+		    <if test="qna_id != null">
+		        AND QNA_ID = #{qna_id}
+		    </if>
+		     <if test="qna_reg_dt_start != null and qna_reg_dt_end != null">
+		        AND QNA_REG_DT BETWEEN TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start == null and qna_reg_dt_end != null">
+		        AND QNA_REG_DT <![CDATA[ <= ]]> TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end == null">
+		        AND QNA_REG_DT <![CDATA[ >= ]]> TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_ST = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_ST <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+	</select>
+	
+	<!-- 고객 문의 and조건 검색 -->
+	<select id="qna_and_search" parameterType="QnaSearchDTO" resultType="QnaDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="qna_sq != null">
+		    	AND QNA_SQ = #{qna_sq}
+		    </if>
+		    <if test="qna_sj != null">
+		        AND QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_nm != null">
+		        AND QNA_NM = #{qna_nm}
+		    </if>
+		    <if test="qna_id != null">
+		        AND QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end != null">
+		        AND QNA_REG_DT BETWEEN TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start == null and qna_reg_dt_end != null">
+		        AND QNA_REG_DT <![CDATA[ <= ]]> TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end == null">
+		        AND QNA_REG_DT <![CDATA[ >= ]]> TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_ST = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_ST <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 고객 문의 or조건 검색 결과 인원 -->
+	<select id="qna_or_count" parameterType="QnaSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM QNA_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="qna_sq != null">
+		    	OR QNA_SQ = #{qna_sq}
+		    </if>
+		    <if test="qna_sj != null">
+		        OR QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_nm != null">
+		        OR QNA_NM = #{qna_nm}
+		    </if>
+		    <if test="qna_id != null">
+		        OR QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end != null">
+		        OR QNA_REG_DT BETWEEN TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start == null and qna_reg_dt_end != null">
+		        OR QNA_REG_DT <![CDATA[ <= ]]> TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end == null">
+		        OR QNA_REG_DT <![CDATA[ >= ]]> TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_ST = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_ST <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+	</select>
+	
+	<!-- 고객 문의 or조건 검색 -->
+	<select id="qna_or_search" parameterType="QnaSearchDTO" resultType="QnaDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM QNA_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="qna_sq != null">
+		    	OR QNA_SQ = #{qna_sq}
+		    </if>
+		    <if test="qna_sj != null">
+		        OR QNA_SJ = #{qna_sj}
+		    </if>
+		    <if test="qna_nm != null">
+		        OR QNA_NM = #{qna_nm}
+		    </if>
+		    <if test="qna_id != null">
+		        OR QNA_ID = #{qna_id}
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end != null">
+		        OR QNA_REG_DT BETWEEN TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start == null and qna_reg_dt_end != null">
+		        OR QNA_REG_DT <![CDATA[ <= ]]> TO_DATE(#{qna_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="qna_reg_dt_start != null and qna_reg_dt_end == null">
+		        OR QNA_REG_DT <![CDATA[ >= ]]> TO_DATE(#{qna_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="view == 0">
+				AND QNA_ANS_ST = 0
+			</if>
+			<if test="view == 1">
+				AND QNA_ANS_ST <![CDATA[ >= ]]> 1
+			</if>
+		</where>
+		ORDER BY QNA_GROUP DESC, QNA_LEVEL ASC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 고객 문의 삭제 -->
+	<delete id="qna_delete" parameterType="String">
+		DELETE FROM QNA_TB WHERE QNA_SQ = #{qna_sq}
+	</delete>
+	
+	<!-- 고객 문의 보기 -->
+	<select id="qna_view" resultType="QnaDTO" parameterType="String">
+		SELECT * FROM QNA_TB WHERE QNA_SQ = #{qna_sq}
+	</select>
+	
+	<!-- 고객 문의 조회수 업데이트 -->
+	<update id="qna_rdcnt_update" parameterType="QnaDTO">
+		UPDATE QNA_TB SET QNA_VIEW_CNT = #{qna_view_cnt} WHERE QNA_SQ = #{qna_sq}
+	</update>
+	
+	
+	<!--=========================== 고객 문의 관리 ===========================-->
+	
+	
+	<!-- 전체 FAQ 갯수 -->
+	<select id="faq_count" resultType="int">
+		SELECT COUNT(*) FROM FAQ_TB
+	</select>
+	
+	<!-- FAQ 가져오기 -->
+	<select id="faq" parameterType="Map" resultType="FaqDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB ORDER BY FAQ_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- FAQ and조건 검색 결과 인원 -->
+	<select id="faq_and_count" parameterType="FaqSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM FAQ_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="faq_sq != null">
+		    	AND FAQ_SQ = #{faq_sq}
+		    </if>
+		    <if test="faq_sj != null">
+		        AND FAQ_SJ = #{faq_sj}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- FAQ and조건 검색 -->
+	<select id="faq_and_search" parameterType="FaqSearchDTO" resultType="FaqDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="faq_sq != null">
+		    	AND FAQ_SQ = #{faq_sq}
+		    </if>
+		    <if test="faq_sj != null">
+		        AND FAQ_SJ = #{faq_sj}
+		    </if>
+		</where>
+		ORDER BY FAQ_SQ DESC) A ) 
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- FAQ or조건 검색 결과 인원 -->
+	<select id="faq_or_count" parameterType="FaqSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM FAQ_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="faq_sq != null">
+		    	OR FAQ_SQ = #{faq_sq}
+		    </if>
+		    <if test="faq_sj != null">
+		        OR FAQ_SJ = #{faq_sj}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- FAQ or조건 검색 -->
+	<select id="faq_or_search" parameterType="FaqSearchDTO" resultType="FaqDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM FAQ_TB
+		<where>
+			<if test="qc_nm != null and !qc_nm.equals('전체')">
+		    	QC_NM = #{qc_nm}
+		    </if>
+	  		<if test="faq_sq != null">
+		    	OR FAQ_SQ = #{faq_sq}
+		    </if>
+		    <if test="faq_sj != null">
+		        OR FAQ_SJ = #{faq_sj}
+		    </if>
+		</where>
+		ORDER BY FAQ_SQ DESC) A ) 
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- FAQ 삭제 -->
+	<delete id="faq_delete" parameterType="String">
+		DELETE FROM FAQ_TB WHERE FAQ_SQ = #{faq_sq}
+	</delete>
+	
+	<!-- FAQ 보기 -->
+	<select id="faq_view" resultType="FaqDTO" parameterType="String">
+		SELECT * FROM FAQ_TB WHERE FAQ_SQ = #{faq_sq}
+	</select>
+</mapper>

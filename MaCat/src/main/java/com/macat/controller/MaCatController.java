@@ -405,9 +405,9 @@ public class MaCatController {
 //	}
 	
 	// 관리자 상품등록 상세페이지로 이동
-	@RequestMapping("product_reg.mcat")
+	@RequestMapping("add_product.mcat")
 	public ModelAndView getProductRegCmd() {
-		return new ModelAndView("admin/product/reg");
+		return new ModelAndView("admin/product/add_product");
 	}
 
 	@RequestMapping(value = "product_reg.mcat", method = RequestMethod.POST)
