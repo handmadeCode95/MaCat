@@ -105,7 +105,7 @@
 		<div class="add_product_title">
 			<span>상품등록</span>
 		</div>
-		<form action="product_reg.mcat" method="post"
+		<form action="admin/products/reg.mcat" method="post"
 			enctype="multipart/form-data">
 			<!--카테고리 선택 파트-->
 			<div class="choose_product_category">

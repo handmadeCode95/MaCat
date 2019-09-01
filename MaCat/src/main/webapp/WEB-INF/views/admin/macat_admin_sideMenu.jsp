@@ -30,8 +30,8 @@
 				<a>판매관리</a>
 			</li>
 			<ul class="prd">
-					<li><a href="product_manage.mcat">상품</a></li>
-					<li><a href="add_product.mcat">상품등록</a></li>
+					<li><a href="admin/products/manager.mcat">상품</a></li>
+					<li><a href="admin/products/add.mcat">상품등록</a></li>
 					<li>주문</li>
 					<li>배송</li>
 			</ul>
@@ -43,7 +43,7 @@
 				<a>회원관리</a>
 			</li>
 			<ul class="prd">
-					<li><a href="mbers_manager.mcat">회원</a></li> <!-- 회원정보 조회 -->
+					<li><a href="admin/members/manager.mcat">회원</a></li> <!-- 회원정보 조회 -->
 					<li>쿠폰</li>
 					<li>포인트</li>
 				</ul>
@@ -69,7 +69,7 @@
 			</li>
 			<ul class="prd">
 					<li><a href="nots_manage.mcat">공지</a></li>
-					<li><a href="faq_manage.mcat">FAQ</a></li>
+					<li><a href="admin/faq/manager.mcat">FAQ</a></li>
 				</ul>
 			<center>
 				<hr width="193" noshade="noshade" size="2px" border-color="#707070">

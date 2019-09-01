@@ -284,7 +284,7 @@
 	                <!-- 각 이미지에 해당되는 상품상세페이지로 이동-->
 	                <div class="related_product_slide">
 	                	<c:forEach var="i" items="${more_product}">
-		                	<a href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
+		                	<a href="products/view.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
 		                		<img src="resources/img/${i.prduct_thumb_nm}" alt="">
 		                	</a>
 	                	</c:forEach>

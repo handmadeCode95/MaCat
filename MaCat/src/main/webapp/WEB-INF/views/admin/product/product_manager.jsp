@@ -231,7 +231,7 @@
 		                                    <td><input name="prduct_sq" class="${i.prduct_sq}" type="hidden" value="${i.prduct_sq}" disabled>1001</td>		                                    
 		                                    <td>${i.prduct_cd}</td> <!-- 상품코드 -->
 		                                    <td>${i.ctgry_nm}</td><!-- 카테고리 -->
-		                                    <td><a href="product.mcat?prduct_nm='${i.prduct_nm}'">${i.prduct_nm}</a></td><!-- 상품명 -->
+		                                    <td><a href="products/view.mcat?prduct_nm='${i.prduct_nm}'">${i.prduct_nm}</a></td><!-- 상품명 -->
 		                                    <td>${i.prduct_price }</td><!-- 상품가격 -->
 		                                    <td>${i.prduct_dc }</td>
 		                                    <td>${i.prduct_dlvy_price}</td>

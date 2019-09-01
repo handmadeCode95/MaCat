@@ -40,7 +40,7 @@
 	            <div class="member_management">
 	                <span>회원관리</span>
 	            </div>
-	            <form id="searchForm" action="mber_search.mcat" method="post">
+	            <form id="searchForm" action="admin/members/search.mcat" method="post">
 	                <div class="member_information_container">
 	                    <!--회원정보-->
 	                    <div class="member_info">
@@ -178,7 +178,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="member_info_table_title">
-	                <span>회원정보 (총 <b id="mbers_count">${mbers_count}</b> 명)</span>
+	                <span>회원정보 (총 <b id="mbers_count">${pageDTO.totalRecord}</b> 명)</span>
 	            </div>
 	            <div id="members" class="info_table">
 	                <form>

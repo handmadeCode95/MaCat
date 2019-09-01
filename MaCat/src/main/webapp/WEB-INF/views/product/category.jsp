@@ -116,7 +116,7 @@
 								<!--상품 이미지 링크 -->
 								<div class="img_ratio_container">
 									<a
-										href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
+										href="products/view.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
 										<img id="product_img" src="resources/img/${i.prduct_thumb_nm}"
 										alt="" style="display: block">
 									</a>
@@ -126,7 +126,7 @@
 									<!--상품명-->
 									<div class="product_title">
 										<a
-											href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">${i.prduct_nm}</a>
+											href="products/view.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">${i.prduct_nm}</a>
 									</div>
 									<!--가격-->
 									<div class="price">
