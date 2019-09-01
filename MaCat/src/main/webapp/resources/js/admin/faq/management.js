@@ -93,7 +93,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "faq_paging.mcat",
+			url			: "admin/faq/paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -113,7 +113,7 @@ $(function() {
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm > *:not(input[name=search_chk])")));
 		$.ajax({
-			url			: "faq_search.mcat",
+			url			: "admin/faq/search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -132,7 +132,7 @@ $(function() {
 	// FAQ 삭제 AJAX
 	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "faq_delete.mcat",
+			url			: "admin/faq/delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

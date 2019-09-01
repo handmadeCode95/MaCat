@@ -38,7 +38,7 @@
 	            <div class="member_management">
 	                <span>FAQ 목록 관리</span>
 	            </div>
-	            <form id="searchForm" action="faq_search.mcat" method="post">
+	            <form id="searchForm" action="admin/faq/search.mcat" method="post">
 	                <div class="member_information_container">
 	                    <!--회원정보-->
 	                    <div class="member_info">

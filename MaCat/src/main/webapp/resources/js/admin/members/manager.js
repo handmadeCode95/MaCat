@@ -64,8 +64,8 @@
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-			}else if (key === "mbers_count"){
-				mbers_count = value;
+				
+				mbers_count = pageDTO.totalRecord;
 			}
 		});
 		$("#searchResult").empty();
@@ -199,7 +199,7 @@
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "admin/members/paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -219,7 +219,7 @@
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "mbers_search.mcat",
+			url			: "admin/members/search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -260,7 +260,7 @@
 	    var mbersDTO = JSON.stringify(data);
 
 	    $.ajax({
-			url			: "mbers_update.mcat",
+			url			: "admin/members/update.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -279,7 +279,7 @@
 	// 탈퇴 AJAX
 	$(document).on("click", "#withdrawal", function(){
 		$.ajax({
-			url			: "withdrawal.mcat",
+			url			: "admin/members/withdrawal.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

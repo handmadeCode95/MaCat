@@ -1,10 +1,24 @@
 package com.macat.service;
 
+import com.macat.dto.FaqSearchDTO;
+import com.macat.dto.MbersSearchDTO;
+import com.macat.dto.NotsSearchDTO;
 import com.macat.dto.PageDTO;
+import com.macat.dto.QnaSearchDTO;
 
 public class Paging {
+	
+	// 페이징을 위한 회원 정보 검색 기록
+	public static MbersSearchDTO mbersSearchDTO;
+	public static NotsSearchDTO notsSearchDTO;
+	public static QnaSearchDTO qnaSearchDTO;
+	public static FaqSearchDTO faqSearchDTO;
 
-	public static void getPage(PageDTO paging, int count, String cPage) {
+	public static String usedDTO; // 페이징을 위한 조회 기록
+	public static int count; // 페이징을 위한 검색 인원 수 기록
+	public static String cPage; // 페이징을 위한 현재 페이지 기록
+
+	public static void setPage(PageDTO paging, int count, String cPage) {
 		paging.setTotalRecord(count);
 
 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {

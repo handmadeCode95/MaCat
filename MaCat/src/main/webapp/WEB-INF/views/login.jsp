@@ -30,7 +30,7 @@
                 	</a>
                 </div>
                 <%-- 로그인 폼 --%>
-                <form name="f" action="login_ok.mcat" method="post" onsubmit="return loginChk()">
+                <form name="f" action="loginOk.mcat" method="post" onsubmit="return loginChk()">
 	                <input type="text" id="id" class="fadeIn second" name="mber_id" placeholder="아이디"><br>
 	                <input type="password" id="pw" class="fadeIn third" name="mber_pw" placeholder="비밀번호"><br>
 	                <input type="submit" class="fadeIn fourth" value="로그인">

@@ -12,7 +12,7 @@ $(function() {
 					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>1001</td>';
 					result += '<td>' + v["prduct_cd"] + '</td>';
 					result += '<td>' + v["ctgry_nm"] + '</td>';
-					result += '<td><a href="product.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
+					result += '<td><a href="products/view.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
 					result += '<td>' + v["prduct_price"] + '</td>';
 					result += '<td>' + v["prduct_dc"] + '</td>';
 					result += '<td>' + v["prduct_dlvy_price"] + '</td>';

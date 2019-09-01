@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,15 +25,9 @@ import com.macat.dto.QnaSearchDTO;
 
 @Repository
 public class DAO {
+	
+	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
-	public SqlSessionTemplate getSqlSessionTemplate() {
-		return sqlSessionTemplate;
-	}
-
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate = sqlSessionTemplate;
-	}
 	
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/

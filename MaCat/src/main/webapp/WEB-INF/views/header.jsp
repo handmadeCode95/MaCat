@@ -45,14 +45,14 @@
                     		</c:otherwise>
                     	</c:choose>
                         <c:if test="${!empty sessionScope.loginData.mber_grad_nm and sessionScope.loginData.mber_grad_nm eq '관리자'}">
-                        	<a href="mbers_manager.mcat">관리자 센터</a>
+                        	<a href="admin/members/manager.mcat">관리자 센터</a>
                         </c:if>
                     </div>
                 </div>
                 <!--searchWrap end-->
                 <!--회원정보-->
                 <div class="members">
-                    <button type="button" class="membersBtn" onclick="isLogin(${!empty sessionScope.loginData.mber_sq}, 'mypage.mcat')">회원정보</button>
+                    <button type="button" class="membersBtn" onclick="isLogin(${!empty sessionScope.loginData.mber_sq}, 'mypage/main.mcat')">회원정보</button>
                 </div>
                 <!--장바구니-->
                 <div class="basket">

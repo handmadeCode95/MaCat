@@ -22,9 +22,9 @@ function isOverlap(prduct_sq, mber_sq) {
         data		: JSON.stringify({"prduct_sq" : prduct_sq, "mber_sq" : mber_sq, "cart_color" : cart_color}),
         success		: function(data) {
         				  if(data) {
-        					  if (confirm("장바구니에 동일한 상품이 있습니다.\n" + cart_amt + "개 더 추가하시겠습니까?")) addCart(prduct_sq, mber_sq, cart_color);
+        					  if (confirm("장바구니에 동일한 상품이 있습니다.\n" + cart_amt + "개 더 추가하시겠습니까?")) addCart(prduct_sq, mber_sq, cart_color, data);
         				  } else {
-        					  addCart(prduct_sq, mber_sq, cart_color);
+        					  addCart(prduct_sq, mber_sq, cart_color, data);
         				  }
         			  },
         error		: function(error) {
@@ -35,7 +35,7 @@ function isOverlap(prduct_sq, mber_sq) {
 	
 }
 
-function addCart(prduct_sq, mber_sq, cart_color) {
+function addCart(prduct_sq, mber_sq, cart_color, overlap) {
 	var cart_amt = $("#amount option:selected").val();
 	console.log(prduct_sq, mber_sq, cart_color, cart_amt);
 	$.ajax({
@@ -43,7 +43,7 @@ function addCart(prduct_sq, mber_sq, cart_color) {
         type		: "POST",
         dataType	: "json",
         contentType : "application/json",
-        data		: JSON.stringify({"prduct_sq" : prduct_sq, "mber_sq" : mber_sq, "cart_amt" : cart_amt, "cart_color" : cart_color}),
+        data		: JSON.stringify({"prduct_sq" : prduct_sq, "mber_sq" : mber_sq, "cart_amt" : cart_amt, "cart_color" : cart_color, "overlap" : overlap}),
         success		: function(data) {
         				  if (data > 0) {
         					  if (confirm("장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?")) location.href = "cart.mcat?mber_sq=" + mber_sq;

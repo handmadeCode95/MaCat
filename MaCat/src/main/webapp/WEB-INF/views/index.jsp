@@ -15,7 +15,7 @@
 			$(function() {
 				$(location).attr("href","main.mcat");
 				// $(location).attr("href", "category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
-				//$(location).attr("href", "product_reg.mcat");
+				//$(location).attr("href", "admin/products/reg.mcat");
 			});
 		</script>
 	</head>
