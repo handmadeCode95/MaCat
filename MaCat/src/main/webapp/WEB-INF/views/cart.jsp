@@ -21,31 +21,11 @@
  	<!-- 체크박스 전체선택 -->
     <script type="text/javascript" src="resources/js/cart.js"></script>
 </head>
-<body>
-	<!-- 고정헤더 불러오기 -->
-	<div id="macat_header"><%@ include file="header.jsp"%></div>
-	<!-- 여백-->
-	<div class="cart_spacing"></div>
-	<head>
-	    <meta charset="UTF-8">
-	    <title>장바구니</title>
-	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
-	    <!--normalize-->
-	    <link rel="stylesheet" href="resources/css/normalize.css">
-	    <!--장바구니 css-->
-	    <link rel="stylesheet" href="resources/css/cart.css">
-	    <!--여백-->
-	    <link rel="stylesheet" href="resources/css/spacing.css">
-	    <!--체크박스 모양-->
-	    <link rel="stylesheet" href="resources/css/checkbox.css">
-	            
-	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <script type="text/javascript" src="resources/js/cart.js"></script>
-	</head>
 	<body>
 	    <div id="macat_header"><%@ include file="header.jsp" %></div>
 	    <!-- 여백-->
 	    <div class="cart_spacing"></div>
+	    
 	    <section id="wrap">
 	        <div class="shoppingCart_title">
 	            <span>CART</span>
@@ -60,7 +40,8 @@
 	                    <col style="width:auto;">
 	                    <col style="width:85px;">
 	                    <col style="width:85px;">
-	                    <col style="width: 85px;">
+	                    <col style="width:85px;">
+	                    <col style="width:85px;">
 	                </colgroup>
 	                <thead>
 	                    <tr>
@@ -76,31 +57,43 @@
 	                        <th scope="col">배송비</th>
 	                    </tr>
 	                </thead>
-	                <tbody id="cart_result">
+	                <tbody id="cart_result" class="cart_tbody">
 	                	<c:choose>
 	                		<c:when test="${!empty cartsDTO}">
 		                		<c:forEach var="i" items="${cartsDTO}" varStatus="vs">
 				                    <tr>
+				                    	<!-- 체크박스 -->
 				                        <td>
 					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}">					                            <label for="${vs.count}"></label>
 					                        <input type="hidden" name="prduct_sq" class="${vs.count}" value="${i.prduct_sq}" disabled>
-					                        <input type="hidden" name="cart_color" class="${vs.count}" value="${i.cart_color}" disabled>
-					                           
+					                        <input type="hidden" name="cart_color" class="${vs.count}" value="${i.cart_color}" disabled>					                           
 					                        <input type="hidden" name="prduct_price" class="${vs.count}" value="${i.prduct_price}" disabled>
 					                        <input type="hidden" name="prduct_dlvy_price" class="${vs.count}" value="${i.prduct_dlvy_price}" disabled>
 					                        <input type="hidden" name="prduct_dced_price" class="${vs.count}" value="${i.prduct_dced_price}" disabled>
 					                        <input type="hidden" name="prduct_dc_pt" class="${vs.count}" value="${i.prduct_dc_pt}" disabled>
 					                        <input type="hidden" name="prduct_dc" class="${vs.count}" value="${i.prduct_dc}" disabled>
 				                        </td>
+				                        <!-- 이미지 -->
 				                        <td><img src="resources/img/${i.prduct_thumb_nm}" alt=""></td>
+				                        <!-- 상품명 -->
 				                        <td>
-				                        <div class="category_box">${i.ctgry_nm}</div>
-				                            <a href="macat_product.html">${i.prduct_nm}</a>
+					                        <div class="category_box">${i.ctgry_nm}</div>
+					                            <a href="macat_product.html">${i.prduct_nm}</a>
 				                        </td>
+				                        <!-- 색상 -->
 				                        <td>${i.cart_color}</td>
-				                        <td><fmt:formatNumber value="${i.cart_amt}" pattern="#,###"></fmt:formatNumber></td>
-				                        <td id="cart_product_price"><fmt:formatNumber value="${i.prduct_dced_price}" pattern="#,###"></fmt:formatNumber></td>
-				                        <td id="cart_delivery_pay"><fmt:formatNumber value="${i.prduct_dlvy_price}" pattern="#,###"></fmt:formatNumber></td>
+				                        <!-- 수량 -->
+				                        <td>
+				                        	<fmt:formatNumber value="${i.cart_amt}" pattern="#,###" />
+				                        </td>
+				                        <!-- 금액 -->
+				                        <td id="cart_product_price">
+				                        	<fmt:formatNumber value="${i.prduct_dced_price}" pattern="#,###"/>
+			                        	</td>
+				                        <!-- 배송비 -->
+				                        <td id="cart_delivery_pay">
+				                        	<fmt:formatNumber value="${i.prduct_dlvy_price}" pattern="#,###" />
+				                        </td>
 				                    </tr>
 			                    </c:forEach>
 		                    </c:when>
@@ -113,18 +106,12 @@
 	                </tbody>			
 	            </table>
 	        </div>
-	        
-	        <div class="cart-order_del_wishList_box">           <!--
-	           <button type="button">선택상품주문</button>
-	           <button type="button">선택상품삭제</button>
-	           <button type="button">위시리스트</button>  -->           
-	            <span>선택상품주문 <hr /> </span>     
-	           
-	            <span>선택상품삭제 <hr class="second"/></span>
-	            
-	            <span>위시리스트</span>                    
-	        </div>
-	        <!--합계 테이블-->
+			<div class="cart-order_del_wishList_box">
+				<div>선택상품주문</div>
+				<div>선택상품삭제</div>
+				<div>위시리스트</div>
+			</div>
+		<!--합계 테이블-->
 	        <div class="cart_total_price">
 	            <table class="price_result">
 	            	<c:choose>

@@ -1,28 +1,26 @@
-﻿
-@charset "utf-8";
-/* 수정 보류 */
-@font-face {
+﻿@font-face {
     font-family: 'THEjunggt130';
     src: local('THEjunggt130'),
         url('../font/THEjunggt130.woff2') format('woff2'),
         url('../font/THEjunggt130.woff') format('woff'),
         url('../font/THEjunggt130.otf') format('opentype'),
         url('../font/THEjunggt130.eot') format('embedded-opentype');
+}
 
 @font-face {
     font-family: '서울남산 장체EB';
     src: local('서울남산 장체EB'),
-	url('../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../font/서울남산 장체EB.woff2') format('woff2'),
         url('../font/서울남산 장체EB.woff') format('woff'),
         url('../font/서울남산 장체EB.otf') format('truetype'),
         url('../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
 
 * {
     font-family: 'THEjunggt130';
-	margin: 0 auto;
-    padding: 0;
+}
 
-a{
+a {
     text-decoration: none;
     list-style: none;
     color: black;
@@ -50,67 +48,94 @@ caption{
     font-size: 50px;
 }
 
-/*바디부분*/
+/*장바구니 감싸는 div */
 .cart_list{
-    margin-top: 30px;
     width: 970px;
-    height : auto;
-margin: 0 auto;
+	height: auto;
+    margin: 0 auto;
     padding: 0;
     text-align: center;
 }
-
-table.cart_list_main{
+/*장바구니 div 속 table*/
+.cart_list .cart_list_main{
 	width: 970px;
-	height : auto;
-	border-top: 2px solid #5c5173;
-	border-bottom: 2px solid #5c5173;
+	margin: 0 auto;	
 }
+/* 보더 간격(공백) 지움 */
+.cart_list table{
+	border-collapse: collapse;
+}
+
 /*테이블 헤드파트*/
-table.cart_list_main thead tr{
-    height: 44px;
+.cart_list .cart_list_main thead{
+	width: 970px;
+	height: 50px;
+	border-top: 5px solid #5c5173;
+	border-bottom: 1px solid #5c5173;
 }
+
+.cart_list .cart_list_main thead tr{
+	width: 970px;
+	height: 50px;
+	border-top: 5px solid #5c5173;
+	border-bottom: 1px solid #5c5173;
+}
+
+.cart_list .cart_list_main thead tr th{
+	border-top: 5px solid #5c5173;
+	border-bottom: 1px solid #5c5173;
+}
+
 /*상품이미지 제목 가리기*/
-table.cart_list_main thead tr th span{
-	display : none;
+.cart_list .cart_list_main thead tr th span{
+    display: none;
 }
 
 /*상품명 제목 배열*/
-table.cart_list_main thead tr th:nth-child(3){
+.cart_list .cart_list_main thead tr th:nth-child(3){
     text-align: left;
 }
-
-table.cart_list_main thead tr th:first-child{
+/*상품 체크박스 중앙배열*/
+.cart_list .cart_list_main thead tr th:first-child{
     text-align: center;
 }
+/*장바구니 담은 상품열 tr*/
+.cart_list .cart_list_main tbody{
+	width: 970px;
+	height: 164px;	
+}
 
-table.cart_list_main tbody tr{
+.cart_list .cart_list_main tbody tr{
+	width: 970px;
 	height: 164px;
-	border-top: 2px solid #5c5173;
-    border-bottom: 2px solid #5C5173;
-}
-/* 테이블 내 폰트 크기 */
-table.cart_list_main tbody tr td{
-	font-size: 11px;
-}
-/* 테이블 내 이미지 */
-table.cart_list_main tbody tr td img{
-width: 90px;
-    height: 90px;
 }
 
-table.cart_list_main tbody tr td:nth-child(3){
-padding-left: 10px;
+/*상품열 tr 속 td */
+.cart_list .cart_list_main tbody tr td{	
+	font-size: 11px;
+	border-bottom: 1px solid #5c5173;
+}
+
+/*tr 속 td 중 상품명 부분*/
+.cart_list .cart_list_main tbody tr td:nth-child(3){
+	padding-left: 10px;
 	text-align: left;
 	font-size: 12px;
     padding-bottom: 20px;
 }
+/*상품이미지 사이즈 조절용*/
+.cart_list .cart_list_main tbody tr td img{
+	width: 90px;
+    height: 90px;
+}
+.cart_list .cart_list_main tbody tr td.category_box{
+	float: left;
+}
 
-
+/*장바구니 담긴것 없을 때*/
 #cart_list_none{
     display: none;
 }
-
 /*상품명 내 카테고리 버튼*/
 .category_box{
     position: relative;
@@ -129,43 +154,40 @@ padding-left: 10px;
     border-top: 5px solid #5C5173;
     border-bottom: 2px solid #5c5173;
     margin: 0 auto;
- padding: 0;   
+    padding: 0;       
     margin-top: 110px;
 }
-
+/*가격파트 좌측 제목부분*/
 .cart_total_price table tr th{
     text-align: left;
 }
+/*가격파트 우측 합계부분*/
 .cart_total_price table tr td{
     text-align: right;
 }
-
 /*장바구니 가격 테이블 전체 마진*/
-table.price_result {
+.cart_total_price table.price_result {
     border-collapse: collapse;
     text-align: left;
     font-size: 14px;
     margin: 32px 22px 15px 22px;
-
-table.price_result {
-    border-collapse: collapse;
-    border-spacing: 1px;
-    text-align: left;
+	 border-spacing: 1px;
 }
+
 /*텍스트 파트 : 왼쪽*/
-table.price_result th {
+.cart_total_price table.price_result th {
     width: 50%;
     height: 40px;
     line-height: 40px;
     font-size: 18px;    
 }
 
-table.price_result tr:last-child th, tr:last-child td{
+.cart_total_price table.price_result tr:last-child th,
+.cart_total_price table.price_result tr:last-child td{
     border-top : 1px solid #5c5173;
 }
-
 /*가격파트 : 오른쪽*/
-table.price_result td {
+.cart_total_price table.price_result td {
     width: 800px;
     height: 40px;
     line-height: 40px; 
@@ -204,32 +226,29 @@ table.price_result td {
     width: 970px;
     height: 40px;
     float: left;
-    line-height: 40px;
-    margin-left: 25px;
+    line-height: 20px;
+    margin-left: 38px;
     margin-top: 10px;
 }
-.cart-order_del_wishList_box span{
-    width: 140px;
+/*텍스트를 감싼 div 설정*/
+.cart-order_del_wishList_box div{
+    width: 100px;
     background-color: #ffffff;
     color: #5C5173;
     border: none;
     cursor: pointer;
     float: left;    
+	font-size: 12px;
+	margin: 10px;	
+	border-right: 2px solid #5c5173;
 }
-/*글자간 수직선 디자인 : 위치조정은 left로*/
-.cart-order_del_wishList_box span hr{
-    width:0; 
-    height:20px; 
-    position: relative;
-    left: 115px;
-    list-style-image: none;
-    border: 1px solid #5c5173;       
-    float: left;
-
+/*맨 마지막 외곽선 제거*/
+.cart-order_del_wishList_box div:last-child{
+	border: none;
 }
 
 /*수량 증감 기능*/
-div.number{
+.cart_list div.number{
     display: inline-block;    
     text-align: center;
     width: 80px;
@@ -237,29 +256,29 @@ div.number{
     margin: 0 auto;
 }
 /*숫자 크기*/
-div.number span{
+.cart_list div.number span{
     font-size: 15px;
 }
 /*감소버튼 a 태그*/
-div.number a#decreaseQuantity{
+.cart_list div.number a#decreaseQuantity{
     width: 20px;
     height: 20px;
     float: left;
 }
 /*증가버튼 a태그*/
-div.number a#increaseQuantity{
+.cart_list div.number a#increaseQuantity{
     width: 20px;
     height: 20px;
     float: right;
 }
 /*감소버튼 img*/
-div.number a#decreaseQuantity img{
+.cart_list div.number a#decreaseQuantity img{
     width: 15px;
     height: 15px; 
     float: left;
 }
 /*증가버튼 img*/
-div.number a#increaseQuantity img{
+.cart_list div.number a#increaseQuantity img{
     width: 15px;
     height: 15px;    
     float: right;

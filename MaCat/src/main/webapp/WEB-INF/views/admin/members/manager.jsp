@@ -226,7 +226,7 @@
 	                            	<c:forEach var="i" items="${mbersDTO}">
 		                                <tr id="${i.mber_sq}">
 		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="${i.mber_sq}"></td>
-		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled>1001</td>
+		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled></td>
 		                                    <td><input name="mber_nm" class="${i.mber_sq}" type="text" value="${i.mber_nm}" disabled></td>
 		                                    <td>${i.mber_gender}</td>
 		                                    <td>${i.mber_id}</td>
@@ -283,9 +283,8 @@
 								<%-- 다음 --%>
 								<c:choose>
 									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
-										<li class="disable"><img
-											src="resources/img/mcat-arrow-slider-right-grey.png"
-											height="10px"></li>
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
 									</c:when>
 									<c:otherwise>
 										<li><a class="page"> <img
