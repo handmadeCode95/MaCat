@@ -15,7 +15,7 @@ function isOverlap(prduct_sq, mber_sq) {
 	var cart_color = $("#color option:selected").val();
 	console.log(prduct_sq, mber_sq, cart_color);
 	$.ajax({
-		url			: "cart_overlap.mcat",
+		url			: "products/overlap.mcat",
         type		: "POST",
         dataType	: "json",
         contentType : "application/json",
@@ -39,14 +39,14 @@ function addCart(prduct_sq, mber_sq, cart_color, overlap) {
 	var cart_amt = $("#amount option:selected").val();
 	console.log(prduct_sq, mber_sq, cart_color, cart_amt);
 	$.ajax({
-		url			: "add_cart.mcat",
+		url			: "products/add.mcat",
         type		: "POST",
         dataType	: "json",
         contentType : "application/json",
         data		: JSON.stringify({"prduct_sq" : prduct_sq, "mber_sq" : mber_sq, "cart_amt" : cart_amt, "cart_color" : cart_color, "overlap" : overlap}),
         success		: function(data) {
         				  if (data > 0) {
-        					  if (confirm("장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?")) location.href = "cart.mcat?mber_sq=" + mber_sq;
+        					  if (confirm("장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?")) location.href = "main/cart.mcat?mber_sq=" + mber_sq;
 						  }else {
 							  alert("상품 추가에 실패하였습니다\n잠시 후 다시 시도해주세요.")
 						  }
@@ -100,7 +100,7 @@ function setCookie(prduct_sq, ctgry_nm, prduct_price, prduct_dlvy_price, prduct_
 
 	document.cookie = name + "=" + JSON.stringify(newCookie) + "; expires=" + date.toUTCString() + "; path=/";
 	if (add) {
-		if (confirm("장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?")) location.href = "cart.mcat";
+		if (confirm("장바구니에 상품이 추가되었습니다.\n장바구니로 이동하시겠습니까?")) location.href = "main/cart.mcat";
 	}
 };
 

@@ -13,9 +13,9 @@
 		<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 		<script type="text/javascript">
 			$(function() {
-				$(location).attr("href","main.mcat");
-				// $(location).attr("href", "category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
-				//$(location).attr("href", "admin/products/reg.mcat");
+				$(location).attr("href","main/home.mcat");
+				// $(location).attr("href", "main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료");
+				// $(location).attr("href", "admin/products/reg.mcat");
 			});
 		</script>
 	</head>

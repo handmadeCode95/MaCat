@@ -29,27 +29,29 @@ import com.macat.service.Paging;
 import com.macat.service.PriceUtil;
 
 @Controller
-@RequestMapping("*.mcat")
+@RequestMapping("/main")
 public class MainController {
 	
 	@Autowired
 	private DAO dao;
-	
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
+
 	// 메인 페이지로 이동
-	@GetMapping("main.mcat")
+	@GetMapping("/home.mcat")
 	public ModelAndView getMainCmd(HttpSession session) {
 		session.setAttribute("ctgriesDTO", dao.getCategories());
 		return new ModelAndView("main");
 	}
 	
 	// 로그인 페이지로 이동
-	@GetMapping("login.mcat")
+	@GetMapping("/login.mcat")
 	public ModelAndView getLoginCmd() {
 		return new ModelAndView("login");
 	}
 	
 	// 로그인
-	@PostMapping("loginOk.mcat")
+	@PostMapping("/loginOk.mcat")
 	public ModelAndView getLoginOkCmd(HttpSession session, MbersDTO mbersDTO, HttpServletResponse response) {
 		ModelAndView mv;
 		response.addCookie(CookieUtil.setCookie("cart", null, 0)); // 장바구니 쿠키 삭제
@@ -68,20 +70,20 @@ public class MainController {
 	}
 	
 	// 로그아웃
-	@GetMapping("logout.mcat")
+	@GetMapping("/logout.mcat")
 	public ModelAndView getLogout(HttpSession session) {
 		session.removeAttribute("loginData");
 		return new ModelAndView("main");
 	}
 
 	// 회원가입 페이지로 이동
-	@GetMapping("join.mcat")
+	@GetMapping("/join.mcat")
 	public ModelAndView getJoinCmd() {
 		return new ModelAndView("join");
 	}
 	
 	// 회원가입
-	@PostMapping("joinOk.mcat")
+	@PostMapping("/joinOk.mcat")
 	public ModelAndView getJoinCmd(MbersDTO mbersDTO) {
 		// 테스트맨 생성기
 		// mbersDTO.setMber_email(mbersDTO.getMber_email() +
@@ -94,17 +96,17 @@ public class MainController {
 
 		mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
 		dao.getJoin(mbersDTO);
-		return new ModelAndView("redirect:login.mcat");
+		return new ModelAndView("redirect:main/login.mcat");
 	}
 	
 	// 관리자 센터로 이동 <임시>
-	@GetMapping("admin.mcat")
+	@GetMapping("/admin.mcat")
 	public ModelAndView getAdminMainCmd() {
 		return new ModelAndView("admin/main");
 	}
 	
 	// 카테고리 페이지로 이동
-	@GetMapping("category.mcat")
+	@GetMapping("/category.mcat")
 	public ModelAndView getCategoryCmd(String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
 		Paging.cPage = cPage;
 
@@ -129,7 +131,7 @@ public class MainController {
 	}
 	
 	// 장바구니로 이동
-	@GetMapping("cart.mcat")
+	@GetMapping("/cart.mcat")
 	public ModelAndView getCartCmd(String mber_sq) {
 		ModelAndView mv = new ModelAndView("cart");
 		if (mber_sq != null) {
@@ -167,7 +169,7 @@ public class MainController {
 	}
 	
 	// 파일 업로드
-	@PostMapping("fileUpload.mcat")
+	@PostMapping("/fileUpload.mcat")
 	public ModelAndView getfileUploadCmd(MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView("file_upload");
 		MultipartFile imgfile = multipartRequest.getFile("Filedata");

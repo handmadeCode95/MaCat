@@ -67,6 +67,6 @@ function isLogin(bo, path) {
 	if (bo) {
 		location.href=path;
 	}else {
-		if (confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")) location.href="login.mcat";
+		if (confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")) location.href="main/login.mcat";
 	}
 }

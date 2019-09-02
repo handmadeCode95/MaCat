@@ -22,18 +22,16 @@ import com.macat.service.DateUtil;
 import com.macat.service.Paging;
 
 @Controller
-@RequestMapping("admin/members/*.mcat")
+@RequestMapping("/admin/members")
 public class AdminMembersController extends Paging {
 
-	private final DAO dao;
-	
 	@Autowired
-	public AdminMembersController(DAO dao) {
-		this.dao = dao;
-	}
+	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 
 	// 회원 정보 조회로 이동
-	@GetMapping("manager.mcat")
+	@GetMapping("/manager.mcat")
 	public ModelAndView getMembersCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "MbersDTO";
@@ -59,7 +57,7 @@ public class AdminMembersController extends Paging {
 	}
 	
 	// 회원 정보 페이징
-	@PostMapping("paging.mcat")
+	@PostMapping("/paging.mcat")
 	@ResponseBody
 	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
 
@@ -92,7 +90,7 @@ public class AdminMembersController extends Paging {
 	}
 
 	// 회원 검색
-	@PostMapping("search.mcat")
+	@PostMapping("/search.mcat")
 	@ResponseBody
 	public Map<String, Object> getMbersSearchCmd(@RequestBody MbersSearchDTO mbersSearchDTO) {
 
@@ -148,7 +146,7 @@ public class AdminMembersController extends Paging {
 	}
 
 	// 회원 정보 수정
-	@PostMapping("update.mcat")
+	@PostMapping("/update.mcat")
 	@ResponseBody
 	public Map<String, Object> getMbersUpdateCmd(@RequestBody Map<String, List<MbersDTO>> members) {
 		for (String i : members.keySet()) {
@@ -160,7 +158,7 @@ public class AdminMembersController extends Paging {
 	}
 
 	// 회원 탈퇴
-	@PostMapping("withdrawal.mcat")
+	@PostMapping("/withdrawal.mcat")
 	@ResponseBody
 	public Map<String, Object> getMbersWithdrawalCmd(@RequestBody Map<String, List<String>> mbers) {
 		for (String i : mbers.keySet()) {

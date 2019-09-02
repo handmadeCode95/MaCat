@@ -25,12 +25,12 @@
             <div id="formContent">
                 <%-- 로고 --%>
                 <div class="fadeIn first">
-               		<a href="main.mcat">
+               		<a href="main/home.mcat">
                 		<img src="resources/img/logos/mcat-logo.png" id="icon" alt="MaCat" />
                 	</a>
                 </div>
                 <%-- 로그인 폼 --%>
-                <form name="f" action="loginOk.mcat" method="post" onsubmit="return loginChk()">
+                <form name="f" action="main/loginOk.mcat" method="post" onsubmit="return loginChk()">
 	                <input type="text" id="id" class="fadeIn second" name="mber_id" placeholder="아이디"><br>
 	                <input type="password" id="pw" class="fadeIn third" name="mber_pw" placeholder="비밀번호"><br>
 	                <input type="submit" class="fadeIn fourth" value="로그인">
@@ -41,7 +41,7 @@
                 <div id="formFooter">
                 	<a class="underlineHover" href="#" style="color: #5C5173;">아이디 찾기</a>
                 	<a class="underlineHover" href="#" style="color: #5C5173;">비밀번호 찾기</a>
-                	<a class="underlineHover" href="join.mcat"style="color: #5C5173;">회원가입</a>
+                	<a class="underlineHover" href="main/join.mcat"style="color: #5C5173;">회원가입</a>
                 </div>
             </div>
         </div>

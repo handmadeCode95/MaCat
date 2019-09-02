@@ -19,14 +19,16 @@ import com.macat.dto.ProductsDTO;
 import com.macat.service.CookieUtil;
 
 @Controller
-@RequestMapping("products/*.mcat")
+@RequestMapping("/products")
 public class ProductsController {
 	
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 	
 	// 상품 페이지로 이동
-	@GetMapping("view.mcat")
+	@GetMapping("/view.mcat")
 	public ModelAndView getProductCmd(@CookieValue(required = false, name = "viewedProductSq1") String viewedProductSq1,
 			@CookieValue(required = false, name = "viewedProductSq2") String viewedProductSq2,
 			@CookieValue(required = false, name = "viewedProductSq3") String viewedProductSq3,
@@ -104,7 +106,7 @@ public class ProductsController {
 	 */
 	
 	// 장바구니 중복 체크
-	@PostMapping("cart_overlap.mcat")
+	@PostMapping("/overlap.mcat")
 	@ResponseBody
 	public boolean isOverlapCmd(@RequestBody Map<String, Object> requestMap) {
 		return dao.getCartOverlap(requestMap) > 0 ? true : false;
@@ -112,7 +114,7 @@ public class ProductsController {
 
 	
 	// 장바구니 수량 추가
-	@PostMapping("add_cart.mcat")
+	@PostMapping("/add.mcat")
 	@ResponseBody
 	public int addCartCmd(@RequestBody Map<String, Object> requestMap) {
 		int result = 0;

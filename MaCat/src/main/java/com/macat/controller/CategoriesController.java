@@ -14,11 +14,13 @@ import com.macat.dto.ProductsDTO;
 import com.macat.service.CookieUtil;
 
 @Controller
-@RequestMapping("categories/*.mcat")
+@RequestMapping("/categories")
 public class CategoriesController {
 	
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 
 	
 

@@ -22,31 +22,32 @@ import com.macat.dto.ProductsDTO;
 import com.macat.service.Paging;
 
 @Controller
-@RequestMapping("admin/products/*.mcat")
+@RequestMapping("/admin/products")
 public class AdmimProductsController extends Paging {
 	
 	@Autowired
 	private DAO dao;
-	
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
+
 	// 상품관리로 이동
-	@GetMapping("manager.mcat")
+	@GetMapping("/manager.mcat")
 	public ModelAndView getPrductManageCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "ProductsDTO";
 		ModelAndView mv = new ModelAndView("admin/product/product_manager");
-		PageDTO pageDTO = new PageDTO();
 
 		return mv;
 	}
 
 	// 관리자 상품등록 상세페이지로 이동
-	@GetMapping("add.mcat")
+	@GetMapping("/add.mcat")
 	public ModelAndView getProductRegCmd() {
 		return new ModelAndView("admin/product/add_product");
 	}
 
 	// 상품 등록
-	@PostMapping("reg.mcat")
+	@PostMapping("/reg.mcat")
 	public ModelAndView getAddProductInfoCmd(@ModelAttribute ProductsDTO productsDTO, HttpServletRequest request) {
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");

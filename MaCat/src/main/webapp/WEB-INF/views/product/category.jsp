@@ -61,7 +61,7 @@
 					<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
 						<c:if test="${ctgry_group eq i.ctgry_group}">
 							<%-- a태그 시작 --%>
-							<a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}"
+							<a href="main/category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=${i.ctgry_level}&ctgry_nm=${i.ctgry_nm}"
 								<c:if test="${ctgry_nm eq i.ctgry_nm}">
 										id="selectedCtgry"
 									</c:if>>
@@ -165,7 +165,7 @@
 					</c:when>
 					<c:otherwise>
 						<li><a class="page"
-							href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${pageDTO.beginBlock - 1}">
+							href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${pageDTO.beginBlock - 1}">
 								<img src="resources/img/mcat-arrow-slider-left-grey.png"
 								height="10px">
 						</a></li>
@@ -182,7 +182,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a class="page"
-								href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
+								href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -196,7 +196,7 @@
 					</c:when>
 					<c:otherwise>
 						<li><a class="page"
-							href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${pageDTO.beginBlock + pageDTO.pagePerBlock}">
+							href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${pageDTO.beginBlock + pageDTO.pagePerBlock}">
 								<img src="resources/img/mcat-arrow-slider-right-grey.png"
 								height="10px">
 						</a></li>

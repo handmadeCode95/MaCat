@@ -109,7 +109,7 @@
                 <h2>신상품</h2>
                 <div class="newInner clear">
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="newImg">
                             <img src="resources/img/mcat-new-item01.jpg" alt="양모볼"></div>
                             <div class="newInfo">
@@ -119,7 +119,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="newImg">
                             <img src="resources/img/mcat-new-item02.jpg" alt="캣터널"></div>
                             <div class="newInfo">
@@ -129,7 +129,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="newImg">
                             <img src="resources/img/mcat-new-item03.jpg" alt="캣타워"></div>
                             <div class="newInfo">
@@ -139,7 +139,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="newImg">
                             <img src="resources/img/mcat-new-item04.jpg" alt="사료"></div>
                             <div class="newInfo">
@@ -149,7 +149,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="newImg">
                             <img src="resources/img/mcat-new-item01.jpg" alt="양모볼"></div>
                             <div class="newInfo">
@@ -165,7 +165,7 @@
                 <h2>금주 할인 상품</h2>
                 <div class="saleInner clear">
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="saleImg">
                             <img src="resources/img/mcat-sale-item01.jpg" alt="케이지볼"></div>
                             <div class="saleInfo">
@@ -175,7 +175,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="saleImg">
                             <img src="resources/img/mcat-sale-item02.jpg" alt="화장실"></div>
                             <div class="saleInfo">
@@ -185,7 +185,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="saleImg">
                             <img src="resources/img/mcat-sale-item03.jpg" alt="캐리어"></div>
                             <div class="saleInfo">
@@ -195,7 +195,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="saleImg">
                             <img src="resources/img/mcat-sale-item04.jpg" alt="스크래쳐"></div>
                             <div class="saleInfo">
@@ -205,7 +205,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
+                        <a href="main/category.mcat?ctgry_group=1&ctgry_level=0&ctgry_nm=사료">
                            <div class="saleImg">
                             <img src="resources/img/mcat-sale-item01.jpg" alt="케이지볼"></div>
                             <div class="saleInfo">

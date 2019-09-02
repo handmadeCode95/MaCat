@@ -9,14 +9,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macat.dao.DAO;
 
 @Controller
-@RequestMapping("orders/*.mcat")
+@RequestMapping("/orders")
 public class OrdersController {
 	
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 	
 	// 결제페이지로 이동
-	@GetMapping("new.mcat")
+	@GetMapping("/new.mcat")
 	public ModelAndView getOrderCmd() {
 		return new ModelAndView("macat_order_page");
 	}

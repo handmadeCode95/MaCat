@@ -23,14 +23,16 @@ import com.macat.dto.QnaSearchDTO;
 import com.macat.service.Paging;
 
 @Controller
-@RequestMapping("admin/qna/*.mcat")
+@RequestMapping("/admin/qna")
 public class AdminQnaController extends Paging {
 
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 	
 	// 고객 문의 관리로 이동
-	@GetMapping("manager.mcat")
+	@GetMapping("/manager.mcat")
 	public ModelAndView getQnaCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "QnaDTO";
@@ -46,7 +48,7 @@ public class AdminQnaController extends Paging {
 	}
 
 	// 고객 문의 페이징
-	@PostMapping("paging.mcat")
+	@PostMapping("/paging.mcat")
 	@ResponseBody
 	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
 
@@ -78,7 +80,7 @@ public class AdminQnaController extends Paging {
 	}
 
 	// 고객 문의 검색
-	@PostMapping("search.mcat")
+	@PostMapping("/search.mcat")
 	@ResponseBody
 	public Map<String, Object> getQnaSearchCmd(@RequestBody QnaSearchDTO qnaSearchDTO) {
 
@@ -120,7 +122,7 @@ public class AdminQnaController extends Paging {
 	}
 
 	// 고객 문의 삭제
-	@PostMapping("delete.mcat")
+	@PostMapping("/delete.mcat")
 	@ResponseBody
 	public Map<String, Object> getQnaDeleteCmd(@RequestBody Map<String, List<String>> qnas) {
 		for (String i : qnas.keySet()) {
@@ -145,7 +147,7 @@ public class AdminQnaController extends Paging {
 	}
 
 	// 문의 보기로 이동
-	@GetMapping("view.mcat")
+	@GetMapping("/view.mcat")
 	public ModelAndView getQnaViewCmd(HttpSession session, String qna_sq) {
 		QnaDTO qnaDTO = dao.getQnaView(qna_sq);
 

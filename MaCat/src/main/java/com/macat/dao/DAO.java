@@ -29,10 +29,17 @@ public class DAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public SqlSessionTemplate getSqlSessionTemplate() {
+		return sqlSessionTemplate;
+	}
+
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
-	
+
 	// 회원가입
 	public int getJoin(MbersDTO mbersDTO) {
 		return sqlSessionTemplate.insert("join", mbersDTO);

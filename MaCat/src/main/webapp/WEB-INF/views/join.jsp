@@ -23,12 +23,12 @@
             <div id="formContent">
                 <%-- 로고 --%>
                 <div class="fadeIn first">
-                	<a href="main.mcat">
+                	<a href="main/home.mcat">
                 		<img src="resources/img/logos/mcat-logo.png" id="icon" alt="MaCat" />
                 	</a>
                 </div>
                 <%-- 로그인 폼 --%>
-                <form name="f" action="joinOk.mcat" method="post" onsubmit="return checkAll()">
+                <form name="f" action="main/joinOk.mcat" method="post" onsubmit="return checkAll()">
 	                <input type="text" id="id" class="fadeIn second" name="mber_id" placeholder="아이디"><br>
 	                <input type="password" id="pw" class="fadeIn third" name="mber_pw" placeholder="비밀번호"><br>
 	                <input type="password" id="pwChk" class="fadeIn fourth" name="pwChk" placeholder="비밀번호 확인"><br>

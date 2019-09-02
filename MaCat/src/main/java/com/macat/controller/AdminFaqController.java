@@ -22,14 +22,16 @@ import com.macat.dto.PageDTO;
 import com.macat.service.Paging;
 
 @Controller
-@RequestMapping("admin/faq/*.mcat")
+@RequestMapping("/admin/faq")
 public class AdminFaqController extends Paging {
 	
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 	
 	// FAQ 관리로 이동
-	@GetMapping("manager.mcat")
+	@GetMapping("/manager.mcat")
 	public ModelAndView getFaqCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "FaqDTO";
@@ -44,7 +46,7 @@ public class AdminFaqController extends Paging {
 	}
 	
 	// FAQ 페이징
-	@PostMapping("paging.mcat")
+	@PostMapping("/paging.mcat")
 	@ResponseBody
 	public Map<String, Object> getFaqPagingCmd(@RequestBody String cPage) {
 
@@ -76,7 +78,7 @@ public class AdminFaqController extends Paging {
 	}
 
 	// FAQ 검색
-	@PostMapping("search.mcat")
+	@PostMapping("/search.mcat")
 	@ResponseBody
 	public Map<String, Object> getFaqSearchCmd(@RequestBody FaqSearchDTO faqSearchDTO) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -112,7 +114,7 @@ public class AdminFaqController extends Paging {
 	}
 
 	// FAQ 삭제
-	@PostMapping("delete.mcat")
+	@PostMapping("/delete.mcat")
 	@ResponseBody
 	public Map<String, Object> getFaqDeleteCmd(@RequestBody Map<String, List<String>> faqs) {
 		for (String i : faqs.keySet()) {
@@ -137,7 +139,7 @@ public class AdminFaqController extends Paging {
 	}
 
 	// FAQ 보기로 이동
-	@GetMapping("view.mcat")
+	@GetMapping("/view.mcat")
 	public ModelAndView getFaqViewCmd(HttpSession session, String faq_sq) {
 		FaqDTO faqDTO = dao.getFaqView(faq_sq);
 

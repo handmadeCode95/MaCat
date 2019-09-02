@@ -21,7 +21,7 @@
         <div class="menu">
             <div class="navWrap">
                 <!--로고-->
-                <h1><a href="main.mcat"><img src="resources/img/mcat-logo.png" alt="마캣로고"></a></h1>
+                <h1><a href="main/home.mcat"><img src="resources/img/mcat-logo.png" alt="마캣로고"></a></h1>
                 <div class="line"><span></span></div>
                 <div class="searchWrap">
                     <!-- 검색 -->
@@ -37,11 +37,11 @@
                     <div class="pc">
                     	<c:choose>
                     		<c:when test="${empty sessionScope.loginData.mber_sq}">
-                    			<a href="login.mcat">로그인</a>
-                    			<a href="join.mcat">회원가입</a>
+                    			<a href="main/login.mcat">로그인</a>
+                    			<a href="main/join.mcat">회원가입</a>
                     		</c:when>
                     		<c:otherwise>
-                    			<a href="javascript:confirm('로그아웃 하시겠습니까?') ?location.href='logout.mcat' :retrun">로그아웃</a>
+                    			<a href="javascript:confirm('로그아웃 하시겠습니까?') ?location.href='main/logout.mcat' :retrun">로그아웃</a>
                     		</c:otherwise>
                     	</c:choose>
                         <c:if test="${!empty sessionScope.loginData.mber_grad_nm and sessionScope.loginData.mber_grad_nm eq '관리자'}">
@@ -56,7 +56,7 @@
                 </div>
                 <!--장바구니-->
                 <div class="basket">
-                    <button type="button" class="basketBtn" onclick="location.href='cart.mcat'">장바구니</button>
+                    <button type="button" class="basketBtn" onclick="location.href='main/cart.mcat'">장바구니</button>
                 </div>
                 <!--주메뉴-->
                 <!--메뉴button-->
@@ -89,7 +89,7 @@
                                             	<c:forEach var="i" items="${sessionScope.ctgriesDTO}">
                                             		<c:if test="${i.ctgry_level eq 0}">
 	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
-	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            			<li><a href="main/category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
 	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
                                             		</c:if>
                                             	</c:forEach>
@@ -132,7 +132,7 @@
                                                 <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
                                             		<c:if test="${i.ctgry_level eq 0}">
 	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
-	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            			<li><a href="main/category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
 	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
                                             		</c:if>
                                             	</c:forEach>
@@ -182,7 +182,7 @@
                                                 <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
                                             		<c:if test="${i.ctgry_level eq 0}">
 	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
-	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            			<li><a href="main/category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
 	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
                                             		</c:if>
                                             	</c:forEach>
@@ -211,7 +211,7 @@
                                                 <c:forEach var="i" items="${sessionScope.ctgriesDTO}">
                                             		<c:if test="${i.ctgry_level eq 0}">
 	                                            		<c:if test="${i.ctgry_ord eq 1 or i.ctgry_ord eq 3 or i.ctgry_ord eq 6}"><ol></c:if>
-	                                            			<li><a href="category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
+	                                            			<li><a href="main/category.mcat?ctgry_group=${i.ctgry_group}&ctgry_level=0&ctgry_nm=${i.ctgry_nm}">${i.ctgry_nm}</a></li>
 	                                            		<c:if test="${i.ctgry_ord eq 2 or i.ctgry_ord eq 5 or i.ctgry_ord eq 7}"></ol></c:if>
                                             		</c:if>
                                             	</c:forEach>

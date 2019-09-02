@@ -227,7 +227,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a class="page"
-											href="ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&category.mcat?cPage=${paging.beginBlock - 1}">
+											href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock - 1}">
 												<img src="resources/img/mcat-arrow-slider-left-grey.png"
 												height="10px">
 										</a></li>
@@ -244,7 +244,7 @@
 										</c:when>
 										<c:otherwise>
 											<li><a class="page"
-												href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
+												href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${i}">${i}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -258,7 +258,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a class="page"
-											href="category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
+											href="main/category.mcat?ctgry_group=${ctgry_group}&ctgry_level=${ctgry_level}&ctgry_nm=${ctgry_nm}&cPage=${paging.beginBlock + paging.pagePerBlock}">
 												<img src="resources/img/mcat-arrow-slider-right-grey.png"
 												height="10px">
 										</a></li>

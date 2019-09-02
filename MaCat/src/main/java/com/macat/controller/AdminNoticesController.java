@@ -20,14 +20,16 @@ import com.macat.dto.PageDTO;
 import com.macat.service.Paging;
 
 @Controller
-@RequestMapping("admin/notices/*.mcat")
+@RequestMapping("/admin/notices")
 public class AdminNoticesController extends Paging {
 	
 	@Autowired
 	private DAO dao;
+	public DAO getDao() {return dao;}
+	public void setDao(DAO dao) {this.dao = dao;}
 	
 	// 공지사항 조회로 이동
-	@GetMapping("manager.mcat")
+	@GetMapping("/manager.mcat")
 	public ModelAndView getNoticesCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
@@ -41,7 +43,7 @@ public class AdminNoticesController extends Paging {
 	}
 	
 	// 공지사항 페이징
-	@PostMapping("paging.mcat")
+	@PostMapping("/paging.mcat")
 	@ResponseBody
 	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
 
@@ -73,7 +75,7 @@ public class AdminNoticesController extends Paging {
 	}
 
 	// 공지사항 검색
-	@PostMapping("search.mcat")
+	@PostMapping("/search.mcat")
 	@ResponseBody
 	public Map<String, Object> getNotsSearchCmd(@RequestBody NotsSearchDTO notsSearchDTO) {
 
@@ -115,19 +117,19 @@ public class AdminNoticesController extends Paging {
 	}
 
 	// 공지사항 작성으로 이동
-	@GetMapping("write.mcat")
+	@GetMapping("/write.mcat")
 	public ModelAndView getNotsWriteGoCmd() {
 		return new ModelAndView("admin/notices/write");
 	}
 
 	// 공지사항 수정으로 이동
-	@GetMapping("update.mcat")
+	@GetMapping("/update.mcat")
 	public ModelAndView getNotsUpdateGoCmd() {
 		return new ModelAndView("admin/notices/update");
 	}
 
 	// 공지사항 삭제
-	@PostMapping("delete.mcat")
+	@PostMapping("/delete.mcat")
 	@ResponseBody
 	public Map<String, Object> getNotsDeleteCmd(@RequestBody Map<String, List<String>> nots) {
 		for (String i : nots.keySet()) {
