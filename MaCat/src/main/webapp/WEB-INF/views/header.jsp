@@ -56,7 +56,14 @@
                 </div>
                 <!--장바구니-->
                 <div class="basket">
-                    <button type="button" class="basketBtn" onclick="location.href='cart.mcat'">장바구니</button>
+					<c:choose>
+						<c:when test="${empty sessionScope.loginData.mber_sq}">
+							<button type="button" class="basketBtn" onclick="location.href='cart.mcat'">장바구니</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="basketBtn" onclick="location.href='cart.mcat?mber_sq=${sessionScope.loginData.mber_sq}'">장바구니</button>
+						</c:otherwise>
+					</c:choose>
                 </div>
                 <!--주메뉴-->
                 <!--메뉴button-->

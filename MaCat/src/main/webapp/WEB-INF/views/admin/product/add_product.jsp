@@ -16,84 +16,7 @@
 
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <!--카테고리 파트 select 문-->
-<script type="text/javascript"
-	src="resources/js/admin/product/add_product.js"></script>
-<!-- checked 속성 poly-checked 추가 -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("li").each(function() {
-			$(this).click(function() {
-				$(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
-				$(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
-			});
-		});
-	});
-</script>
-
-<!--상품명 제한 쿼리-->
-<script type="text/javascript">
-	function chkword(obj, maxByte) {
-		var strValue = obj.value;
-		var strLen = strValue.length;
-		var totalByte = 0;
-		var len = 0;
-		var oneChar = "";
-		var str2 = "";
-		for (var i = 0; i < strLen; i++) {
-			oneChar = strValue.charAt(i);// input 입력한 값을 charAt() 함수로 한자씩 분리
-			if (escape(oneChar).length > 4) {
-				totalByte += 3; // 아스키값이 아닌 유니코드이면 길이 2로 계산하고,
-			} else {
-				totalByte++; // 아스키값이면 1로 합니다.
-			}
-			if (totalByte <= maxByte) {
-				len = i + 1; // 입력한 문자 길이보다 넘치면 잘라내기 위해 저장
-			}
-		}
-		// 넘어가는 글자는 자른다
-		if (totalByte > maxByte) {
-			alert("한글 " + (maxByte / 3) + "자 (영어 " + (maxByte) + " 바이트)"
-					+ "를 초과 입력 할 수 없습니다.");
-			str2 = strValue.substr(0, len);
-			obj.value = str2;
-			chkword(obj, 4000);
-		}
-	}
-</script>
-<!-- input 콤마찍기 쿼리-->
-<script type="text/javascript">
-	function SetComma(str) {
-		str = str.replace(/,/g, '');
-		var retValue = "";
-		if (isNaN(str) == false) {
-			for (i = 1; i <= str.length; i++) {
-				if (i > 1 && (i % 3) == 1)
-					retValue = str.charAt(str.length - i) + "," + retValue;
-				else
-					retValue = str.charAt(str.length - i) + retValue;
-			}
-		} else
-			alert("숫자만 입력 가능합니다.");
-		return retValue;
-	}
-</script>
-<!--체크박스 선택 한계 쿼리-->
-<script type="text/javascript">
-	function count_ck(obj) {
-		var chkbox = document.getElementsByName("colors");
-		var chkCnt = 0;
-		for (var i = 0; i < chkbox.length; i++) {
-			if (chkbox[i].checked) {
-				chkCnt++;
-			}
-		}
-		if (chkCnt > 10) {
-			alert("색상은 10개까지 선택하실 수 있습니다");
-			obj.checked = false;
-			return false;
-		}
-	}
-</script>
+<script type="text/javascript" src="resources/js/admin/product/add_product.js"></script>
 </head>
 
 <body>
@@ -216,167 +139,29 @@
 				<span>상품이미지</span>
 				<div class="main_image_part">
 					<span>대표이미지</span>
-					<div class="cover_layer">
+					<div class="main_cover_layer">
 						<!--미리보는 곳-->
-						<div id="preview-main"></div>
+						<div class="preview"></div>
 						<!--파일 선택등-->
 						<div class="preview_underBox">
 							<input type="file" name="main_img" class="inp-img-main"
 								accept=".gif, .jpg, .png">
 							<button type="button" class="preview-file_upload-main">추가</button>
-							<button type="button" class="btn-delete-main">삭제</button>
 						</div>
 					</div>
 				</div>
 				<div class="sub_image_part">
 					<span>추가이미지</span>
-					<!--1번 이미지-->
-					<div class="cover_layer">
-						<div id="preview-sub1"></div>
-						<div class="preview_underBox">
-							<input type="file" name="sub_img1" class="inp-img-sub1"
-								accept=".gif, .jpg, .png">
-							<button type="button" class="preview-file_upload-sub1">추가</button>
-							<button type="button" class="btn-delete-sub1">삭제</button>
+					<div class="sub_cover_layer">
+						<div class="preview">
 						</div>
-					</div>
-					<!--2번 이미지-->
-					<div class="cover_layer">
-						<div id="preview-sub2"></div>
 						<div class="preview_underBox">
-							<input type="file" name="sub_img2" class="inp-img-sub2"
+							<input type="file" name="sub_img1" class="inp-img-sub2"
 								accept=".gif, .jpg, .png">
-							<button type="button" class="preview-file_upload-sub2">추가</button>
-							<button type="button" class="btn-delete-sub2">삭제</button>
-						</div>
-					</div>
-					<!--3번 이미지-->
-					<div class="cover_layer">
-						<div id="preview-sub3"></div>
-						<div class="preview_underBox">
-							<input type="file" name="sub_img3" class="inp-img-sub3"
-								accept=".gif, .jpg, .png">
-							<button type="button" class="preview-file_upload-sub3">추가</button>
-							<button type="button" class="btn-delete-sub3">삭제</button>
+							<button type="button" class="preview-file_upload-sub">추가</button>
 						</div>
 					</div>
 				</div>
-				<script type="text/javascript">
-					/*숩긴 input을 다른 버튼에서 실행하게 하기*/
-					$(".preview-file_upload-main").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-main").click();
-					});
-					$(".preview-file_upload-sub1").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub1").click();
-					});
-					$(".preview-file_upload-sub2").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub2").click();
-					});
-					$(".preview-file_upload-sub3").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub3").click();
-					});
-
-					// 등록 이미지 등록 미리보기
-					function readInputFile(input) {
-						if (input.files && input.files[0]) {
-							var reader = new FileReader();
-							reader.onload = function(e) {
-								$('#preview-main').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-main").on('change', function() {
-						readInputFile(this);
-					});
-					/*추가1*/
-					function readInputFile_sub1(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub1 = new FileReader();
-							reader_sub1.onload = function(e) {
-								$('#preview-sub1').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub1.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-sub1").on('change', function() {
-						readInputFile_sub1(this);
-					});
-					/*추가2*/
-					function readInputFile_sub2(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub2 = new FileReader();
-							reader_sub2.onload = function(e) {
-								$('#preview-sub2').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub2.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-sub2").on('change', function() {
-						readInputFile_sub2(this);
-					});
-					/*추가3*/
-					function readInputFile_sub3(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub3 = new FileReader();
-							reader_sub3.onload = function(e) {
-								$('#preview-sub3').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub3.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-sub3").on('change', function() {
-						readInputFile_sub3(this);
-					});
-
-					// 등록 이미지 삭제 ( input file reset )
-					function resetInputFile($input, $preview) {
-						var agent = navigator.userAgent.toLowerCase();
-						if ((navigator.appName == 'Netscape' && navigator.userAgent
-								.search('Trident') != -1)
-								|| (agent.indexOf("msie") != -1)) {
-							// ie 일때
-							$input.replaceWith($input.clone(true));
-							$preview.empty();
-						} else {
-							//other
-							$input.val("");
-							$preview.empty();
-						}
-					}
-
-					$(".btn-delete-main").click(function(event) {
-						var $input = $(".inp-img-main");
-						var $preview = $('#preview-main');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub1").click(function(event) {
-						var $input = $(".inp-img-sub1");
-						var $preview = $('#preview-sub1');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub2").click(function(event) {
-						var $input = $(".inp-img-sub2");
-						var $preview = $('#preview-sub2');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub3").click(function(event) {
-						var $input = $(".inp-img-sub3");
-						var $preview = $('#preview-sub3');
-						resetInputFile($input, $preview);
-					});
-				</script>
 			</div>
 			<!--배송정보 파트-->
 			<div class="delivery_info">

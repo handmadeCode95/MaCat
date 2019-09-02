@@ -206,8 +206,6 @@
 	                    </ul>
 	                    <ul>
 	                        <!-- 장바구니에 추가하시겠습니까 ask : 확인 = 추가되었습니다 / 취소 = 상품상세페이지-->
-	                        <!-- href="cookie_cart.mcat?prduct_sq=${productsDTO.prduct_sq}"
-	                         href="db_cart.mcat?prduct_sq=${productsDTO.prduct_sq}&mber_sq=${sessionScope.loginData.mber_sq}"-->
 	                        <c:choose>
 	                        	<c:when test="${empty sessionScope.loginData.mber_sq}">
 		                        	<a href="javascript:setCookie(${productsDTO.prduct_sq},	'${productsDTO.ctgry_nm}', ${productsDTO.prduct_price}, ${productsDTO.prduct_dlvy_price}, '${productsDTO.prduct_nm}', '${productsDTO.prduct_thumb_nm}', ${productsDTO.prduct_dc}, ${productsDTO.prduct_dc_pt}, ${productsDTO.prduct_dced_price}, 'cart', 1);">

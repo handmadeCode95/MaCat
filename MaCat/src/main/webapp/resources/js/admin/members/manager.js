@@ -68,12 +68,9 @@
 				mbers_count = value;
 			}
 		});
-		$("#searchResult").empty();
-		$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
-		$("#mbers_count").empty();
-		$("#mbers_count").append(mbers_count);
+		$("#searchResult").html(result);
+		$("#paging").html(pagingResult);
+		$("#mbers_count").html(mbers_count);
 		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
@@ -217,7 +214,6 @@
 	
 	// 회원 검색 AJAX
 	$("#searchBtn").click(function() {
-		console.log($().toJSON($("#searchForm")));
 		$.ajax({
 			url			: "mbers_search.mcat",
             type		: "POST",

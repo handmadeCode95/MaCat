@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +70,6 @@ public class MaCatController {
 	private String usedDTO; // 페이징을 위한 조회 기록
 	private int count; // 페이징을 위한 검색 인원 수 기록
 	private String cPage; // 페이징을 위한 현재 페이지 기록
-
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
@@ -307,7 +307,7 @@ public class MaCatController {
 	// 결제페이지로 이동
 	@RequestMapping("order.mcat")
 	public ModelAndView getOrderCmd() {
-		return new ModelAndView("macat_order_page");
+		return new ModelAndView("");
 	}
 	
 	
@@ -392,7 +392,6 @@ public class MaCatController {
 		this.cPage = cPage;
 		usedDTO = "ProductsDTO";
 		ModelAndView mv = new ModelAndView("admin/product/product_manager");
-		PageDTO pageDTO = new PageDTO();
 		 
 		
 		return mv;
@@ -529,7 +528,6 @@ public class MaCatController {
 	public Map<String, Object> getMbersPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-
 		PageDTO pageDTO = new PageDTO(50);
 
 		Map<String, Object> map = new HashMap<String, Object>();

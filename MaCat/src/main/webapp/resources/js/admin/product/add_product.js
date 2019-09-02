@@ -44,123 +44,84 @@ $(document).ready(function() {
 /*////////////////// 이미지 미리보기 쿼리 //////////////////*/
 // 정상 작동
 $(document).ready(function(){	
+	var inputFileClass = 1;
 	// 숨긴 input을 다른 버튼에서 실행하게 하기
-	$(".preview-file_upload-main").click(function(e){
+	$(document).on("click", ".preview-file_upload-main", function(e) {
 	    e.preventDefault();
 	    $(".inp-img-main").click();
 	});      
 	
-	$(".preview-file_upload-sub1").click(function(e){
+	$(document).on("click", ".preview-file_upload-sub", function(e) {
 	    e.preventDefault();
 	    $(".inp-img-sub1").click();
-	}); 
-	
-	$(".preview-file_upload-sub2").click(function(e){
-	    e.preventDefault();
-	    $(".inp-img-sub2").click();
-	}); 
-	
-	$(".preview-file_upload-sub3").click(function(e){
-	    e.preventDefault();
-	    $(".inp-img-sub3").click();
-	}); 
+	});
 
-	// 메인 이미지
-	function readInputFile(input) {
-	if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	        $('#preview-main').html("<img src=" + e.target.result + ">");
-	    }
-	    reader.readAsDataURL(input.files[0]);
-	    }
-	}
+	
+	// 파일 등록시 readInputFile함수에 인자로 전달
 	$(".inp-img-main").on('change', function() {
 	    readInputFile(this);
 	});
-
-	// 추가 이미지 1
-	function readInputFile_sub1(input) {
-	if (input.files && input.files[0]) {
-	    var reader_sub1 = new FileReader();
-	    reader_sub1.onload = function(e) {
-	        $('#preview-sub1').html("<img src=" + e.target.result + ">");
-	    }
-	    reader_sub1.readAsDataURL(input.files[0]);
-	    }
-	}
+	
 	$(".inp-img-sub1").on('change', function() {
-	    readInputFile_sub1(this);
+	    readInputFile_sub(this);
 	});
-
-	//추가 이미지 2
-	function readInputFile_sub2(input) {
-	if (input.files && input.files[0]) {
-	    var reader_sub2 = new FileReader();
-	    reader_sub2.onload = function(e) {
-	        $('#preview-sub2').html("<img src=" + e.target.result + ">");
-	    }
-	    reader_sub2.readAsDataURL(input.files[0]);
+	
+	// 메인 이미지
+	function readInputFile(input) {
+		if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.readAsDataURL(input.files[0]);
+		    reader.onload = function(e) {
+		        $('.main_cover_layer > .preview').html("<img src=" + e.target.result + ">");
+		        $('.preview-file_upload-main').replaceWith('<button type="button" class="btn-delete-main">삭제</button>');
+		    }
 	    }
 	}
-	$(".inp-img-sub2").on('change', function() {
-	    readInputFile_sub2(this);
-	});
-
-	//추가 이미지 3
-	 function readInputFile_sub3(input) {
-	if (input.files && input.files[0]) {
-	    var reader_sub3 = new FileReader();
-	    reader_sub3.onload = function(e) {
-	        $('#preview-sub3').html("<img src=" + e.target.result + ">");
-	    }
-	    reader_sub3.readAsDataURL(input.files[0]);
+	
+	// 추가 이미지
+	function readInputFile_sub(input) {
+		if (input.files && input.files[0]) {
+		    var reader_sub = new FileReader();
+		    reader_sub.readAsDataURL(input.files[0]);
+		    reader_sub.onload = function(e) {
+		    	$('.sub_cover_layer').before('<div class="new_cover_layer">'
+		    		+ '<div class="preview"><img src=' + e.target.result + '></div>'
+		    		+ '<input type="file" name="sub_img" class="inp-img-sub" accept=".gif, .jpg, .png">'
+		    		+ '<div class="preview_underBox"><button type="button" class="btn-delete-sub">삭제</button></div></div>');
+		    }
 	    }
 	}
-	$(".inp-img-sub3").on('change', function() {
-	    readInputFile_sub3(this);
-	});
-
+	
 	// 등록 이미지 삭제 ( input file reset )
 	function resetInputFile($input, $preview) {
-	var agent = navigator.userAgent.toLowerCase();
-	if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-	    // ie 일때
-	    $input.replaceWith($input.clone(true));
-	    $preview.empty();
-	} else {
-	    //other
-	    $input.val("");
-	    $preview.empty();
-	    }
+		var agent = navigator.userAgent.toLowerCase();
+		if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
+		    // ie 일때
+		    $input.replaceWith($input.clone(true));
+		    $preview.empty();
+		} else {
+		    //other
+		    $input.val("");
+		    $preview.empty();
+		}
 	}
+	
+	
 	// 메인 이미지 삭제 버튼
-	$(".btn-delete-main").click(function(event) {
+	$(document).on("click", ".btn-delete-main", function(event) {
 	    var $input = $(".inp-img-main");
-	    var $preview = $('#preview-main');
+	    var $preview = $('.main_cover_layer > .preview');
 	    resetInputFile($input, $preview);
+	    $('.btn-delete-main').replaceWith('<button type="button" class="preview-file_upload-main">추가</button>');
 	});      
 
+	
 	// 추가 이미지 1 삭제 버튼
-	$(".btn-delete-sub1").click(function(event) {
-	    var $input = $(".inp-img-sub1");
-	    var $preview = $('#preview-sub1');
+	$(document).on("click", ".btn-delete-sub", function(event) {
+	    var $input = $(".inp-img-sub");
+	    var $preview = $('.preview');
 	    resetInputFile($input, $preview);
-	});  
-
-	// 추가 이미지 2 삭제 버튼
-	$(".btn-delete-sub2").click(function(event) {
-	    var $input = $(".inp-img-sub2");
-	    var $preview = $('#preview-sub2');
-	    resetInputFile($input, $preview);
-	}); 
-
-	// 추가 이미지 3 삭제 버튼
-	$(".btn-delete-sub3").click(function(event) {
-	    var $input = $(".inp-img-sub3");
-	    var $preview = $('#preview-sub3');
-	    resetInputFile($input, $preview);
-	});      
+	});   
 	
 });
 
@@ -225,3 +186,4 @@ function count_ck(obj){
         return false;
     }
 }
+
