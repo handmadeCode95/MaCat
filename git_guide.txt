@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-﻿## git pull 다른 브랜치 가져오기
+## git pull 다른 브랜치 가져오기
 1) 받아올 로컬 폴더 생성
 2) git init
 3) git remote add origin 해당git주소
@@ -139,3 +139,12 @@ ex) merge conflict 발생 후 common.txt 파일 상태
   7
   8 function c
 >>>>>>> da2809c8b0bf1620c9669905ac8ce0033d9fd135
+
+
+*** git remote update
+먼저 원격의 브랜치에 접근하기 위해 git remote를 갱신해줄 필요가 있다.
+
+$ git remote update
+원격의 브랜치를 찾지 못해서 발생하는 fatal: Cannot update paths and switch to branch 'feature/rename' at the same time. 
+오류 메세지를 해결해준다.
+[출처 https://cjh5414.github.io/get-git-remote-branch/]
