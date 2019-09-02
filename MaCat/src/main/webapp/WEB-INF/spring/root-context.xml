@@ -28,6 +28,9 @@
 	   <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<!-- Paging -->
+	<bean id="paging" class="com.macat.service.Paging"></bean>
+	
 	<!-- upload -->
 	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

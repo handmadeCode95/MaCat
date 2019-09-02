@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ import com.macat.dto.PageDTO;
 import com.macat.dto.ProductsDTO;
 import com.macat.dto.QnaDTO;
 import com.macat.dto.QnaSearchDTO;
+import com.macat.service.CookieUtil;
 import com.macat.service.DateUtil;
 import com.macat.service.FileUpload;
 
@@ -50,16 +52,13 @@ import com.macat.service.PriceUtil;
 @Controller
 public class MaCatController {
 
-	@Inject
-	private DAO dao;
+	private final DAO dao;
 
-	public DAO getDao() {
-		return dao;
-	}
-
-	public void setDao(DAO dao) {
+	@Autowired
+	public MaCatController(DAO dao, Paging paging) {
 		this.dao = dao;
 	}
+
 
 	// 페이징을 위한 회원 정보 검색 기록
 	private MbersSearchDTO mbersSearchDTO;
@@ -73,208 +72,13 @@ public class MaCatController {
 	
 	/*////////////////////////////////// 메인 //////////////////////////////////*/
 
-	// 메인 페이지로 이동
-	@RequestMapping("main.mcat")
-	public ModelAndView getMainCmd(HttpSession session) {
-		session.setAttribute("ctgriesDTO", dao.getCategories());
-		return new ModelAndView("main");
-	}
 	
-	// 로그인 페이지로 이동
-	@RequestMapping("login.mcat")
-	public ModelAndView getLoginCmd() {
-		return new ModelAndView("login");
-	}
-
-	// 회원가입 페이지로 이동
-	@RequestMapping("join.mcat")
-	public ModelAndView getJoinCmd() {
-		return new ModelAndView("join");
-	}
-
-	// 로그인
-	@RequestMapping(value = "login_ok.mcat", method = RequestMethod.POST)
-	public ModelAndView getLoginOkCmd(HttpSession session, MbersDTO mbersDTO, HttpServletResponse response) {
-		ModelAndView mv;
-		response.addCookie(setCookie("cart", null, 0)); // 장바구니 쿠키 삭제
-		
-		MbersDTO loginMber = dao.getLogin(mbersDTO);
-		if (loginMber != null) {
-			mv = new ModelAndView("main");
-			session.setAttribute("loginData", loginMber);
-			dao.getLoginRecord(mbersDTO);
-			return mv;
-		} else {
-			mv = new ModelAndView("login");
-			mv.addObject("loginData", "fail");
-			return mv;
-		}
-	}
-	
-	@RequestMapping("logout.mcat")
-	public ModelAndView getLogout(HttpSession session) {
-		session.removeAttribute("loginData");
-		return new ModelAndView("main");
-	}
-	
-	// 회원가입
-	@RequestMapping(value = "mber_join.mcat", method = RequestMethod.POST)
-	public ModelAndView getJoinCmd(MbersDTO mbersDTO) {
-		// 테스트맨 생성기
-		//mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
-		//String id = mbersDTO.getMber_id();
-		//for (int i = 1; i <= 100; i++) {
-		//	mbersDTO.setMber_id(id + i);
-		//	dao.getJoin(mbersDTO);
-		//}
-		 
-
-		mbersDTO.setMber_email(mbersDTO.getMber_email() + mbersDTO.getMber_email_end());
-		dao.getJoin(mbersDTO);
-		return new ModelAndView("redirect:login.mcat");
-	}
-
-	// 관리자 main으로 이동
-	@RequestMapping("admin.mcat")
-	public ModelAndView getAdminMainCmd() {
-		return new ModelAndView("admin/main");
-	}
-	
-	// 카테고리 페이지로 이동
-	@RequestMapping("category.mcat")
-	public ModelAndView getCategoryCmd(String cPage, int ctgry_group, int ctgry_level, String ctgry_nm) {
-		this.cPage = cPage;
-		
-		ModelAndView mv = new ModelAndView("product/category");
-		PageDTO pageDTO = new PageDTO(20);
-		
-		if (ctgry_level > 0) {
-			count = dao.getProductsCount(ctgry_nm);
-			Paging.getPage(pageDTO, count, cPage);
-			mv.addObject("productsDTO", dao.getProductsList(ctgry_nm, pageDTO.getBegin(), pageDTO.getEnd()));
-		}else {
-			count = dao.getProductsCount(ctgry_group);
-			Paging.getPage(pageDTO, count, cPage);
-			mv.addObject("productsDTO", dao.getProductsList(ctgry_group, pageDTO.getBegin(), pageDTO.getEnd()));
-		}
-		
-		mv.addObject("ctgry_group", ctgry_group);
-		mv.addObject("ctgry_level", ctgry_level);
-		mv.addObject("ctgry_nm", ctgry_nm);
-		mv.addObject("pageDTO", pageDTO);
-		return mv;
-	}
-	
-	// 장바구니로 이동
-	@RequestMapping("cart.mcat")
-	public ModelAndView getCartCmd(String mber_sq) {
-		ModelAndView mv = new ModelAndView("cart");
-		if (mber_sq != null) {
-			List<CartsDTO> cartList = dao.getCarts(mber_sq);
-			int totalPrice = 0;
-			int totalDC = 0;
-			int mostDlvyPrice = 0;
-
-			for (CartsDTO i : cartList) {
-				int dc = PriceUtil.getDc(i.getPrduct_price(), i.getPrduct_dc(), i.getPrduct_dc_pt());
-				int price = i.getPrduct_price();
-
-				totalDC += dc;
-				totalPrice += price;
-				i.setPrduct_dced_price(price - dc);
-
-				if (mostDlvyPrice < i.getPrduct_dlvy_price()) {
-					mostDlvyPrice = i.getPrduct_dlvy_price();
-				}
-			}
-
-			if (totalPrice - totalDC > 50000) {
-				for (CartsDTO i : cartList) {
-					i.setPrduct_dlvy_price(0);
-				}
-				mostDlvyPrice = 0;
-			}
-
-			mv.addObject("totalPrice", totalPrice);
-			mv.addObject("totalDC", totalDC);
-			mv.addObject("mostDlvyPrice", mostDlvyPrice);
-			mv.addObject("cartsDTO", cartList);
-		}
-		return mv;
-	}
 
 	
 	/*////////////////////////////////// 카테고리 //////////////////////////////////*/
 	
 	
-	// 상품 페이지로 이동
-	@RequestMapping("product.mcat")
-	public ModelAndView getProductCmd(@CookieValue(required = false, name = "viewedProductSq1") String viewedProductSq1,
-			@CookieValue(required = false, name = "viewedProductSq2") String viewedProductSq2,
-			@CookieValue(required = false, name = "viewedProductSq3") String viewedProductSq3,
-			@CookieValue(required = false, name = "viewedProductThumb1") String viewedProductThumb1,
-			@CookieValue(required = false, name = "viewedProductThumb2") String viewedProductThumb2,
-			@CookieValue(required = false, name = "viewedProductThumb3") String viewedProductThumb3,
-			HttpServletResponse response, String prduct_sq, String prduct_thumb_nm) {
-		ModelAndView mv = new ModelAndView("product/product");
-		
-		// 조회수 증가
-		if (dao.getProductViewCntUp(prduct_sq) < 1) System.out.println("조회수증가실패");
-		
-		// 최근 본 상품 쿠키에 추가. 3개 이상이면 첫 상품 삭제, 중복 불가
-		if (!prduct_sq.equals(viewedProductSq1) && !prduct_sq.equals(viewedProductSq2) && !prduct_sq.equals(viewedProductSq3)) {
-			if (viewedProductSq1 != null) {
-				if (viewedProductSq2 != null) {
-					if (viewedProductSq3 != null) {
-						response.addCookie(setCookie("viewedProductSq1", viewedProductSq2, 60 * 60 * 24));
-						response.addCookie(setCookie("viewedProductThumb1", viewedProductThumb2, 60 * 60 * 24));
-						response.addCookie(setCookie("viewedProductSq2", viewedProductSq3, 60 * 60 * 24));
-						response.addCookie(setCookie("viewedProductThumb2", viewedProductThumb3, 60 * 60 * 24));
-					}
-					response.addCookie(setCookie("viewedProductSq3", prduct_sq, 60 * 60 * 24));
-					response.addCookie(setCookie("viewedProductThumb3", prduct_thumb_nm, 60 * 60 * 24));
-				}else {
-					response.addCookie(setCookie("viewedProductSq2", prduct_sq, 60 * 60 * 24));
-					response.addCookie(setCookie("viewedProductThumb2", prduct_thumb_nm, 60 * 60 * 24));
-				}
-			}else {
-				response.addCookie(setCookie("viewedProductSq1", prduct_sq, 60 * 60 * 24));
-				response.addCookie(setCookie("viewedProductThumb1", prduct_thumb_nm, 60 * 60 * 24));
-			}
-		}
-		
-		ProductsDTO productsDTO =  dao.getProduct(prduct_sq);
-		
-		// 상품 총 적립 금액
-		if (productsDTO.getPrduct_save() > 0) {
-			productsDTO.setPrduct_point(productsDTO.getPrduct_save());
-		}else if (productsDTO.getPrduct_save_pt() > 0 && productsDTO.getPrduct_price() > 99) {
-			productsDTO.setPrduct_point(productsDTO.getPrduct_price() * productsDTO.getPrduct_save_pt() / 100);
-		}else {
-			productsDTO.setPrduct_point(0);
-		}
-		
-		// 상품 할인된 가격
-		if (productsDTO.getPrduct_dc() > 0) {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - productsDTO.getPrduct_dc());
-		}else if (productsDTO.getPrduct_dc_pt() > 0 && productsDTO.getPrduct_price() > 99) {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - (productsDTO.getPrduct_price() * productsDTO.getPrduct_dc_pt() / 100));
-		}else {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price());
-		}
-		
-		// 상품 평점 반올림
-		productsDTO.setPrduct_rating_round(Math.round(productsDTO.getPrduct_rating_avg()));
-		
-		// 상품 색상
-		productsDTO.setColors(dao.getColors(prduct_sq));
-		
-		mv.addObject("imagesDTO", dao.getProductImages(prduct_sq));
-		mv.addObject("more_product", dao.getProductsList(productsDTO.getCtgry_nm(), 1, 5));
-		mv.addObject("review_cnt", dao.getReviewsCount());
-		mv.addObject("productsDTO", productsDTO);
-		return mv;
-	}
+	
 	
 	
 	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
@@ -306,8 +110,9 @@ public class MaCatController {
 	
 	// 결제페이지로 이동
 	@RequestMapping("order.mcat")
-	public ModelAndView getOrderCmd() {
-		return new ModelAndView("");
+	public ModelAndView getOrderCmd(ModelAndView mv) {
+		mv.setViewName("");
+		return mv;
 	}
 	
 	
@@ -316,10 +121,11 @@ public class MaCatController {
 	
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manager.mcat")
-	public ModelAndView getMembersCmd(String cPage) {
+	public ModelAndView getMembersCmd(ModelAndView mv, String cPage) {
+		mv.setViewName("admin/members/manager");
+		
 		this.cPage = cPage;
 		usedDTO = "MbersDTO";
-		ModelAndView mv = new ModelAndView("admin/members/manager");
 
 		DateDTO dateDTO = new DateDTO();
 		dateDTO.setToday(DateUtil.getToday());
@@ -343,10 +149,10 @@ public class MaCatController {
 
 	// 공지사항 조회로 이동
 	@RequestMapping("nots_manage.mcat")
-	public ModelAndView getNoticesCmd(String cPage) {
+	public ModelAndView getNoticesCmd(ModelAndView mv, String cPage) {
+		mv.setViewName("admin/notices/management");
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
-		ModelAndView mv = new ModelAndView("admin/notices/management");
 		PageDTO pageDTO = new PageDTO();
 		count = dao.getNotsCount();
 		Paging.getPage(pageDTO, count, cPage);
@@ -357,11 +163,12 @@ public class MaCatController {
 
 	// 고객 문의 관리로 이동
 	@RequestMapping("qna_manage.mcat")
-	public ModelAndView getQnaCmd(String cPage) {
+	public ModelAndView getQnaCmd(ModelAndView mv, String cPage) {
+		mv.setViewName("admin/qna/customer_manager");
+		
 		this.cPage = cPage;
 		usedDTO = "QnaDTO";
-//		ModelAndView mv = new ModelAndView("admin/qna/management");
-		ModelAndView mv = new ModelAndView("admin/qna/customer_manager");
+		
 		PageDTO pageDTO = new PageDTO();
 		count = dao.getQnaCount();
 		Paging.getPage(pageDTO, count, cPage);
@@ -373,10 +180,12 @@ public class MaCatController {
 	
 	// FAQ 관리로 이동
 	@RequestMapping("faq_manage.mcat")
-	public ModelAndView getFaqCmd(String cPage) {
+	public ModelAndView getFaqCmd(ModelAndView mv, String cPage) {
+		mv.setViewName("admin/faq/management");
+		
 		this.cPage = cPage;
 		usedDTO = "FaqDTO";
-		ModelAndView mv = new ModelAndView("admin/faq/management");
+		
 		PageDTO pageDTO = new PageDTO();
 		count = dao.getFaqCount();
 		Paging.getPage(pageDTO, count, cPage);
@@ -388,123 +197,40 @@ public class MaCatController {
 	
 	// 상품관리로 이동
 	@RequestMapping("product_manage.mcat")
-	public ModelAndView getPrductManageCmd(String cPage) {
+	public ModelAndView getPrductManageCmd(ModelAndView mv, String cPage) {
+		mv.setViewName("admin/product/product_manager");
+		
 		this.cPage = cPage;
 		usedDTO = "ProductsDTO";
-		ModelAndView mv = new ModelAndView("admin/product/product_manager");
-		 
 		
 		return mv;
 	}
 	
-	// 주문 관리로 이동
-//	@RequestMapping("order_manage.mcat")
-//	public ModelAndView getOdrManageCmd() {
-//		
-//	}
 	
 	// 관리자 상품등록 상세페이지로 이동
 	@RequestMapping("add_product.mcat")
-	public ModelAndView getProductRegCmd() {
-		return new ModelAndView("admin/product/add_product");
+	public ModelAndView getProductRegCmd(ModelAndView mv) {
+		mv.setViewName("admin/product/add_product");
+		return mv;
 	}
 
+	// 상세페이지 등록
 	@RequestMapping(value = "product_reg.mcat", method = RequestMethod.POST)
-	public ModelAndView getAddProductInfoCmd(@ModelAttribute ProductsDTO productsDTO, HttpServletRequest request) {
+	public ModelAndView getAddProductInfoCmd(ModelAndView mv, @ModelAttribute ProductsDTO productsDTO, HttpServletRequest request) {
 		try {
-			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-			
-			ImagesDTO imagesDTO = new ImagesDTO();
-			Map<String, MultipartFile> map = new HashMap<String, MultipartFile>();
-			map.put("main_img", productsDTO.getMain_img());
-			map.put("sub_img1", productsDTO.getSub_img1());
-			map.put("sub_img2", productsDTO.getSub_img2());
-			map.put("sub_img3", productsDTO.getSub_img3());
-			
-			for (String i : map.keySet()) {
-				if(map.get(i).isEmpty()) {
-					switch (i) {
-					case "main_img":
-						productsDTO.setMain_img_nm("");
-						break;
-					case "sub_img1":
-						productsDTO.setSub_img1_nm("");
-						break;
-					case "sub_img2":
-						productsDTO.setSub_img2_nm("");
-						break;
-					case "sub_img3":
-						productsDTO.setSub_img3_nm("");
-						break;
-					}
-					
-				}else {
-					imagesDTO.setImg_thumb_fl(1);
-					imagesDTO.setImg_body_fl(0);
-					imagesDTO.setPrduct_sq(productsDTO.getPrduct_sq());
-					imagesDTO.setImg_main_fl(0);
-					switch (i) {
-					case "main_img":
-						productsDTO.setMain_img_nm(productsDTO.getMain_img().getOriginalFilename());
-						imagesDTO.setImg_ord(1);
-						imagesDTO.setImg_main_fl(1);
-						imagesDTO.setImg_nm(productsDTO.getMain_img_nm());
-						break;
-					case "sub_img1":
-						productsDTO.setSub_img1_nm(productsDTO.getSub_img1().getOriginalFilename());
-						imagesDTO.setImg_ord(2);
-						imagesDTO.setImg_nm(productsDTO.getSub_img1_nm());
-						break;
-					case "sub_img2":
-						productsDTO.setSub_img2_nm(productsDTO.getSub_img2().getOriginalFilename());
-						imagesDTO.setImg_ord(3);
-						imagesDTO.setImg_nm(productsDTO.getSub_img2_nm());
-						break;
-					case "sub_img3":
-						productsDTO.setSub_img3_nm(productsDTO.getSub_img3().getOriginalFilename());
-						imagesDTO.setImg_ord(4);
-						imagesDTO.setImg_nm(productsDTO.getSub_img3_nm());
-						break;
-					}
-				}
-				switch (i) {
-				case "main_img":
-					if(dao.getAddProduct(productsDTO) > 0) {
-						map.get(i).transferTo(new File(path + "/" + productsDTO.getMain_img_nm()));
-					}
-					break;
-				case "sub_img1":
-					if(dao.getAddProduct(productsDTO) > 0) {
-						map.get(i).transferTo(new File(path + "/" + productsDTO.getSub_img1_nm()));
-					}
-					break;
-				case "sub_img2":
-					if(dao.getAddProduct(productsDTO) > 0) {
-						map.get(i).transferTo(new File(path + "/" + productsDTO.getSub_img2_nm()));
-					}
-					break;
-				case "sub_img3":
-					if(dao.getAddProduct(productsDTO) > 0) {
-						map.get(i).transferTo(new File(path + "/" + productsDTO.getSub_img3_nm()));
-					}
-					break;
-				}
-				
-				dao.getAddImg(imagesDTO);
-			}
-			
+			mv.setViewName("admin/product/reg");
 			
 		} catch (Exception e) {
 		}
-		return new ModelAndView("admin/product/reg");
+		return mv;
 	}
 	
 	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
 	
 	
 	@RequestMapping(value = "file_upload.mcat", method = RequestMethod.POST)
-	public ModelAndView getfileUploadCmd(MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
-		ModelAndView mv = new ModelAndView("file_upload");
+	public ModelAndView getfileUploadCmd(ModelAndView mv, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
+		mv.setViewName("file_upload");
 		MultipartFile imgfile = multipartRequest.getFile("Filedata");
 		Calendar cal = Calendar.getInstance();
 		String fileName = imgfile.getOriginalFilename();
@@ -525,7 +251,7 @@ public class MaCatController {
 	// 회원 정보 페이징
 	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMbersPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getMbersPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO(50);
@@ -626,7 +352,7 @@ public class MaCatController {
 				dao.getMbersUpdate(j);
 			}
 		}
-		return getMbersPageDTOCmd(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 
 	// 회원 탈퇴
@@ -651,7 +377,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getMbersPageDTOCmd(cPage);
+		return getMbersPagingCmd(cPage);
 	}
 
 	
@@ -661,7 +387,7 @@ public class MaCatController {
 	// 공지사항 페이징
 	@RequestMapping(value = "nots_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getNotsPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -734,14 +460,16 @@ public class MaCatController {
 
 	// 공지사항 작성으로 이동
 	@RequestMapping("nots_write.mcat")
-	public ModelAndView getNotsWriteGoCmd() {
-		return new ModelAndView("admin/notices/write");
+	public ModelAndView getNotsWriteGoCmd(ModelAndView mv) {
+		mv.setViewName("admin/notices/write");
+		return mv;
 	}
 
 	// 공지사항 수정으로 이동
 	@RequestMapping("nots_update.mcat")
-	public ModelAndView getNotsUpdateGoCmd() {
-		return new ModelAndView("admin/notices/update");
+	public ModelAndView getNotsUpdateGoCmd(ModelAndView mv) {
+		mv.setViewName("admin/notices/update");
+		return mv;
 	}
 
 	// 공지사항 삭제
@@ -766,7 +494,7 @@ public class MaCatController {
 			break;
 		}
 
-		return getNotsPageDTOCmd(cPage);
+		return getNotsPagingCmd(cPage);
 	}
 
 	
@@ -776,7 +504,7 @@ public class MaCatController {
 	// 고객 문의 페이징
 	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getQnaPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -869,12 +597,14 @@ public class MaCatController {
 			break;
 		}
 
-		return getQnaPageDTOCmd(cPage);
+		return getQnaPagingCmd(cPage);
 	}
 
 	// 문의 보기로 이동
 	@RequestMapping("qna_view.mcat")
-	public ModelAndView getQnaViewCmd(HttpSession session, String qna_sq) {
+	public ModelAndView getQnaViewCmd(ModelAndView mv, HttpSession session, String qna_sq) {
+		mv.setViewName("admin/qna/view");
+		
 		QnaDTO qnaDTO = dao.getQnaView(qna_sq);
 
 		qnaDTO.setQna_view_cnt(qnaDTO.getQna_view_cnt() + 1);
@@ -882,7 +612,7 @@ public class MaCatController {
 
 		session.setAttribute("qnaDTO", qnaDTO);
 
-		return new ModelAndView("admin/qna/view");
+		return mv;
 	}
 	
 
@@ -892,7 +622,7 @@ public class MaCatController {
 	// FAQ 페이징
 	@RequestMapping(value = "faq_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getFaqPageDTOCmd(@RequestBody String cPage) {
+	public Map<String, Object> getFaqPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
 		PageDTO pageDTO = new PageDTO();
@@ -979,71 +709,63 @@ public class MaCatController {
 			break;
 		}
 
-		return getFaqPageDTOCmd(cPage);
+		return getFaqPagingCmd(cPage);
 	}
 
 	// FAQ 보기로 이동
 	@RequestMapping("faq_view.mcat")
-	public ModelAndView getFaqViewCmd(HttpSession session, String faq_sq) {
-		FaqDTO faqDTO = dao.getFaqView(faq_sq);
-
-		session.setAttribute("faqDTO", faqDTO);
-
-		return new ModelAndView("admin/faq/view");
+	public ModelAndView getFaqViewCmd(ModelAndView mv, HttpSession session, String faq_sq) {
+		mv.setViewName("admin/faq/view");
+		session.setAttribute("faqDTO", dao.getFaqView(faq_sq));
+		return mv;
 	}
 	
 	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/
 	
 	// 구매후기 페이지 이동
 	@RequestMapping("review.mcat")
-	public ModelAndView getReviewCmd() {
-		return new ModelAndView("member/review");
+	public ModelAndView getReviewCmd(ModelAndView mv) {
+		mv.setViewName("member/review");
+		return mv;
 	}
 	
 	// 마이페이지 이동
 	@RequestMapping("mypage.mcat")
-	public ModelAndView getMyPageCmd() {
-		return new ModelAndView("member/mypage");
+	public ModelAndView getMyPageCmd(ModelAndView mv) {
+		mv.setViewName("member/mypage");
+		return mv;
 	}
 	
 	// 마이페이지 - 주문내역관리 이동
 	@RequestMapping("mypage_order_inquiry.mcat")
-	public ModelAndView getOrderInquiryCmd() {
-		return new ModelAndView("member/mypage_order_inquiry");
+	public ModelAndView getOrderInquiryCmd(ModelAndView mv) {
+		mv.setViewName("member/mypage_order_inquiry");
+		return mv;
 	}
 	
 	// 마이페이지 - 프로필 관리 이동	
 	
 	// 마이페이지 - 찜목록 관리 이동
 	@RequestMapping("mypage_wishlist.mcat")
-	public ModelAndView getWishListCmd() {
-		return new ModelAndView("member/mypage_wishlist");
+	public ModelAndView getWishListCmd(ModelAndView mv) {
+		mv.setViewName("member/mypage_wishlist");
+		return mv;
 	}
 	
 	// 마이페이지 - 마일리지 이동
 	
 	// 마이페이지 - 게시물 관리 페이지 이동
 	@RequestMapping("mypage_post_management.mcat")
-	public ModelAndView getPostManageCmd() {
-		return new ModelAndView("member/mypage_post_management");
+	public ModelAndView getPostManageCmd(ModelAndView mv) {
+		mv.setViewName("member/mypage_post_management");
+		return mv;
 	}
 	
 	// 마이페이지 - 배송주소록 관리 이동
 	@RequestMapping("mypage_deliveryAdress.mcat")
-	public ModelAndView getDeliveryAdressCmd() {
-		return new ModelAndView("member/mypage_deliveryAdress");
-	}
-	
-	
-	/*////////////////////////////////// 기타 메소드 //////////////////////////////////*/
-
-	
-	// 쿠키
-	public Cookie setCookie(String name, String value, int time) {
-		Cookie cookie = new Cookie(name, value);
-		cookie.setPath("/");
-		cookie.setMaxAge(time);
-		return cookie;
+	public ModelAndView getDeliveryAdressCmd(ModelAndView mv) {
+		mv.setViewName("member/mypage_deliveryAdress");
+		return mv;
 	}
 	
 }
