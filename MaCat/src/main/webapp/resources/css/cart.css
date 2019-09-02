@@ -112,15 +112,15 @@ caption{
 
 /*상품열 tr 속 td */
 .cart_list .cart_list_main tbody tr td{	
-	font-size: 11px;
 	border-bottom: 1px solid #5c5173;
+	font-size: 18px;
 }
 
 /*tr 속 td 중 상품명 부분*/
 .cart_list .cart_list_main tbody tr td:nth-child(3){
 	padding-left: 10px;
 	text-align: left;
-	font-size: 12px;
+	font-size: 18px;
     padding-bottom: 20px;
 }
 /*상품이미지 사이즈 조절용*/

@@ -64,7 +64,7 @@
 				                    <tr>
 				                    	<!-- 체크박스 -->
 				                        <td>
-					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}">					                            <label for="${vs.count}"></label>
+					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}"><label for="${vs.count}"></label>
 					                        <input type="hidden" name="prduct_sq" class="${vs.count}" value="${i.prduct_sq}" disabled>
 					                        <input type="hidden" name="cart_color" class="${vs.count}" value="${i.cart_color}" disabled>					                           
 					                        <input type="hidden" name="prduct_price" class="${vs.count}" value="${i.prduct_price}" disabled>
@@ -84,6 +84,15 @@
 				                        <td>${i.cart_color}</td>
 				                        <!-- 수량 -->
 				                        <td>
+				                        <!--수량 증가/감소 쿼리-->
+				                            <div class="number">
+				                                <a href="#" id="decreaseQuantity">
+				                                <img src="resources/img/mcat_substract.png" alt="sub"></a>   
+				                                <span id="numberUpDown">1</span>
+				                                <a href="#" id="increaseQuantity">
+				                                    <img src="resources/img/mcat_add.png" alt="add">
+				                                </a>
+				                            </div>
 				                        	<fmt:formatNumber value="${i.cart_amt}" pattern="#,###" />
 				                        </td>
 				                        <!-- 금액 -->

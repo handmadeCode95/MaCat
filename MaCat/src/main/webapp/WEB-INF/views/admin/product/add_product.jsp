@@ -267,14 +267,17 @@
 						e.preventDefault();
 						$(".inp-img-main").click();
 					});
+					
 					$(".preview-file_upload-sub1").click(function(e) {
 						e.preventDefault();
 						$(".inp-img-sub1").click();
 					});
+					
 					$(".preview-file_upload-sub2").click(function(e) {
 						e.preventDefault();
 						$(".inp-img-sub2").click();
 					});
+					
 					$(".preview-file_upload-sub3").click(function(e) {
 						e.preventDefault();
 						$(".inp-img-sub3").click();
@@ -294,6 +297,7 @@
 					$(".inp-img-main").on('change', function() {
 						readInputFile(this);
 					});
+					
 					/*추가1*/
 					function readInputFile_sub1(input) {
 						if (input.files && input.files[0]) {
@@ -308,6 +312,7 @@
 					$(".inp-img-sub1").on('change', function() {
 						readInputFile_sub1(this);
 					});
+					
 					/*추가2*/
 					function readInputFile_sub2(input) {
 						if (input.files && input.files[0]) {
@@ -322,6 +327,7 @@
 					$(".inp-img-sub2").on('change', function() {
 						readInputFile_sub2(this);
 					});
+					
 					/*추가3*/
 					function readInputFile_sub3(input) {
 						if (input.files && input.files[0]) {
@@ -333,6 +339,7 @@
 							reader_sub3.readAsDataURL(input.files[0]);
 						}
 					}
+					
 					$(".inp-img-sub3").on('change', function() {
 						readInputFile_sub3(this);
 					});

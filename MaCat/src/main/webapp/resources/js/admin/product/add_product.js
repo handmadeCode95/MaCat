@@ -69,10 +69,12 @@ $(document).ready(function(){
 	function readInputFile(input) {
 	if (input.files && input.files[0]) {
 	    var reader = new FileReader();
+	    reader.readAsDataURL(input.files[0]);
+	    
 	    reader.onload = function(e) {
 	        $('#preview-main').html("<img src=" + e.target.result + ">");
 	    }
-	    reader.readAsDataURL(input.files[0]);
+
 	    }
 	}
 	$(".inp-img-main").on('change', function() {
@@ -83,10 +85,12 @@ $(document).ready(function(){
 	function readInputFile_sub1(input) {
 	if (input.files && input.files[0]) {
 	    var reader_sub1 = new FileReader();
+	    reader_sub1.readAsDataURL(input.files[0]);
 	    reader_sub1.onload = function(e) {
 	        $('#preview-sub1').html("<img src=" + e.target.result + ">");
 	    }
-	    reader_sub1.readAsDataURL(input.files[0]);
+	    
+	   
 	    }
 	}
 	$(".inp-img-sub1").on('change', function() {

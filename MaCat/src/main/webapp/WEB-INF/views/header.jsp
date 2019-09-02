@@ -8,8 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>헤더</title>
+    <!-- 크롬 탭 아이콘 -->
     <link href="resources/img/mcat-favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <!-- 초기화 -->
     <link rel="stylesheet" href="resources/css/normalize.css">
+    <!-- 헤더 css -->
     <link rel="stylesheet" href="resources/css/header.css">
     <script src="resources/js/jquery-3.4.1.min.js"></script>
     <script src="resources/js/macat.js"></script>

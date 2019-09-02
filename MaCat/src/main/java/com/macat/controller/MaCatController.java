@@ -307,7 +307,7 @@ public class MaCatController {
 	// 결제페이지로 이동
 	@RequestMapping("order.mcat")
 	public ModelAndView getOrderCmd() {
-		return new ModelAndView("macat_order_page");
+		return new ModelAndView("macat_payment_page");
 	}
 	
 	
