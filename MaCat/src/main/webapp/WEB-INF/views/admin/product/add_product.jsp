@@ -11,8 +11,7 @@
 <!--초기화-->
 <link rel="stylesheet" href="resources/css/normalize.css">
 <!--상품등록 페이지 css-->
-<link rel="stylesheet"
-	href="resources/css/admin/product/macat_admin_add_product.css">
+<link rel="stylesheet" href="resources/css/admin/product/macat_admin_add_product.css">
 
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <!--카테고리 파트 select 문-->
@@ -98,8 +97,7 @@
 
 <body>
 	<!--관리자 페이지 사이드메뉴 불러오기-->
-	<div class="macat_sideMenu_load"><%@ include
-			file="../macat_admin_sideMenu.jsp"%></div>
+	<div class="macat_sideMenu_load"><%@ include file="../macat_admin_sideMenu.jsp"%></div>
 	<main>
 	<section class="wrap">
 		<div class="add_product_title">
@@ -261,129 +259,6 @@
 						</div>
 					</div>
 				</div>
-				<script type="text/javascript">
-					/*숩긴 input을 다른 버튼에서 실행하게 하기*/
-					$(".preview-file_upload-main").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-main").click();
-					});
-					
-					$(".preview-file_upload-sub1").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub1").click();
-					});
-					
-					$(".preview-file_upload-sub2").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub2").click();
-					});
-					
-					$(".preview-file_upload-sub3").click(function(e) {
-						e.preventDefault();
-						$(".inp-img-sub3").click();
-					});
-
-					// 등록 이미지 등록 미리보기
-					function readInputFile(input) {
-						if (input.files && input.files[0]) {
-							var reader = new FileReader();
-							reader.onload = function(e) {
-								$('#preview-main').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-main").on('change', function() {
-						readInputFile(this);
-					});
-					
-					/*추가1*/
-					function readInputFile_sub1(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub1 = new FileReader();
-							reader_sub1.onload = function(e) {
-								$('#preview-sub1').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub1.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-sub1").on('change', function() {
-						readInputFile_sub1(this);
-					});
-					
-					/*추가2*/
-					function readInputFile_sub2(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub2 = new FileReader();
-							reader_sub2.onload = function(e) {
-								$('#preview-sub2').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub2.readAsDataURL(input.files[0]);
-						}
-					}
-					$(".inp-img-sub2").on('change', function() {
-						readInputFile_sub2(this);
-					});
-					
-					/*추가3*/
-					function readInputFile_sub3(input) {
-						if (input.files && input.files[0]) {
-							var reader_sub3 = new FileReader();
-							reader_sub3.onload = function(e) {
-								$('#preview-sub3').html(
-										"<img src=" + e.target.result + ">");
-							}
-							reader_sub3.readAsDataURL(input.files[0]);
-						}
-					}
-					
-					$(".inp-img-sub3").on('change', function() {
-						readInputFile_sub3(this);
-					});
-
-					// 등록 이미지 삭제 ( input file reset )
-					function resetInputFile($input, $preview) {
-						var agent = navigator.userAgent.toLowerCase();
-						if ((navigator.appName == 'Netscape' && navigator.userAgent
-								.search('Trident') != -1)
-								|| (agent.indexOf("msie") != -1)) {
-							// ie 일때
-							$input.replaceWith($input.clone(true));
-							$preview.empty();
-						} else {
-							//other
-							$input.val("");
-							$preview.empty();
-						}
-					}
-
-					$(".btn-delete-main").click(function(event) {
-						var $input = $(".inp-img-main");
-						var $preview = $('#preview-main');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub1").click(function(event) {
-						var $input = $(".inp-img-sub1");
-						var $preview = $('#preview-sub1');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub2").click(function(event) {
-						var $input = $(".inp-img-sub2");
-						var $preview = $('#preview-sub2');
-						resetInputFile($input, $preview);
-					});
-
-					$(".btn-delete-sub3").click(function(event) {
-						var $input = $(".inp-img-sub3");
-						var $preview = $('#preview-sub3');
-						resetInputFile($input, $preview);
-					});
-				</script>
 			</div>
 			<!--배송정보 파트-->
 			<div class="delivery_info">

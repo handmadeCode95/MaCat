@@ -35,9 +35,6 @@ Number.prototype.format = function(){
 	var totalDC = 0;
 	if
 }*/
-
-
-
 // 쿠키에 cart가 있다면 페이지 로드시 장바구니 가져오기
 $(function() {
 	var carts = JSON.parse(getCookie('cart'));
@@ -79,8 +76,13 @@ $(function() {
 				cartResult += '<td><img src="resources/img/' + v["prduct_thumb_nm"] + '" alt=""></td>';
 				cartResult += '<td><div class="category_box">' + v["ctgry_nm"] + '</div>';
 				cartResult += '<a href="macat_product.html">' + v["prduct_nm"] + '</a></td>';
-				cartResult += '<td>' + v["cart_color"] + '</td>';
-				cartResult += '<td>' + v["cart_amt"].format() + '</td>';
+				cartResult += '<td>' + v["cart_color"] + '</td>';				
+				
+				cartResult += '<td><div class="__count_range"><input value="-" type="button" count_range="m" type="button">'
+							  +'<input class="count" value="' 
+							  + v["cart_amt"].format() 
+							  +'" readonly="" name=""><input value="+" type="button" count_range="p"></div></td>';
+				
 				cartResult += '<td id="cart_product_price">' + v["prduct_dced_price"].format() + '</td>';
 				cartResult += '<td id="cart_delivery_pay">' + v["prduct_dlvy_price"].format() + '</td></tr>';
 				chkboxID++;
@@ -96,7 +98,6 @@ $(function() {
 		$(".price_result").empty();
 		$(".price_result").append(priceResult);
 	}
-	
 	
 	$("#cart_allCheck").change(function(){
 		$(".chkbox").prop("checked", this.checked);
@@ -131,7 +132,7 @@ $(function(){
 });        
 
 function allCheckFunc( obj ) {
-$("[name=cartchkAll]").prop("checked", $(obj).prop("checked") );
+	$("[name=cartchkAll]").prop("checked", $(obj).prop("checked") );
 }
 
 /*     체크박스 체크시 전체선택 체크 여부 : 하나 선택해제하면
@@ -170,6 +171,7 @@ $(function(){
 });
 
 /*/////////////// 수량 증가/감소 쿼리 /////////////// */
+/*
 $(function(){
     // 감소(-)버튼 눌렀을 때
     $('#decreaseQuantity').click(function(e){
@@ -201,4 +203,4 @@ $(function(){
     }
         $('#numberUpDown').text(num);
     });
-});
+});*/

@@ -247,39 +247,46 @@ caption{
 	border: none;
 }
 
-/*수량 증감 기능*/
-.cart_list div.number{
+/* 수량 +- 2차 */
+div.__count_range input.count{
+	width : 50px;
+	text-align: center;
+}
+
+/* 
+수량 증감 기능
+.cart_list table.cart_list_main tbody tr td div.number{
     display: inline-block;    
     text-align: center;
     width: 80px;
     height: 20px;
     margin: 0 auto;
 }
-/*숫자 크기*/
-.cart_list div.number span{
+숫자 크기
+.cart_list table.cart_list_main tbody tr td div.number span{
     font-size: 15px;
 }
-/*감소버튼 a 태그*/
-.cart_list div.number a#decreaseQuantity{
+감소버튼 a 태그
+.cart_list table.cart_list_main tbody tr td div.number a#decreaseQuantity{
     width: 20px;
     height: 20px;
     float: left;
 }
-/*증가버튼 a태그*/
-.cart_list div.number a#increaseQuantity{
+증가버튼 a태그
+.cart_list table.cart_list_main tbody tr td div.number a#increaseQuantity{
     width: 20px;
     height: 20px;
     float: right;
 }
-/*감소버튼 img*/
-.cart_list div.number a#decreaseQuantity img{
+감소버튼 img
+.cart_list table.cart_list_main tbody tr td div.number a#decreaseQuantity img{
     width: 15px;
     height: 15px; 
     float: left;
 }
-/*증가버튼 img*/
-.cart_list div.number a#increaseQuantity img{
+증가버튼 img
+.cart_list table.cart_list_main tbody tr td div.number a#increaseQuantity img{
     width: 15px;
     height: 15px;    
     float: right;
-}
+} */

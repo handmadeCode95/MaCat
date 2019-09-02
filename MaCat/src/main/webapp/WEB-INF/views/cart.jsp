@@ -84,16 +84,8 @@
 				                        <td>${i.cart_color}</td>
 				                        <!-- 수량 -->
 				                        <td>
-				                        <!--수량 증가/감소 쿼리-->
-				                            <div class="number">
-				                                <a href="#" id="decreaseQuantity">
-				                                <img src="resources/img/mcat_substract.png" alt="sub"></a>   
-				                                <span id="numberUpDown">1</span>
-				                                <a href="#" id="increaseQuantity">
-				                                    <img src="resources/img/mcat_add.png" alt="add">
-				                                </a>
-				                            </div>
-				                        	<fmt:formatNumber value="${i.cart_amt}" pattern="#,###" />
+				                        <!--수량 증가/감소 쿼리-->	
+				                          <fmt:formatNumber value="${i.cart_amt}" pattern="#,###"  />			                        	
 				                        </td>
 				                        <!-- 금액 -->
 				                        <td id="cart_product_price">
@@ -120,6 +112,65 @@
 				<div>선택상품삭제</div>
 				<div>위시리스트</div>
 			</div>
+		
+			<script type="text/javascript">
+			$(document).ready(function(){
+			    $('.__count_range input[count_range]').click(function(e){
+			        e.preventDefault();
+			        var type = $(this).attr('count_range');
+			        var $count = $(this).parent().children('input.count[value]');
+			        var count_val = $count.val(); // min 1
+			        if(type=='m'){
+			            if(count_val<1){
+			                return;
+			            }
+			            $count.val(parseInt(count_val)-1);
+			        }else if(type=='p'){
+			            $count.val(parseInt(count_val)+1);
+			        }
+			    });
+			});
+			</script>
+			<!-- 
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+				    // This button will increment the value
+				    $('.qtyplus').click(function(e){
+				        // Stop acting like a button
+				        e.preventDefault();
+				        // Get the field name
+				        fieldName = $(this).attr('field');
+				        // Get its current value
+				        var currentVal = parseInt($('input[name='+fieldName+']').val());
+				        // If is not undefined
+				        if (!isNaN(currentVal)) {
+				            // Increment
+				            $('input[name='+fieldName+']').val(currentVal + 1);
+				        } else {
+				            // Otherwise put a 0 there
+				            $('input[name='+fieldName+']').val(0);
+				        }
+				    });
+				    
+				    // This button will decrement the value till 0
+				    $(".qtyminus").click(function(e) {
+				        // Stop acting like a button
+				        e.preventDefault();
+				        // Get the field name
+				        fieldName = $(this).attr('field');
+				        // Get its current value
+				        var currentVal = parseInt($('input[name='+fieldName+']').val());
+				        // If it isn't undefined or its greater than 0
+				        if (!isNaN(currentVal) && currentVal > 0) {
+				            // Decrement one
+				            $('input[name='+fieldName+']').val(currentVal - 1);
+				        } else {
+				            // Otherwise put a 0 there
+				            $('input[name='+fieldName+']').val(0);
+				        }
+				    });				    
+				});
+			</script> -->
 		<!--합계 테이블-->
 	        <div class="cart_total_price">
 	            <table class="price_result">
@@ -170,38 +221,4 @@
 	        </div>
 	    </section>
 	</body>
- <script type="text/javascript">
-    $(function(){
-        // 감소(-)버튼 눌렀을 때
-        $('#decreaseQuantity').click(function(e){
-            e.preventDefault();
-            // stat 변수에 #numberUpDown 이 있는 태그의 내용을 가져옴
-            var stat = $('#numberUpDown').text();
-            // num에 stat를 int 로 변환해서 담음
-            var num = parseInt(stat,10);
-                num--;
-            // 최소값 : num에 1을 최소값으로 넣어줌
-            if(num<=0){
-                alert('더 이상 줄일수 없습니다.');
-                num =1;
-            }
-            // #numberUpDown 태그 내용을 num으로 바꿈
-            $('#numberUpDown').text(num);                    
-        });
-        
-        // 증가(+)버튼 눌렀을 때
-        $('#increaseQuantity').click(function(e){
-            e.preventDefault();
-            var stat = $('#numberUpDown').text();
-            var num = parseInt(stat,10);
-                num++;
-        // 최대값
-        if(num>10){
-            alert('더 이상 늘릴수 없습니다.');
-            num=10;
-        }
-            $('#numberUpDown').text(num);
-        });
-    });
-</script>
 </html>
