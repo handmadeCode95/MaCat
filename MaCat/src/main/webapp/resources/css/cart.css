@@ -26,6 +26,11 @@ a {
     color: black;
 }
 
+input{
+	margin : 0;
+	padding: 0;
+}
+
 #wrap {
     width: 1024px;
     min-width: 960px;
@@ -113,23 +118,19 @@ caption{
 /*상품열 tr 속 td */
 .cart_list .cart_list_main tbody tr td{	
 	border-bottom: 1px solid #5c5173;
-	font-size: 18px;
+	font-size: 15px;
 }
 
 /*tr 속 td 중 상품명 부분*/
-.cart_list .cart_list_main tbody tr td:nth-child(3){
+.cart_list .cart_list_main tbody tr td{
 	padding-left: 10px;
-	text-align: left;
-	font-size: 18px;
+	font-size: 15px;
     padding-bottom: 20px;
 }
 /*상품이미지 사이즈 조절용*/
 .cart_list .cart_list_main tbody tr td img{
 	width: 90px;
     height: 90px;
-}
-.cart_list .cart_list_main tbody tr td.category_box{
-	float: left;
 }
 
 /*장바구니 담긴것 없을 때*/
@@ -246,47 +247,32 @@ caption{
 .cart-order_del_wishList_box div:last-child{
 	border: none;
 }
+td.mbers_cart_amt{
+	width: 85px;
+}
 
 /* 수량 +- 2차 */
+div.__count_range{
+	width: 70px;
+	height : 15px;
+	margin: 0 auto;	
+}
+/* + - 버튼용 input */
+div.__count_range input.sub_add{	
+	width : 15px;
+	height : 15px;
+	margin: 0 auto;	
+	padding: 0;
+	border: 0;
+}
+/* 수량표시 input */
 div.__count_range input.count{
-	width : 50px;
+	width : 40px;
+	height : 15px;
+	border: 0;
 	text-align: center;
 }
 
-/* 
-수량 증감 기능
-.cart_list table.cart_list_main tbody tr td div.number{
-    display: inline-block;    
-    text-align: center;
-    width: 80px;
-    height: 20px;
-    margin: 0 auto;
+.float_txt{
+	text-align: left;
 }
-숫자 크기
-.cart_list table.cart_list_main tbody tr td div.number span{
-    font-size: 15px;
-}
-감소버튼 a 태그
-.cart_list table.cart_list_main tbody tr td div.number a#decreaseQuantity{
-    width: 20px;
-    height: 20px;
-    float: left;
-}
-증가버튼 a태그
-.cart_list table.cart_list_main tbody tr td div.number a#increaseQuantity{
-    width: 20px;
-    height: 20px;
-    float: right;
-}
-감소버튼 img
-.cart_list table.cart_list_main tbody tr td div.number a#decreaseQuantity img{
-    width: 15px;
-    height: 15px; 
-    float: left;
-}
-증가버튼 img
-.cart_list table.cart_list_main tbody tr td div.number a#increaseQuantity img{
-    width: 15px;
-    height: 15px;    
-    float: right;
-} */

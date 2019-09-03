@@ -304,6 +304,8 @@ public class MaCatController {
 
 	}
 	
+	
+	
 	// 결제페이지로 이동
 	@RequestMapping("order.mcat")
 	public ModelAndView getOrderCmd() {
@@ -519,6 +521,46 @@ public class MaCatController {
 		return mv;
 	}
 
+	/*////////////////////////////////// 장바구니 - 회원  //////////////////////////////////*/
+	// 회원 장바구니 추가
+	@RequestMapping(value = "edit_cart.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getEditCartAmtCmd(@RequestBody Map<String, String> map){
+		System.out.println(dao.getCartUpdate(map));
+		
+		List<CartsDTO> cartList = dao.getCarts((String.valueOf(map.get("mber_sq"))));
+		int totalPrice = 0;
+		int totalDC = 0;
+		int mostDlvyPrice = 0;
+
+		for (CartsDTO i : cartList) {
+			int dc = PriceUtil.getDc(i.getPrduct_price(), i.getPrduct_dc(), i.getPrduct_dc_pt());
+			int price = i.getPrduct_price();
+
+			totalDC += dc;
+			totalPrice += price;
+			i.setPrduct_dced_price(price - dc);
+
+			if (mostDlvyPrice < i.getPrduct_dlvy_price()) {
+				mostDlvyPrice = i.getPrduct_dlvy_price();
+			}
+		}
+
+		if (totalPrice - totalDC > 50000) {
+			for (CartsDTO i : cartList) {
+				i.setPrduct_dlvy_price(0);
+			}
+			mostDlvyPrice = 0;
+		}
+		Map<String, Object> editCartMap = new HashMap<String, Object>();
+		
+		editCartMap.put("totalPrice", totalPrice);
+		editCartMap.put("totalDC", totalDC);
+		editCartMap.put("mostDlvyPrice", mostDlvyPrice);
+		editCartMap.put("cartList", cartList);
+		
+		return editCartMap;
+	}
 	
 	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
 

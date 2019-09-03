@@ -154,6 +154,11 @@ public class DAO {
 		return sqlSessionTemplate.insert("add_cart", map);
 	}
 	
+	// 장바구니 업데이트
+	public int getCartUpdate(Map<String, String> map) {
+		return sqlSessionTemplate.update("edit_cart", map);
+	}
+	
 	
 	/*////////////////////////////////// 상품 관리 //////////////////////////////////*/
 	

@@ -64,7 +64,7 @@
 				                    <tr>
 				                    	<!-- 체크박스 -->
 				                        <td>
-					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}"><label for="${vs.count}"></label>
+					                        <input name="carts" class="chkbox" type="checkbox" id="${vs.count}" value="${vs.count}" checked><label for="${vs.count}"></label>
 					                        <input type="hidden" name="prduct_sq" class="${vs.count}" value="${i.prduct_sq}" disabled>
 					                        <input type="hidden" name="cart_color" class="${vs.count}" value="${i.cart_color}" disabled>					                           
 					                        <input type="hidden" name="prduct_price" class="${vs.count}" value="${i.prduct_price}" disabled>
@@ -76,17 +76,20 @@
 				                        <!-- 이미지 -->
 				                        <td><img src="resources/img/${i.prduct_thumb_nm}" alt=""></td>
 				                        <!-- 상품명 -->
-				                        <td>
+				                        <td class="float_txt">
 					                        <div class="category_box">${i.ctgry_nm}</div>
-					                            <a href="macat_product.html">${i.prduct_nm}</a>
+					                            <a class="float_txt" href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">${i.prduct_nm}</a>
 				                        </td>
 				                        <!-- 색상 -->
 				                        <td>${i.cart_color}</td>
-				                        <!-- 수량 -->
-				                        <td>
-				                        <!--수량 증가/감소 쿼리-->	
-				                          <fmt:formatNumber value="${i.cart_amt}" pattern="#,###"  />			                        	
-				                        </td>
+				                        <!-- 수량 -->				                        
+				                        <td class="mbers_cart_amt">
+					                        <div class="__count_range">
+						                         <input value="-" type="button" count_range="m" type="button" class="sub_add" onclick="javascript:editCartAmt('${i.prduct_sq}','${i.mber_sq}', '${i.cart_color}', '${i.cart_amt-1}')">
+												 <input class="count" value="${i.cart_amt}" readonly="" name="">
+												 <input value="+" type="button" count_range="p" class="sub_add" onclick="javascript:editCartAmt('${i.prduct_sq}','${i.mber_sq}', '${i.cart_color}', '${i.cart_amt+1}')">
+											 </div>
+										 </td>				                        
 				                        <!-- 금액 -->
 				                        <td id="cart_product_price">
 				                        	<fmt:formatNumber value="${i.prduct_dced_price}" pattern="#,###"/>
@@ -114,63 +117,8 @@
 			</div>
 		
 			<script type="text/javascript">
-			$(document).ready(function(){
-			    $('.__count_range input[count_range]').click(function(e){
-			        e.preventDefault();
-			        var type = $(this).attr('count_range');
-			        var $count = $(this).parent().children('input.count[value]');
-			        var count_val = $count.val(); // min 1
-			        if(type=='m'){
-			            if(count_val<1){
-			                return;
-			            }
-			            $count.val(parseInt(count_val)-1);
-			        }else if(type=='p'){
-			            $count.val(parseInt(count_val)+1);
-			        }
-			    });
-			});
+
 			</script>
-			<!-- 
-			<script type="text/javascript">
-				jQuery(document).ready(function(){
-				    // This button will increment the value
-				    $('.qtyplus').click(function(e){
-				        // Stop acting like a button
-				        e.preventDefault();
-				        // Get the field name
-				        fieldName = $(this).attr('field');
-				        // Get its current value
-				        var currentVal = parseInt($('input[name='+fieldName+']').val());
-				        // If is not undefined
-				        if (!isNaN(currentVal)) {
-				            // Increment
-				            $('input[name='+fieldName+']').val(currentVal + 1);
-				        } else {
-				            // Otherwise put a 0 there
-				            $('input[name='+fieldName+']').val(0);
-				        }
-				    });
-				    
-				    // This button will decrement the value till 0
-				    $(".qtyminus").click(function(e) {
-				        // Stop acting like a button
-				        e.preventDefault();
-				        // Get the field name
-				        fieldName = $(this).attr('field');
-				        // Get its current value
-				        var currentVal = parseInt($('input[name='+fieldName+']').val());
-				        // If it isn't undefined or its greater than 0
-				        if (!isNaN(currentVal) && currentVal > 0) {
-				            // Decrement one
-				            $('input[name='+fieldName+']').val(currentVal - 1);
-				        } else {
-				            // Otherwise put a 0 there
-				            $('input[name='+fieldName+']').val(0);
-				        }
-				    });				    
-				});
-			</script> -->
 		<!--합계 테이블-->
 	        <div class="cart_total_price">
 	            <table class="price_result">

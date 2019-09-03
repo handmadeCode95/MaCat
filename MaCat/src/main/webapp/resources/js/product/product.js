@@ -12,7 +12,8 @@ $(function() {
 
 //장바구니 담기(회원)
 function isOverlap(prduct_sq, mber_sq) {
-	var cart_color = $("#color option:selected").val();
+	var cart_amt = $("#amount option:selected").val(); // 콤보박스에서 선택한 수량이 입력됨
+	var cart_color = $("#color option:selected").val(); // 색상 선택값이 입력됨
 	console.log(prduct_sq, mber_sq, cart_color);
 	$.ajax({
 		url			: "cart_overlap.mcat",
@@ -22,9 +23,9 @@ function isOverlap(prduct_sq, mber_sq) {
         data		: JSON.stringify({"prduct_sq" : prduct_sq, "mber_sq" : mber_sq, "cart_color" : cart_color}),
         success		: function(data) {
         				  if(data) {
-        					  if (confirm("장바구니에 동일한 상품이 있습니다.\n" + cart_amt + "개 더 추가하시겠습니까?")) addCart(prduct_sq, mber_sq, cart_color);
+        					  if (confirm("장바구니에 동일한 상품이 있습니다.\n" + cart_amt + "개 더 추가하시겠습니까?")) addCart(prduct_sq, mber_sq, cart_color, cart_amt);
         				  } else {
-        					  addCart(prduct_sq, mber_sq, cart_color);
+        					  addCart(prduct_sq, mber_sq, cart_color, cart_amt);
         				  }
         			  },
         error		: function(error) {
@@ -35,8 +36,7 @@ function isOverlap(prduct_sq, mber_sq) {
 	
 }
 
-function addCart(prduct_sq, mber_sq, cart_color) {
-	var cart_amt = $("#amount option:selected").val();
+function addCart(prduct_sq, mber_sq, cart_color, cart_amt) {
 	console.log(prduct_sq, mber_sq, cart_color, cart_amt);
 	$.ajax({
 		url			: "add_cart.mcat",
@@ -58,6 +58,8 @@ function addCart(prduct_sq, mber_sq, cart_color) {
 	});
 }
 
+
+
 // 장바구니 담기(비회원)
 function setCookie(prduct_sq, ctgry_nm, prduct_price, prduct_dlvy_price, prduct_nm, prduct_thumb_nm, prduct_dc, prduct_dc_pt, prduct_dced_price, name, exp) {
 	var date = new Date();
@@ -67,9 +69,9 @@ function setCookie(prduct_sq, ctgry_nm, prduct_price, prduct_dlvy_price, prduct_
 	var newCookie;
 	var cart_amt = parseInt($("#amount option:selected").val());
 	var cart_color = $("#color option:selected").val();
-	var price = prduct_price * cart_amt;
-	var dc = prduct_dc * cart_amt;
-	var dced_price = prduct_dced_price * cart_amt;
+	var price = prduct_price * cart_amt; // 가격 = 상품가 * 상품수량 (1000 * 3) = 3000원
+	var dc = prduct_dc * cart_amt; // 할인가 = 지정 할인금액 * 상품수량 (100 * 3) = 300원
+	var dced_price = prduct_dced_price * cart_amt; // 최종가 = 
 	
 	if(oldCookie){
 		var chk = 0;
@@ -82,6 +84,7 @@ function setCookie(prduct_sq, ctgry_nm, prduct_price, prduct_dlvy_price, prduct_
 					oldCookie.cart[i].prduct_price = parseInt(oldCookie.cart[i].prduct_price) + parseInt(price);
 					oldCookie.cart[i].prduct_dc = parseInt(oldCookie.cart[i].prduct_dc) + parseInt(dc);
 					oldCookie.cart[i].prduct_dced_price = parseInt(oldCookie.cart[i].prduct_dced_price) + parseInt(dced_price);
+					// dced_price = price - dc
 					add = true;
 				}else{
 					continue;

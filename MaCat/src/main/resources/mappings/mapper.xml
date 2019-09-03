@@ -113,6 +113,11 @@
 		INSERT INTO CARTS_TB VALUES(CARTS_SEQ.NEXTVAL, #{prduct_sq}, #{mber_sq}, #{cart_amt}, #{cart_color})
 	</insert>
 	
+	<!-- 장바구니 업데이트 -->
+	<update id="edit_cart" parameterType="Map">
+		UPDATE CARTS_TB SET CART_AMT = #{cart_amt} WHERE PRDUCT_SQ = #{prduct_sq} AND MBER_SQ = #{mber_sq} AND CART_COLOR = #{cart_color} 
+	</update>
+	
 	
 	<!--=========================== 상품 관리 ===========================-->
 
