@@ -21,8 +21,7 @@
 
 <body>
 	<!--관리자 페이지 사이드메뉴 불러오기-->
-	<div class="macat_sideMenu_load"><%@ include
-			file="../macat_admin_sideMenu.jsp"%></div>
+	<div class="macat_sideMenu_load"><%@ include file="../macat_admin_sideMenu.jsp"%></div>
 	<main>
 	<section class="wrap">
 		<div class="add_product_title">
@@ -156,7 +155,7 @@
 						<div class="preview">
 						</div>
 						<div class="preview_underBox">
-							<input type="file" name="sub_img1" class="inp-img-sub2"
+							<input type="file" name="sub_img1" class="inp-img-sub1"
 								accept=".gif, .jpg, .png">
 							<button type="button" class="preview-file_upload-sub">추가</button>
 						</div>

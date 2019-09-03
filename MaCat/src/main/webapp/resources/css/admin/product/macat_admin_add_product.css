@@ -570,9 +570,7 @@ input[type="checkbox"]#test_20:checked + label {
 
 /*파일 미리보기 삭제*/
 .btn-delete-main,
-.btn-delete-sub1,
-.btn-delete-sub2,
-.btn-delete-sub3{
+.btn-delete-sub{
     width: 50px;
     height: 30px;
     background-color: #5c5173;
