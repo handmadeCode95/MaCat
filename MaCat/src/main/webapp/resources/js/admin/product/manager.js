@@ -4,6 +4,7 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var prducts_count;
 		$.each(data, function(key, value){
 			if (key === "productsDTO") {
 				$.each(value, function(k, v){
@@ -70,8 +71,11 @@ $(function() {
 	});
 	$("#searchResult").empty();
 	$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
+	$("#paging").empty();
+	$("#paging").append(pagingResult);
+	$("#prducts_count").empty();
+	$("#prducts_count").append(prducts_count);
+		
 	}
 	
 	
@@ -191,7 +195,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "prducts_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

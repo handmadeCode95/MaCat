@@ -38,6 +38,7 @@ import com.macat.dto.MbersSearchDTO;
 import com.macat.dto.NotsSearchDTO;
 import com.macat.dto.PageDTO;
 import com.macat.dto.ProductsDTO;
+import com.macat.dto.ProductsSearchDTO;
 import com.macat.dto.QnaDTO;
 import com.macat.dto.QnaSearchDTO;
 import com.macat.service.DateUtil;
@@ -65,6 +66,7 @@ public class MaCatController {
 	private NotsSearchDTO notsSearchDTO;
 	private QnaSearchDTO qnaSearchDTO;
 	private FaqSearchDTO faqSearchDTO;
+	private ProductsSearchDTO productsSearchDTO;
 
 	private String usedDTO; // 페이징을 위한 조회 기록
 	private int count; // 페이징을 위한 검색 인원 수 기록
@@ -277,8 +279,7 @@ public class MaCatController {
 	}
 	
 	
-	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/
-	
+	/*////////////////////////////////// 상품 페이지 //////////////////////////////////*/	
 	
 	boolean overlap;
 
@@ -313,8 +314,7 @@ public class MaCatController {
 	}
 	
 	
-	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/
-	
+	/*////////////////////////////////// 관리자 메인 //////////////////////////////////*/	
 	
 	// 회원 정보 조회로 이동
 	@RequestMapping("mbers_manager.mcat")
@@ -388,13 +388,26 @@ public class MaCatController {
 		return mv;
 	}
 	
-	// 상품관리로 이동
-	@RequestMapping("product_manage.mcat")
-	public ModelAndView getPrductManageCmd(String cPage) {
+	// 상품정보 관리로 이동
+	@RequestMapping("product_manager.mcat")
+	public ModelAndView getPrductManageCmd(String cPage, String ctgry_nm) {
 		this.cPage = cPage;
 		usedDTO = "ProductsDTO";
 		ModelAndView mv = new ModelAndView("admin/product/product_manager");
-		PageDTO pageDTO = new PageDTO();
+		
+		DateDTO dateDTO = new DateDTO();
+		dateDTO.setToday(DateUtil.getToday());
+		dateDTO.setOneWeekAgo(DateUtil.addDate(-7));
+		dateDTO.setOneMonthAgo(DateUtil.addMonth(-1));
+		dateDTO.setThreeMonthAgo(DateUtil.addMonth(-3));
+		dateDTO.setSixMonthAgo(DateUtil.addMonth(-6));
+		dateDTO.setOneYearAgo(DateUtil.addYear(-1));
+		
+		PageDTO pageDTO = new PageDTO(50);
+		count = dao.getProductsCount(ctgry_nm);
+		Paging.getPage(pageDTO, count, cPage);
+		mv.addObject("");		
+		
 		 
 		
 		return mv;
@@ -562,26 +575,19 @@ public class MaCatController {
 		return editCartMap;
 	}
 	
-	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
-
-	
+	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/	
 	// 회원 정보 페이징
 	@RequestMapping(value = "mbers_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getMbersPageDTOCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-
-		PageDTO pageDTO = new PageDTO(50);
-
+		PageDTO pageDTO = new PageDTO(50);		
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
 		Paging.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
-
-		map.put("mbers_count", count);
-
-		
+		map.put("mbers_count", count);		
 		map.put("mber_grad", dao.getMberGradList());
 
 		switch (usedDTO) {
@@ -1035,6 +1041,40 @@ public class MaCatController {
 
 		return new ModelAndView("admin/faq/view");
 	}
+	
+	/*////////////////////////////////// 상품 정보 관리 //////////////////////////////////*/
+	// 상품 정보 페이징
+	@RequestMapping(value = "prducts_paging.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getProductsPageDTDCmd(@RequestBody String cPage){
+		this.cPage = cPage;
+		PageDTO pageDTO = new PageDTO(50);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Paging.getPage(pageDTO, count, cPage);
+		map.put("pageDTO", pageDTO);
+		map.put("prducts_count", count);
+		
+		switch (usedDTO) {
+		case "ProductsDTO" :
+			map.put("productsDTO", dao.getProductsList(ctgry_nm, pageDTO.getBegin(), pageDTO.getEnd()));
+			break;
+		default:
+			productsSearchDTO.setBegin(pageDTO.getBegin());
+			productsSearchDTO.setEnd(pageDTO.getEnd());
+			switch (usedDTO) {
+			case "MbersSearchDTO_and":
+				map.put("mbersDTO", dao.getMbersAndSearch(mbersSearchDTO));
+				break;
+			case "MbersSearchDTO_or":
+				map.put("mbersDTO", dao.getMbersOrSearch(mbersSearchDTO));
+				break;
+			}
+		}
+		return map;
+	}
+	
+	
 	
 	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/
 	

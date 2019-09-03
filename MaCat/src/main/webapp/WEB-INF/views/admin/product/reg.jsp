@@ -6,10 +6,8 @@
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>마캣 관리자 페이지</title>
-
+	    <title>상품등록 페이지 - 상세페이지 작성</title>
     	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">	    
-
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->

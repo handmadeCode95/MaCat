@@ -7,7 +7,7 @@
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>상품 정보 관리</title>
+	    <title>상품정보 관리</title>
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->
@@ -174,7 +174,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="product_info_table_title">
-	                <span>상품정보 (총 <p>1,837</p> 개)</span>
+	                <span>상품정보 (총 <b id="prducts_count"> ${prducts_count} </b> 개)</span>
 	            </div>
 	            <div id="products" class="info_table">
 	                <form>
@@ -203,7 +203,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input name="mbers" type="checkbox" id="allCheck"></th>
+	                                    <th><input name="products" type="checkbox" id="allCheck"></th>
 	                                    <th scope="col">상품번호</th>
 	                                    <th scope="col">상품코드</th>
 	                                    <th scope="col">카테고리</th>
