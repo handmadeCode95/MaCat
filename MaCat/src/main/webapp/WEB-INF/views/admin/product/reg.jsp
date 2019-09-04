@@ -44,18 +44,42 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-	            	<p>상품제목출력파트</p>
+	            	<p>${productsDTO.prduct_nm}</p>
 
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            	<div class="smartEditor_container">
-		            		<form id="contentsForm">
-			            		<textarea id="txtContent" name="contents"></textarea>
+		            		<form action="product_reg_ok.mcat" id="contentsForm" method="post" enctype="multipart/form-data">
+		            			<%-- <input type="hidden" name="prduct_dom_dt" value="${productsDTO.prduct_dom_dt}">
+		            			<input type="hidden" name="prduct_amt" value="${productsDTO.prduct_amt}">
+		            			<input type="hidden" name="prduct_price" value="${productsDTO.prduct_price}">
+		            			<input type="hidden" name="prduct_as" value="${productsDTO.prduct_as}">
+		            			<input type="hidden" name="prduct_maker" value="${productsDTO.prduct_maker}">
+		            			<input type="hidden" name="prduct_coo" value="${productsDTO.prduct_coo}">
+		            			<input type="hidden" name="prduct_matr" value="${productsDTO.prduct_matr}">
+		            			<input type="hidden" name="prduct_size" value="${productsDTO.prduct_size}">
+		            			<input type="hidden" name="prduct_nm" value="${productsDTO.prduct_nm}">
+		            			<input type="hidden" name="prduct_qa" value="${productsDTO.prduct_qa}">
+		            			<input type="hidden" name="ctgry_nm" value="${productsDTO.ctgry_nm}">
+		            			<input type="hidden" name="prduct_cd" value="${productsDTO.prduct_cd}">
+		            			<input type="hidden" name="main_img" value="${productsDTO.main_img}">
+		            			<input type="hidden" name="sub_img1" value="${productsDTO.sub_img1}">
+		            			<input type="hidden" name="sub_img2" value="${productsDTO.sub_img2}">
+		            			<input type="hidden" name="sub_img3" value="${productsDTO.sub_img3}">
+		            			<input type="hidden" name="prduct_price" value="${productsDTO.prduct_price}">
+		            			<input type="hidden" name="prduct_dlvy_price" value="${productsDTO.prduct_dlvy_price}">
+		            			<input type="hidden" name="prduct_save_pt" value="${productsDTO.prduct_save_pt}">
+		            			<input type="hidden" name="prduct_save" value="${productsDTO.prduct_save}">
+		            			<input type="hidden" name="prduct_dc_pt" value="${productsDTO.prduct_dc_pt}">
+		            			<input type="hidden" name="prduct_dc" value="${productsDTO.prduct_dc}">
+		            			<input type="hidden" name="colors" value="${productsDTO.colors}"> --%>
+		            			<input type="hidden" name="colors" value="${productsDTO}">
+			            		<textarea id="txtContent" name="prduct_cn"></textarea>
 			            	</form>
 		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-	            	<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료">
+	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" form="contentsForm">
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -69,6 +93,11 @@
 		oAppRef: oEditors,
 		elPlaceHolder: document.getElementById('txtContent'), // html editor가 들어갈 textarea id
 		sSkinURI: "resources/se/SmartEditor2Skin.html",  // html editor가 skin url
+		htParams : {
+			bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseVerticalResizer : false,	// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		},
 		fOnAppLoad: function () { 
 			//기본폰트
 			oEditors.getById["txtContent"].setDefaultFont("나눔고딕", 11);

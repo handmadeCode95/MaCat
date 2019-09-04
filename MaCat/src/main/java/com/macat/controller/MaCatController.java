@@ -202,12 +202,18 @@ public class MaCatController {
 
 	// 상세페이지 등록
 	@RequestMapping(value = "product_reg.mcat", method = RequestMethod.POST)
-	public ModelAndView getAddProductInfoCmd(ModelAndView mv, @ModelAttribute ProductsDTO productsDTO, HttpServletRequest request) {
-		try {
-			mv.setViewName("admin/product/reg");
-			
-		} catch (Exception e) {
-		}
+	public ModelAndView getAddProductInfoCmd(ModelAndView mv, @ModelAttribute ProductsDTO productsDTO) {
+		mv.setViewName("admin/product/reg");
+		return mv;
+	}
+	
+	// 상세페이지 등록
+	@RequestMapping(value = "product_reg_ok.mcat", method = RequestMethod.POST)
+	public ModelAndView getAddProductInfoOkCmd(ModelAndView mv, ProductsDTO productsDTO) {
+		
+		//여기부터
+		
+		mv.setViewName("main");
 		return mv;
 	}
 	

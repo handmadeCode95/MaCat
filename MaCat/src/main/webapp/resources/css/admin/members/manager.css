@@ -302,3 +302,8 @@ ul,li{
     border: none; 
     margin-left: 84px;
 }
+
+#mbers_count {
+	color: #F25E5E;
+	font-weight: normal;
+}

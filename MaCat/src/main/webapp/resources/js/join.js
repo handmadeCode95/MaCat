@@ -1,7 +1,7 @@
 //생년월일 input 변경
 $(document).ready(function() {
     $("#birthday_placeholder").focus(function() {
-        $("#birthday_placeholder").replaceWith("<input type='date' id='birthday' name='mber_birthday_dt'>");
+        $(this).replaceWith("<input type='date' id='birthday' name='mber_birthday_dt'>");
         $("#birthday").focus();
     }); 
 });

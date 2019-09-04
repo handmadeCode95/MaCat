@@ -1,4 +1,17 @@
-/*////////////////// 카테고리 연계 쿼리 //////////////////*/
+function check() {
+	// 데이터 전송 전 ','제거
+	$("input[name=prduct_price]").val($("input[name=prduct_price]").val().replace(/,/g,''));
+	$("input[name=prduct_dc]").val($("input[name=prduct_dc]").val().replace(/,/g,''));
+	$("input[name=prduct_amt]").val($("input[name=prduct_amt]").val().replace(/,/g,''));
+	$("input[name=prduct_dlvy_price]").val($("input[name=prduct_dlvy_price]").val().replace(/,/g,''));
+	$("input[name=prduct_save]").val($("input[name=prduct_save]").val().replace(/,/g,''));
+	
+	// 이곳에 유효성 검사를 추가 해야합니다.
+	
+	return true;
+}
+
+/*////////////////// 카테고리 연계 스크립트 //////////////////*/
 // 정상 작동
 function categoryChange(e) {
   var food = ["건식", "습식", "우유/분유", "저칼로리"];
@@ -30,40 +43,34 @@ function categoryChange(e) {
       target.appendChild(opt);
   }
 }
-/*//////////////////  단위선택 박스 색상변경 쿼리 //////////////////*/
-// 정상 작동 : 사이드메뉴 영향을 미치니 주의
-$(document).ready(function() {
-    $("div > ul > li").each(function() {
-        $(this).click(function() {
-            $(this).addClass("selected"); 
-            $(this).siblings().removeClass("selected"); 
-        });
-    });
-});
-
-/*////////////////// 이미지 미리보기 쿼리 //////////////////*/
+/*////////////////// 이미지 미리보기 스크립트 //////////////////*/
 // 정상 작동
 $(document).ready(function(){	
 	var inputFileClass = 1;
+	
 	// 숨긴 input을 다른 버튼에서 실행하게 하기
 	$(document).on("click", ".preview-file_upload-main", function(e) {
 	    e.preventDefault();
-	    $(".inp-img-main").trigger("click");
+	    $(".inp-img-main").click();
 	    
 	    // 파일 등록시 readInputFile함수에 인자로 전달
-	    $(".inp-img-main").on('change', function() {
+	    $(".inp-img-main").off().on('change', function() {
 		    readInputFile(this);
 		});
 	});      
 	
 	$(document).on("click", ".preview-file_upload-sub", function(e) {
 	    e.preventDefault();
-	    $(".inp-img-sub" + inputFileClass).trigger("click");
-	    
-	    // 파일 등록시 readInputFile함수에 인자로 전달
-	    $(".inp-img-sub" + inputFileClass).on("change", function(e) {
-		    readInputFile_sub(this);
-		});
+	    if (inputFileClass < 4) {
+	    	$(".inp-img-sub" + inputFileClass).click();
+		    // 파일 등록시 readInputFile함수에 인자로 전달
+		    $(".inp-img-sub" + inputFileClass).off().on("change", function(e) {
+			    readInputFile_sub(this);
+			});
+		}else {
+			alert('추가이미지는 3개까지 추가 가능합니다.');
+			return;
+		}
 	});
 	
 	// 메인 이미지
@@ -87,29 +94,50 @@ $(document).ready(function(){
 		    	$('.sub_cover_layer').before('<div class="new_cover_layer">'
 		    		+ '<div class="preview"><img src=' + e.target.result + '></div>'
 		    		+ '<div class="preview_underBox">'
-		    		+ '<button type="button" class="btn-delete-sub" value="' + e.target.result + '">삭제</button></div></div>');
-		    	inputFileClass++;
-		    	//$('.inp-img-sub1').after('<input type="file" name="sub_img' + inputFileClass + '" class="inp-img-sub' + inputFileClass + '" accept=".gif, .jpg, .png">');
+		    		+ '<button type="button" class="btn-delete-sub" value="' + inputFileClass + '">삭제</button></div></div>');
+		    	var $beforeImg = '.inp-img-sub' + $(".sub_cover_layer input[type=file]").length;
+		    	inputFileClass = $(".sub_cover_layer input[type=file]").length + 1;
+		    	$($beforeImg).after('<input type="file" name="sub_img' + inputFileClass + '" class="inp-img-sub' + inputFileClass + '" accept=".gif, .jpg, .png">');
+		    	
+		    	if (inputFileClass > 3) {
+		    		$(".sub_cover_layer").css("visibility", "hidden");
+		    	}
 		    }
 	    }
 	}
 	
-	// 등록 이미지 삭제 ( input file reset )
-	function resetInputFile($input, $div) {
+	// 메인 이미지 삭제 ( input file reset )
+	function resetMainInputFile($input, $div) {
 		var agent = navigator.userAgent.toLowerCase();
 		if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
 		    // ie 일때
-		    $input.replaceWith($input.clone(true));
-		    inputFileClass--;
-		    $div.remove();
-		    //$input.remove();
+			$input.replaceWith($input.clone(true));
+		    $div.empty();
 		} else {
 		    //other
-		    $input.val("");
-		    inputFileClass--;
-		    $div.remove();
-		    //$input.remove();
+			$input.val("");
+		    $div.empty();
 		}
+	}
+	
+	// 추가 이미지 삭제 ( input file reset )
+	function resetSubInputFile($filledInput, $emptyInput, $div) {
+		var agent = navigator.userAgent.toLowerCase();
+		if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
+		    // ie 일때
+		    $div.remove();
+		    $filledInput.replaceWith($filledInput.clone(true));
+		    $emptyInput.remove();
+		} else {
+		    //other
+		    $div.remove();
+		    $filledInput.val("");
+		    $emptyInput.remove();
+		}
+		
+		if (inputFileClass < 4) {
+    		$(".sub_cover_layer").css("visibility", "visible");
+    	}
 	}
 	
 	
@@ -117,23 +145,49 @@ $(document).ready(function(){
 	$(document).on("click", ".btn-delete-main", function(event) {
 	    var $input = $('.inp-img-main');
 	    var $div = $('.main_cover_layer > .preview');
-	    resetInputFile($input, $div);
+	    resetMainInputFile($input, $div);
 	    $('.btn-delete-main').replaceWith('<button type="button" class="preview-file_upload-main">추가</button>');
 	});      
 
 	
 	// 추가 이미지 1 삭제 버튼
 	$(document).on("click", ".btn-delete-sub", function(event) {
-	    //var $input = $('.sub_cover_layer').children("." + $(this).attr("value"));
-	    var $input = $(".inp-img-sub1");
+	    var $emptyInput = $(".sub_cover_layer input[type=file]:last-child");
+	    var $filledInput = $(".inp-img-sub" + $(this).attr("value"));
 	    var $div = $(this).parents('.new_cover_layer');
-	    resetInputFile($input, $div);
+	    resetSubInputFile($filledInput, $emptyInput, $div);
+	    if ($(this).attr("value") > $(".sub_cover_layer input[type=file]").length) {
+			inputFileClass = $(".sub_cover_layer input[type=file]").length;
+		}else {
+			inputFileClass = $(this).attr("value");
+		}
 	});   
 	
+	
+	/*//////////////////  단위선택 박스 색상변경 스크립트 //////////////////*/
+	// 정상 작동 : 사이드메뉴 영향을 미치니 주의
+	$(document).ready(function() {
+	    $("div > ul > li").each(function() {
+	        $(this).click(function() {
+	            $(this).addClass("selected"); 
+	            $(this).siblings().removeClass("selected"); 
+	        });
+	    });
+	});
+	
+	
+	/*////////////////// 생년월일 input 변경 스크립트 //////////////////*/
+	//생년월일 input 변경
+	$(document).ready(function() {
+	    $('input[name=prduct_dom_dt_ph]').focus(function() {
+	        $(this).replaceWith('<input class="detail_1_input" type="date" name="prduct_dom_dt" id="byteInfo">');
+	        $('input[name=prduct_dom_dt]').focus();
+	    }); 
+	});
 });
 
 
-/*////////////////// 상품명 글자수 입력 제한 쿼리 //////////////////*/
+/*////////////////// 상품명 글자수 입력 제한 스크립트 //////////////////*/
 // 정상 작동
 function chkword(obj, maxByte) {
     var strValue = obj.value;
@@ -162,10 +216,18 @@ function chkword(obj, maxByte) {
     }
 }
 
-/*////////////////// input 입력되는 숫자 콤마(,) 처리 쿼리 //////////////////*/
+/*////////////////// input 입력되는 숫자 콤마(,) 처리 스크립트 //////////////////*/
 // 정상 작동
-function SetComma(str) {
+function setComma(str) {
     str = str.replace(/,/g, '');
+    if (str.length > 1) {
+    	for (var i = 0; i < str.length-1; i++) {
+    		if (str.charAt(i) === '0') {
+    			str = str.substring(1, str.length);
+    			i--;
+			}else break;
+		}
+    }
     var retValue = "";
     if (isNaN(str) == false) {
         for (i = 1; i <= str.length; i++) {
@@ -177,7 +239,7 @@ function SetComma(str) {
     return retValue;
 }
 
-/*////////////////// 색상선택 파트 체크박스 선택 수 제한 쿼리  //////////////////*/
+/*////////////////// 색상선택 파트 체크박스 선택 수 제한 스크립트  //////////////////*/
 // 정상 작동
 function count_ck(obj){
     var chkbox = document.getElementsByName("palette_chk");

@@ -885,4 +885,5 @@ input[type="checkbox"]#test_20:checked + label {
 /*선택시 색상변경*/
 .selected {
     background: #f25e5e;
+    color: #fff;
 }

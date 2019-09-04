@@ -226,7 +226,7 @@
 	                            	<c:forEach var="i" items="${mbersDTO}">
 		                                <tr id="${i.mber_sq}">
 		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="${i.mber_sq}"></td>
-		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled></td>
+		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled>${i.mber_sq}</td>
 		                                    <td><input name="mber_nm" class="${i.mber_sq}" type="text" value="${i.mber_nm}" disabled></td>
 		                                    <td>${i.mber_gender}</td>
 		                                    <td>${i.mber_id}</td>
@@ -247,7 +247,7 @@
 	                        </table>
 	
 	                    </div>
-	                    <div>
+	                    <div id="pagingDiv">
 							<ol id="paging">
 								<%-- 이전 --%>
 								<c:choose>

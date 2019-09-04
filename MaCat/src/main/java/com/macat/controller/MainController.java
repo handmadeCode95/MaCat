@@ -57,8 +57,8 @@ public class MainController {
 
 	// 로그인
 	@RequestMapping(value = "login_ok.mcat", method = RequestMethod.POST)
-	public ModelAndView getLoginOkCmd(ModelAndView mv, HttpSession session, MbersDTO mbersDTO,
-			HttpServletResponse response) {
+	public ModelAndView getLoginOkCmd(ModelAndView mv, HttpSession session,
+			MbersDTO mbersDTO, HttpServletResponse response) {
 		response.addCookie(CookieUtil.setCookie("cart", null, 0)); // 장바구니 쿠키 삭제 <<개선필요
 
 		MbersDTO loginMber = dao.getLogin(mbersDTO);

@@ -27,7 +27,7 @@
 		<div class="add_product_title">
 			<span>상품등록</span>
 		</div>
-		<form action="product_reg.mcat" method="post"
+		<form action="product_reg.mcat" onsubmit="return check()" method="post"
 			enctype="multipart/form-data">
 			<!--카테고리 선택 파트-->
 			<div class="choose_product_category">
@@ -61,8 +61,11 @@
 				<span>판매가</span>
 				<div class="price_choice_box">
 					<div class="tag_price">
-						<span>정가</span> <input type="number" class="tag_price_input"
-							name="prduct_price" id="cm_monthly_fee" value="0">
+						<span>정가</span> <input type="text" class="tag_price_input"
+							name="prduct_price" id="cm_monthly_fee" value="0"
+							onkeyup="this.value = setComma(this.value)"
+							onkeydown="this.value = setComma(this.value)"
+							onfocus="this.value = setComma(this.value)">
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -70,8 +73,11 @@
 						</div>
 					</div>
 					<div class="discount_price">
-						<span>할인</span> <input type="number" class="discount_price_input"
-							name="prduct_dc" id="cm_monthly_fee" value="0">
+						<span>할인</span> <input type="text" class="discount_price_input"
+							name="prduct_dc" id="cm_monthly_fee" value="0"
+							onkeyup="this.value = setComma(this.value)"
+							onkeydown="this.value = setComma(this.value)"
+							onfocus="this.value = setComma(this.value)">
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -81,7 +87,7 @@
 						</div>
 					</div>
 					<div class="total_price">
-						<span>할인가</span> <span>10,000원 (0원 할인)</span>
+						<span>할인가</span> <span>0원 (0원 할인)</span>
 						<!-- 미구현 -->
 					</div>
 				</div>
@@ -91,8 +97,11 @@
 				<span>재고수량</span>
 				<div class="available_stock_container">
 					<div class="left_stock">
-						<span>재고</span> <input type="number" class="left_stock_input"
-							name="prduct_amt" id="cm_monthly_fee" value="0">
+						<span>재고</span> <input type="text" class="left_stock_input"
+							name="prduct_amt" id="cm_monthly_fee" value="0"
+							onkeyup="this.value = setComma(this.value)"
+							onkeydown="this.value = setComma(this.value)"
+							onfocus="this.value = setComma(this.value)">
 						<div class="left_stock_box">
 							<ul>
 								<li>개</li>
@@ -143,9 +152,9 @@
 						<div class="preview"></div>
 						<!--파일 선택등-->
 						<div class="preview_underBox">
+							<button type="button" class="preview-file_upload-main">추가</button>
 							<input type="file" name="main_img" class="inp-img-main"
 								accept=".gif, .jpg, .png">
-							<button type="button" class="preview-file_upload-main">추가</button>
 						</div>
 					</div>
 				</div>
@@ -155,9 +164,9 @@
 						<div class="preview">
 						</div>
 						<div class="preview_underBox">
+							<button type="button" class="preview-file_upload-sub">추가</button>
 							<input type="file" name="sub_img1" class="inp-img-sub1"
 								accept=".gif, .jpg, .png">
-							<button type="button" class="preview-file_upload-sub">추가</button>
 						</div>
 					</div>
 				</div>
@@ -169,8 +178,9 @@
 				<div class="delivery_pay">
 					<span>배송비</span> <input type="text" class="pay_input"
 						name="prduct_dlvy_price" id="cm_monthly_fee" value="0"
-						onkeyUp="this.value = SetComma(this.value)"
-						onfocus="this.value = SetComma(this.value)">
+						onkeyup="this.value = setComma(this.value)"
+						onkeydown="this.value = setComma(this.value)"
+						onfocus="this.value = setComma(this.value)">
 					<div class="pay_box">
 						<ul>
 							<li>원</li>
@@ -180,12 +190,13 @@
 				<!--배송사-->
 				<div class="delivery_company">
 					<span>배송사</span> <select class="delivery_box"> <!-- 미구현 -->
-						<option value="0">우체국 택배</option>
-						<option value="1">로젠 택배</option>
-						<option value="2">옐로우캡 택배</option>
-						<option value="3">CJ 택배</option>
-						<option value="4">대한통운</option>
-						<option value="5">편의점 택배</option>
+						<option value="0">우체국택배</option>
+						<option value="1">CJ대한통운</option>
+						<option value="2">한진택배</option>
+						<option value="3">롯데택배</option>
+						<option value="4">로젠택배</option>
+						<option value="5">편의점택배</option>
+						<option value="6">기타택배</option>
 					</select>
 				</div>
 			</div>
@@ -196,8 +207,9 @@
 				<div class="mileage_box">
 					<span>적립금</span> <input type="text" class="mileage_input"
 						name="prduct_save" id="cm_monthly_fee" value="0"
-						onkeyUp="this.value = SetComma(this.value)"
-						onfocus="this.value = SetComma(this.value)">
+						onkeyup="this.value = setComma(this.value)"
+						onkeydown="this.value = setComma(this.value)"
+						onfocus="this.value = setComma(this.value)">
 					<div class="mileage_btn_box">
 						<ul>
 							<li>P</li> <!-- 미구현 -->
@@ -228,7 +240,7 @@
 				</div>
 				<div class="detail-yymmdd">
 					<span>제조일자</span> <input class="detail_1_input" type="text"
-						name="prduct_dom_dt" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_dom_dt_ph" id="byteInfo">
 				</div>
 				<div class="detail-as_code">
 					<span>A/S번호</span> <input class="detail_1_input" type="text"
