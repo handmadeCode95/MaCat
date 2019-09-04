@@ -334,7 +334,6 @@ public class MaCatController {
 		PageDTO pageDTO = new PageDTO(50);
 		count = dao.getMbersCount();
 		Paging.getPage(pageDTO, count, cPage);
-		mv.addObject("mbers_count", count);
 
 		mv.addObject("dateDTO", dateDTO);
 		mv.addObject("mber_grad", dao.getMberGradList());
@@ -390,7 +389,7 @@ public class MaCatController {
 	
 	// 상품정보 관리로 이동
 	@RequestMapping("product_manager.mcat")
-	public ModelAndView getPrductManageCmd(String cPage, String ctgry_nm) {
+	public ModelAndView getPrductManageCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "ProductsDTO";
 		ModelAndView mv = new ModelAndView("admin/product/product_manager");
@@ -404,11 +403,12 @@ public class MaCatController {
 		dateDTO.setOneYearAgo(DateUtil.addYear(-1));
 		
 		PageDTO pageDTO = new PageDTO(50);
-		count = dao.getProductsCount(ctgry_nm);
+		count = dao.getProductsCount();
 		Paging.getPage(pageDTO, count, cPage);
-		mv.addObject("");		
 		
-		 
+		mv.addObject("dateDTO", dateDTO);
+		mv.addObject("productsDTO", dao.getProductsList(pageDTO.getBegin(), pageDTO.getEnd()));
+		mv.addObject("pageDTO", pageDTO);
 		
 		return mv;
 	}
@@ -706,7 +706,6 @@ public class MaCatController {
 
 	
 	/*////////////////////////////////// 공지사항 관리 //////////////////////////////////*/
-
 	
 	// 공지사항 페이징
 	@RequestMapping(value = "nots_paging.mcat", method = RequestMethod.POST)
@@ -798,6 +797,8 @@ public class MaCatController {
 	@RequestMapping(value = "nots_delete.mcat", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getNotsDeleteCmd(@RequestBody Map<String, List<String>> nots) {
+//		Map key = i = json, List<String> = j = 공지사항 db의 PK (nots_sq)
+		
 		for (String i : nots.keySet()) {
 			for (String j : nots.get(i)) {
 				dao.getNotsDelete(j);
@@ -821,7 +822,6 @@ public class MaCatController {
 
 	
 	/*////////////////////////////////// 고객 문의 관리 //////////////////////////////////*/
-
 	
 	// 고객 문의 페이징
 	@RequestMapping(value = "qna_paging.mcat", method = RequestMethod.POST)
@@ -936,9 +936,7 @@ public class MaCatController {
 	}
 	
 
-	/*////////////////////////////////// FAQ 관리 //////////////////////////////////*/
-
-	
+	/*////////////////////////////////// FAQ 관리 //////////////////////////////////*/	
 	// FAQ 페이징
 	@RequestMapping(value = "faq_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
@@ -1046,9 +1044,10 @@ public class MaCatController {
 	// 상품 정보 페이징
 	@RequestMapping(value = "prducts_paging.mcat", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getProductsPageDTDCmd(@RequestBody String cPage){
+	public Map<String, Object> getProductsPageDTOCmd(@RequestBody String cPage){
 		this.cPage = cPage;
-		PageDTO pageDTO = new PageDTO(50);
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setNumPerPage(50);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Paging.getPage(pageDTO, count, cPage);
@@ -1057,23 +1056,90 @@ public class MaCatController {
 		
 		switch (usedDTO) {
 		case "ProductsDTO" :
-			map.put("productsDTO", dao.getProductsList(ctgry_nm, pageDTO.getBegin(), pageDTO.getEnd()));
+			map.put("productsDTO", dao.getProductsList(pageDTO.getBegin(), pageDTO.getEnd()));
 			break;
 		default:
 			productsSearchDTO.setBegin(pageDTO.getBegin());
 			productsSearchDTO.setEnd(pageDTO.getEnd());
 			switch (usedDTO) {
-			case "MbersSearchDTO_and":
-				map.put("mbersDTO", dao.getMbersAndSearch(mbersSearchDTO));
+			case "ProductsSearchDTO_and":
+				map.put("productsDTO",dao.getProductsAndSearch(productsSearchDTO));
 				break;
-			case "MbersSearchDTO_or":
-				map.put("mbersDTO", dao.getMbersOrSearch(mbersSearchDTO));
+			case "ProductsSearchDTO_or":
+				map.put("productsDTO", dao.getProductsOrSearch(productsSearchDTO));
 				break;
 			}
 		}
 		return map;
 	}
 	
+	// 상품 검색
+	@RequestMapping(value = "products_search.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getProductsSearchCmd(@RequestBody ProductsSearchDTO productsSearchDTO){
+		
+		if(productsSearchDTO.getPrduct_dlvy_price_start() != null)
+			productsSearchDTO.setPrduct_dlvy_price_start(productsSearchDTO.getPrduct_dlvy_price_start());
+		if(productsSearchDTO.getPrduct_dlvy_price_end() != null)
+			productsSearchDTO.setPrduct_dlvy_price_end(productsSearchDTO.getPrduct_dlvy_price_end());
+		if(productsSearchDTO.getPrduct_reg_dt_start() != null)
+			productsSearchDTO.setPrduct_reg_dt_start(productsSearchDTO.getPrduct_reg_dt_start() + " 00:00:00");
+		if(productsSearchDTO.getPrduct_reg_dt_end() != null)
+			productsSearchDTO.setPrduct_reg_dt_end(productsSearchDTO.getPrduct_reg_dt_end() + " 23:59:59");
+		if(productsSearchDTO.getPrduct_price_start() != null)
+			productsSearchDTO.setPrduct_price_start(productsSearchDTO.getPrduct_price_start());
+		if(productsSearchDTO.getPrduct_price_end() != null)
+			productsSearchDTO.setPrduct_price_end(productsSearchDTO.getPrduct_price_end());
+		if(productsSearchDTO.getPrduct_dc_start() != null)
+			productsSearchDTO.setPrduct_dc_start(productsSearchDTO.getPrduct_dc_start());
+		if(productsSearchDTO.getPrduct_dc_end() != null)
+			productsSearchDTO.setPrduct_dc_end(productsSearchDTO.getPrduct_dc_end());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		PageDTO pageDTO = new PageDTO(50);
+		
+		switch(productsSearchDTO.getAnd_or_chk()) {
+		case "and":
+			usedDTO = "ProductsSearchDTO_and";
+			count = dao.getProductsAndCount(productsSearchDTO);
+			break;
+		case "or":
+			usedDTO = "ProductsSearchDTO_or";
+			count = dao.getProductsOrCount(productsSearchDTO);
+			break;
+		}
+		
+		Paging.getPage(pageDTO, count, null);
+		map.put("pageDTO", pageDTO);
+		map.put("products_count", count);
+		
+		productsSearchDTO.setBegin(pageDTO.getBegin());
+		productsSearchDTO.setEnd(pageDTO.getEnd());
+		this.productsSearchDTO = productsSearchDTO; // 페이징용 검색기록 저장
+		
+		switch(productsSearchDTO.getAnd_or_chk()) {
+		case "and":
+			map.put("productsDTO", dao.getProductsAndSearch(productsSearchDTO));
+			break;
+		case "or":
+			map.put("productsDTO", dao.getProductsOrSearch(productsSearchDTO));
+			break;
+		}		
+		return map;
+	}
+	
+	// 상품 정보 수정
+	@RequestMapping(value = "products_update.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getProductsUpdateCmd(@RequestBody Map<String, List<ProductsDTO>> products){
+		for (String i : products.keySet()) {
+			for (ProductsDTO j : products.get(i)) {
+				dao.getProductsUpdate(j);
+			}
+		}
+		return getProductsPageDTOCmd(cPage);		
+	}
 	
 	
 	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/

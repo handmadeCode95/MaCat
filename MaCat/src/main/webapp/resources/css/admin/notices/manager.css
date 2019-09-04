@@ -62,28 +62,28 @@ main{
     float: right;    
 }
 /* 회원관리 타이틀 파트*/
-.product_management {
+.member_management {
     width: 1645px;
     height: 60px;
     background: #ffffff;
     margin: 16px 40px 14px 27px;    
 }
-.product_management span{
+.member_management span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
 /*회원정보 작업 파트*/
-.product_information_container {
+.member_information_container {
     width: 1645px;
     height: 656px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
 /* 회원정보 파트*/
-.product_info {
+.member_info {
     width: 1592px;
-    height: 203px;
+    height: 270px;
     margin: 0 auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;    
@@ -92,32 +92,32 @@ main{
 .infomation_control_part {
     float: left;
     /*margin-top: 26.5px;*/
-    height: 203px;
+    height: 270px;
 }
 /*회원정보 타이틀*/
-.product_info_title {
+.member_info_title {
     width: 311px; 
-    height: 165px; 
+    height: 232px; 
     float: left;
     margin-top: 19px;
 }
 
 /*회원정보 파트 */
-.product_info_middle{
+.member_info_middle{
     float: left;
     width: 555px;
-    height: 156px;
+    height: 223px;
     margin-top: 28px;
 }
 
-.product_info_right{
+.member_info_right{
     float: left;
-    width: 650px;
+    width: 300px;
     margin-left: 62.5px;
     margin-top: 28px;    
 }
 /*
-.product_info span, 
+.member_info span, 
 .searching_term span {
     margin-left: 11.5px;
     padding-top: 19px;
@@ -127,7 +127,7 @@ main{
 /*기간 파트*/
 .searching_term {
     width: 1592px;
-    height: 246px;
+    height: 179px;
     margin: auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;
@@ -177,21 +177,26 @@ main{
 }
 
 /*접속기간 기간선택 버튼 div*/
-.dlvy_period_btn{
-	float: left;
-    width: 60px;
+.connect_period_btn{
+    margin-top: 37.5px;
+    width: 380px;
     height: 35.5px;
 }
 
-.dlvy_period_btn li{
+.connect_period_btn li{
     float: left;
     border: 1px solid #cfcfcf;
-    width: 56px;
+    width: 66px;
     height: 37.5px;
     line-height: 35.5px;
     text-align: center;
     margin-left: -1px;    
     box-sizing: border-box;
+}
+
+.connect_period_btn li:first-child,
+.connect_period_btn li:last-child{
+    width: 56px;
 }
 
 ul,li{    

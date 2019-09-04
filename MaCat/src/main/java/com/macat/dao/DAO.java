@@ -19,6 +19,7 @@ import com.macat.dto.MbersSearchDTO;
 import com.macat.dto.NotsDTO;
 import com.macat.dto.NotsSearchDTO;
 import com.macat.dto.ProductsDTO;
+import com.macat.dto.ProductsSearchDTO;
 import com.macat.dto.QnaDTO;
 import com.macat.dto.QnaSearchDTO;
 
@@ -118,7 +119,7 @@ public class DAO {
 	public ProductsDTO getProduct(String prduct_sq) {
 		return sqlSessionTemplate.selectOne("product", prduct_sq);
 	}
-	
+		
 	// 상품 리뷰 갯수
 	public int getReviewsCount() {
 		return sqlSessionTemplate.selectOne("reviews_count");
@@ -157,11 +158,47 @@ public class DAO {
 	// 장바구니 업데이트
 	public int getCartUpdate(Map<String, String> map) {
 		return sqlSessionTemplate.update("edit_cart", map);
-	}
-	
+	}	
 	
 	/*////////////////////////////////// 상품 관리 //////////////////////////////////*/
 	
+	// 전체 상품 갯수
+	public int getProductsCount() {
+		return sqlSessionTemplate.selectOne("products_count");
+	}
+	
+	// 전체 상품 정보 가져오기
+	public List<ProductsDTO> getProductsList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("products", map);
+	}
+	
+	// 상품 and조건 검색 결과 인원
+	public int getProductsAndCount(ProductsSearchDTO productsSearchDTO) {
+		return sqlSessionTemplate.selectOne("products_and_count", productsSearchDTO);
+	}
+	
+	// 상품 or조건 검색 결과 인원
+	public int getProductsOrCount(ProductsSearchDTO productsSearchDTO) {
+		return sqlSessionTemplate.selectOne("products_or_count", productsSearchDTO);
+	}
+	
+	// 상품 and조건 검색
+	public List<ProductsDTO> getProductsAndSearch(ProductsSearchDTO productsSearchDTO){
+		return sqlSessionTemplate.selectList("products_and_search", productsSearchDTO);
+	}
+	
+	// 상품 or조건 검색
+	public List<ProductsDTO> getProductsOrSearch(ProductsSearchDTO productsSearchDTO){
+		return sqlSessionTemplate.selectList("products_or_search", productsSearchDTO);
+	}
+	
+	// 상품 정보 수정
+	public int getProductsUpdate(ProductsDTO productsDTO) {
+		return sqlSessionTemplate.delete("products_update", productsDTO);
+	}
 	
 	public int getAddProduct(ProductsDTO productsDTO) {
 		return sqlSessionTemplate.insert("add_product", productsDTO);
@@ -172,8 +209,7 @@ public class DAO {
 	}
 	
 	
-	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
-	
+	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/	
 	
 	// 전체 회원 숫자
 	public int getMbersCount() {

@@ -4,11 +4,9 @@ public class ProductsSearchDTO {
 	
 	private String prduct_sq, prduct_nm, prduct_amt, prduct_cd, ctgry_nm, prduct_dlvy_price_start, prduct_dlvy_price_end,  
 						prduct_reg_dt_start, prduct_reg_dt_end, prduct_price_start, prduct_price_end, prduct_dc_start, prduct_dc_end, and_or_chk;
-	private int begin, end;
+	private int begin, end;	// 페이징용
 	
-	public ProductsSearchDTO() {
-		
-	}
+	public ProductsSearchDTO() {	}
 	
 	public ProductsSearchDTO(String prduct_sq, String prduct_nm, String prduct_amt, String prduct_cd, String ctgry_nm,
 			String prduct_dlvy_price_start, String prduct_dlvy_price_end, String prduct_reg_dt_start,

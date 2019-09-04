@@ -1,33 +1,34 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <html lang="ko">
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>회원 정보 관리</title>
+	    <title>공지사항 관리</title>
 	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->
-	    <link rel="stylesheet" href="resources/css/admin/members/manager.css">
+	    <link rel="stylesheet" href="resources/css/admin/notices/manager.css">
 	    <!-- 체크박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
 	    <!-- 라디오박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
-	    <link rel="stylesheet" href="resources/css/admin/members/admin_table.css">
+	    <link rel="stylesheet" href="resources/css/admin/notices/admin_table.css">
 	    <!--input text입력창 조절 css-->
-	    <link rel="stylesheet" href="resources/css/admin/members/input_textarea.css">
+	    <link rel="stylesheet" href="resources/css/admin/notices/input_textarea.css">
 	    <!-- 페이징 -->
 	    <link rel="stylesheet" href="resources/css/paging.css">	    
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
 
 	    <!-- 관리자 쿼리  -->
-	    <script type="text/javascript" src="resources/js/admin/members/manager.js"></script>
+	    <script type="text/javascript" src="resources/js/admin/notices/manager.js"></script>
 	    <!-- checkbox 전체선택 쿼리 포함 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
 	</head>
@@ -38,13 +39,13 @@
 	    <main>
 	        <section class="wrap">
 	            <div class="member_management">
-	                <span>회원관리</span>
+	                <span>공지사항 관리</span>
 	            </div>
 	            <form id="searchForm" action="mber_search.mcat" method="post">
 	                <div class="member_information_container">
-	                    <!--회원정보-->
+	                    <!--공지사항 정보-->
 	                    <div class="member_info">
-	                        <div class="member_info_title"><span>회원정보</span></div>
+	                        <div class="member_info_title"><span>공지사항 정보</span></div>
 	                        <div class="infomation_control_part">
 	                            <!--이름 아이디 핸드폰번호 생일-->
 	                            <div class="member_info_middle">
@@ -178,7 +179,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="member_info_table_title">
-	                <span>회원정보 (총 <b id="mbers_count">${pageDTO.totalRecord}</b> 명)</span>
+	                <span>회원정보 (총 <b id="mbers_count">${mbers_count}</b> 명)</span>
 	            </div>
 	            <div id="members" class="info_table">
 	                <form>
@@ -226,7 +227,7 @@
 	                            	<c:forEach var="i" items="${mbersDTO}">
 		                                <tr id="${i.mber_sq}">
 		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="${i.mber_sq}"></td>
-		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled>${i.mber_sq}</td>
+		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled></td>
 		                                    <td><input name="mber_nm" class="${i.mber_sq}" type="text" value="${i.mber_nm}" disabled></td>
 		                                    <td>${i.mber_gender}</td>
 		                                    <td>${i.mber_id}</td>
@@ -247,7 +248,7 @@
 	                        </table>
 	
 	                    </div>
-	                    <div id="pagingDiv">
+	                    <div>
 							<ol id="paging">
 								<%-- 이전 --%>
 								<c:choose>

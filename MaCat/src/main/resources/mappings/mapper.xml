@@ -77,7 +77,7 @@
 	<select id="product" resultType="ProductsDTO">
 		SELECT * FROM PRODUCTS_TB WHERE PRDUCT_SQ = #{prduct_sq}
 	</select>
-	
+		
 	<!-- 상품 리뷰 갯수 -->
 	<select id="reviews_count" resultType="int">
 		SELECT COUNT(*) FROM REVIEWS_TB
@@ -121,13 +121,285 @@
 	
 	<!--=========================== 상품 관리 ===========================-->
 
+	<!-- 전체 상품 갯수 -->
+	<select id="products_count" resultType="int">
+		select count(*) from products_tb
+	</select>
+	
+	<!-- 상품정보 가져오기 -->
+	<select id="products" parameterType="Map" resultType="ProductsDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB ORDER BY prduct_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 상품 and조건 검색결과 인원:count -->
+	<select id="products_and_count" parameterType="ProductsSearchDTO" resultType="int">
+		select count(*) from products_tb
+		<where>
+			<if test="prduct_sq != null">
+				prduct_sq = #{prduct_sq}
+			</if>
+			<if test="prduct_nm != null">
+				and prduct_nm = #{prduct_nm}
+			</if>
+			<if test="prduct_amt != null">
+				and prduct_amt = #{prduct_amt}
+			</if>
+			<if test="prduct_cd != null">
+				and prduct_cd = #{prduct_cd}
+			</if>
+			<if test="ctgry_nm != null">
+				and ctgry_nm = #{ctgry_nm}
+			</if>
+			<!-- 배송비 -->
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end != null">
+				AND prduct_dlvy_price BETWEEN #{prduct_dlvy_price_start} AND #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start == null and prduct_dlvy_price_end != null">
+				AND prduct_dlvy_price <![CDATA[ <= ]]> #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end == null">
+				AND prduct_dlvy_price <![CDATA[ >= ]]> #{prduct_dlvy_price_start}
+			</if>
+			<!-- 상품 등록일 -->
+			<if test="prduct_reg_dt_start != null and prduct_reg_dt_end != null">
+		        AND prduct_reg_dt BETWEEN TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start == null and prduct_reg_dt_end != null">
+		        AND prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start != null and prduct_reg_dt_end == null">
+		        AND prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 상품 가격 -->
+		    <if test="prduct_price_start != null and prduct_price_end != null">
+				AND prduct_price BETWEEN #{prduct_price_start} AND #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start == null and prduct_price_end != null">
+				AND prduct_price <![CDATA[ <= ]]> #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start != null and prduct_price_end == null">
+				AND prduct_price <![CDATA[ >= ]]> #{prduct_price_start}
+			</if>
+			<!-- 할인가격 -->
+			<if test="prduct_dc_start != null and prduct_dc_end != null">
+				AND prduct_dc BETWEEN #{prduct_dc_start} AND #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start == null and prduct_dc_end != null">
+				AND prduct_dc <![CDATA[ <= ]]> #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start != null and prduct_dc_end == null">
+				AND prduct_dc <![CDATA[ >= ]]> #{prduct_dc_start}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 상품 and조건 검색 -->
+	<select id="producst_and_search" parameterType="ProductsSearchDTO" resultType="ProductsDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM products_tb
+		<where>
+			<if test="prduct_sq != null">
+				prduct_sq = #{prduct_sq}
+			</if>
+			<if test="prduct_nm != null">
+				and prduct_nm = #{prduct_nm}
+			</if>
+			<if test="prduct_amt != null">
+				and prduct_amt = #{prduct_amt}
+			</if>
+			<if test="prduct_cd != null">
+				and prduct_cd = #{prduct_cd}
+			</if>
+			<if test="ctgry_nm != null">
+				and ctgry_nm = #{ctgry_nm}
+			</if>
+			<!-- 배송비 -->
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end != null">
+				AND prduct_dlvy_price BETWEEN #{prduct_dlvy_price_start} AND #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start == null and prduct_dlvy_price_end != null">
+				AND prduct_dlvy_price <![CDATA[ <= ]]> #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end == null">
+				AND prduct_dlvy_price <![CDATA[ >= ]]> #{prduct_dlvy_price_start}
+			</if>
+			<!-- 상품 등록일 -->
+			<if test="prduct_reg_dt_start != null and prduct_reg_dt_end != null">
+		        AND prduct_reg_dt BETWEEN TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start == null and prduct_reg_dt_end != null">
+		        AND prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start != null and prduct_reg_dt_end == null">
+		        AND prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 상품 가격 -->
+		    <if test="prduct_price_start != null and prduct_price_end != null">
+				AND prduct_price BETWEEN #{prduct_price_start} AND #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start == null and prduct_price_end != null">
+				AND prduct_price <![CDATA[ <= ]]> #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start != null and prduct_price_end == null">
+				AND prduct_price <![CDATA[ >= ]]> #{prduct_price_start}
+			</if>
+			<!-- 할인가격 -->
+			<if test="prduct_dc_start != null and prduct_dc_end != null">
+				AND prduct_dc BETWEEN #{prduct_dc_start} AND #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start == null and prduct_dc_end != null">
+				AND prduct_dc <![CDATA[ <= ]]> #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start != null and prduct_dc_end == null">
+				AND prduct_dc <![CDATA[ >= ]]> #{prduct_dc_start}
+			</if>
+		</where>
+		order by prduct_sq desc) A )
+		<where>
+			r_num between #{begin} and #{end}
+		</where>
+	</select>
+	
+	<!-- 상품 or조건 검색결과 인원:count -->
+	<select id="products_or_count" parameterType="ProductsSearchDTO" resultType="int">
+		select count(*) from products_tb
+		<where>
+			<if test="prduct_sq != null">
+				prduct_sq = #{prduct_sq}
+			</if>
+			<if test="prduct_nm != null">
+				or prduct_nm = #{prduct_nm}
+			</if>
+			<if test="prduct_amt != null">
+				or prduct_amt = #{prduct_amt}
+			</if>
+			<if test="prduct_cd != null">
+				or prduct_cd = #{prduct_cd}
+			</if>
+			<if test="ctgry_nm != null">
+				or ctgry_nm = #{ctgry_nm}
+			</if>
+			<!-- 배송비 -->
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end != null">
+				or prduct_dlvy_price BETWEEN #{prduct_dlvy_price_start} AND #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start == null and prduct_dlvy_price_end != null">
+				or prduct_dlvy_price <![CDATA[ <= ]]> #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end == null">
+				or prduct_dlvy_price <![CDATA[ >= ]]> #{prduct_dlvy_price_start}
+			</if>
+			<!-- 상품 등록일 -->
+			<if test="prduct_reg_dt_start != null and prduct_reg_dt_end != null">
+		        or prduct_reg_dt BETWEEN TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start == null and prduct_reg_dt_end != null">
+		        or prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start != null and prduct_reg_dt_end == null">
+		        or prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 상품 가격 -->
+		    <if test="prduct_price_start != null and prduct_price_end != null">
+				or prduct_price BETWEEN #{prduct_price_start} AND #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start == null and prduct_price_end != null">
+				or prduct_price <![CDATA[ <= ]]> #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start != null and prduct_price_end == null">
+				or prduct_price <![CDATA[ >= ]]> #{prduct_price_start}
+			</if>
+			<!-- 할인가격 -->
+			<if test="prduct_dc_start != null and prduct_dc_end != null">
+				or prduct_dc BETWEEN #{prduct_dc_start} AND #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start == null and prduct_dc_end != null">
+				or prduct_dc <![CDATA[ <= ]]> #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start != null and prduct_dc_end == null">
+				or prduct_dc <![CDATA[ >= ]]> #{prduct_dc_start}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 상품 or조건 검색 -->
+	<select id="products_or_search" parameterType="ProductsSearchDTO" resultType="ProductsDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM products_tb
+		<where>
+			<if test="prduct_sq != null">
+				prduct_sq = #{prduct_sq}
+			</if>
+			<if test="prduct_nm != null">
+				or prduct_nm = #{prduct_nm}
+			</if>
+			<if test="prduct_amt != null">
+				or prduct_amt = #{prduct_amt}
+			</if>
+			<if test="prduct_cd != null">
+				or prduct_cd = #{prduct_cd}
+			</if>
+			<if test="ctgry_nm != null">
+				or ctgry_nm = #{ctgry_nm}
+			</if>
+			<!-- 배송비 -->
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end != null">
+				or prduct_dlvy_price BETWEEN #{prduct_dlvy_price_start} AND #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start == null and prduct_dlvy_price_end != null">
+				or prduct_dlvy_price <![CDATA[ <= ]]> #{prduct_dlvy_price_end}
+			</if>
+			<if test="prduct_dlvy_price_start != null and prduct_dlvy_price_end == null">
+				or prduct_dlvy_price <![CDATA[ >= ]]> #{prduct_dlvy_price_start}
+			</if>
+			<!-- 상품 등록일 -->
+			<if test="prduct_reg_dt_start != null and prduct_reg_dt_end != null">
+		        or prduct_reg_dt BETWEEN TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start == null and prduct_reg_dt_end != null">
+		        or prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="prduct_reg_dt_start != null and prduct_reg_dt_end == null">
+		        or prduct_reg_dt <![CDATA[ <= ]]> TO_DATE(#{prduct_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 상품 가격 -->
+		    <if test="prduct_price_start != null and prduct_price_end != null">
+				or prduct_price BETWEEN #{prduct_price_start} AND #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start == null and prduct_price_end != null">
+				or prduct_price <![CDATA[ <= ]]> #{prduct_price_end}
+			</if>
+			<if test="prduct_price_start != null and prduct_price_end == null">
+				or prduct_price <![CDATA[ >= ]]> #{prduct_price_start}
+			</if>
+			<!-- 할인가격 -->
+			<if test="prduct_dc_start != null and prduct_dc_end != null">
+				or prduct_dc BETWEEN #{prduct_dc_start} AND #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start == null and prduct_dc_end != null">
+				or prduct_dc <![CDATA[ <= ]]> #{prduct_dc_end}
+			</if>
+			<if test="prduct_dc_start != null and prduct_dc_end == null">
+				or prduct_dc <![CDATA[ >= ]]> #{prduct_dc_start}
+			</if>
+		</where>
+		order by prduct_sq desc) A )
+		<where>
+			r_num between #{begin} and #{end}
+		</where>
+	</select>
+	
+	<!-- 상품정보 수정 -->
+	<update id="products_update" parameterType="ProductsDTO">
+		update products_tb set prduct_cd = #{prduct_cd}, ctgry_nm = #{ctgry_nm}, prduct_price = #{prduct_price}, prduct_cd = #{prduct_cd}, prduct_
+	</update>
 
+	<!-- 상품 추가 -->
 	<insert id="add_product">
 		INSERT INTO PRODUCTS_TB VALUES(PRDUCT_SEQ.NEXTVAL, #{ctgry_nm}, #{prduct_reg_dt}, #{prduct_dom_dt}, #{prduct_amt}, #{prduct_price}, #{prduct_dlvy_price},
 			#{prduct_view_cnt}, #{prduct_sale_sum}, #{prduct_as}, #{prduct_maker}, #{prduct_coo}, #{prduct_matr}, #{prduct_size}, #{prduct_nm}, #{prduct_qa}, #{prduct_thumb_nm},
 			#{prduct_cn}, #{prduct_rating_avg}, #{prduct_dc_pt}, #{prduct_save_pt}, #{prduct_ctgry_group}, #{prduct_dc}, #{prduct_save}, #{prduct_cd})
 	</insert>
 	
+	<!-- 이미지 추가 -->
 	<insert id="add_img">
 		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_body_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
 	</insert>

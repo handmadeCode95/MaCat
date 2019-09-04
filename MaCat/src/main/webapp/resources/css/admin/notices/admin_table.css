@@ -72,6 +72,29 @@ table.type11 th {
     
     font-size: 15px;
 }
+/*테이블 헤드 길이 선언*/
+/*.mber_no, .mber_name{
+    width: 100px;
+}
+.id, .pwd{
+    width: 140px;
+}
+.email{
+    width: 240px;
+}
+.phone_num, .tel_num{
+    width: 145px;
+}
+.birth_yymmdd, .join_yymmdd, .lately{
+    width: 130px;
+}
+.point{
+    width: 83px;
+}
+.zip_code{
+    width: 72.5px;
+}*/
+
 
 table.type11 th:first-child {
     width: 40px;    
@@ -101,12 +124,5 @@ table.type11 td {
     text-align: center;
     border: none;    
     background: #fff;
-    color : black;
-}
-
-.info_table .table_wrap .type11 tbody tr td,
-.info_table .table_wrap .type11 tbody tr td a
-{
-    color : black;
 }
 

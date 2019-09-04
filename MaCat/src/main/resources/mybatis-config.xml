@@ -14,6 +14,7 @@
 		<typeAlias type="com.macat.dto.FaqSearchDTO" alias="FaqSearchDTO"/>
 		<typeAlias type="com.macat.dto.CtgriesDTO" alias="CtgriesDTO"/>
 		<typeAlias type="com.macat.dto.ProductsDTO" alias="ProductsDTO"/>
+		<typeAlias type="com.macat.dto.ProductsSearchDTO" alias="ProductsSearchDTO"/>
 		<typeAlias type="com.macat.dto.ImagesDTO" alias="ImagesDTO"/>
 		<typeAlias type="com.macat.dto.QnaCtgriesDTO" alias="QnaCtgriesDTO"/>
 		<typeAlias type="com.macat.dto.MberGradDTO" alias="MberGradDTO"/>

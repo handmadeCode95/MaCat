@@ -10,7 +10,7 @@
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["mber_sq"] + '">';
 					result += '<td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"></td>';
-					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled>1001</td>';
+					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled></td>';
 					result += '<td><input name="mber_nm" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_nm"] + '" disabled></td>';
 					result += '<td>' + v["mber_gender"] + '</td>';
 					result += '<td>' + v["mber_id"] + '</td>';
@@ -64,9 +64,9 @@
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-			}else if (key === "mbers_count"){
-				mbers_count = value;
+				mbers_count = pageDTO.totalRecord;
 			}
+
 		});
 		$("#searchResult").empty();
 		$("#searchResult").append(result);
