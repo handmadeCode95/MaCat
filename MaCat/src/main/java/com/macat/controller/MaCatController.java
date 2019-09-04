@@ -1141,6 +1141,30 @@ public class MaCatController {
 		return getProductsPageDTOCmd(cPage);		
 	}
 	
+	// 상품 삭제
+	@RequestMapping(value = "products_delete.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getProductsDeleteCmd(@RequestBody Map<String, List<String>> products){
+		for (String i : products.keySet()) {
+			for (String j : products.get(i)) {
+				dao.getProductsDelete(j);
+			}
+		}
+		
+		switch (usedDTO) {
+		case "ProductsDTO":
+			count = dao.getProductsCount();
+			break;
+		case "ProductsSearchDTO_and":
+			count = dao.getProductsAndCount(productsSearchDTO);
+			break;
+		case "ProductsSearchDTO_or":
+			count = dao.getProductsOrCount(productsSearchDTO);
+			break;
+		}
+		
+		return getProductsPageDTOCmd(cPage);		
+	}
 	
 	/*////////////////////////////////// 마이 페이지 //////////////////////////////////*/
 	

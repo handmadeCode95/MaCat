@@ -197,7 +197,12 @@ public class DAO {
 	
 	// 상품 정보 수정
 	public int getProductsUpdate(ProductsDTO productsDTO) {
-		return sqlSessionTemplate.delete("products_update", productsDTO);
+		return sqlSessionTemplate.update("products_update", productsDTO);
+	}
+	
+	// 상품 삭제 (관리자)
+	public int getProductsDelete(String prduct_sn) {
+		return sqlSessionTemplate.delete("products_delete", prduct_sn);
 	}
 	
 	public int getAddProduct(ProductsDTO productsDTO) {

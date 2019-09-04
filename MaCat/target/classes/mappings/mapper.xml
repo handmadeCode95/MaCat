@@ -389,8 +389,13 @@
 	
 	<!-- 상품정보 수정 -->
 	<update id="products_update" parameterType="ProductsDTO">
-		update products_tb set prduct_cd = #{prduct_cd}, ctgry_nm = #{ctgry_nm}, prduct_price = #{prduct_price}, prduct_cd = #{prduct_cd}, prduct_
+		update products_tb set prduct_cd = #{prduct_cd}, ctgry_nm = #{ctgry_nm}, prduct_price = #{prduct_price}, prduct_cd = #{prduct_cd}, prduct_dlvy_price =#{prduct_dlvy_price}, prduct_maker =#{prduct_maker}, prduct_coo = #{prduct_coo}, prduct_matr = #{prduct_matr}, prduct_dc_pt =#{prduct_dc_pt}, prduct_save_pt = #{prduct_save_pt}, prduct_save = #{prduct_save}, prduct_view_cnt = #{prduct_view_cnt}, prduct_rating_avg = #{prduct_rating_avg}, prduct_sale_sum = #{prduct_sale_sum}, prduct_amt = #{prduct_amt}        
 	</update>
+	
+	<!-- 상품정보 삭제 -->
+	<delete id="products_delete" parameterType="String">
+		delete from products_tb where prduct_sq = #{prduct_sq}
+	</delete>
 
 	<!-- 상품 추가 -->
 	<insert id="add_product">

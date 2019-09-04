@@ -302,7 +302,7 @@
 						
 	                    <div class="edit_delete_btn">
 	                        <input class="edit_btn" type="button" value="수정" id="update" />
-	                        <input class="delete_btn" type="button" value="삭제" id="withdrawal" />
+	                        <input class="delete_btn" type="button" value="삭제" id="delete" />
 	                    </div>
 	                </form>
 	            </div>
