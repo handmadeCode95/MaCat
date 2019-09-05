@@ -44,42 +44,18 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-	            	<p>${productsDTO.prduct_nm}</p>
+	            	<p>${sessionScope.productForm.prduct_nm}</p>
 
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            	<div class="smartEditor_container">
-		            		<form action="product_reg_ok.mcat" id="contentsForm" method="post" enctype="multipart/form-data">
-		            			<%-- <input type="hidden" name="prduct_dom_dt" value="${productsDTO.prduct_dom_dt}">
-		            			<input type="hidden" name="prduct_amt" value="${productsDTO.prduct_amt}">
-		            			<input type="hidden" name="prduct_price" value="${productsDTO.prduct_price}">
-		            			<input type="hidden" name="prduct_as" value="${productsDTO.prduct_as}">
-		            			<input type="hidden" name="prduct_maker" value="${productsDTO.prduct_maker}">
-		            			<input type="hidden" name="prduct_coo" value="${productsDTO.prduct_coo}">
-		            			<input type="hidden" name="prduct_matr" value="${productsDTO.prduct_matr}">
-		            			<input type="hidden" name="prduct_size" value="${productsDTO.prduct_size}">
-		            			<input type="hidden" name="prduct_nm" value="${productsDTO.prduct_nm}">
-		            			<input type="hidden" name="prduct_qa" value="${productsDTO.prduct_qa}">
-		            			<input type="hidden" name="ctgry_nm" value="${productsDTO.ctgry_nm}">
-		            			<input type="hidden" name="prduct_cd" value="${productsDTO.prduct_cd}">
-		            			<input type="hidden" name="main_img" value="${productsDTO.main_img}">
-		            			<input type="hidden" name="sub_img1" value="${productsDTO.sub_img1}">
-		            			<input type="hidden" name="sub_img2" value="${productsDTO.sub_img2}">
-		            			<input type="hidden" name="sub_img3" value="${productsDTO.sub_img3}">
-		            			<input type="hidden" name="prduct_price" value="${productsDTO.prduct_price}">
-		            			<input type="hidden" name="prduct_dlvy_price" value="${productsDTO.prduct_dlvy_price}">
-		            			<input type="hidden" name="prduct_save_pt" value="${productsDTO.prduct_save_pt}">
-		            			<input type="hidden" name="prduct_save" value="${productsDTO.prduct_save}">
-		            			<input type="hidden" name="prduct_dc_pt" value="${productsDTO.prduct_dc_pt}">
-		            			<input type="hidden" name="prduct_dc" value="${productsDTO.prduct_dc}">
-		            			<input type="hidden" name="colors" value="${productsDTO.colors}"> --%>
-		            			<input type="hidden" name="colors" value="${productsDTO}">
+		            		<form id="contentsForm" method="post" enctype="multipart/form-data">
 			            		<textarea id="txtContent" name="prduct_cn"></textarea>
 			            	</form>
 		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" form="contentsForm">
+	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite()">
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -111,7 +87,7 @@
 		var onWrite = function(){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-			boardWriteForm.action ="writeSubmit";              
+			boardWriteForm.action ="product_reg_ok.mcat";              
 			boardWriteForm.submit();  
 		};
 		

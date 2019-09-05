@@ -40,8 +40,8 @@ public class FileUpload {
 			e.printStackTrace();
 			new IOException("파일 업로드에 실패하였습니다.");
 		}finally{
-			if(out != null){out.close();}
-			if(is != null){is.close();}
+			if(out != null) out.close();
+			if(is != null) is.close();
 		}
 	}
 }

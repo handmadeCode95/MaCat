@@ -7,12 +7,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macat.dao.DAO;
 import com.macat.dto.CartsDTO;
+import com.macat.dto.CtgriesDTO;
 import com.macat.dto.MbersDTO;
 import com.macat.dto.PageDTO;
 import com.macat.service.CookieUtil;
@@ -20,6 +23,7 @@ import com.macat.service.Paging;
 import com.macat.service.PriceUtil;
 
 @Controller
+@SessionAttributes("ctgriesDTO")
 public class MainController {
 	
 	private final DAO dao;
@@ -35,9 +39,9 @@ public class MainController {
 	
 	// 메인 페이지로 이동
 	@RequestMapping("main.mcat")
-	public ModelAndView getMainCmd(ModelAndView mv, HttpSession session) {
+	public ModelAndView getMainCmd(ModelAndView mv) {
 		mv.setViewName("main");
-		session.setAttribute("ctgriesDTO", dao.getCategories());
+		mv.addObject("ctgriesDTO", dao.getCategories());
 		return mv;
 	}
 
@@ -57,14 +61,13 @@ public class MainController {
 
 	// 로그인
 	@RequestMapping(value = "login_ok.mcat", method = RequestMethod.POST)
-	public ModelAndView getLoginOkCmd(ModelAndView mv, HttpSession session,
-			MbersDTO mbersDTO, HttpServletResponse response) {
+	public ModelAndView getLoginOkCmd(ModelAndView mv, HttpSession session, HttpServletResponse response, MbersDTO mbersDTO) {
 		response.addCookie(CookieUtil.setCookie("cart", null, 0)); // 장바구니 쿠키 삭제 <<개선필요
 
-		MbersDTO loginMber = dao.getLogin(mbersDTO);
-		if (loginMber != null) {
+		mbersDTO = dao.getLogin(mbersDTO);
+		if (mbersDTO != null) {
 			mv.setViewName("main");
-			session.setAttribute("loginData", loginMber);
+			session.setAttribute("loginData", mbersDTO);
 			dao.getLoginRecord(mbersDTO);
 			return mv;
 		} else {
