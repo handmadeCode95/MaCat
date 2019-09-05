@@ -1,13 +1,12 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>상품등록 페이지 - 상세페이지 작성</title>
+	    <title>공지사항 수정페이지</title>
     	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">	    
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
@@ -43,15 +42,7 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-	            	<c:choose>
-	            		<c:when test="${!empty sessionScope.productForm}">
-	            			<p>${sessionScope.productForm.prduct_nm}</p>
-	            		</c:when>
-	            		<c:otherwise>
-	            			<input type="text">
-	            		</c:otherwise>
-	            	</c:choose>
-	            	
+	            	<p>상품제목출력파트</p>
 
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
@@ -62,17 +53,7 @@
 		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-	            	<c:set var="url" value="${pageContext.request.requestURL}"></c:set>
-	            	<c:choose>
-	            		<!-- 공지사항 수정 페이지 -->
-	            		<c:when test="${url eq 'nots_update_page'}">
-	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onMotify(${url})">
-	            		</c:when>
-	            		<!-- 상품상세 수정 페이지 : 기본값 -->
-	            		<c:when test="${url eq 'product_update_page'}">
-	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite(${url})">
-	            		</c:when>
-	            	</c:choose>
+	            	<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료">
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -90,23 +71,23 @@
 			//기본폰트
 			oEditors.getById["txtContent"].setDefaultFont("나눔고딕", 11);
 	        //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
-	        var contents = '';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
+	        var contents = ${not_cn};         //db에서 불러온 값을 여기에서 체워넣으면 됨.
 	        oEditors.getById["txtContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣음
 		    },
 		    fCreator: "createSEditor2"
 		});
 		
-		var onWrite = function(url){
+		var onWrite = function(){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-			boardWriteForm.action = url;              
+			boardWriteForm.action ="writeSubmit";              
 			boardWriteForm.submit();  
 		};
 		
-		var onModify = function(url){
+		var onModify = function(){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-			boardWriteForm.action =url;              
+			boardWriteForm.action ="modifySubmit";              
 			boardWriteForm.submit();  
 		};
 		

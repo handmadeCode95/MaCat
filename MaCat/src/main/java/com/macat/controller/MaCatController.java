@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +37,7 @@ import com.macat.dto.FaqSearchDTO;
 import com.macat.dto.ImagesDTO;
 import com.macat.dto.MbersDTO;
 import com.macat.dto.MbersSearchDTO;
+import com.macat.dto.NotsDTO;
 import com.macat.dto.NotsSearchDTO;
 import com.macat.dto.PageDTO;
 import com.macat.dto.ProductsDTO;
@@ -343,11 +346,11 @@ public class MaCatController {
 	}
 
 	// 공지사항 조회로 이동
-	@RequestMapping("nots_manage.mcat")
+	@RequestMapping("nots_manager.mcat")
 	public ModelAndView getNoticesCmd(String cPage) {
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
-		ModelAndView mv = new ModelAndView("admin/notices/management");
+		ModelAndView mv = new ModelAndView("admin/notices/manager");
 		PageDTO pageDTO = new PageDTO();
 		count = dao.getNotsCount();
 		Paging.getPage(pageDTO, count, cPage);
@@ -718,6 +721,7 @@ public class MaCatController {
 
 		Paging.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
+		map.put("nots_count", count);
 		
 		switch (usedDTO) {
 		case "NotsDTO":
@@ -786,11 +790,27 @@ public class MaCatController {
 	public ModelAndView getNotsWriteGoCmd() {
 		return new ModelAndView("admin/notices/write");
 	}
-
-	// 공지사항 수정으로 이동
-	@RequestMapping("nots_update.mcat")
-	public ModelAndView getNotsUpdateGoCmd() {
-		return new ModelAndView("admin/notices/update");
+	
+	// 공지사항 수정 : 페이지 이동
+	@GetMapping("nots_update_page.mcat")
+	public ModelAndView getNotsUpdatePageCmd(ModelAndView mv, String not_sq) {
+		mv.setViewName("admin/notices/nots_update");
+		mv.addObject("notsDTO", dao.getNots(not_sq));
+		mv.addObject("url", "nots_update_page");
+		
+		return mv;
+	}	
+	
+	// 공지사항 수정 : 관리자 페이지 내부
+	@RequestMapping(value = "nots_update.mcat", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getNotsUpdateCmd(@RequestBody Map<String, List<NotsDTO>> nots){
+		for (String i : nots.keySet()) {
+			for (NotsDTO j : nots.get(i)) {
+				dao.getNotsUpdate(j);
+			}
+		}		
+		return getNotsPageDTOCmd(cPage);
 	}
 
 	// 공지사항 삭제
@@ -1129,7 +1149,15 @@ public class MaCatController {
 		return map;
 	}
 	
-	// 상품 정보 수정
+	// 상품 정보 수정 : 페이지 이동
+	@GetMapping("product_update_page.mcat")
+	public ModelAndView getProductUpdatePageCmd(ModelAndView mv, String prduct_sq) {
+		mv.setViewName("admin/product/add_product");
+		mv.addObject("productsDTO", dao.getProduct(prduct_sq));
+		mv.addObject("url", "product_update_page");
+		return mv;
+	}
+	// 상품 정보 수정 : 관리자 페이지 내부
 	@RequestMapping(value = "products_update.mcat", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getProductsUpdateCmd(@RequestBody Map<String, List<ProductsDTO>> products){

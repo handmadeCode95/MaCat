@@ -1,6 +1,6 @@
 /*////////////////// 카테고리 연계 쿼리 //////////////////*/
 // 정상 작동
-function categoryChange(e) {
+function categoryChange(e, ctgry_nm) {
   var food = ["건식", "습식", "우유/분유", "저칼로리"];
   var snack = ["캔", "소시지/건어물", "스낵", "츄르"];
   var toilet = ["응고형", "흡수형", "평판", "후드형"];
@@ -15,18 +15,23 @@ function categoryChange(e) {
   if (e.value == "0") var depth_2 = default_option;
   else if (e.value == "1") var depth_2 = food;
   else if (e.value == "2") var depth_2 = snack;
-  else if (e.value == "3") var depth_2 = toilet;
-  else if (e.value == "4") var depth_2 = toy;
-  else if (e.value == "5") var depth_2 = living_goods;
-  else if (e.value == "6") var depth_2 = acc;
+  else if (e.value == "3") var depth_2 = toy;
+  else if (e.value == "4") var depth_2 = living_goods;
+  else if (e.value == "5") var depth_2 = acc;
+  else if (e.value == "6") var depth_2 = toilet;
   else if (e.value == "7") var depth_2 = clean_goods;
   
   target.options.length = 0;
 
-  for (x in depth_2) {
-      var opt = document.createElement("option");
-      opt.value = depth_2[x];
-      opt.innerHTML = depth_2[x];
+  for (i in depth_2) {
+	if (depth_2[i] === ctgry_nm) {
+		var opt = document.createElement("option");
+		opt.setAttribute("selected", "selected");
+	}else{
+		var opt = document.createElement("option");
+	}
+      opt.value = depth_2[i];
+      opt.innerHTML = depth_2[i];
       target.appendChild(opt);
   }
 }

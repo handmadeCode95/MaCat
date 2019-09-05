@@ -184,7 +184,6 @@
 			
 			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
 			$("#allCheck").prop("checked", false);
-
 		}
 	});
 	

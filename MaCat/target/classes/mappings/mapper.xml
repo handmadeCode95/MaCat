@@ -64,6 +64,7 @@
 	</select>
 	
 	<!-- 상품 정보 조회 -->
+	
 	<select id="products_group_list" parameterType="Map" resultType="ProductsDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}		
 	</select>
@@ -675,6 +676,11 @@
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB ORDER BY NOT_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<!-- 하나의 공지사항 가져오기 -->
+	<select id="nots" resultType="NotsDTO">
+		select * from nots_tb where not_sq = #{not_sq}
+	</select>
+	
 	<!-- 공지사항 and조건 검색 결과 인원 -->
 	<select id="nots_and_count" parameterType="NotsSearchDTO" resultType="int">
 		SELECT COUNT(*) FROM NOTICES_TB
@@ -782,6 +788,11 @@
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
 	</select>
+	
+	<!-- 공지사항 수정 -->
+	<update id="nots_update" parameterType="NotsDTO">
+		update nots_tb set not_sj = #{not_sj}, not_cn = #{not_cn}
+	</update>
 	
 	<!-- 공지사항 삭제 -->
 	<delete id="nots_delete" parameterType="String">

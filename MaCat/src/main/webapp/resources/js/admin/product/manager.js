@@ -13,7 +13,7 @@ $(function() {
 					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>'+ v["prduct_sq"] + '</td>';
 					result += '<td>' + v["prduct_cd"] + '</td>';
 					result += '<td>' + v["ctgry_nm"] + '</td>';
-					result += '<td><a href="product.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
+					result += '<td><a href="product_update_page.mcat?prduct_sq="' + v["prduct_sq"] + '">' + v["prduct_nm"] + '</a></td>';
 					result += '<td>' + v["prduct_price"] + '</td>';
 					result += '<td>' + v["prduct_dc"] + '</td>';
 					result += '<td>' + v["prduct_dlvy_price"] + '</td>';
@@ -200,7 +200,7 @@ $(function() {
 	});
 	
 	
-	// 회원 검색 AJAX
+	// 상품 검색 AJAX
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
@@ -243,7 +243,7 @@ $(function() {
 	    var productsDTO = JSON.stringify(data);
 
 	    $.ajax({
-			url			: "products_update.mcat",
+			url			: "products_update_page.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

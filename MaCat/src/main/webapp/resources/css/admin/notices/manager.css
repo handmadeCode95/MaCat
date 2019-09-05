@@ -17,36 +17,14 @@
 }
 
 * {
-    font-family: 'THEjunggt130';
+    font-family: 'THEjunggt130';	
+    margin: 0 auto;
+    padding: 0;  
 }
 
-* {
-    margin: 0;
-    padding: 0;        
-}
-/*임시 사이드메뉴*/
-header{
-    height: 60px;
-    width: 1920px; 
-    background: #402F61; 
-    color: #ffffff;
-    margin: auto;
-    /*텍스트 세로 중앙정렬*/
-    line-height: 60px;    
-    box-sizing: border-box;
-}
-
-header h1{
-    padding-left: 40px;
-}
-
-aside{
-    height: 1502px;
-    width: 208px;
-    float: left;
-    text-align: center;
-    line-height: 80px;
-    background: #5C5173;
+ul,li{    
+    list-style: none;
+    cursor: pointer;
 }
 
 main{
@@ -61,29 +39,30 @@ main{
     background: #dfdfdf;
     float: right;    
 }
-/* 회원관리 타이틀 파트*/
-.member_management {
+/* 공지사항 관리 타이틀 파트*/
+.notices_management {
     width: 1645px;
     height: 60px;
     background: #ffffff;
     margin: 16px 40px 14px 27px;    
 }
-.member_management span{
+.notices_management span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
-/*회원정보 작업 파트*/
-.member_information_container {
+
+/*공지사항 정보 전체 창 사이즈*/
+.notice_information_container {
     width: 1645px;
-    height: 656px;
+    height: 456px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
-/* 회원정보 파트*/
-.member_info {
+/* 공지사항 정보 파트*/
+.notices_info {
     width: 1592px;
-    height: 270px;
+    height: 210px;
     margin: 0 auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;    
@@ -91,121 +70,66 @@ main{
 /*체크박스 포함 선택단*/
 .infomation_control_part {
     float: left;
-    /*margin-top: 26.5px;*/
-    height: 270px;
+    height: 210px;
 }
-/*회원정보 타이틀*/
-.member_info_title {
+
+/*공지사항 정보 타이틀*/
+.notices_info_title {
     width: 311px; 
-    height: 232px; 
+    height: 190px; 
     float: left;
     margin-top: 19px;
 }
-
-/*회원정보 파트 */
-.member_info_middle{
+/*글번호 제목 작성일 */
+.notices_info_middle{
     float: left;
-    width: 555px;
-    height: 223px;
-    margin-top: 28px;
+    width: 650px;
+    height: 190px;
+    margin-top: 19px;
 }
-
-.member_info_right{
-    float: left;
-    width: 300px;
-    margin-left: 62.5px;
-    margin-top: 28px;    
+/* 체크박스 div*/
+.notices_info_middle .nots_chk_div{
+	float: left;
+	width:150px;
+	height: 169px;
 }
-/*
-.member_info span, 
-.searching_term span {
-    margin-left: 11.5px;
-    padding-top: 19px;
-    font-size: 15px;    
-}*/
-
-/*기간 파트*/
-.searching_term {
-    width: 1592px;
-    height: 179px;
-    margin: auto;
-    box-sizing: border-box;
-    border-bottom: 1px solid #707070;
+/*각 체크박스 폰트, 간격 설정*/
+.notices_info_middle .nots_chk_div .checks{
+	font-size: 15px;
+    line-height: 36px;
+    height: 56px;
 }
-/*기간 제목부분*/
-.searching_term_title {
-    width: 311px;
-    height: 153px;
-    float: left;
-    margin-top: 13.5px;    
+/* 글번호 제목 input div*/
+.notices_info_middle .nots_input_div{
+	float: left;
+	width: 210px;
 }
-
-.searching_term_middle{
-    float: left;
-    width: 555px;
-    height: 140px;
-    margin-top: 35.5px;
+/* 글번호 제목 input*/
+.notices_info_middle .nots_input_div input{
+	width: 188px;
+	height: 36px;
+	margin-bottom: 16px;    
+    margin-right: 17px;
+    margin-left: 15px;
 }
-
-.searching_term_right{
-    float: left;
-    width: 375px;
-    margin-left: 62.5px;
-    margin-top: 35.5px;
+/*작성일 div*/
+.notices_info_middle .nots_reg_dt_div{
+	float: left;
+	position: relative;
+	display: inline-block;
+	width: 500px;	
 }
-
-/*가입일 기간선택 버튼 div*/
-.join_period_btn{
-    width: 380px;
-    height: 35.5px;
-}
-
-.join_period_btn li{
-    float: left;
-    border: 1px solid #CFCFCF;
-    width: 66px;
-    height: 37.5px;
-    line-height: 35.5px;
-    text-align: center;
-    margin-left: -1px;    
-    box-sizing: border-box; 
-}
-
-.join_period_btn li:first-child,
-.join_period_btn li:last-child{
-    width: 56px;
-}
-
-/*접속기간 기간선택 버튼 div*/
-.connect_period_btn{
-    margin-top: 37.5px;
-    width: 380px;
-    height: 35.5px;
-}
-
-.connect_period_btn li{
-    float: left;
-    border: 1px solid #cfcfcf;
-    width: 66px;
-    height: 37.5px;
-    line-height: 35.5px;
-    text-align: center;
-    margin-left: -1px;    
-    box-sizing: border-box;
-}
-
-.connect_period_btn li:first-child,
-.connect_period_btn li:last-child{
-    width: 56px;
-}
-
-ul,li{    
-    list-style: none;
-    cursor: pointer;
+/*작성일 div속 input*/
+.notices_info_middle .nots_reg_dt_div input{
+	width: 188px;
+    height: 35px;
+    margin-bottom: 16px;    
+    margin-right: 17px;
+	margin-left: 15px;
 }
 
 .selected{
-	color: #ffffff;
+	color: #ffffff;	
     background: #f25e5e;    
 }
 
@@ -275,7 +199,6 @@ ul,li{
     border: none; 
     margin-left: 84px;
 }
-
 /**/
 .edit_delete_btn{
     width: 391px;

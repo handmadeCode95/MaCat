@@ -204,11 +204,11 @@ public class DAO {
 	public int getProductsDelete(String prduct_sn) {
 		return sqlSessionTemplate.delete("products_delete", prduct_sn);
 	}
-	
+	// 상품 추가
 	public int getAddProduct(ProductsDTO productsDTO) {
 		return sqlSessionTemplate.insert("add_product", productsDTO);
 	}
-	
+	// 상품 이미지 추가
 	public int getAddImg(ImagesDTO imagesDTO) {
 		return sqlSessionTemplate.insert("add_img", imagesDTO);
 	}
@@ -276,6 +276,12 @@ public class DAO {
 		return sqlSessionTemplate.selectList("notices", map);
 	}
 	
+	// 하나의 공지사항 가져오기
+	public NotsDTO getNots(String not_sq) {
+		return sqlSessionTemplate.selectOne("nots", not_sq);
+	}
+	
+	
 	// 공지사항 and조건 검색 결과 인원
 	public int getNotsAndCount(NotsSearchDTO notsSearchDTO) {
 		return sqlSessionTemplate.selectOne("nots_and_count", notsSearchDTO);
@@ -296,11 +302,15 @@ public class DAO {
 		return sqlSessionTemplate.selectList("nots_or_search", notsSearchDTO);
 	}
 	
+	// 공지사항 수정
+	public int getNotsUpdate(NotsDTO notsDTO) {
+		return sqlSessionTemplate.update("nots_update", notsDTO);
+	}
+	
 	// 공지사항 삭제
 	public int getNotsDelete(String not_sn) {
 		return sqlSessionTemplate.delete("nots_delete", not_sn);
-	}
-	
+	}	
 	
 	/*////////////////////////////////// 고객 문의 관리 //////////////////////////////////*/
 	

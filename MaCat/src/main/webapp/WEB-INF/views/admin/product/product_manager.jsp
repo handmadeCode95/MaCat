@@ -10,18 +10,20 @@
 	    <title>상품정보 관리</title>
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
+   	    <!-- 페이징 -->
+	    <link rel="stylesheet" href="resources/css/paging.css">	     
+   	    <!-- 체크박스 css -->
+	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
+	    
 	    <!-- 관리자페이지 css -->
 	    <link rel="stylesheet" href="resources/css/admin/product/manager.css">
-	    <!-- 체크박스 css -->
-	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
 	    <!-- 라디오박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/product/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
 	    <link rel="stylesheet" href="resources/css/admin/product/admin_table.css">
 	    <!--input text입력창 조절 css-->
 	    <link rel="stylesheet" href="resources/css/admin/product/input_textarea.css">
-	    <!-- 페이징 -->
-	    <link rel="stylesheet" href="resources/css/paging.css">	      
+ 
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	
 	        
@@ -39,7 +41,7 @@
 	            <div class="product_management">
 	                <span>상품관리</span>
 	            </div>
-	            <form id="searchForm" action="mber_search.mcat" method="post">
+	            <form id="searchForm" action="products_search.mcat" method="post">
 	                <div class="product_information_container">
 	                    <!--상품정보-->
 	                    <div class="product_info">
@@ -47,8 +49,7 @@
 	                        <div class="infomation_control_part">
 	                            <!--상품번호 상품명 상품재고-->
 	                            <div class="product_info_middle">
-	                                <div class="checks">
-	                                
+	                                <div class="checks">	                                
 	                                    <input type="checkbox" id="product_chk" class="search" value="prduct_sq">
 	                                    <label for="product_chk" style="margin-right: 26px; ">상품번호</label>
 	                                    <span class="inputClickListener"><input type="text" name="prduct_sq" class="prduct_sq" disabled></span>
@@ -231,7 +232,8 @@
 		                                    <td><input name="prduct_sq" class="${i.prduct_sq}" type="hidden" value="${i.prduct_sq}" disabled>${i.prduct_sq}</td>		                                    
 		                                    <td>${i.prduct_cd}</td> <!-- 상품코드 -->
 		                                    <td>${i.ctgry_nm}</td><!-- 카테고리 -->
-		                                    <td><a href="product.mcat?prduct_nm=${i.prduct_nm}">${i.prduct_nm}</a></td><!-- 상품명 -->
+		                                    <%-- <td><a href="product.mcat?prduct_nm=${i.prduct_nm}">${i.prduct_nm}</a></td><!-- 상품명 --> --%>
+		                                    <td><a href="product_update_page.mcat?prduct_sq=${i.prduct_sq}">${i.prduct_nm}</a></td><!-- 상품명 -->
 		                                    <td>${i.prduct_price}</td><!-- 상품가격 -->
 		                                    <td>${i.prduct_dc}</td>
 		                                    <td>${i.prduct_dlvy_price}</td>

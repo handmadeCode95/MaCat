@@ -68,7 +68,7 @@
 
 			</li>
 			<ul class="prd">
-					<li><a href="nots_manage.mcat">공지</a></li>
+					<li><a href="nots_manager.mcat">공지</a></li>
 					<li><a href="faq_manage.mcat">FAQ</a></li>
 				</ul>
 			<center>
