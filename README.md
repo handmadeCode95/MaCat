@@ -1,52 +1,41 @@
-# ±Û¸Ó¸®
+# Project MaCat 
+> ì˜¤í”ˆë§ˆì¼“ ì›¹ ì‚¬ì´íŠ¸ êµ¬í˜„
 
-¼Ò½ºÄÚµå ºí·ÏÀº ´ÙÀ½°ú °°ÀÌ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ìžë°”ì–¸ì–´ ê¸°ë°˜ í”„ë ˆìž„ì›Œí¬ë¥¼ í™œìš©í•œ ì›¹ì‚¬ì´íŠ¸ êµ¬í˜„
 
-```c
+## ê°œë°œí™˜ê²½
+Windows 10, oracle 11g, Eclipse, SQL Developer, Brackets, Adobe XD
 
-#include <stdio.h>
-int main(void) {
-  printf("Hello World!");
-}
-```
-¸µÅ©´Â ´ÙÀ½°ú °°ÀÌ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
-
-[ºí·Î±× ÁÖ¼Ò](https://blog.naver.com/ndb796)
-
-¼ø¼­ ¾ø´Â ¸ñ·ÏÀº ´ÙÀ½°ú °°ÀÌ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
-
-* ±ê °­ÁÂ
-
-  * ±ê Clone
-
-  * ±ê Pull
-
-  * ±ê Commit
-
-    * ±ê Commit ¨ç
-
-    * ±ê Commit ¨è
-
-  * ±ê Push
+## ìž‘ì—… í˜„í™©
+* xydragon
+  * ê´€ë¦¬ìž íŽ˜ì´ì§€ jsp ìž‘ì—…ì¤‘
+    * íšŒì›ê´€ë¦¬, ìƒí’ˆê´€ë¦¬, ê³ ê°ë¬¸ì˜ ê´€ë¦¬, ê³µì§€ì‚¬í•­ ê´€ë¦¬
+* bat-coding
+  * í”„ë¡œì íŠ¸ Refactoring ìž‘ì—… ì§„í–‰ì¤‘
+  * Controller ì„¸ë¶„í™”, ê°ì²´í™” ìž‘ì—…
+  * ìƒí’ˆë“±ë¡ íŽ˜ì´ì§€ ì´ë¯¸ì§€ êµ¬í˜„ìž‘ì—… 
 
 
-ÀÎ¿ë ±¸¹®Àº ´ÙÀ½°ú °°ÀÌ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
 
-> '°øºÎÇÕ½Ã´Ù.' -³ªµ¿ºó-
+ë§í¬ëŠ” ë‹¤ìŒê³¼ ê°™ì´ ìž‘ì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+[ë¸”ë¡œê·¸ ì£¼ì†Œ](https://blog.naver.com/wodyd9999999)
+ìˆœì„œ ì—†ëŠ” ëª©ë¡ì€ ë‹¤ìŒê³¼ ê°™ì´ ìž‘ì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 
-Å×ÀÌºíÀº ´ÙÀ½°ú °°ÀÌ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.
+* ê¹ƒ ê°•ì¢Œ
 
-ÀÌ¸§|¿µ¾î|Á¤º¸|¼öÇÐ
+  * ê¹ƒ Clone
 
----|---|---|---|
+  * ê¹ƒ Pull
 
-³ªµ¿ºó|98Á¡|87Á¡|100Á¡|
+  * ê¹ƒ Commit
 
-È«±æµ¿|97Á¡|78Á¡|93Á¡|
+    * ê¹ƒ Commit â‘ 
 
-ÀÌ¼ø½Å|89Á¡|93Á¡|97Á¡|
+    * ê¹ƒ Commit â‘¡
+
+  * ê¹ƒ Push
 
 
-°­Á¶´Â ´ÙÀ½°ú °°ÀÌ ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì¸ìš© êµ¬ë¬¸ì€ ë‹¤ìŒê³¼ ê°™ì´ ìž‘ì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 
-**Ä¡Å²** ¸Ô´Ù°¡ ~~µÎµå·¯±â~~³µ¾î¿ä. ¤Ð¤Ð
+> 'ê³µë¶€í•©ì‹œë‹¤.' -ë‚˜ë™ë¹ˆ-
