@@ -17,9 +17,9 @@ Windows 10, oracle 11g, Eclipse, SQL Developer, Brackets, Adobe XD
 
 
 
-링크는 다음과 같이 작성할 수 있습니다.
-[블로그 주소](https://blog.naver.com/wodyd9999999)
-순서 없는 목록은 다음과 같이 작성할 수 있습니다.
+링크는 다음과 같이 작성할 수 있습니다.[블로그 주소](https://blog.naver.com/wodyd9999999)
+
+  순서 없는 목록은 다음과 같이 작성할 수 있습니다.
 
 * 깃 강좌
 
