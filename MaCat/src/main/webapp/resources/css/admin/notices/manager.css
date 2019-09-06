@@ -39,7 +39,8 @@ main{
     background: #dfdfdf;
     float: right;    
 }
-/* 공지사항 관리 타이틀 파트*/
+/*공지사항 관리자 페이지용 css*/
+/* 공지사항 타이틀 파트*/
 .notices_management {
     width: 1645px;
     height: 60px;
@@ -51,18 +52,17 @@ main{
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
-
-/*공지사항 정보 전체 창 사이즈*/
-.notice_information_container {
+/*공지사항 작업 파트*/
+.notices_info_container {
     width: 1645px;
-    height: 456px;
+    height: 390px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
 /* 공지사항 정보 파트*/
 .notices_info {
     width: 1592px;
-    height: 210px;
+    height: 200px;
     margin: 0 auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;    
@@ -70,62 +70,23 @@ main{
 /*체크박스 포함 선택단*/
 .infomation_control_part {
     float: left;
-    height: 210px;
+    /*margin-top: 26.5px;*/
+    height: 170px;
 }
-
 /*공지사항 정보 타이틀*/
 .notices_info_title {
     width: 311px; 
-    height: 190px; 
+    height: 132px; 
     float: left;
     margin-top: 19px;
 }
-/*글번호 제목 작성일 */
+
+/* 공지사항 정보 파트 */
 .notices_info_middle{
     float: left;
-    width: 650px;
-    height: 190px;
-    margin-top: 19px;
-}
-/* 체크박스 div*/
-.notices_info_middle .nots_chk_div{
-	float: left;
-	width:150px;
-	height: 169px;
-}
-/*각 체크박스 폰트, 간격 설정*/
-.notices_info_middle .nots_chk_div .checks{
-	font-size: 15px;
-    line-height: 36px;
-    height: 56px;
-}
-/* 글번호 제목 input div*/
-.notices_info_middle .nots_input_div{
-	float: left;
-	width: 210px;
-}
-/* 글번호 제목 input*/
-.notices_info_middle .nots_input_div input{
-	width: 188px;
-	height: 36px;
-	margin-bottom: 16px;    
-    margin-right: 17px;
-    margin-left: 15px;
-}
-/*작성일 div*/
-.notices_info_middle .nots_reg_dt_div{
-	float: left;
-	position: relative;
-	display: inline-block;
-	width: 500px;	
-}
-/*작성일 div속 input*/
-.notices_info_middle .nots_reg_dt_div input{
-	width: 188px;
-    height: 35px;
-    margin-bottom: 16px;    
-    margin-right: 17px;
-	margin-left: 15px;
+    width: 580px;
+    height: 123px;
+    margin-top: 28px;
 }
 
 .selected{

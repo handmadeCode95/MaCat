@@ -14,7 +14,7 @@
 //					result += '<td><input name="not_sq" class="' + v["not_sq"] + '" type="hidden" value="' + v["not_sq"] + '" disabled>' + v["not_sq"] +'</td>';
 					result += '<td>' + v["not_sj"] + '</td>';
 					result += '<td><input name="not_sj" class="' + v["not_sq"] + '" type="text" value="' + v["not_sj"] + '" disabled></td>';
-					result += '<td>' + v["not_reg_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["not_reg_dt"].substring(0, 10) + '</td></tr>';
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -108,9 +108,9 @@
 			$(this).siblings(".search").prop("checked", true);
 			$(this).siblings(".search").trigger("change");
 		}
-		if (!$(this).parents("div").siblings("div").children(".search").prop("checked")) {
-			$(this).parents("div").siblings("div").children(".search").prop("checked", true);
-			$(this).parents("div").siblings("div").children(".search").trigger("change");
+		if (!$(this).parents("div").children(".search").prop("checked")) {
+			$(this).parents("div").children(".search").prop("checked", true);
+			$(this).parents("div").children(".search").trigger("change");
 			$(this).children().focus();
 		}
 	});

@@ -37,7 +37,7 @@ input[type=password] {
 .info_table .table_wrap{
     overflow: auto;
     width: 100%;    
-    height: 565px;
+    height: 500px;
     display: block;
 }
 

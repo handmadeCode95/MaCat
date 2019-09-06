@@ -3,7 +3,7 @@ package com.macat.service;
 import com.macat.dto.PageDTO;
 
 public class Paging {
-
+// extends > DI 예정
 	public static void getPage(PageDTO paging, int count, String cPage) {
 		paging.setTotalRecord(count);
 
