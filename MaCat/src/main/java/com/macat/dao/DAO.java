@@ -166,6 +166,10 @@ public class DAO {
 		return sqlSessionTemplate.insert("add_img", imagesDTO);
 	}
 	
+	public int getAddImgs(List<ImagesDTO> imagesDTOs) {
+		return sqlSessionTemplate.insert("add_imgs", imagesDTOs);
+	}
+	
 	
 	/*////////////////////////////////// 회원 정보 관리 //////////////////////////////////*/
 	

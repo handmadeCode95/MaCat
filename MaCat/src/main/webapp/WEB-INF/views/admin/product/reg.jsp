@@ -49,7 +49,7 @@
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            	<div class="smartEditor_container">
-		            		<form id="contentsForm" method="post" enctype="multipart/form-data">
+		            		<form id="contentsForm" method="post">
 			            		<textarea id="txtContent" name="prduct_cn"></textarea>
 			            	</form>
 		            	</div>	            	

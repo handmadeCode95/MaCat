@@ -9,9 +9,13 @@ import java.io.OutputStream;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.macat.dto.ImagesDTO;
+
+import net.coobird.thumbnailator.Thumbnails;
+
 public class FileUpload {
 	
-	public static void fileUpload(MultipartFile fileData, String path, String fileName) throws IOException {
+	public static String fileUpload(MultipartFile fileData, String path, String fileName) throws IOException {
 		String originalFileName = fileData.getOriginalFilename();
 		String contentType = fileData.getContentType();
 		long fileSize = fileData.getSize();
@@ -28,9 +32,7 @@ public class FileUpload {
 			if (fileSize > 0) {
 				is = fileData.getInputStream();
 				File realUploadDir = new File(path);
-				if (!realUploadDir.exists()) {
-					realUploadDir.mkdirs();
-				}
+				if (!realUploadDir.exists()) realUploadDir.mkdirs();
 				out = new FileOutputStream(path +"/"+ fileName);
 				FileCopyUtils.copy(is, out);
 			}else{
@@ -43,5 +45,8 @@ public class FileUpload {
 			if(out != null) out.close();
 			if(is != null) is.close();
 		}
+		
+		return path +"/"+ fileName;
 	}
+	
 }

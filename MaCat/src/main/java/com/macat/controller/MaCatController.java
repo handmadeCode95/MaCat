@@ -2,7 +2,7 @@
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.macat.dao.DAO;
 import com.macat.dto.DateDTO;
 import com.macat.dto.FaqSearchDTO;
+import com.macat.dto.ImagesDTO;
 import com.macat.dto.MbersDTO;
 import com.macat.dto.MbersSearchDTO;
 import com.macat.dto.NotsSearchDTO;
@@ -39,6 +40,8 @@ import com.macat.service.DateUtil;
 import com.macat.service.FileUpload;
 
 import com.macat.service.Paging;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @SessionAttributes("productForm")
@@ -184,7 +187,6 @@ public class MaCatController {
 		return mv;
 	}
 	
-	
 	// 관리자 상품등록 상세페이지로 이동
 	@RequestMapping("add_product.mcat")
 	public ModelAndView getProductRegCmd(ModelAndView mv) {
@@ -194,74 +196,77 @@ public class MaCatController {
 	
 	// 상세페이지 등록
 	@RequestMapping(value = "product_reg.mcat", method = RequestMethod.POST)
-	public ModelAndView getAddProductInfoCmd(ModelAndView mv, HttpServletRequest request, ProductsDTO productsDTO,
-			@SessionAttribute("loginData") MbersDTO mbersDTO) throws IOException {
+	public ModelAndView getAddProductInfoCmd(ModelAndView mv, ProductsDTO productsDTO) {
 		mv.setViewName("admin/product/reg");
-		
-		Calendar cal = Calendar.getInstance();
-		MultipartFile mainImg = productsDTO.getMain_img();
-		MultipartFile subImg1 = productsDTO.getSub_img1();
-		MultipartFile subImg2 = productsDTO.getSub_img2();
-		MultipartFile subImg3 = productsDTO.getSub_img3();
-		
-		if (mainImg != null && mainImg.getSize() > 0) {
-			String fileName = mainImg.getOriginalFilename();
-			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
-			
-			String path = request.getSession().getServletContext().getRealPath("/")+File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			FileUpload.fileUpload(mainImg, path, productsDTO.getMain_img_nm());
-			
-			mainImg = null;
-		}
-		if (subImg1 != null && subImg1.getSize() > 0) {
-			String fileName = subImg1.getOriginalFilename();
-			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
-			
-			String path = request.getSession().getServletContext().getRealPath("/")+File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			FileUpload.fileUpload(subImg1, path, productsDTO.getMain_img_nm());
-			
-			subImg1 = null;
-		}
-		if (subImg2 != null && subImg2.getSize() > 0) {
-			String fileName = subImg2.getOriginalFilename();
-			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
-			
-			String path = request.getSession().getServletContext().getRealPath("/")+File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			FileUpload.fileUpload(subImg2, path, productsDTO.getMain_img_nm());
-			
-			subImg2 = null;
-		}
-		if (subImg3 != null && subImg3.getSize() > 0) {
-			String fileName = subImg3.getOriginalFilename();
-			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
-			
-			String path = request.getSession().getServletContext().getRealPath("/")+File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			FileUpload.fileUpload(subImg3, path, productsDTO.getMain_img_nm());
-			
-			subImg3 = null;
-		}
-		
 		mv.addObject("productForm", productsDTO);
 		return mv;
 	}
 	
 	// 상세페이지 등록
 	@RequestMapping(value = "product_reg_ok.mcat", method = RequestMethod.POST)
-	public ModelAndView getAddProductInfoOkCmd(ModelAndView mv, SessionStatus sessionStatus, 
-			@SessionAttribute("productForm") ProductsDTO productsDTO, String prduct_cn) {
+	public ModelAndView getAddProductInfoOkCmd(ModelAndView mv, SessionStatus sessionStatus, HttpServletRequest request, 
+			@SessionAttribute("productForm") ProductsDTO productsDTO, @SessionAttribute("loginData") MbersDTO mbersDTO,
+			String prduct_cn) throws IOException {
 		mv.setViewName("main");
 		productsDTO.setPrduct_cn(prduct_cn);
+		String prduct_sq = productsDTO.getPrduct_sq();
+		
+		Calendar cal = Calendar.getInstance();
+		MultipartFile mainImg = productsDTO.getMain_img();
+		MultipartFile subImg1 = productsDTO.getSub_img1();
+		MultipartFile subImg2 = productsDTO.getSub_img2();
+		MultipartFile subImg3 = productsDTO.getSub_img3();
+		Map<String, List<ImagesDTO>> imgMap = new HashMap<String, List<ImagesDTO>>();
+		List<ImagesDTO> imagesDTOs = new ArrayList<ImagesDTO>();
+		
+		String mainfileName = mainImg.getOriginalFilename();
+		String mainfileType = mainfileName.substring(mainfileName.lastIndexOf("."), mainfileName.length());
+		productsDTO.setMain_img_nm(cal.getTimeInMillis() + mainfileType);  
+		
+		String mainPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
+		//이름바꾸고 mybatis Foreach구현 String mainPath = FileUpload.fileUpload(mainImg, path, productsDTO.getMain_img_nm());
+		imagesDTOs.add(new ImagesDTO(mainPath, 0, 1, 0, prduct_sq));
+		
+		if (subImg1 != null && subImg1.getSize() > 0) {
+			String subfileName1 = subImg1.getOriginalFilename();
+			String subfileType1 = subfileName1.substring(subfileName1.lastIndexOf("."), subfileName1.length());
+			productsDTO.setMain_img_nm(cal.getTimeInMillis() + subfileType1);  
+			
+			String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
+			String subPath1 = FileUpload.fileUpload(mainImg, path, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(subPath1, 1, 0, 0, prduct_sq));
+		}
+		if (subImg2 != null && subImg2.getSize() > 0) {
+			String fileName = subImg2.getOriginalFilename();
+			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
+			
+			String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
+			String subPath2 = FileUpload.fileUpload(subImg2, path, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(subPath2, 1, 0, 0, prduct_sq));
+		}
+		if (subImg3 != null && subImg3.getSize() > 0) {
+			String fileName = subImg3.getOriginalFilename();
+			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
+			
+			String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
+			String subPath3 = FileUpload.fileUpload(subImg3, path, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(subPath3, 1, 0, 0, prduct_sq));
+		}
+		
+		imgMap.put("imgList", imagesDTOs);
 		
 		// 상품등록, 이미지등록
+		//dao.getAddProduct(productsDTO);
+		
+		
 		
 		sessionStatus.setComplete();
 		return mv;
 	}
 	
+
 	/*////////////////////////////////// 파일 업로드 //////////////////////////////////*/
 	
 	
@@ -275,7 +280,7 @@ public class MaCatController {
 		String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		String replaceName = cal.getTimeInMillis() + fileType;  
 		
-		String path = request.getSession().getServletContext().getRealPath("/")+File.separator + "resources/upload/" + mbersDTO.getMber_id();
+		String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
 		FileUpload.fileUpload(imgfile, path, replaceName);
 		mv.addObject("path", path);
 		mv.addObject("filename", replaceName);
