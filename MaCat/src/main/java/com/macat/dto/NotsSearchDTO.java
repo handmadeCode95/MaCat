@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class NotsSearchDTO {
+public class NotsSearchDTO implements AdminSearchDTO {
 	
 	private String not_sq, not_sj, mber_sq, not_reg_dt_start, not_reg_dt_end ,and_or_chk;
 	private int begin, end; // 페이징

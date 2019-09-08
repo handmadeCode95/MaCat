@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class MbersSearchDTO {
+public class MbersSearchDTO implements AdminSearchDTO {
 	
 	private String mber_sq, mber_id, mber_nm, mber_birthday_dt_start, mber_birthday_dt_end, mber_gender, mber_reg_dt_start, mber_reg_dt_end,
 					mber_conect_dt_start, mber_conect_dt_end, mber_phone_no, mber_grad_nm, mber_tel_no, and_or_chk;

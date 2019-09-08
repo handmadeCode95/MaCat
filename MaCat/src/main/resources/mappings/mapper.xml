@@ -123,7 +123,7 @@
 			#{prduct_cn}, #{prduct_rating_avg}, #{prduct_dc_pt}, #{prduct_save_pt}, #{prduct_ctgry_group}, #{prduct_dc}, #{prduct_save}, #{prduct_cd})
 	</insert>
 	
-	<insert id="add_img" parameterMap="ImagesDTO">
+	<insert id="add_img" parameterType="ImagesDTO">
 		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
 	</insert>
 	

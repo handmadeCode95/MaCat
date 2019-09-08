@@ -5,27 +5,29 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.macat.dao.DAO;
+import com.macat.dao.CategoryDAOImpl;
+import com.macat.dao.MainDAOImpl;
 import com.macat.dto.ProductsDTO;
-import com.macat.service.CookieUtil;
-import com.macat.service.Paging;
+import com.macat.util.CookieUtil;
 
 @Controller
 public class CategoryController {
 	
-	private final DAO dao;
+	private final CategoryDAOImpl categoryDAOImpl;
+	private final MainDAOImpl mainDAOImpl;
 
 	@Autowired
-	public CategoryController(DAO dao, Paging paging) {
-		this.dao = dao;
+	public CategoryController(CategoryDAOImpl categoryDAOImpl, MainDAOImpl mainDAOImpl) {
+		this.categoryDAOImpl = categoryDAOImpl;
+		this.mainDAOImpl = mainDAOImpl;
 	}
 	
 	// 상품 페이지로 이동
-	@RequestMapping("product.mcat")
-	public ModelAndView getProductCmd(ModelAndView mv,
+	@GetMapping("product.mcat")
+	public ModelAndView redirectProductPageCmd(ModelAndView mv,
 			@CookieValue(required = false, name = "viewedProductSq1") String viewedProductSq1,
 			@CookieValue(required = false, name = "viewedProductSq2") String viewedProductSq2,
 			@CookieValue(required = false, name = "viewedProductSq3") String viewedProductSq3,
@@ -36,7 +38,7 @@ public class CategoryController {
 		mv.setViewName("product/product");
 
 		// 조회수 증가
-		if (dao.getProductViewCntUp(prduct_sq) < 1)
+		if (categoryDAOImpl.updateProductViewCount(prduct_sq) < 1)
 			System.out.println("조회수증가실패");
 
 		// 최근 본 상품 쿠키에 추가. 3개 이상이면 첫 상품 삭제, 중복 불가
@@ -64,7 +66,7 @@ public class CategoryController {
 			}
 		}
 
-		ProductsDTO productsDTO = dao.getProduct(prduct_sq);
+		ProductsDTO productsDTO = categoryDAOImpl.getProduct(prduct_sq);
 
 		// 상품 총 적립 금액
 		if (productsDTO.getPrduct_save() > 0) {
@@ -79,8 +81,7 @@ public class CategoryController {
 		if (productsDTO.getPrduct_dc() > 0) {
 			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - productsDTO.getPrduct_dc());
 		} else if (productsDTO.getPrduct_dc_pt() > 0 && productsDTO.getPrduct_price() > 99) {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price()
-					- (productsDTO.getPrduct_price() * productsDTO.getPrduct_dc_pt() / 100));
+			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - (productsDTO.getPrduct_price() * productsDTO.getPrduct_dc_pt() / 100));
 		} else {
 			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price());
 		}
@@ -89,11 +90,11 @@ public class CategoryController {
 		productsDTO.setPrduct_rating_round(Math.round(productsDTO.getPrduct_rating_avg()));
 
 		// 상품 색상
-		productsDTO.setColors(dao.getColors(prduct_sq));
+		productsDTO.setColors(categoryDAOImpl.getColors(prduct_sq));
 
-		mv.addObject("imagesDTO", dao.getProductImages(prduct_sq));
-		mv.addObject("more_product", dao.getProductsList(productsDTO.getCtgry_nm(), 1, 5));
-		mv.addObject("review_cnt", dao.getReviewsCount());
+		mv.addObject("imagesDTO", categoryDAOImpl.getProductImages(prduct_sq));
+		mv.addObject("more_product", mainDAOImpl.getProductsList(productsDTO.getCtgry_nm(), 1, 5));
+		mv.addObject("review_cnt", categoryDAOImpl.getReviewsCount());
 		mv.addObject("productsDTO", productsDTO);
 		return mv;
 	}

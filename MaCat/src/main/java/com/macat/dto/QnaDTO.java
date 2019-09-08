@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class QnaDTO {
+public class QnaDTO implements AdminDTO {
 	
 	private String qna_sq, qna_sj, qna_nm, qna_id, qna_cn, qna_reg_dt, qc_nm, mber_sq, qna_ans_st;
 	private int qna_view_cnt, qna_group, qna_level;

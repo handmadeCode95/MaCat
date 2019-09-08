@@ -1,4 +1,4 @@
-﻿package com.macat.service;
+﻿package com.macat.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,11 +9,7 @@ import java.io.OutputStream;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.macat.dto.ImagesDTO;
-
-import net.coobird.thumbnailator.Thumbnails;
-
-public class FileUpload {
+public class FileUploadUtil {
 	
 	public static String fileUpload(MultipartFile fileData, String path, String fileName) throws IOException {
 		String originalFileName = fileData.getOriginalFilename();

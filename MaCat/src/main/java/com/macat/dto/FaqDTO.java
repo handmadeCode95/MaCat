@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class FaqDTO {
+public class FaqDTO implements AdminDTO {
 	
 	private String faq_sq, faq_sj, faq_cn, qc_nm, mber_sq;
 

@@ -1,10 +1,10 @@
-package com.macat.service;
+package com.macat.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtil {
+public class DateCalculateUtil {
 	
 	public static String getToday() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(new Date());

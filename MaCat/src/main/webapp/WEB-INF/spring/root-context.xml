@@ -23,18 +23,56 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
-	<!-- DAO -->
-	<bean id="dao" class="com.macat.dao.DAO">
-	   <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-	</bean>
-	
-	<!-- Paging -->
-	<bean id="paging" class="com.macat.service.Paging"></bean>
-	
 	<!-- upload -->
 	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 			<property name="defaultEncoding" value="UTF-8" />
 			<property name="maxUploadSize" value="104857600" />
 	</bean>
+	
+	<!-- DAO -->
+	<bean id="adminAddProductDAOImpl" class="com.macat.dao.AdminAddProductDAOImpl">
+	   <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminFaqManagementDAO -->
+	<bean id="adminFaqManagementDAO" class="com.macat.dao.AdminFaqManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminMemberManagementDAO -->
+	<bean id="adminMemberManagementDAO" class="com.macat.dao.AdminMemberManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminNoticeManagementDAO -->
+	<bean id="adminNoticeManagementDAO" class="com.macat.dao.AdminNoticeManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminProductManagementDAO -->
+	<bean id="adminProductManagementDAO" class="com.macat.dao.AdminProductManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminQnaManagementDAO -->
+	<bean id="adminQnaManagementDAO" class="com.macat.dao.AdminQnaManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- categoryDAOImpl -->
+	<bean id="categoryDAOImpl" class="com.macat.dao.CategoryDAOImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- mainDAOImpl -->
+	<bean id="mainDAOImpl" class="com.macat.dao.MainDAOImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- productDetailDAOImpl -->
+	<bean id="productDetailDAOImpl" class="com.macat.dao.ProductDetailDAOImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 </beans>

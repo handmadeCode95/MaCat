@@ -1,8 +1,8 @@
-package com.macat.service;
+package com.macat.util;
 
 import com.macat.dto.PageDTO;
 
-public class Paging {
+public class PagingUtil {
 
 	public static void getPage(PageDTO paging, int count, String cPage) {
 		paging.setTotalRecord(count);
@@ -29,8 +29,7 @@ public class Paging {
 		paging.setBegin((paging.getNowPage() - 1) * paging.getNumPerPage() + 1);
 		paging.setEnd((paging.getBegin() - 1) + paging.getNumPerPage());
 
-		paging.setBeginBlock(
-				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+		paging.setBeginBlock((int)((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
 
 		if (paging.getEndBlock() > paging.getTotalPage()) {

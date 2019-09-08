@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class QnaSearchDTO {
+public class QnaSearchDTO implements AdminSearchDTO {
 	
 	private String qc_nm, qna_sq, qna_sj, qna_nm, qna_id, qna_reg_dt_start, qna_reg_dt_end, view, and_or_chk;
 	private int begin, end; // 페이징

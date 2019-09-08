@@ -1,4 +1,4 @@
-package com.macat.service;
+package com.macat.util;
 
 import javax.servlet.http.Cookie;
 

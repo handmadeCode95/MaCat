@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class MbersDTO {
+public class MbersDTO implements AdminDTO {
 	
 	private String mber_sq, mber_id, mber_pw, mber_nm, mber_email, mber_email_end, mber_gender, mber_birthday_dt, mber_phone_no, mber_tel_no, mber_point_sum,
 				   mber_reg_dt, mber_conect_dt, mber_zip_no, mber_adres, mber_detail_adres, mber_grad_nm;

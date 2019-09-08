@@ -2,8 +2,8 @@ package com.macat.dto;
 
 public class DateDTO {
 	
-	String year, month, date;
-	String today, oneWeekAgo, oneMonthAgo, threeMonthAgo, sixMonthAgo, oneYearAgo;
+	private String year, month, date;
+	private String today, oneWeekAgo, oneMonthAgo, threeMonthAgo, sixMonthAgo, oneYearAgo;
 	
 	public DateDTO() {
 

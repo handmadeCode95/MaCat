@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class FaqSearchDTO {
+public class FaqSearchDTO implements AdminSearchDTO {
 	
 	private String qc_nm, faq_sq, faq_sj, and_or_chk;
 	private int begin, end; // 페이징

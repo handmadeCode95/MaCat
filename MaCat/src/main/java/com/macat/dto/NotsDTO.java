@@ -1,6 +1,6 @@
 package com.macat.dto;
 
-public class NotsDTO {
+public class NotsDTO implements AdminDTO {
 	
 	private String not_sq, not_sj, not_cn, not_reg_dt, mber_sq;
 	
