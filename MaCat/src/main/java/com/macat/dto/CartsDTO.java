@@ -1,6 +1,11 @@
 package com.macat.dto;
 
-public class CartsDTO {
+import java.io.Serializable;
+
+public class CartsDTO implements Serializable {
+	
+	private static final long serialVersionUID = -4558666853314302134L;
+	
 	
 	private String cart_sq, prduct_sq, mber_sq, ctgry_nm, cart_color, prduct_nm, prduct_thumb_nm;
 	private int prduct_price, prduct_dlvy_price, prduct_dced_price, cart_amt, prduct_dc = 0, prduct_dc_pt = 0;

@@ -1,0 +1,44 @@
+/*공지사항 관리 페이지용*/
+
+/*작성일 기간선택 input div 단 정렬하기*/
+.notices_info_middle .checks>div{
+    float: right;
+    width: 456px;
+}
+
+.notices_info_middle .checks{
+	height: 50px;
+}
+
+
+/*전체 input 디자인*/
+.checks input[type=text]{
+	background: white; 
+	border: 1px solid #cfcfcf; 
+	height: 36px;
+	width: 190px;
+}
+
+/*작성일 기간선택 input*/
+#not_reg_dt_start{
+    width: 190px;
+    height: 37px;
+    border: 1px solid #CFCFCF;
+    background: #fff;    
+	margin: 0px 15px 16px 17px;
+}
+
+#not_reg_dt_end{    
+    width: 190px;
+    height: 37px;
+    border: 1px solid #CFCFCF;
+    background: #fff;    
+	margin: 0px 15px 16px 0px;
+}
+
+
+.checks label{
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
+}

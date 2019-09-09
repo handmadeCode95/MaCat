@@ -11,8 +11,7 @@
 <!--초기화-->
 <link rel="stylesheet" href="resources/css/normalize.css">
 <!--상품등록 페이지 css-->
-<link rel="stylesheet"
-	href="resources/css/admin/product/macat_admin_add_product.css">
+<link rel="stylesheet" href="resources/css/admin/product/macat_admin_add_product.css">
 
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <!--카테고리 파트 select 문-->
@@ -29,21 +28,29 @@
 		</div>
 		<form action="product_reg.mcat" onsubmit="return check()" method="post"
 			enctype="multipart/form-data">
+
 			<!--카테고리 선택 파트-->
 			<div class="choose_product_category">
 				<span>카테고리</span>
 				<div class="category_select_box">
-					<select class="category_depth_1" onchange="categoryChange(this)">
+					<select class="category_depth_1" onchange="categoryChange(this, '${productsDTO.ctgry_nm}')">
 						<option value="0">1차 카테고리</option>
-						<option value="1">사료</option>
-						<option value="2">간식</option>
-						<option value="3">화장실/모래</option>
-						<option value="4">장난감</option>
-						<option value="5">생활용품</option>
-						<option value="6">악세사리</option>
-						<option value="7">목욕/위생</option>
-					</select> <select name="ctgry_nm" class="category_depth_2"
-						id="second_category">
+						<option value="1" <c:if test="${productsDTO.prduct_ctgry_group eq 1}">selected </c:if>>사료</option>
+						<option value="2" <c:if test="${productsDTO.prduct_ctgry_group eq 2}">selected </c:if>>간식</option>
+						<option value="3" <c:if test="${productsDTO.prduct_ctgry_group eq 3}">selected </c:if>>장난감</option>
+						<option value="4" <c:if test="${productsDTO.prduct_ctgry_group eq 4}">selected </c:if>>생활용품</option>
+						<option value="5" <c:if test="${productsDTO.prduct_ctgry_group eq 5}">selected </c:if>>의류</option>
+						<option value="6" <c:if test="${productsDTO.prduct_ctgry_group eq 6}">selected </c:if>>화장실</option>
+						<option value="7" <c:if test="${productsDTO.prduct_ctgry_group eq 7}">selected </c:if>>목욕/위생</option>
+						<c:if test="${!empty productsDTO.prduct_ctgry_group}">
+							<script type="text/javascript">
+								$(function() {
+									$('.category_depth_1').trigger("change");
+								});
+							</script>
+						</c:if>
+					</select>
+					<select name="ctgry_nm" class="category_depth_2" id="second_category">
 						<option>2차 카테고리</option>
 					</select>
 				</div>
@@ -53,7 +60,7 @@
 				<span>상품명</span>
 				<div class="title_write_part">
 					<input class="product_title_inputBox" type="text" name="prduct_nm"
-						id="byteInfo" onkeyup="chkword(this, 150)">
+						id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_nm}">
 				</div>
 			</div>
 			<!--판매가 입력 파트-->
@@ -66,6 +73,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -78,6 +86,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -102,6 +111,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="left_stock_box">
 							<ul>
 								<li>개</li>
@@ -224,19 +234,19 @@
 				<span>상세정보</span>
 				<div class="detail-resource">
 					<span>소재</span> <input class="detail_1_input" type="text"
-						name="prduct_matr" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_matr" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_matr}">
 				</div>
 				<div class="detail-size">
 					<span>크기</span> <input class="detail_1_input" type="text"
-						name="prduct_size" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_size" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_size}">
 				</div>
 				<div class="detail-maker">
 					<span>제조사</span> <input class="detail_1_input" type="text"
-						name="prduct_maker" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_maker" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_maker}">
 				</div>
 				<div class="detail-country">
 					<span>제조국</span> <input class="detail_1_input" type="text"
-						name="prduct_coo" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_coo" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_coo}">
 				</div>
 				<div class="detail-yymmdd">
 					<span>제조일자</span> <input class="detail_1_input" type="text"
@@ -244,15 +254,24 @@
 				</div>
 				<div class="detail-as_code">
 					<span>A/S번호</span> <input class="detail_1_input" type="text"
-						name="prduct_as" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_as" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_as}">
 				</div>
 				<div class="detail-quality">
 					<span>품질보증기준</span> <input class="detail_quality_input" type="text"
-						name="prduct_qa" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_qa" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_qa}">
 				</div>
 			</div>
 			<!--상세페이지 버튼-->
 			<div class="product_detail_page">
+			
+			<c:if test="">
+			
+			</c:if>
+				<div>
+					<a href="javascript:void(0)"> <input
+						class="detail_btn" type="submit" value="상세페이지 작성하기" />
+					</a>
+				</div>				
 				<div>
 					<a href="javascript:void(0)"> <input
 						class="detail_btn" type="submit" value="상세페이지 작성하기" />

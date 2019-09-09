@@ -4,15 +4,16 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var prducts_count;
 		$.each(data, function(key, value){
 			if (key === "productsDTO") {
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["prduct_sq"] + '">';
 					result += '<td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"></td>';
-					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>1001</td>';
+					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>'+ v["prduct_sq"] + '</td>';
 					result += '<td>' + v["prduct_cd"] + '</td>';
 					result += '<td>' + v["ctgry_nm"] + '</td>';
-					result += '<td><a href="product.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
+					result += '<td><a href="product_update_page.mcat?prduct_sq="' + v["prduct_sq"] + '">' + v["prduct_nm"] + '</a></td>';
 					result += '<td>' + v["prduct_price"] + '</td>';
 					result += '<td>' + v["prduct_dc"] + '</td>';
 					result += '<td>' + v["prduct_dlvy_price"] + '</td>';
@@ -27,12 +28,6 @@ $(function() {
 					result += '<td>' + v["prduct_rating_avg"] + '</td>';
 					result += '<td>' + v["prduct_sale_sum"] + '</td>';
 					result += '<td>' + v["prduct_amt"] + '</td>';
-					//result += "<option>등급선택</option>";
-					//$.each(data.mber_grad, function(mgKey, mgValue) {
-					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//})
-					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//result += "</select></td></tr>";
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -66,14 +61,18 @@ $(function() {
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
+				
+				prducts_count = pageDTO.totalRecord;
+				// prducts_count 전역변수를 pageDTO.totalRecord로 정의하는 문장
 		}
 	});
 	$("#searchResult").empty();
 	$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
-	}
-	
+	$("#paging").empty();
+	$("#paging").append(pagingResult);
+	$("#prducts_count").empty();
+	$("#prducts_count").append(prducts_count);		
+	}	
 	
 	// form 데이터를 JSON형식으로 변환
 	$.fn.toJSON = function(f) {
@@ -113,34 +112,30 @@ $(function() {
     		$(this).children().attr("disabled", false); // 히든값
     		$(this).siblings().children().attr("disabled", true);
         });
-    });
+    });    
     
-    
-    $(".connect_period_li").each(function() {
-        $(this).click(function() {
-            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
-            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
-            $("#connect_term").prop("checked", false);  // 기간 input 초기화
-    		$("#connect_term").trigger("change");		// 기간 input 초기화
-    		$(this).children().attr("disabled", false); // 히든값
-    		$(this).siblings().children().attr("disabled", true);
-        });
-    });
-    
+//    $(".connect_period_li").each(function() {
+//        $(this).click(function() {
+//            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+//            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+//            $("#connect_term").prop("checked", false);  // 기간 input 초기화
+//    		$("#connect_term").trigger("change");		// 기간 input 초기화
+//    		$(this).children().attr("disabled", false); // 히든값
+//    		$(this).siblings().children().attr("disabled", true);
+//        });
+//    });    
     
     $("#join_date").change(function(){
         if($("#join_date").is(":checked")){
         	$(".join_period_li").removeClass("selected");
         }
-    });
+    });    
     
-    
-    $("#connect_term").change(function(){
-        if($("#connect_term").is(":checked")){
-        	$(".connect_period_li").removeClass("selected");
-        }
-    });
-    
+//    $("#connect_term").change(function(){
+//        if($("#connect_term").is(":checked")){
+//        	$(".connect_period_li").removeClass("selected");
+//        }
+//    });    
 
     // 검색 영역 체크박스 체크시 인풋 활성화/비활성화, 포커싱
 	$(".search").change(function() {
@@ -154,7 +149,6 @@ $(function() {
 		}
 	});
 	
-	
 	// 검색 영역 인풋 클릭시 인풋 활성화/비활성화, 포커싱
 	$(".inputClickListener").click(function() {
 		if (!$(this).siblings(".search").prop("checked")){
@@ -167,7 +161,6 @@ $(function() {
 			$(this).children().focus();
 		}
 	});
-    
 	
 	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화 + 색상변경
 	$(document).on("change", ".chkbox", function(){
@@ -191,7 +184,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "prducts_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -207,11 +200,11 @@ $(function() {
 	});
 	
 	
-	// 회원 검색 AJAX
+	// 상품 검색 AJAX
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "mbers_search.mcat",
+			url			: "products_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -225,11 +218,9 @@ $(function() {
             			  }
 		});
 	});
-	
 
 	// 수정 AJAX
-	$(document).on("click", "#update", function(){
-		
+	$(document).on("click", "#update", function(){		
 		/* 체크된 열만 JSON 배열로 파싱 */
 		var data = {};
 		var arr = [];
@@ -246,17 +237,17 @@ $(function() {
 	        // 담은 열 정보를 arr배열에 추가
 	        arr.push(row);
 	    });
-	    // arr배열을 mbersDTO라는 key값과 함께 저장
-	    data = {mbersDTO : arr};
+	    // arr배열을 productsDTO라는 key값과 함께 저장
+	    data = {productsDTO : arr};
 	    // JSON형태로 직렬화
-	    var mbersDTO = JSON.stringify(data);
+	    var productsDTO = JSON.stringify(data);
 
 	    $.ajax({
-			url			: "mbers_update.mcat",
+			url			: "products_update_page.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: mbersDTO,
+            data		: productsDTO,
             success		: function(data) {
             				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
@@ -269,10 +260,10 @@ $(function() {
 	});
 		
 	
-	// 탈퇴 AJAX
-	$(document).on("click", "#withdrawal", function(){
+	// 상품 삭제 AJAX
+	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "withdrawal.mcat",
+			url			: "products_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

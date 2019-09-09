@@ -5,10 +5,9 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-
 	<head>
 	    <meta charset="UTF-8">
-	    <title>회원 정보 관리</title>
+	    <title>주문 정보 관리</title>
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/admin/order_search/normalize.css">
 	    <!-- 관리자페이지 css -->
@@ -29,8 +28,6 @@
 	    <script type="text/javascript" src="resources/js/admin/order_search/manager.js"></script>
 	    <!-- checkbox 전체선택 쿼리 포함 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
-
-
 	</head>
 
 	<body>
@@ -215,7 +212,7 @@
 	                            </thead>
 	                            <tbody id="searchResult">
 	                            <c:forEach var=" " items="">
-		                                <tr id="${i.mber_sq}">
+		                                <tr id="${i.}">
 		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value=""></td>
 		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="" disabled>1001</td>
 		                                    <td><input name="mber_nm" class="${i.mber_sq}" type="text" value="" disabled></td>

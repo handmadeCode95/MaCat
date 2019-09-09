@@ -1,6 +1,28 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../font/THEjunggt130.woff') format('woff'),
+        url('../../font/THEjunggt130.otf') format('opentype'),
+        url('../../font/THEjunggt130.eot') format('embedded-opentype');
+}
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
 /*주소지 탭메*/
 /*탭메뉴*/
-#item_tab{
+#adress_tab{
     width:690px;
     margin:0 auto;
     text-align:center;    
@@ -10,7 +32,7 @@
     border-bottom: 2px solid #5c5173;
 }
 /*탭메뉴 제목*/
-.tab-titles{
+.adress_tab-titles{
     list-style: none;
     margin: 0 auto;
     padding: 0;
@@ -19,7 +41,7 @@
 }
 
 /* Float the list items side by side */
-.tab-titles li {
+.adress_tab-titles li {
     float: left;
     line-height: 42px;
     height: 42px;
@@ -28,7 +50,7 @@
 }
 
 /* Style the links inside the list items */
-.tab-titles li a {
+.adress_tab-titles li a {
     display: inline-block;
     color: black;
     text-align: center;
@@ -36,19 +58,19 @@
     font-size: 20px;
 }
 /* Style the tab content */
-.tabcontent {
+.adress_tabcontent {
     border-top: 1px solid #5c5173;
     display: none;
     background-color:#ffffff;
     margin: 0 auto;
 }
 /*클릭 시 current가 붙을 때*/
-.tab-titles li.current, ul.tab-titles li.current > a{
+.adress_tab-titles li.current, ul.adress_tab-titles li.current > a{
     background: #5c5173;
     color: #ffffff;
 }
 
-.tabcontent.current {
+.adress_tabcontent.current {
     display: block;
 }
 /*주소지 탭 끝*/

@@ -1,5 +1,4 @@
-﻿
-/*헤더 - 세션간 공간확보용*/
+﻿/*헤더 - 세션간 공간확보용*/
 .spacing {
     height: 160px;
 }
@@ -13,5 +12,9 @@
 }
 
 .order_spacing {
-    height: 250px;
+    height: 210px;
+}
+
+.payment_aside_table_spacing {
+	height: 300px;
 }

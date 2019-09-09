@@ -13,7 +13,7 @@ function check() {
 
 /*////////////////// 카테고리 연계 스크립트 //////////////////*/
 // 정상 작동
-function categoryChange(e) {
+function categoryChange(e, ctgry_nm) {
   var food = ["건식", "습식", "우유/분유", "저칼로리"];
   var snack = ["캔", "소시지/건어물", "스낵", "츄르"];
   var toilet = ["응고형", "흡수형", "평판", "후드형"];
@@ -28,18 +28,23 @@ function categoryChange(e) {
   if (e.value == "0") var depth_2 = default_option;
   else if (e.value == "1") var depth_2 = food;
   else if (e.value == "2") var depth_2 = snack;
-  else if (e.value == "3") var depth_2 = toilet;
-  else if (e.value == "4") var depth_2 = toy;
-  else if (e.value == "5") var depth_2 = living_goods;
-  else if (e.value == "6") var depth_2 = acc;
+  else if (e.value == "3") var depth_2 = toy;
+  else if (e.value == "4") var depth_2 = living_goods;
+  else if (e.value == "5") var depth_2 = acc;
+  else if (e.value == "6") var depth_2 = toilet;
   else if (e.value == "7") var depth_2 = clean_goods;
   
   target.options.length = 0;
 
-  for (x in depth_2) {
-      var opt = document.createElement("option");
-      opt.value = depth_2[x];
-      opt.innerHTML = depth_2[x];
+  for (i in depth_2) {
+	if (depth_2[i] === ctgry_nm) {
+		var opt = document.createElement("option");
+		opt.setAttribute("selected", "selected");
+	}else{
+		var opt = document.createElement("option");
+	}
+      opt.value = depth_2[i];
+      opt.innerHTML = depth_2[i];
       target.appendChild(opt);
   }
 }
@@ -75,6 +80,7 @@ $(document).ready(function(){
 	
 	// 메인 이미지
 	function readInputFile(input) {
+<<<<<<< HEAD
 		if (input.files && input.files[0]) {
 		    var reader = new FileReader();
 		    reader.readAsDataURL(input.files[0]);
@@ -103,6 +109,46 @@ $(document).ready(function(){
 		    		$(".sub_cover_layer").css("visibility", "hidden");
 		    	}
 		    }
+=======
+	if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.readAsDataURL(input.files[0]);
+	    
+	    reader.onload = function(e) {
+	        $('#preview-main').html("<img src=" + e.target.result + ">");
+	    }
+
+	    }
+	}
+	$(".inp-img-main").on('change', function() {
+	    readInputFile(this);
+	});
+
+	// 추가 이미지 1
+	function readInputFile_sub1(input) {
+	if (input.files && input.files[0]) {
+	    var reader_sub1 = new FileReader();
+	    reader_sub1.readAsDataURL(input.files[0]);
+	    reader_sub1.onload = function(e) {
+	        $('#preview-sub1').html("<img src=" + e.target.result + ">");
+	    }
+	    
+	   
+	    }
+	}
+	$(".inp-img-sub1").on('change', function() {
+	    readInputFile_sub1(this);
+	});
+
+	//추가 이미지 2
+	function readInputFile_sub2(input) {
+	if (input.files && input.files[0]) {
+	    var reader_sub2 = new FileReader();
+	    reader_sub2.onload = function(e) {
+	        $('#preview-sub2').html("<img src=" + e.target.result + ">");
+	    }
+	    reader_sub2.readAsDataURL(input.files[0]);
+>>>>>>> xydragon
 	    }
 	}
 	

@@ -1,0 +1,444 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../font/THEjunggt130.woff') format('woff'),
+        url('../../font/THEjunggt130.otf') format('opentype'),
+        url('../../font/THEjunggt130.eot') format('embedded-opentype');
+}
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+/*주소지 테이블 시작*/
+/*바깥 div*/
+.delivery_adress_table{
+    width: 670px;
+    height: 168px;
+    margin: 0;
+    padding: 5px;
+}
+
+table.order_adress_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+     width: 660px;
+}
+
+/*좌측 메뉴 설명란*/
+table.order_adress_table th {
+    font-size: 12px; 
+    text-align: right;
+    width: 130px;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;    
+}
+/*우측 input 입력란*/
+table.order_adress_table td {
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;
+    vertical-align: middle;
+}
+/*테이블 내부 input 사이즈*/
+.delivery_adress_table .order_adress_table input{
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    background: #ffffff;
+    border: 1px solid #5C5173;
+}
+/*주소, 상세주소, 배송메세지*/
+.delivery_adress_table .order_adress_table .adress_input, 
+.delivery_adress_table .order_adress_table .adress_more_input,
+.delivery_adress_table .order_adress_table .order_msg_input{
+    width: 300px;
+}
+/*우편번호 버튼*/
+.zip_code_btn{
+    border: 1px solid #5c5173;
+    color: #5c5173;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin-left: 25px;    
+}
+/*주소지 테이블 끝*/
+
+/*쿠폰 테이블*/
+/*바깥 div*/
+.coupon_table_container{
+    width: 690px;
+    height: 94px;
+    margin: 0;
+    border-bottom: 2px solid #5c5173;
+}
+
+table.coupon_table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 690px;
+}
+
+/*좌측 메뉴 설명란*/
+table.coupon_table th {
+    font-size: 18px; 
+    text-align: right;
+    width: 290px;
+    height: 20px;
+    line-height: 20px;
+    padding: 10px 10px 10px 0px;
+}
+/*우측 input 입력란*/
+table.coupon_table td {
+    width: 500px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 10px 10px 10px 10px;
+}
+/*사용가능 포인트 부분*/
+table.coupon_table td span{
+    font-size: 10px;
+}
+
+/*쿠폰 테이블 내 select, option 디자인*/
+/*선택 콤보박스 화살표, 내부 텍스트 조정*/
+select {
+    display: block;
+    border: 1px solid #ccc;
+    width: 200px;
+    font-size: 18px;
+    color: #777;
+    height: 18px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    -webkit-appearance: none;
+    background: url('../../img/mcat_arrow_down_final.png') no-repeat 100% 50%;
+    text-align: center;
+    text-align-last: right;
+    padding-right: 30px;
+    border: none;
+    border-bottom: 1px solid #5c5173;
+}
+
+option {
+    direction: rtl;
+    text-align-last: right;
+}
+/*포인트 사용*/
+.point_use{
+    width: 170px;
+    height: 18px;
+    line-height: 18px;
+    background: #ffffff;
+    border: 1px solid #5C5173;
+}
+
+.coupon_table_container .coupon_table input.point_use{
+    background: url('../../img/mcat_point_font.png') no-repeat 100% 50%;
+    direction: rtl;
+    padding-right: 30px;
+}
+/*쿠폰 테이블 끗*/
+
+/*결제선택 테이블*/
+.payment_choice{
+    display: inline-block;
+    width: 690px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+/*바깥 div*/
+.payment_choice_container{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 624px;
+    height: 180px;
+    margin: 0;
+}
+
+table.payment_choice_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    width: 624px;
+    height: 180px;
+}
+
+/*라디오버튼 감싼 부분*/
+table.payment_choice_table th {
+    font-size: 12px; 
+    text-align: right;
+    width: 46px;
+    height: 60px;
+    line-height: 60px;    
+    border-collapse: collapse;
+}
+/*제목 감싼 부분*/
+table.payment_choice_table td {
+    width: 110px;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 9px;
+    vertical-align: middle;
+    border-collapse: collapse;
+    border-right: 1px solid #5c5173;
+    font-size: 16px;
+}
+
+table.payment_choice_table tr {
+    border: 1px solid #5c5173;
+}
+/*결제선택 테이블 끝*/
+
+/*무통장 테이블*/
+.bank_deposit{
+    display: inline-block;
+    width: 690px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+.bank_deposit-container{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 624px;
+    height: 180px;
+    margin: 0;
+}
+table.bank_deposit-table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    width: 624px;
+    height: 180px;
+}
+
+/*라디오버튼 감싼 부분*/
+
+/*제목 감싼 부분*/
+table.bank_deposit-table td {
+    width: 110px;
+    height: 60px;
+    line-height: 60px;
+    border-collapse: collapse;
+    border-right: 1px solid #5c5173;
+    text-align: center;
+    font-size: 16px;
+}
+
+table.bank_deposit-table tr {
+    border: 1px solid #5c5173;
+}
+
+/*무통장입금 파트 선택시 색상변환*/
+.selected{
+    background: #5c5173;    
+    color: #ffffff;
+}
+/*무통장 테이블 끝*/
+
+/*구매상품목록 테이블*/
+/*테이블 바깥 div*/
+.ordered_product_list{
+    width: 690px;
+    height: 200px;
+    margin: 0 auto;
+}
+/*테이블 자체*/
+.ordered_product_list-table{
+    width: 690px;
+    height: 165px;
+    margin: 0 auto;
+}
+/* 보더간 공백제거 */
+.ordered_product_list table.ordered_product_list-table{
+	border-collapse: collapse;
+}
+
+
+/*테이블 헤드파트*/
+.ordered_product_list-table thead{
+	width: 690px;
+	height: 26px;
+}
+
+.ordered_product_list-table thead tr{
+	width: 690px;
+	height: 26px;
+}
+
+.ordered_product_list-table thead tr th{    
+    background: #5c5173;
+    color: #ffffff;
+    height: 26px;
+    font-size: 10px;
+}
+
+.ordered_product_list-table thead tr th span{
+    float: left;
+    margin-left: 20px;
+}
+
+.ordered_product_list-table tbody{
+	height: 55px;
+	width: 690px;
+}
+
+.ordered_product_list-table tbody tr{
+	height: 55px;
+	width: 690px;
+}
+/*테이블 내부 폰트 크기*/
+.ordered_product_list-table tbody tr td{
+	font-size: 11px;
+    border-bottom: 2px solid #5C5173;
+}
+/*상품정보 테이블 이미지 크기*/
+.ordered_product_list-table tbody tr td img{
+	width: 45px;
+    height: 45px;
+}
+/*구매상품목록 끝*/
+
+/*최종결제정보 목록 테이블*/
+/*바깥 div*/
+.total_price_container{
+    width: 280px;
+    height: 210px;
+    padding: 15px;
+    border-top: 5px solid #5c5173;
+}
+
+/*최종가격 테이블 전체 마진*/
+table.total_price_table {
+	margin : 0 auto;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+    border-spacing: 1px;
+}
+/*텍스트 파트 : 왼쪽*/
+table.total_price_table th {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;    
+}
+/*가격파트 : 오른쪽*/
+table.total_price_table td {
+    width: 160px;
+    height: 40px;
+    line-height: 40px; 
+    font-size: 18px;
+    text-align: right;
+}
+/*결제예정금액 열 크기 조정*/
+table.total_price_table tr:last-child th,
+table.total_price_table tr:last-child td{       
+    line-height: 60px;
+    border-collapse: collapse;
+    border-top : 1px solid #5c5173;
+    border-bottom: 2px solid #5C5173;
+}
+/*결제예정금액 폰트 색상*/
+table.total_price_table tr:last-child td:last-child {
+    font-size: 30px;
+    color: #F25E5E;    
+}
+/*결제하기 버튼*/
+.total_price_btn_conatiner{
+    width: 260px;
+    padding-top: 20px;
+    margin: 0 auto;    
+}
+
+.total_price_btn_conatiner input.order_go{
+    width: 230px;
+    height: 62px;
+    line-height: 25px;
+    font-size: 25px;
+    border: none;
+    background: #5c5173;
+    color: #ffffff;
+}
+/*최종가격 테이블 끝*/
+
+/*결제동의 테이블*/
+/*결제동의 테이블 바깥 div*/
+.payment_agreement_conatiner{
+    width: 270px;
+    height: 210px;
+    padding: 0px 10px 0px 10px;
+    margin: 0 auto;
+}
+
+.payment_agreement_conatiner span{
+    display: inline-block;
+    width: 270px;
+    height: 30px;
+    line-height: 30px;
+    background: #5c5173;
+    color: #ffffff;    
+    margin-left: -10px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+
+/*결제동의 테이블 전체 마진*/
+table.payment_agreement_table {
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 15px;
+    border-spacing: 1px;
+    text-align: left;
+}
+/*텍스트 파트 : 왼쪽*/
+table.payment_agreement_table th {
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    padding-right: 10px;
+    font-size: 15px;    
+    text-align: right;
+    
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+table.payment_agreement_table th:last-child{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 2px solid #5c5173;
+    border-bottom: 2px solid #5c5173;
+} 
+
+/*설명문 파트 : 오른쪽*/
+table.payment_agreement_table td {
+    width: 100%;
+    height: 40px;
+    line-height: 100%; 
+    font-size: 10px;
+}

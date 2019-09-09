@@ -1,13 +1,12 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>상품등록 페이지 - 상세페이지 작성</title>
+	    <title>공지사항 수정페이지</title>
     	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">	    
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
@@ -43,44 +42,18 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-<<<<<<< HEAD
-	            	<p>${sessionScope.productForm.prduct_nm}</p>
-=======
-	            	<c:choose>
-	            		<c:when test="${!empty sessionScope.productForm}">
-	            			<p>${sessionScope.productForm.prduct_nm}</p>
-	            		</c:when>
-	            		<c:otherwise>
-	            			<input type="text">
-	            		</c:otherwise>
-	            	</c:choose>
-	            	
->>>>>>> xydragon
+	            	<p>상품제목출력파트</p>
 
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            	<div class="smartEditor_container">
-		            		<form id="contentsForm" method="post">
-			            		<textarea id="txtContent" name="prduct_cn"></textarea>
+		            		<form id="contentsForm">
+			            		<textarea id="txtContent" name="contents"></textarea>
 			            	</form>
 		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-<<<<<<< HEAD
-	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite()">
-=======
-	            	<c:set var="url" value="${pageContext.request.requestURL}"></c:set>
-	            	<c:choose>
-	            		<!-- 공지사항 수정 페이지 -->
-	            		<c:when test="${url eq 'nots_update_page'}">
-	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onMotify(${url})">
-	            		</c:when>
-	            		<!-- 상품상세 수정 페이지 : 기본값 -->
-	            		<c:when test="${url eq 'product_update_page'}">
-	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite(${url})">
-	            		</c:when>
-	            	</c:choose>
->>>>>>> xydragon
+	            	<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료">
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -94,36 +67,27 @@
 		oAppRef: oEditors,
 		elPlaceHolder: document.getElementById('txtContent'), // html editor가 들어갈 textarea id
 		sSkinURI: "resources/se/SmartEditor2Skin.html",  // html editor가 skin url
-		htParams : {
-			bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseVerticalResizer : false,	// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-		},
 		fOnAppLoad: function () { 
 			//기본폰트
 			oEditors.getById["txtContent"].setDefaultFont("나눔고딕", 11);
 	        //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
-	        var contents = '';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
+	        var contents = ${not_cn};         //db에서 불러온 값을 여기에서 체워넣으면 됨.
 	        oEditors.getById["txtContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣음
 		    },
 		    fCreator: "createSEditor2"
 		});
 		
-		var onWrite = function(url){
+		var onWrite = function(){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-<<<<<<< HEAD
-			boardWriteForm.action ="product_reg_ok.mcat";              
-=======
-			boardWriteForm.action = url;              
->>>>>>> xydragon
+			boardWriteForm.action ="writeSubmit";              
 			boardWriteForm.submit();  
 		};
 		
-		var onModify = function(url){
+		var onModify = function(){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-			boardWriteForm.action =url;              
+			boardWriteForm.action ="modifySubmit";              
 			boardWriteForm.submit();  
 		};
 		

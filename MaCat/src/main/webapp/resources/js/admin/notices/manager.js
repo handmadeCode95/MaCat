@@ -4,37 +4,17 @@
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
-  	    var mbers_count;
+  	    var nots_count;
 		$.each(data, function(key, value){
-			if (key === "mbersDTO") {
+			if (key === "notsDTO") {
 				$.each(value, function(k, v){
-					result += '<tr id="' + v["mber_sq"] + '">';
-					result += '<td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"></td>';
-<<<<<<< HEAD
-					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled>' + v["mber_sq"] + '</td>';
-=======
-					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled></td>';
->>>>>>> xydragon
-					result += '<td><input name="mber_nm" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_nm"] + '" disabled></td>';
-					result += '<td>' + v["mber_gender"] + '</td>';
-					result += '<td>' + v["mber_id"] + '</td>';
-					result += '<td><input name="mber_pw" class="' + v["mber_sq"] + '" type="password" value="' + v["mber_pw"] + '" disabled></td>';
-					result += '<td><input name="mber_phone_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_phone_no"] + '" disabled></td>';
-					result += '<td><input name="mber_tel_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_tel_no"] + '" disabled></td>';
-					result += '<td><input name="mber_zip_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_zip_no"] + '" disabled></td>';
-					result += '<td><input name="mber_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_adres"] + '" disabled></td>';
-					result += '<td><input name="mber_detail_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_detail_adres"] + '" disabled></td>';
-					result += '<td><input name="mber_email" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_email"] + '" disabled></td>';
-					result += '<td>' + v["mber_birthday_dt"].substring(0, 10) + '</td>';
-					result += '<td>' + v["mber_reg_dt"].substring(0, 10) + '</td>';
-					result += '<td>' + v["mber_conect_dt"].substring(0, 10) + '</td>';
-					result += '<td>' + v["mber_point_sum"] + 'p</td></tr>';
-					//result += "<option>등급선택</option>";
-					//$.each(data.mber_grad, function(mgKey, mgValue) {
-					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//})
-					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//result += "</select></td></tr>";
+					result += '<tr id="' + v["not_sq"] + '">';
+					result += '<td class="checks"><input name="nots" class="chkbox" type="checkbox" id="table_chk" value="' + v["not_sq"] 
+							 + '"><label for="table_chk"></label></td>';
+//					result += '<td><input name="not_sq" class="' + v["not_sq"] + '" type="hidden" value="' + v["not_sq"] + '" disabled>' + v["not_sq"] +'</td>';
+					result += '<td>' + v["not_sj"] + '</td>';
+					result += '<td><input name="not_sj" class="' + v["not_sq"] + '" type="text" value="' + v["not_sj"] + '" disabled></td>';
+					result += '<td>' + v["not_reg_dt"].substring(0, 10) + '</td></tr>';
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -68,17 +48,16 @@
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-<<<<<<< HEAD
-				
-=======
->>>>>>> xydragon
-				mbers_count = pageDTO.totalRecord;
+			}else if (key === "mbers_count"){
+				nots_count = value;
 			}
-
 		});
-		$("#searchResult").html(result);
-		$("#paging").html(pagingResult);
-		$("#mbers_count").html(mbers_count);
+		$("#searchResult").empty();
+		$("#searchResult").append(result);
+		$("#paging").empty();
+		$("#paging").append(pagingResult);
+		$("#nots_count").empty();
+		$("#nots_count").append(mbers_count);
 		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
@@ -99,8 +78,8 @@
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 mbers일 경우에는 무조건 배열처리(mbers는 체크박스이다)
-	        	if (name === "mbers") {
+	        	// 이름이 nots일 경우에는 무조건 배열처리(mbers는 체크박스이다)
+	        	if (name === "nots") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -111,45 +90,6 @@
 	    return JSON.stringify(newJSON);
 	};
 	
-	
-    $(".join_period_li").each(function() {
-        $(this).click(function() {
-            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CSS인 selected클래스로 적용
-            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
-            $("#join_date").prop("checked", false); // 기간 input 초기화
-    		$("#join_date").trigger("change");		// 기간 input 초기화
-    		$(this).children().attr("disabled", false); // 히든값
-    		$(this).siblings().children().attr("disabled", true);
-        });
-    });
-    
-    
-    $(".connect_period_li").each(function() {
-        $(this).click(function() {
-            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CSS인 selected클래스로 적용
-            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
-            $("#connect_term").prop("checked", false);  // 기간 input 초기화
-    		$("#connect_term").trigger("change");		// 기간 input 초기화
-    		$(this).children().attr("disabled", false); // 히든값
-    		$(this).siblings().children().attr("disabled", true);
-        });
-    });
-    
-    
-    $("#join_date").change(function(){
-        if($("#join_date").is(":checked")){
-        	$(".join_period_li").removeClass("selected");
-        }
-    });
-    
-    
-    $("#connect_term").change(function(){
-        if($("#connect_term").is(":checked")){
-        	$(".connect_period_li").removeClass("selected");
-        }
-    });
-    
-
     // 검색 영역 체크박스 체크시 인풋 활성화/비활성화, 포커싱
 	$(".search").change(function() {
 		if ($(this).prop("checked")) {
@@ -168,9 +108,9 @@
 			$(this).siblings(".search").prop("checked", true);
 			$(this).siblings(".search").trigger("change");
 		}
-		if (!$(this).parents("div").siblings(".search").prop("checked")) {
-			$(this).parents("div").siblings(".search").prop("checked", true);
-			$(this).parents("div").siblings(".search").trigger("change");
+		if (!$(this).parents("div").children(".search").prop("checked")) {
+			$(this).parents("div").children(".search").prop("checked", true);
+			$(this).parents("div").children(".search").trigger("change");
 			$(this).children().focus();
 		}
 	});
@@ -189,6 +129,7 @@
 			
 			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
 			$("#allCheck").prop("checked", false);
+
 		}
 	});
 	
@@ -203,7 +144,7 @@
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "nots_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -219,10 +160,11 @@
 	});
 	
 	
-	// 회원 검색 AJAX
+	// 공지사항 검색 AJAX
 	$("#searchBtn").click(function() {
+		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "mbers_search.mcat",
+			url			: "nots_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -237,7 +179,6 @@
 		});
 	});
 	
-
 	// 수정 AJAX
 	$(document).on("click", "#update", function(){
 		
@@ -257,17 +198,17 @@
 	        // 담은 열 정보를 arr배열에 추가
 	        arr.push(row);
 	    });
-	    // arr배열을 mbersDTO라는 key값과 함께 저장
-	    data = {mbersDTO : arr};
+	    // arr배열을 notsDTO라는 key값과 함께 저장
+	    data = {notsDTO : arr};
 	    // JSON형태로 직렬화
-	    var mbersDTO = JSON.stringify(data);
+	    var notsDTO = JSON.stringify(data);
 
 	    $.ajax({
-			url			: "mbers_update.mcat",
+			url			: "nots_update.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: mbersDTO,
+            data		: notsDTO,
             success		: function(data) {
             				  $().getTable(data);
             			  },
@@ -278,11 +219,10 @@
 		});
 	});
 		
-	
-	// 탈퇴 AJAX
-	$(document).on("click", "#withdrawal", function(){
+	// 삭제 AJAX
+	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "withdrawal.mcat",
+			url			: "nots_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

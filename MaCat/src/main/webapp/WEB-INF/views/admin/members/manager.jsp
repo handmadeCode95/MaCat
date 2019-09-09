@@ -178,7 +178,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="member_info_table_title">
-	                <span>회원정보 (총 <b id="mbers_count">${mbers_count}</b> 명)</span>
+	                <span>회원정보 (총 <b id="mbers_count">${pageDTO.totalRecord}</b> 명)</span>
 	            </div>
 	            <div id="members" class="info_table">
 	                <form>
@@ -283,9 +283,8 @@
 								<%-- 다음 --%>
 								<c:choose>
 									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
-										<li class="disable"><img
-											src="resources/img/mcat-arrow-slider-right-grey.png"
-											height="10px"></li>
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
 									</c:when>
 									<c:otherwise>
 										<li><a class="page"> <img
