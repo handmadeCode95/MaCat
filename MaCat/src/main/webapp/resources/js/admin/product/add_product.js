@@ -80,7 +80,6 @@ $(document).ready(function(){
 	
 	// 메인 이미지
 	function readInputFile(input) {
-<<<<<<< HEAD
 		if (input.files && input.files[0]) {
 		    var reader = new FileReader();
 		    reader.readAsDataURL(input.files[0]);
@@ -109,46 +108,6 @@ $(document).ready(function(){
 		    		$(".sub_cover_layer").css("visibility", "hidden");
 		    	}
 		    }
-=======
-	if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.readAsDataURL(input.files[0]);
-	    
-	    reader.onload = function(e) {
-	        $('#preview-main').html("<img src=" + e.target.result + ">");
-	    }
-
-	    }
-	}
-	$(".inp-img-main").on('change', function() {
-	    readInputFile(this);
-	});
-
-	// 추가 이미지 1
-	function readInputFile_sub1(input) {
-	if (input.files && input.files[0]) {
-	    var reader_sub1 = new FileReader();
-	    reader_sub1.readAsDataURL(input.files[0]);
-	    reader_sub1.onload = function(e) {
-	        $('#preview-sub1').html("<img src=" + e.target.result + ">");
-	    }
-	    
-	   
-	    }
-	}
-	$(".inp-img-sub1").on('change', function() {
-	    readInputFile_sub1(this);
-	});
-
-	//추가 이미지 2
-	function readInputFile_sub2(input) {
-	if (input.files && input.files[0]) {
-	    var reader_sub2 = new FileReader();
-	    reader_sub2.onload = function(e) {
-	        $('#preview-sub2').html("<img src=" + e.target.result + ">");
-	    }
-	    reader_sub2.readAsDataURL(input.files[0]);
->>>>>>> xydragon
 	    }
 	}
 	
