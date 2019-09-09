@@ -30,7 +30,7 @@
 				<a>판매관리</a>
 			</li>
 			<ul class="prd">
-					<li><a href="product_manager.mcat">상품</a></li>
+					<li><a href="product_manage.mcat">상품</a></li>
 					<li><a href="add_product.mcat">상품등록</a></li>
 					<li>주문</li>
 					<li>배송</li>
@@ -67,7 +67,7 @@
 				<a>게시글 관리</a>
 			</li>
 			<ul class="prd">
-					<li><a href="nots_manager.mcat">공지</a></li>
+					<li><a href="nots_manage.mcat">공지</a></li>
 					<li><a href="faq_manage.mcat">FAQ</a></li>
 				</ul>
 			<center>

@@ -7,7 +7,7 @@
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>회원 정보 관리</title>
+	    <title>FAQ 관리</title>
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->
@@ -17,13 +17,13 @@
 	    <!-- 라디오박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
-	    <link rel="stylesheet" href="resources/css/admin/members/admin_table.css">
+	    <link rel="stylesheet" href="resources/css/admin/faq/admin_table.css">
 	    <!--input text입력창 조절 css-->
-	    <link rel="stylesheet" href="resources/css/admin/members/input_textarea.css">
+	    <link rel="stylesheet" href="resources/css/admin/faq/input_textarea.css">
 	    <!-- 페이징 -->
 	    <link rel="stylesheet" href="resources/css/paging.css">	    
 	    <!-- 스크립트 -->
-	    <script type="text/javascript" src="resources/js/admin/members/manager.js"></script>
+	    <script type="text/javascript" src="resources/js/admin/faq/management.js"></script>
 	
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
 	    <!-- checkbox 전체선택 쿼리 포함 -->
@@ -42,113 +42,43 @@
 	                <div class="member_information_container">
 	                    <!--회원정보-->
 	                    <div class="member_info">
-	                        <div class="member_info_title"><span>회원정보</span></div>
+	                        <div class="member_info_title"><span>FAQ</span></div>
 	                        <div class="infomation_control_part">
 	                            <!--이름 아이디 핸드폰번호 생일-->
 	                            <div class="member_info_middle">
+	                            
 	                                <div class="checks">
 	                                    <input type="checkbox" id="name_chk">
 	                                    <label for="name_chk" style="margin-right: 54px; ">이름</label>
 	                                    <input type="text" name="mber_nm">
 	                                </div>
+	                                
 	                                <div class="checks">
 	                                    <input type="checkbox" id="id_chk">
 	                                    <label for="id_chk" style="margin-right: 40px;">아이디</label>
 	                                    <input type="text" name="mber_id">
 	                                </div>
+	                                
 	                                <div class="checks">
 	                                    <input type="checkbox" id="cellphone_chk">
 	                                    <label for="cellphone_chk" style="margin-right: 12px;">핸드폰번호</label>
 	                                    <input type="tel" name="mber_phone_no">
 	                                </div>
+	                                
 	                                <div class="checks">
 	                                    <input type="checkbox" id="birth_chk">
 	                                    <label for="birth_chk">생일</label>
 	                                    <div>
 	                                        <input type="date" class="birth_box1" name="mber_birthday_dt_start"> ~
 	                                        <input type="date" class="birth_box2" name="mber_birthday_dt_end">
-	                                    </div>
-	
+	                                    </div>	
 	                                </div>
+	                                
 	                            </div>
-	                            <!--회원번호 회원등급 전화번호-->
-	                            <div class="member_info_right">
-	                                <div class="checks">
-	                                    <input type="checkbox" id="member_no">
-	                                    <label for="member_no" style="margin-right: 13px;">회원번호</label>
-	                                    <input type="text" name="mber_sq">
-	                                </div>
-	                                <div class="checks">
-	                                    <input type="checkbox" id="member_grade">
-	                                    <label for="member_grade" style="margin-right: 13px;">회원등급</label>
-	                                    <input type="text" name="mber_grad_nm">
-	                                </div>
-	                                <div class="checks">
-	                                    <input type="checkbox" id="phone_num">
-	                                    <label for="phone_num" style="margin-right: 13px;">전화번호</label>
-	                                    <input type="tel" name="mber_tel_no">
-	                                </div>
-	                                <div class="gender_radio_btn">
-	                                    <input type="radio" class="gender_all" id="gender_all" name="mber_gender" value="0" checked>
-	                                    <label for="gender_all">전체</label>
-	
-	                                    <input type="radio" class="female" id="female" name="mber_gender" value="1">
-	                                    <label style="margin-left: 50px;margin-right: 50px;" for="female">여자</label>
-	
-	                                    <input type="radio" class="male" id="male" name="mber_gender" value="2">
-	                                    <label for="male">남자</label>
-	                                </div>
-	                            </div>
+	                            	                            
 	                        </div>
 	                    </div>
-	                    <!--기간-->
-	                    <div class="searching_term">
-	                        <div class="searching_term_title"><span>기간</span></div>
-	                        <div class="searching_term_middle">
-	                            <div class="checks">
-	                                <input type="checkbox" id="join_date">
-	                                <label for="join_date" style="margin-right: 36px;">가입일</label>
-	                                <div>
-	                                    <input type="date" class="join_box1" name="mber_reg_dt_start">
-	                                    ~
-	                                    <input type="date" class="join_box2" name="mber_reg_dt_end">
-	                                </div>
-	                            </div>
-	                            <div class="checks">
-	                                <input type="checkbox" id="connect_term">
-	                                <label for="connect_term" style="margin-right: 21px;">접속기간</label>
-	                                <div>
-	                                    <input type="date" class="connect_box1" name="mber_conect_dt_start">
-	                                    ~
-	                                    <input type="date" class="connect_box2" name="mber_conect_dt_end">
-	                                </div>
-	
-	                            </div>
-	                        </div>
-	                        <!-- 기간 선택 파트 -->
-	                        <div class="searching_term_right part2">
-	                            <div class="join_period_btn">
-	                                <ul>
-	                                    <li>오늘</li>
-	                                    <li>1주일</li>
-	                                    <li>1개월</li>
-	                                    <li>3개월</li>
-	                                    <li>6개월</li>
-	                                    <li>1년</li>
-	                                </ul>
-	                            </div>
-	                            <div class="connect_period_btn">
-	                                <ul>
-	                                    <li>오늘</li>
-	                                    <li>1주일</li>
-	                                    <li>1개월</li>
-	                                    <li>3개월</li>
-	                                    <li>6개월</li>
-	                                    <li>1년</li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                    </div>
+	                    
 	                    <!-- 버튼 파트-->
 	                    <div class="btn_part">
 	                        <div class="and_or_radio_btn">

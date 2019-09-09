@@ -42,7 +42,7 @@ public class AdminNoticesController {
 	// 공지사항 조회로 이동
 	@GetMapping("nots_manage.mcat")
 	public ModelAndView redirectNoticesManagerCmd(ModelAndView mv, String cPage) {
-		mv.setViewName("admin/notices/management");
+		mv.setViewName("admin/notices/manager");
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
 		PageDTO pageDTO = new PageDTO();
