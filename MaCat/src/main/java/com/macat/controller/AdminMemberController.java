@@ -76,9 +76,7 @@ public class AdminMemberController {
 
 		PagingUtil.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
-
 		map.put("mbers_count", count);
-
 		
 		map.put("mber_grad", adminMemberManagementDAO.getMemberGradeList());
 

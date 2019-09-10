@@ -63,8 +63,7 @@
 		SELECT COUNT(*) FROM PRODUCTS_TB WHERE CTGRY_NM = #{ctgry_nm}
 	</select>
 	
-	<!-- 상품 정보 조회 -->
-	
+	<!-- 상품 정보 조회 -->	
 	<select id="products_group_list" parameterType="Map" resultType="ProductsDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM PRODUCTS_TB WHERE PRDUCT_CTGRY_GROUP = #{prduct_ctgry_group} ORDER BY PRDUCT_SALE_SUM DESC, PRDUCT_VIEW_CNT DESC, PRDUCT_REG_DT DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}		
 	</select>
@@ -195,7 +194,7 @@
 	</select>
 	
 	<!-- 상품 and조건 검색 -->
-	<select id="producst_and_search" parameterType="ProductsSearchDTO" resultType="ProductsDTO">
+	<select id="products_and_search" parameterType="ProductsSearchDTO" resultType="ProductsDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM products_tb
 		<where>
 			<if test="prduct_sq != null">

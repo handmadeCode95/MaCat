@@ -4,11 +4,15 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var qnas_count;
 		$.each(data, function(key, value){
 			if (key === "qnaDTO") {
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["qna_sq"] + '">';
-					result += '<td>' + v["qna_ans_st"] + '</td>';
+					result += '<td class="checks"><input name="qnas" class="chkbox" type="checkbox" id="table_chk" value="'
+							+ v["qna_sq"] + '"><label for="table_chk"></label></td>';
+					result += '<td><input name="qna_sq" class="' + v["qna_sq"] + '" type="hidden" value="' + v["qna_sq"] +'" disabled>'
+							+ v["qna_ans_st"] + '</td>';
 					result += '<td>' + v["qc_nm"] + '</td>';
 					result += '<td>' + v["qna_sq"] + '</td>';
 					result += '<td><a href="qna_manage.mcat?qna_sj="' + v["qna_sj"] + '">' + v["qna_sj"] + '</a></td>';
@@ -16,12 +20,6 @@ $(function() {
 					result += '<td>' + v["qna_id"] + '</td>';
 					result += '<td>' + v["qna_reg_dt"] + '</td>';
 					result += '<td>' + v["qna_view_cnt"] + '</td>';
-					//result += "<option>등급선택</option>";
-					//$.each(data.mber_grad, function(mgKey, mgValue) {
-					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//})
-					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//result += "</select></td></tr>";
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -55,12 +53,14 @@ $(function() {
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-		}
-	});
-	$("#searchResult").empty();
-	$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
+			}else if (key === "mbers_count"){
+				qnas_count = value;
+			}
+		});
+	$("#searchResult").html(result);
+	$("#paging").html(pagingResult);
+	$("#qnas_count").html(qnas_count);
+	if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
 	
@@ -80,8 +80,8 @@ $(function() {
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 "prduct"일 경우에는 무조건 배열처리(prduct는 체크박스이다)
-	        	if (name === "prduct") {
+	        	// 이름이 "qnas"일 경우에는 무조건 배열처리(qnas는 체크박스이다)
+	        	if (name === "qnas") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -180,7 +180,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "qna_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -200,7 +200,7 @@ $(function() {
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "mbers_search.mcat",
+			url			: "qna_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -216,7 +216,7 @@ $(function() {
 	});
 	
 
-	// 수정 AJAX
+	// 수정 AJAX : 작업필요 190911
 	$(document).on("click", "#update", function(){
 		
 		/* 체크된 열만 JSON 배열로 파싱 */
@@ -259,9 +259,9 @@ $(function() {
 		
 	
 	// 탈퇴 AJAX
-	$(document).on("click", "#withdrawal", function(){
+	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "withdrawal.mcat",
+			url			: "qna_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

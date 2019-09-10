@@ -9,7 +9,7 @@ $(function() {
 			if (key === "productsDTO") {
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["prduct_sq"] + '">';
-					result += '<td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"></td>';
+					result += '<td class="checks"><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"><label for="table_chk"></label></td>';
 					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>'+ v["prduct_sq"] + '</td>';
 					result += '<td>' + v["prduct_cd"] + '</td>';
 					result += '<td>' + v["ctgry_nm"] + '</td>';
@@ -27,7 +27,7 @@ $(function() {
 					result += '<td>' + v["prduct_view_cnt"] + '</td>';
 					result += '<td>' + v["prduct_rating_avg"] + '</td>';
 					result += '<td>' + v["prduct_sale_sum"] + '</td>';
-					result += '<td>' + v["prduct_amt"] + '</td>';
+					result += '<td>' + v["prduct_amt"] + '</td></tr>';
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -66,12 +66,10 @@ $(function() {
 				// prducts_count 전역변수를 pageDTO.totalRecord로 정의하는 문장
 		}
 	});
-	$("#searchResult").empty();
-	$("#searchResult").append(result);
-	$("#paging").empty();
-	$("#paging").append(pagingResult);
-	$("#prducts_count").empty();
-	$("#prducts_count").append(prducts_count);		
+	$("#searchResult").html(result);
+	$("#paging").html(pagingResult);
+	$("#prducts_count").html(prducts_count);		
+	if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}	
 	
 	// form 데이터를 JSON형식으로 변환

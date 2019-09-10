@@ -9,19 +9,21 @@
 	    <meta charset="UTF-8">
 	    <title>고객 문의 관리</title>
 	    <!-- 초기화 -->
-	    <link rel="stylesheet" href="resources/css/admin/customer_center/normalize.css">
+	    <link rel="stylesheet" href="resources/css/normalize.css">
+   	    <!-- 페이징 -->
+	    <link rel="stylesheet" href="resources/css/paging.css">	     
+   	    <!-- 체크박스 css -->
+	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
+	    	    
 	    <!-- 관리자페이지 css -->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/manager.css">
-	    <!-- 체크박스 css -->
-	    <link rel="stylesheet" href="resources/css/admin/customer_center/checkbox.css">
 	    <!-- 라디오박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/admin_table.css">
 	    <!--input text입력창 조절 css-->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/input_textarea.css">
-	    <!-- 페이징 -->
-	    <link rel="stylesheet" href="resources/css/admin/customer_center/paging.css">	    
+	    
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
 	    
@@ -156,7 +158,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="qna_info_table_title">
-	                <span>고객문의정보 (총 <p>1,837</p> 개)</span>
+	                <span>고객문의정보 (총 <b id="qnas_count">${pageDTO.totalRecord}</b> 개)</span>
 	            </div>
 	            <div id="qnas" class="info_table">
 	                <form>
@@ -175,7 +177,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input name="mbers" type="checkbox" id="allCheck"></th>
+	                                    <th class="checks"><input type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 	                                    <th scope="col">답변여부</th>
 	                                    <th scope="col">카테고리</th>
 	                                    <th scope="col">문의 번호</th>
@@ -189,22 +191,73 @@
 	                            <tbody id="searchResult">
 	                            	<c:forEach var="i" items="${qnaDTO}">
 		                                <tr id="${i.qna_sq}">
-		                                    <td>${i.qna_ans_st }</td>
-		                                    <td>${i.qc_nm }</td>
-		                                    <td>${i.qna_sq }</td>
+		                                	<td class="checks"><input name="qnas" class="chkbox" type="checkbox" id="table_chk" value="${i.qna_sq}"><label for="table_chk"></label></td>
+		                                    <td><input name="qna_sq" class="${i.qna_sq}" type="hidden" value="${i.qna_sq}" disabled>${i.qna_ans_st}</td>
+		                                    <td>${i.qc_nm}</td>
+		                                    <td>${i.qna_sq}</td>
 		                                    <td><a href="qna_manage.mcat?qna_sj='${i.qna_sj}'">${i.qna_sj}</a></td>
-		                                    <td>${i.qna_nm }</td>
-		                                    <td>${i.qna_id }</td>
-		                                    <td>${i.qna_reg_dt }</td>
-		                                    <td>${i.qna_view_cnt }</td>
+		                                    <td>${i.qna_nm}</td>
+		                                    <td>${i.qna_id}</td>
+		                                    <td>${i.qna_reg_dt}</td>
+		                                    <td>${i.qna_view_cnt}</td>
 		                                </tr>
 		                             </c:forEach>
 	                            </tbody>
 	                        </table>
 	                    </div>
+	                    
+	                    <!-- 페이징 div -->
+	                    <div id="pagingDiv">
+							<ol id="paging">
+								<%-- 이전 --%>
+								<c:choose>
+									<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"> 
+										<input type="hidden" name="cPage" value="${pageDTO.beginBlock - 1}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+		
+								<%-- 블록안에 들어간 페이지번호들 --%>
+								<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}"
+									step="1" var="i">
+									<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
+									<c:choose>
+										<c:when test="${i == pageDTO.nowPage}">
+											<li class="now">${i}</li>
+										</c:when>
+										<c:otherwise>
+											<li><a class="page">${i}<input type="hidden"
+													name="cPage" value="${i}"></a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+		
+								<%-- 다음 --%>
+								<c:choose>
+									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page"> <img
+												src="resources/img/mcat-arrow-slider-right-grey.png"
+												height="10px"> <input type="hidden" name="cPage"
+												value="${pageDTO.beginBlock + pageDTO.pagePerBlock}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ol>
+						</div>
+	                    
 	                    <div class="edit_delete_btn">
 	                        <input class="edit_btn" type="button" value="수정" id="update" />
-	                        <input class="delete_btn" type="button" value="삭제" id="withdrawal" />
+	                        <input class="delete_btn" type="button" value="삭제" id="delete" />
 	                    </div>
 	                </form>
 	            </div>

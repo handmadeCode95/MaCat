@@ -41,7 +41,7 @@ input[type=password] {
     display: block;
 }
 
-.info_table .table_wrap table {
+.info_table .table_wrap table.type11 {
     border-collapse: collapse;
     text-align: center;
     margin: 0px 23px 0px 0px;
@@ -71,7 +71,7 @@ input[type=password] {
     font-size: 15px;
 }
 
-.info_table .table_wrap table.type11 th input,label{	
+.info_table .table_wrap table.type11 th input, label{	
 	margin-left: 7px;
 }
 
@@ -91,12 +91,19 @@ input[type=password] {
     text-align: center;
     border: none;    
 }
+/* 글씨 안보이는거 임시로 보이게 함, 변경가능 */
+.info_table .table_wrap .type11 tbody tr td,
+.info_table .table_wrap .type11 tbody tr td a
+{
+    color : black;
+}
+
 /*disable 일때 = 기본값*/
 input[disabled='disabled']{
     background: #fff;
     color : #000;
 }
-/*회원정보 테이블 수정상태일 때*/
+/*테이블 수정상태일 때*/
 #searchResult input{
     color: #f2a766;     
     background: #fff;

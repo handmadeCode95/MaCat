@@ -85,7 +85,7 @@
                         <!--버튼들 담은 div-->
                         <div class="view_refresh_btn">
                             <input id="searchBtn" class="view_btn" type="button" value="조회" />
-                            <input class="refresh_btn" type="button" value="초기화" />
+                            <input class="refresh_btn" type="reset" value="초기화" />
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
        						<colgroup>
 								<col width="40" />	<!--체크박스-->
 								<col width="100" /> <!--글번호-->
-								<col width="800" />	<!--제목-->
+								<col width="100%" />	<!--제목-->
 								<col width="200" /> <!--작성일-->
 							</colgroup>              
                             <thead>
@@ -115,7 +115,7 @@
                             <tbody id="searchResult">
                             	<c:forEach var="i" items="${notsDTO}">
 	                            	<tr id="${i.not_sq}">
-										<td class="checks"><input name="nots" class="chkbox" type="checkbox" id="table_chk" value="${i.not_sq}"><label for="table_chk"></label>
+										<td class="checks"><input name="nots" class="chkbox" type="checkbox" id="table_chk" value="${i.not_sq}"><label for="table_chk"></label></td>
 										<td><input name="not_sq" class="${i.not_sq}" type="hidden" value="${i.not_sq}" disabled>${i.not_sq}</td>		
 										<td>${i.not_sj}</td>
 										<td>${i.not_reg_dt.substring(0, 10)}</td>

@@ -41,70 +41,70 @@ input[type=password] {
     display: block;
 }
 
-.info_table .table_wrap table {
+.info_table .table_wrap table.type11 {
     border-collapse: collapse;
     text-align: center;
     margin: 0px 23px 0px 0px;
-    padding-top: 34px;
-    
-    width: 1592px;  
-    
+    padding-top: 34px;    
+    width: 1592px;      
     table-layout: fixed;
 }
 
-
-table.type11 {
-    border-collapse: separate;
-    text-align: center;
-    margin: 0px 23px 130px 26px;
-    padding-top: 34px;
-    width: 1596px;    
-}
-
-table.type11 th { 
+.info_table .table_wrap table.type11 th { 
     height: 40px;    
-    vertical-align: middle;
-    
+	line-height: 40px;
+    vertical-align: middle;    
     color: #ffffff;
     background: #F25E5E;
-    border: 1px solid #707070;
-    
-    font-size: 15px;
+    border: 1px solid #707070;    
+    font-size: 15px;    
+	text-align: center;
 }
 
-table.type11 th:first-child {
+.info_table .table_wrap table.type11 th:first-child {
     width: 40px;    
     height: 40px;    
-    vertical-align: middle;
-    
+	line-height: 40px;
     color: #ffffff;
     background: #ffffff;
-    border: 1px solid #707070;
-    
+    border: 1px solid #707070;    
     font-size: 15px;
 }
 
-table.type11 td {
+.info_table .table_wrap table.type11 tr th.checks input, label{	
+	margin-left: 7px;
+}
+
+.info_table .table_wrap table.type11 td {
     height: 34px;
-    vertical-align: middle;
-    
+	line-height: 34px;
+    vertical-align: middle;    
     border: 1px solid #707070;
     box-sizing: content-box;
-    background: #FFFFFF;
-    
+    background: #FFFFFF;    
     font-size: 15px;    
+	color: black;
 }
-/*테이블 내 input*/
+/**/
 .info_table .table_wrap .type11 tbody tr td input{
     width: 95%;
     text-align: center;
     border: none;    
-    background: #fff;
-    color: black;
 }
-
+/* 글씨 안보이는거 임시로 보이게 함, 변경가능 */
 .info_table .table_wrap .type11 tbody tr td,
 .info_table .table_wrap .type11 tbody tr td a
 {
     color : black;
+}
+
+/*disable 일때 = 기본값*/
+input[disabled='disabled']{
+    background: #fff;
+    color : #000;
+}
+/*테이블 수정상태일 때*/
+#searchResult input{
+    color: #f2a766;     
+    background: #fff;
 }

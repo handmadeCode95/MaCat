@@ -52,12 +52,9 @@
 				nots_count = value;
 			}
 		});
-		$("#searchResult").empty();
-		$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
-		$("#nots_count").empty();
-		$("#nots_count").append(mbers_count);
+		$("#searchResult").html(result);
+		$("#paging").html(pagingResult);
+		$("#nots_count").html(mbers_count);
 		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	

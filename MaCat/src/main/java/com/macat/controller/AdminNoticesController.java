@@ -134,6 +134,7 @@ public class AdminNoticesController {
 		return mv;
 	}
 
+	// 페이지이동, 관리자 페이지 내부 수정 추가 필요
 	// 공지사항 수정으로 이동
 	@GetMapping("nots_update.mcat")
 	public ModelAndView getNotsUpdateGoCmd(ModelAndView mv) {

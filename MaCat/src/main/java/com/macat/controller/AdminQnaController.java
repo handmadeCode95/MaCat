@@ -170,5 +170,7 @@ public class AdminQnaController {
 
 		return mv;
 	}
+	
+	// 업데이트 작업 필요 190911
 
 }

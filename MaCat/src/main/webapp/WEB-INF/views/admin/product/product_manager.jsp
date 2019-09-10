@@ -204,7 +204,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input name="products" type="checkbox" id="allCheck"></th>
+	                                    <th class="checks"><input name="products" type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 	                                    <th scope="col">상품번호</th>
 	                                    <th scope="col">상품코드</th>
 	                                    <th scope="col">카테고리</th>
@@ -228,7 +228,7 @@
 	                            <tbody id="searchResult">
 	                            <c:forEach var="i" items="${productsDTO}">
 		                                <tr id="${i.prduct_sq}">
-		                                    <td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="${i.prduct_sq}"></td>
+		                                    <td class="checks"><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="${i.prduct_sq}"><label for="table_chk"></label></td>
 		                                    <td><input name="prduct_sq" class="${i.prduct_sq}" type="hidden" value="${i.prduct_sq}" disabled>${i.prduct_sq}</td>		                                    
 		                                    <td>${i.prduct_cd}</td> <!-- 상품코드 -->
 		                                    <td>${i.ctgry_nm}</td><!-- 카테고리 -->

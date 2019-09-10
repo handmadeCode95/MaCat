@@ -15,17 +15,17 @@ public class AdminAddProductDAOImpl implements AdminAddProductDAO {
 	public SqlSessionTemplate getSqlSessionTemplate() { return sqlSessionTemplate; }
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) { this.sqlSessionTemplate = sqlSessionTemplate; }
 	
-	
+	// 상품 추가
 	@Override
 	public int insertProduct(ProductsDTO productsDTO) {
 		return sqlSessionTemplate.insert("add_product", productsDTO);
 	}
-	
+	// 상품 이미지 추가
 	@Override
 	public int insertImage(ImagesDTO imagesDTO) {
 		return sqlSessionTemplate.insert("add_img", imagesDTO);
 	}
-	
+	// 상품 이미지 추가
 	@Override
 	public int insertImages(List<ImagesDTO> imagesDTOs) {
 		return sqlSessionTemplate.insert("add_imgs", imagesDTOs);

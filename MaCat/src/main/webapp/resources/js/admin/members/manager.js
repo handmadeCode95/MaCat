@@ -1,15 +1,19 @@
 ﻿$(function() {
 	
 	// AJAX 처리시 tbody에 출력할 값
+	// getTable(data) 이라는 공통함수를 fn에 정의해서 빠르게 사용하겠다는 소리
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
   	    var mbers_count;
+  	    // $.each(data => $.each(getTable(), function(key, value)
 		$.each(data, function(key, value){
+			// function(mbersDTO, value)
 			if (key === "mbersDTO") {
+				// function(mbersDTO, k:result, v: += 이후의 값 - 변수의 내용)
 				$.each(value, function(k, v){
 					result += '<tr id="' + v["mber_sq"] + '">';
-					result += '<td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"></td>';
+					result += '<td class="checks"><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"><label for="table_chk"></label></td>';
 					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled></td>';
 					result += '<td><input name="mber_nm" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_nm"] + '" disabled></td>';
 					result += '<td>' + v["mber_gender"] + '</td>';
@@ -66,7 +70,6 @@
 				}
 				mbers_count = pageDTO.totalRecord;
 			}
-
 		});
 		$("#searchResult").html(result);
 		$("#paging").html(pagingResult);

@@ -47,7 +47,7 @@ public class AdminFaqController {
 	// FAQ 관리로 이동
 	@GetMapping("faq_manage.mcat")
 	public ModelAndView redirectFaqManagerCmd(ModelAndView mv, String cPage) {
-		mv.setViewName("admin/faq/management");
+		mv.setViewName("admin/faq/manager");
 		
 		this.cPage = cPage;
 		usedDTO = "FaqDTO";
@@ -97,6 +97,7 @@ public class AdminFaqController {
 	@PostMapping("faq_search.mcat")
 	@ResponseBody
 	public Map<String, Object> getFaqSearchCmd(@RequestBody FaqSearchDTO faqSearchDTO) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		PageDTO pageDTO = new PageDTO();
 
@@ -154,12 +155,12 @@ public class AdminFaqController {
 		return getFaqPagingCmd(cPage);
 	}
 
-	// FAQ 보기로 이동
-	@GetMapping("faq_view.mcat")
-	public ModelAndView getFaqViewCmd(ModelAndView mv, HttpSession session, String faq_sq) {
-		mv.setViewName("admin/faq/view");
-		session.setAttribute("faqDTO", adminFaqManagementDAO.getPostView(faq_sq));
-		return mv;
-	}
+//	// FAQ 보기로 이동
+//	@GetMapping("faq_view.mcat")
+//	public ModelAndView getFaqViewCmd(ModelAndView mv, HttpSession session, String faq_sq) {
+//		mv.setViewName("admin/faq/view");
+//		session.setAttribute("faqDTO", adminFaqManagementDAO.getPostView(faq_sq));
+//		return mv;
+//	}
 
 }

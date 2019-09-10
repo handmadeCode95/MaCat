@@ -4,22 +4,31 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var faqs_count;
 		$.each(data, function(key, value){
 			if (key === "faqDTO") {
 				$.each(value, function(k, v){
-					result += "<tr id='" + v["faq_sq"] + "'>";
-					result += "<td><input type='checkbox' class='chkbox' name='faqs' value='" + v["faq_sq"] + "'></td>";
-					result += "<td>" + v["qc_nm"] + "</td>";
-					result += "<td>" + v["faq_sq"] + "</td>";
-					result += "<td><a href='faq_view.mcat?faq_sq=" + v["faq_sq"] + "'>" + v["faq_sj"] + "</a></td>";
+					result += '<tr id=" ' + v["faqDTO"] + ' ">';
+					result += '<td class="checks"><input name="faqs" class="chkbox" type="checkbox" id="table_chk" value=" ' + v["faq_sq"] 
+								+ ' "><label for="table_chk"></label></td>';
+					result += '<td><input name="faq_sq" class=" ' + v["faq_sq"] + ' " type="hidden" value=" ' + v["faq_sq"] 
+								+ ' ">' + v["qc_nm"] + '</td>';
+					result += '<td>' + v["faq_sq"] + '</td>';
+					result += '<td><a href="faq_view.mcat?faq_sq="' + v["faq_sq"] + '">' + v["faq_sj"] + '</a></td></tr>';
+
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
 				
 				if (pageDTO.beginBlock <= pageDTO.pagePerBlock){
-					pagingResult += '<li class="disable">◀</li>';
+					pagingResult += '<li class="disable">';
+					pagingResult +=	'<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">'
+					pagingResult += '</li>';
 				}else {
-					pagingResult += '<li><a class="page">◀<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock - 1) + '"></a></li>';
+					pagingResult += '<li><a class="page">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock - 1) + '">';
+					pagingResult += '</a></li>';
 				}
 				  
 				for (var i = pageDTO.beginBlock; i <= pageDTO.endBlock; i++) {
@@ -31,16 +40,23 @@ $(function() {
 				}
 				  
 				if (pageDTO.endBlock >= pageDTO.totalPage){
-					pagingResult += '<li class="disable">▶</li>';
+					pagingResult += '<li class="disable">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
+					pagingResult += '</li>';
 				}else {
-					pagingResult += '<li><a class="page">▶<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '"></a></li>';
+					pagingResult += '<li><a class="page">';
+					pagingResult += '<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px">';
+					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
+					pagingResult += '</a></li>';
 				}
+			}else if (key === "mbers_count"){
+				faqs_count = value;
 			}
 		});
-		$("#searchResult").empty();
-		$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
+		$("#searchResult").html(result);
+		$("#paging").html(pagingResult);
+		$("#faqs_count").html(faqs_count);
+		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
 	
@@ -72,21 +88,52 @@ $(function() {
 	    return JSON.stringify(newJSON);
 	};
 	
-	
-	// 검색 영역 체크박스 체크시 인풋 활성화/비활성화
-	$("input[name=search_chk]").change(function() {
+	 // 검색 영역 체크박스 체크시 인풋 활성화/비활성화, 포커싱
+	$(".search").change(function() {
 		if ($(this).prop("checked")) {
 			$("." + this.value).attr("disabled", false);
+			$("." + this.value + ":first").focus();
 		} else {
 			$("." + this.value).attr("disabled", true);
 			$("." + this.value).val(null);
+			$("." + this.value).removeClass("active");
 		}
 	});
 	
+	// 검색 영역 인풋 클릭시 인풋 활성화/비활성화, 포커싱
+	$(".inputClickListener").click(function() {
+		if (!$(this).siblings(".search").prop("checked")){
+			$(this).siblings(".search").prop("checked", true);
+			$(this).siblings(".search").trigger("change");
+		}
+		if (!$(this).parents("div").children(".search").prop("checked")) {
+			$(this).parents("div").children(".search").prop("checked", true);
+			$(this).parents("div").children(".search").trigger("change");
+			$(this).children().focus();
+		}
+	});
 	
+	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화 + 색상변경
+	$(document).on("change", ".chkbox", function(){
+		if ($(this).prop("checked")){
+			$("."+this.value).attr("disabled", false);
+			$("."+this.value).css("color", "#F2A766");
+			
+			// 체크 안된 값이 없으면 allCheck 체크박스도 체크
+			if ($(".chkbox:not(:checked)").length == 0) $("#allCheck").prop("checked", true);
+		}else {
+			$("."+this.value).attr("disabled", true);
+			$("."+this.value).css("color", "#000");
+			
+			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
+			$("#allCheck").prop("checked", false);
+
+		}
+	});
 	// 전체 체크
-	$(".all").change(function(){
+	$("#allCheck").change(function(){
 		$(".chkbox").prop("checked", this.checked);
+		$(".chkbox").trigger("change");
 	});
 	
 	
@@ -111,13 +158,13 @@ $(function() {
 	
 	// FAQ 검색 AJAX
 	$("#searchBtn").click(function() {
-		console.log($().toJSON($("#searchForm > *:not(input[name=search_chk])")));
+		console.log($().toJSON($("#searchForm")));
 		$.ajax({
 			url			: "faq_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: $().toJSON($("#searchForm > *:not(input[name=search_chk])")),
+            data		: $().toJSON($("#searchForm")),
             success		: function(data) {
             				  $().getTable(data);
             			  },
