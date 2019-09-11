@@ -4,35 +4,23 @@ $(function() {
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
+  	    var orders_count;
 		$.each(data, function(key, value){
-			if (key === "ProductsDTO") {
+			if (key === "OrderDTO") {
 				$.each(value, function(k, v){
-					result += '<tr id="' + v["prduct_sq"] + '">';
-					result += '<td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="' + v["prduct_sq"] + '"></td>';
-					result += '<td><input name="prduct_sq" class="' + v["prduct_sq"] + '" type="hidden" value="' + v["prduct_sq"] + '" disabled>1001</td>';
-					result += '<td>' + v["prduct_cd"] + '</td>';
-					result += '<td>' + v["ctgry_nm"] + '</td>';
-					result += '<td><a href="product.mcat?prduct_nm="' + v["prduct_nm"] + '">' + v["prduct_nm"] + '</a></td>';
-					result += '<td>' + v["prduct_price"] + '</td>';
-					result += '<td>' + v["prduct_dc"] + '</td>';
-					result += '<td>' + v["prduct_dlvy_price"] + '</td>';
-					result += '<td>' + v["prduct_maker"] + '</td>';
-					result += '<td>' + v["prduct_coo"] + '</td>';
-					result += '<td>' + v["prduct_matr"] + '</td>';
-					result += '<td>' + v["prduct_reg_dt"].substring(0, 10) + '</td>';
-					result += '<td>' + v["prduct_dc_pt"] + '</td>';
-					result += '<td>' + v["prduct_save_pt"] + '</td>';
-					result += '<td>' + v["prduct_save"] + '</td>';
-					result += '<td>' + v["prduct_view_cnt"] + '</td>';
-					result += '<td>' + v["prduct_rating_avg"] + '</td>';
-					result += '<td>' + v["prduct_sale_sum"] + '</td>';
-					result += '<td>' + v["prduct_amt"] + '</td>';
-					//result += "<option>등급선택</option>";
-					//$.each(data.mber_grad, function(mgKey, mgValue) {
-					//	result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//})
-					// result += "<option value='" + mgValue["mber_grad_nm"] + "'"; if(v["mber_grad_nm"] === mgValue["mber_grad_nm"]) result += " selected"; result += ">" + mgValue["mber_grad_nm"] + "</option>";
-					//result += "</select></td></tr>";
+					result += '<tr id="' + v["order_sq"] + '">';		
+					result += '<td class="checks"><input name="orders" class="chkbox" type="checkbox" id="table_chk" value="' 
+							+ v["order_sq"] + '"><label for="table_chk"></label></td>';
+					result += '<td>' + v["order_sq"] + '</td>';
+					result += '<td>' + v["mber_sq"] + '</td>';
+					result += '<td>' + v["prduct_sq"] + '</td>';
+					result += '<td>' + v["order_dt"].substring(0,10) + '</td>';
+					result +='<td><input name="order_amt" class="' + v["order_amt"] +'" type="text" value="'	+ v["order_amt"] +'" disabled></td>'; 
+					result += '<td><input name="order_point" class="' + v["order_point"] + '" type="text" value="' + v["order_point"] + '" disabled></td>';
+					result += '<td>' + v["order_pay"] + '</td>';
+					result += '<td>' + v["ordet_method"] + '</td>';
+					result += '<td><input name="order_status" class="' + v["order_status"] + '" type="text" value="' + v["order_status"] +'" disabled></td>';
+					result += '<td>' + v["order_compt_dt"].substring(0,10) + '</td>';					
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -66,12 +54,13 @@ $(function() {
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-		}
-	});
-	$("#searchResult").empty();
-	$("#searchResult").append(result);
-		$("#paging").empty();
-		$("#paging").append(pagingResult);
+				orders_count = pageDTO.totalRecord;
+			}
+		});
+		$("#searchResult").html(result);
+		$("#paging").html(pagingResult);
+		$("#orders_count").html(orders_count);
+		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
 	
@@ -91,8 +80,8 @@ $(function() {
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 "prduct"일 경우에는 무조건 배열처리(prduct는 체크박스이다)
-	        	if (name === "prduct") {
+	        	// 이름이 "orders"일 경우에는 무조건 배열처리(orders는 체크박스이다)
+	        	if (name === "orders") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -103,7 +92,7 @@ $(function() {
 	    return JSON.stringify(newJSON);
 	};
 	
-	
+	// 주문일
     $(".join_period_li").each(function() {
         $(this).click(function() {
             $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
@@ -113,9 +102,8 @@ $(function() {
     		$(this).children().attr("disabled", false); // 히든값
     		$(this).siblings().children().attr("disabled", true);
         });
-    });
-    
-    
+    });    
+    // 주문 결제일
     $(".connect_period_li").each(function() {
         $(this).click(function() {
             $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
@@ -126,18 +114,34 @@ $(function() {
     		$(this).siblings().children().attr("disabled", true);
         });
     });
+    // 주문 완료일
+    $(".order_period_li").each(function() {
+        $(this).click(function() {
+            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+            $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+            $("#order_compt").prop("checked", false);  // 기간 input 초기화
+    		$("#order_compt").trigger("change");		// 기간 input 초기화
+    		$(this).children().attr("disabled", false); // 히든값
+    		$(this).siblings().children().attr("disabled", true);
+        });
+    });
     
     
     $("#join_date").change(function(){
         if($("#join_date").is(":checked")){
         	$(".join_period_li").removeClass("selected");
         }
-    });
-    
+    });    
     
     $("#connect_term").change(function(){
         if($("#connect_term").is(":checked")){
         	$(".connect_period_li").removeClass("selected");
+        }
+    });
+    
+    $("#order_compt").change(function(){
+        if($("#order_compt").is(":checked")){
+        	$(".order_period_li").removeClass("selected");
         }
     });
     
@@ -174,12 +178,17 @@ $(function() {
 		if ($(this).prop("checked")){
 			$("."+this.value).attr("disabled", false);
 			$("."+this.value).css("color", "#F2A766");
-		}else{
+			
+			// 체크 안된 값이 없으면 allCheck 체크박스도 체크
+			if ($(".chkbox:not(:checked)").length == 0) $("#allCheck").prop("checked", true);
+		}else {
 			$("."+this.value).attr("disabled", true);
 			$("."+this.value).css("color", "#000");
+			
+			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
+			$("#allCheck").prop("checked", false);
 		}
 	});
-	
 
 	// 전체 체크
 	$("#allCheck").change(function(){
@@ -191,7 +200,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "mbers_paging.mcat",
+			url			: "order_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -207,11 +216,11 @@ $(function() {
 	});
 	
 	
-	// 회원 검색 AJAX
+	// 주문 검색 AJAX
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "mbers_search.mcat",
+			url			: "order_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -252,7 +261,7 @@ $(function() {
 	    var mbersDTO = JSON.stringify(data);
 
 	    $.ajax({
-			url			: "mbers_update.mcat",
+			url			: "order_update.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -269,10 +278,10 @@ $(function() {
 	});
 		
 	
-	// 탈퇴 AJAX
-	$(document).on("click", "#withdrawal", function(){
+	// 삭제 AJAX
+	$(document).on("click", "#delete", function(){
 		$.ajax({
-			url			: "withdrawal.mcat",
+			url			: "order_delete.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",

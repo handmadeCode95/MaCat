@@ -24,30 +24,6 @@
     margin: 0;
     padding: 0;        
 }
-/*임시 사이드메뉴*/
-header{
-    height: 60px;
-    width: 1920px; 
-    background: #402F61; 
-    color: #ffffff;
-    margin: auto;
-    /*텍스트 세로 중앙정렬*/
-    line-height: 60px;    
-    box-sizing: border-box;
-}
-
-header h1{
-    padding-left: 40px;
-}
-
-aside{
-    height: 1502px;
-    width: 208px;
-    float: left;
-    text-align: center;
-    line-height: 80px;
-    background: #5C5173;
-}
 
 main{
     width: 1920px;
@@ -76,7 +52,7 @@ main{
 /*회원정보 작업 파트*/
 .order_information_container {
     width: 1645px;
-    height: 656px;
+    height: 676px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
@@ -116,14 +92,6 @@ main{
     margin-left: 62.5px;
     margin-top: 28px;    
 }
-/*
-.order_info span, 
-.searching_term span {
-    margin-left: 11.5px;
-    padding-top: 19px;
-    font-size: 15px;    
-}*/
-
 /*기간 파트*/
 .searching_term {
     width: 1592px;
@@ -142,14 +110,14 @@ main{
 
 .searching_term_middle{
     float: left;
-    width: 555px;
+    width: 575px;
     height: 140px;
     margin-top: 35.5px;
 }
 
 .searching_term_right{
     float: left;
-    width: 375px;
+    width: 400px;
     margin-left: 62.5px;
     margin-top: 35.5px;
 }
@@ -325,4 +293,9 @@ ul,li{
     background: #F2A766;    
     border: none; 
     margin-left: 84px;
+}
+
+#orders_count{
+	color : #f25e5e;
+	font-weight: normal;
 }

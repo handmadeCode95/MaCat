@@ -189,7 +189,7 @@ public class AdminProductController {
 		public Map<String, Object> getProductsDeleteCmd(@RequestBody Map<String, List<String>> products){
 			for (String i : products.keySet()) {
 				for (String j : products.get(i)) {
-					adminProductManagementDAO.getProductsDelete(j);
+					adminProductManagementDAO.deleteAdmin(j);
 				}
 			}
 			

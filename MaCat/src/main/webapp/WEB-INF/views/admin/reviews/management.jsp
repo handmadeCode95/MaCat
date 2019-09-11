@@ -89,12 +89,12 @@
 											<c:if test="${i.re_ans_chk == 1}">답변완료</c:if>
 											<c:if test="${i.re_ans_chk == 2}">답글</c:if>
 										</td>
-										<td>
+<%-- 										<td>
 											<c:if test="${i.re_ctgry == 1}">취소</c:if>
 											<c:if test="${i.re_ctgry == 2}">교환</c:if>
 											<c:if test="${i.re_ctgry == 3}">배송</c:if>
 											<c:if test="${i.re_ctgry == 4}">결제</c:if>
-										</td>
+										</td> --%>
 										<td>${i.re_sn}</td>
 										<td>
 											<c:forEach begin="1" end="${i.re_level}">

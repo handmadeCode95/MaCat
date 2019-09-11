@@ -5,9 +5,10 @@
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
-		<property name="url" value="jdbc:oracle:thin:@203.236.220.70:1521:xe" />
-		<property name="username" value="ICTPROJECT" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<!-- <property name="url" value="jdbc:oracle:thin:@203.236.220.70:1521:xe" /> -->		
+		<!-- <property name="username" value="ICTPROJECT" /> -->
+		<property name="username" value="xydragon" />
 		<property name="password" value="1111" />
 	</bean>
 	
@@ -60,6 +61,16 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<!-- adminOrderManagementDAO -->
+	<bean id="adminOrderManagementDAO" class="com.macat.dao.AdminOrderManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminReviewManagementDAO -->
+	<bean id="adminReviewManagementDAO" class="com.macat.dao.AdminReviewManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />	
+	</bean>
+	
 	<!-- categoryDAOImpl -->
 	<bean id="categoryDAOImpl" class="com.macat.dao.CategoryDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
@@ -74,5 +85,5 @@
 	<bean id="productDetailDAOImpl" class="com.macat.dao.ProductDetailDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
-	
+		
 </beans>

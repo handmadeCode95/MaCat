@@ -19,6 +19,10 @@
 		<typeAlias type="com.macat.dto.QnaCtgriesDTO" alias="QnaCtgriesDTO"/>
 		<typeAlias type="com.macat.dto.MberGradDTO" alias="MberGradDTO"/>
 		<typeAlias type="com.macat.dto.CartsDTO" alias="CartsDTO"/>
+		<typeAlias type="com.macat.dto.OrderDTO" alias="OrderDTO"/>
+		<typeAlias type="com.macat.dto.OrderSearchDTO" alias="OrderSearchDTO"/>
+		<typeAlias type="com.macat.dto.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.macat.dto.ReviewSearchDTO" alias="ReviewSearchDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

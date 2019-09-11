@@ -411,10 +411,259 @@
 		<foreach collection="imagesDTOs" item="I"></foreach>
 		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
 	</insert>
+	
+	<!--=========================== 주문 정보 관리 ===========================-->
+	
+	<!-- 전체 주문 숫자 -->
+	<select id="orders_count" resultType="int">
+		select count(*) from orders_tb
+	</select>
+	
+	<!-- 전체 주문정보 가져오기 -->
+	<select id="orders" parameterType="Map" resultType="OrderDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM orders_tb ORDER BY order_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 주문 and조건 검색결과 인원 -->
+	<select id="order_and_count" parameterType="OrderSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM orders_tb
+		<where>
+	  		<if test="order_sq != null">
+		    	order_sq = #{order_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        AND prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_pay != null">
+		    	and order_pay = #{order_pay}
+		    </if>
+		    <if test="order_method != null">
+		    	and order_method = #{order_method}
+		    </if>
+		    <if test="order_status != null">
+		    	and order_status = #{order_status}
+		    </if>		 
+		    <!-- 주문일 -->   
+		    <if test="order_dt_start != null and order_dt_end != null">
+		        AND order_dt BETWEEN TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start == null and order_dt_end != null">
+		        AND order_dt <![CDATA[ <= ]]> TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start != null and order_dt_start == null">
+		        AND order_dt <![CDATA[ >= ]]> TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문완료일 -->		    
+		    <if test="order_compt_dt_start != null and order_compt_dt둥 != null">
+		        AND order_compt_dt BETWEEN TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start == null and order_compt_dt_end != null">
+		        AND order_compt_dt <![CDATA[ <= ]]> TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start != null and order_compt_dt_end == null">
+		        AND order_compt_dt <![CDATA[ >= ]]> TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문결제일 -->
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_end != null">
+		        AND order_paymt_dt BETWEEN TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start == null and order_paymt_dt_end != null">
+		        AND order_paymt_dt <![CDATA[ <= ]]> TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_start == null">
+		        AND order_paymt_dt <![CDATA[ >= ]]> TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		   
+		</where>
+	</select>
+	
+	<!-- 주문 or조건 검색결과 인원 -->
+	<select id="order_or_count" parameterType="OrderSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM orders_tb
+		<where>
+	  		<if test="order_sq != null">
+		    	order_sq = #{order_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        or prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_pay != null">
+		    	or order_pay = #{order_pay}
+		    </if>
+		    <if test="order_method != null">
+		    	or order_method = #{order_method}
+		    </if>
+		    <if test="order_status != null">
+		    	or order_status = #{order_status}
+		    </if>		 
+		    <!-- 주문일 -->   
+		    <if test="order_dt_start != null and order_dt_end != null">
+		        or order_dt BETWEEN TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start == null and order_dt_end != null">
+		        or order_dt <![CDATA[ <= ]]> TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start != null and order_dt_start == null">
+		        or order_dt <![CDATA[ >= ]]> TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문완료일 -->		    
+		    <if test="order_compt_dt_start != null and order_compt_dt둥 != null">
+		        or order_compt_dt BETWEEN TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start == null and order_compt_dt_end != null">
+		        or order_compt_dt <![CDATA[ <= ]]> TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start != null and order_compt_dt_end == null">
+		        or order_compt_dt <![CDATA[ >= ]]> TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문결제일 -->
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_end != null">
+		        or order_paymt_dt BETWEEN TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start == null and order_paymt_dt_end != null">
+		        or order_paymt_dt <![CDATA[ <= ]]> TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_start == null">
+		        or order_paymt_dt <![CDATA[ >= ]]> TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		   
+		</where>
+	</select>
+	
+	<!-- 주문 and조건 검색 -->
+	<select id="order_and_search" parameterType="OrderSearchDTO" resultType="OrderDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM orders_tb
+		<where>
+	  		<if test="order_sq != null">
+		    	order_sq = #{order_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        AND prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_pay != null">
+		    	and order_pay = #{order_pay}
+		    </if>
+		    <if test="order_method != null">
+		    	and order_method = #{order_method}
+		    </if>
+		    <if test="order_status != null">
+		    	and order_status = #{order_status}
+		    </if>		 
+		    <!-- 주문일 -->   
+		    <if test="order_dt_start != null and order_dt_end != null">
+		        AND order_dt BETWEEN TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start == null and order_dt_end != null">
+		        AND order_dt <![CDATA[ <= ]]> TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start != null and order_dt_start == null">
+		        AND order_dt <![CDATA[ >= ]]> TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문완료일 -->		    
+		    <if test="order_compt_dt_start != null and order_compt_dt둥 != null">
+		        AND order_compt_dt BETWEEN TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start == null and order_compt_dt_end != null">
+		        AND order_compt_dt <![CDATA[ <= ]]> TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start != null and order_compt_dt_end == null">
+		        AND order_compt_dt <![CDATA[ >= ]]> TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문결제일 -->
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_end != null">
+		        AND order_paymt_dt BETWEEN TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start == null and order_paymt_dt_end != null">
+		        AND order_paymt_dt <![CDATA[ <= ]]> TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_start == null">
+		        AND order_paymt_dt <![CDATA[ >= ]]> TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		   
+		</where>
+		ORDER BY order_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+
+	<!-- 주문 or조건 검색 -->
+	<select id="order_or_search" parameterType="OrderSearchDTO" resultType="OrderDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM orders_tb
+		<where>
+	  		<if test="order_sq != null">
+		    	order_sq = #{order_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        or prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_pay != null">
+		    	or order_pay = #{order_pay}
+		    </if>
+		    <if test="order_method != null">
+		    	or order_method = #{order_method}
+		    </if>
+		    <if test="order_status != null">
+		    	or order_status = #{order_status}
+		    </if>		 
+		    <!-- 주문일 -->   
+		    <if test="order_dt_start != null and order_dt_end != null">
+		        or order_dt BETWEEN TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start == null and order_dt_end != null">
+		        or order_dt <![CDATA[ <= ]]> TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start != null and order_dt_start == null">
+		        or order_dt <![CDATA[ >= ]]> TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문완료일 -->		    
+		    <if test="order_compt_dt_start != null and order_compt_dt둥 != null">
+		        or order_compt_dt BETWEEN TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start == null and order_compt_dt_end != null">
+		        or order_compt_dt <![CDATA[ <= ]]> TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start != null and order_compt_dt_end == null">
+		        or order_compt_dt <![CDATA[ >= ]]> TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문결제일 -->
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_end != null">
+		        or order_paymt_dt BETWEEN TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start == null and order_paymt_dt_end != null">
+		        or order_paymt_dt <![CDATA[ <= ]]> TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_start == null">
+		        or order_paymt_dt <![CDATA[ >= ]]> TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		   
+		</where>
+		ORDER BY order_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 주문 삭제 -->
+	<delete id="orders_delete" parameterType="String">
+		delete from orders_tb where order_sq = #{order_sq}
+	</delete>
+	
+	<!-- 주문 수정 -->
+	<update id="order_update" parameterType="OrderDTO">
+		update orders_tb set order_amt = #{order_amt}, order_point = #{order_point}, order_status =#{order_status}
+	</update>
 
 
 	<!--=========================== 회원 정보 관리 ===========================-->
-	
 	
 	<!-- 전체 회원 숫자 -->
 	<select id="mbers_count" resultType="int">
@@ -541,7 +790,7 @@
 	</select>
 	
 	<!-- 회원 or조건 검색 결과 인원 -->
-	<select id="mbers_or_count" parameterType="MbersSearchDTO" resultType="int">
+	<select id="mbers_or_count" parameterType="MbersSearchDTO" resultType="MbersDTO">
 		SELECT COUNT(*) FROM MEMBERS_TB
 		<where>
 	  		<if test="mber_nm != null">
@@ -987,7 +1236,7 @@
 	</update>
 	
 	
-	<!--=========================== 고객 문의 관리 ===========================-->
+	<!--=========================== FAQ 관리 ===========================-->
 	
 	
 	<!-- 전체 FAQ 갯수 -->
@@ -1081,4 +1330,192 @@
 	<select id="faq_view" resultType="FaqDTO" parameterType="String">
 		SELECT * FROM FAQ_TB WHERE FAQ_SQ = #{faq_sq}
 	</select>
+	
+	<!--=========================== 리뷰(후기) 관리 ===========================-->
+	
+	<!-- 전체 리뷰 숫자 : 위에 있음-->
+
+	
+	<!-- 리뷰 정보 가져오기 -->
+	<select id="reviews" parameterType="Map" resultType="ReviewDTO"> 
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM reviews_tb ORDER BY re_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+
+	<!-- 리뷰 and조건 검색 결과 인원 -->
+	<select id="reviews_and_count" parameterType="ReviewSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM reviews_tb
+		<where>
+	  		<if test="re_sq != null">
+		    	re_sq = #{re_sq}
+		    </if>
+		    <if test="re_sj != null">
+		        AND re_sj = #{re_sj}
+		    </if>
+		    <if test="re_nm != null">
+		        AND re_nm = #{re_nm}
+		    </if>
+		    <if test="re_id != null">
+		    	and re_id = #{re_id}
+		    </if>		    
+		    <!-- 리뷰등록일 -->
+		    <if test="re_reg_date_start != null and re_reg_date_end != null">
+		        AND re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start == null and re_reg_date_end != null">
+		        AND re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start != null and re_reg_date_end == null">
+		        AND re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_rating != null">
+		        AND re_rating = #{re_rating}
+		    </if>
+		    <if test="re_view_cnt != null">
+		        AND re_view_cnt = #{re_view_cnt}
+		    </if>
+		    <if test="re_like != null">
+		        AND re_like = #{re_like}
+		    </if>
+		    <if test="re_ans_st != null">
+		    	and re_ans_st = #{re_ans_st}
+		    </if>
+		</where>
+	</select>	
+	
+	<!-- 리뷰 or조건 검색 결과 인원 -->
+	<select id="reviews_or_count" parameterType="ReviewSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM reviews_tb
+		<where>
+	  		<if test="re_sq != null">
+		    	re_sq = #{re_sq}
+		    </if>
+		    <if test="re_sj != null">
+		        or re_sj = #{re_sj}
+		    </if>
+		    <if test="re_nm != null">
+		        or re_nm = #{re_nm}
+		    </if>
+		    <if test="re_id != null">
+		    	or re_id = #{re_id}
+		    </if>		    
+		    <!-- 리뷰등록일 -->
+		    <if test="re_reg_date_start != null and re_reg_date_end != null">
+		        or re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start == null and re_reg_date_end != null">
+		        or re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start != null and re_reg_date_end == null">
+		        or re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_rating != null">
+		        or re_rating = #{re_rating}
+		    </if>
+		    <if test="re_view_cnt != null">
+		        or re_view_cnt = #{re_view_cnt}
+		    </if>
+		    <if test="re_like != null">
+		        or re_like = #{re_like}
+		    </if>
+		    <if test="re_ans_st != null">
+		    	or re_ans_st = #{re_ans_st}
+		    </if>
+		</where>
+	</select>	
+	
+	<!-- 리뷰 and조건 검색 -->
+	<select id="reviews_and_search" parameterType="ReviewSearchDTO" resultType="ReviewDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM reviews_tb
+		<where>
+	  		<if test="re_sq != null">
+		    	re_sq = #{re_sq}
+		    </if>
+		    <if test="re_sj != null">
+		        AND re_sj = #{re_sj}
+		    </if>
+		    <if test="re_nm != null">
+		        AND re_nm = #{re_nm}
+		    </if>
+		    <if test="re_id != null">
+		    	and re_id = #{re_id}
+		    </if>		    
+		    <!-- 리뷰등록일 -->
+		    <if test="re_reg_date_start != null and re_reg_date_end != null">
+		        AND re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start == null and re_reg_date_end != null">
+		        AND re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start != null and re_reg_date_end == null">
+		        AND re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_rating != null">
+		        AND re_rating = #{re_rating}
+		    </if>
+		    <if test="re_view_cnt != null">
+		        AND re_view_cnt = #{re_view_cnt}
+		    </if>
+		    <if test="re_like != null">
+		        AND re_like = #{re_like}
+		    </if>
+		    <if test="re_ans_st != null">
+		    	and re_ans_st = #{re_ans_st}
+		    </if>
+		</where>
+		ORDER BY re_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 리뷰 or조건 검색 -->
+	<select id="reviews_or_search" parameterType="ReviewSearchDTO" resultType="ReviewDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM reviews_tb
+		<where>
+	  		<if test="re_sq != null">
+		    	re_sq = #{re_sq}
+		    </if>
+		    <if test="re_sj != null">
+		        or re_sj = #{re_sj}
+		    </if>
+		    <if test="re_nm != null">
+		        or re_nm = #{re_nm}
+		    </if>
+		    <if test="re_id != null">
+		    	or re_id = #{re_id}
+		    </if>		    
+		    <!-- 리뷰등록일 -->
+		    <if test="re_reg_date_start != null and re_reg_date_end != null">
+		        or re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start == null and re_reg_date_end != null">
+		        or re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_reg_date_start != null and re_reg_date_end == null">
+		        or re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="re_rating != null">
+		        or re_rating = #{re_rating}
+		    </if>
+		    <if test="re_view_cnt != null">
+		        or re_view_cnt = #{re_view_cnt}
+		    </if>
+		    <if test="re_like != null">
+		        or re_like = #{re_like}
+		    </if>
+		    <if test="re_ans_st != null">
+		    	or re_ans_st = #{re_ans_st}
+		    </if>
+		</where>
+		ORDER BY re_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviews_delete" parameterType="String">
+		DELETE FROM reviews_tb WHERE re_sq = #{re_sq}
+	</delete>
+	
 </mapper>

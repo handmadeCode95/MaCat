@@ -38,28 +38,28 @@ main{
     float: right;    
 }
 /* 회원관리 타이틀 파트*/
-.member_management {
+.order_management {
     width: 1645px;
     height: 60px;
     background: #ffffff;
-    margin: 16px 40px 14px 27px;    
+    margin: 16px 40px 14px 27px;
 }
-.member_management span{
+.order_management span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
 /*회원정보 작업 파트*/
-.member_information_container {
+.order_information_container {
     width: 1645px;
-    height: 656px;
+    height: 676px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
 /* 회원정보 파트*/
-.member_info {
+.order_info {
     width: 1592px;
-    height: 270px;
+    height: 197px;
     margin: 0 auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;    
@@ -68,64 +68,56 @@ main{
 .infomation_control_part {
     float: left;
     /*margin-top: 26.5px;*/
-    height: 270px;
+    height: 197px;
 }
 /*회원정보 타이틀*/
-.member_info_title {
+.order_info_title {
     width: 311px; 
-    height: 232px; 
+    height: 175px; 
     float: left;
     margin-top: 19px;
 }
 
 /*회원정보 파트 */
-.member_info_middle{
+.order_info_middle{
     float: left;
     width: 555px;
-    height: 223px;
+    height: 166px;
     margin-top: 28px;
 }
 
-.member_info_right{
+.order_info_right{
     float: left;
     width: 300px;
     margin-left: 62.5px;
     margin-top: 28px;    
 }
-/*
-.member_info span, 
-.searching_term span {
-    margin-left: 11.5px;
-    padding-top: 19px;
-    font-size: 15px;    
-}*/
-
 /*기간 파트*/
 .searching_term {
     width: 1592px;
-    height: 179px;
+    height: 252px;
     margin: auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;
 }
 /*기간 제목부분*/
 .searching_term_title {
+	float: left;
     width: 311px;
     height: 153px;
-    float: left;
-    margin-top: 13.5px;    
+    margin-top: 13.5px;
 }
 
 .searching_term_middle{
     float: left;
-    width: 555px;
+    width: 575px;
     height: 140px;
     margin-top: 35.5px;
 }
 
 .searching_term_right{
     float: left;
-    width: 375px;
+    width: 400px;
     margin-left: 62.5px;
     margin-top: 35.5px;
 }
@@ -174,6 +166,30 @@ main{
 .connect_period_btn li:last-child{
     width: 56px;
 }
+
+/*주문완료일*/
+.order_period_btn{
+    margin-top: 37.5px;
+    width: 380px;
+    height: 35.5px;
+}
+
+.order_period_btn li{
+    float: left;
+    border: 1px solid #cfcfcf;
+    width: 66px;
+    height: 37.5px;
+    line-height: 35.5px;
+    text-align: center;
+    margin-left: -1px;    
+    box-sizing: border-box;
+}
+
+.order_period_btn li:first-child,
+.order_period_btn li:last-child{
+    width: 56px;
+}
+
 
 ul,li{    
     list-style: none;
@@ -279,7 +295,7 @@ ul,li{
     margin-left: 84px;
 }
 
-#mbers_count {
-	color: #F25E5E;
+#orders_count{
+	color : #f25e5e;
 	font-weight: normal;
 }

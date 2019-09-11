@@ -59,20 +59,10 @@ public class AdminProductManagementDAO implements AdminManagementDAO {
 
 	// 상품 삭제(관리자 페이지)
 	@Override
-	public int deleteAdmin(String prduct_sn) {
-		return sqlSessionTemplate.delete("products_delete", prduct_sn);
+	public int deleteAdmin(String prduct_sq) {
+		return sqlSessionTemplate.delete("products_delete", prduct_sq);
 	}
-	
-	// 상품 삭제 (관리자)
-	public int getProductsDelete(String prduct_sn) {
-		return sqlSessionTemplate.delete("products_delete", prduct_sn);
-	}
-	
-	// 전체 상품 갯수
-	public int getProductsCount() {
-		return sqlSessionTemplate.selectOne("products_count");
-	}
-	
+		
 	// 하나의 상품 정보 가져오기
 	public ProductsDTO getProduct(String prduct_sq) {
 		return sqlSessionTemplate.selectOne("product", prduct_sq);
@@ -81,8 +71,7 @@ public class AdminProductManagementDAO implements AdminManagementDAO {
 	// 상품 정보 수정
 	public int getProductsUpdate(ProductsDTO productsDTO) {
 		return sqlSessionTemplate.update("products_update", productsDTO);
-	}
-	
+	}	
 
 	// 상품 and조건 검색 결과 인원
 	public int getProductsAndCount(ProductsSearchDTO productsSearchDTO) {
