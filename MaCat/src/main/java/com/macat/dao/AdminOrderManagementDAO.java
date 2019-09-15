@@ -65,7 +65,6 @@ public class AdminOrderManagementDAO implements AdminManagementDAO{
 	@Override
 	public int deleteAdmin(String order_sq) {
 		return sqlSessionTemplate.delete("orders_delete", order_sq);
-	}
-	
+	}	
 	
 }

@@ -23,6 +23,8 @@
 		<typeAlias type="com.macat.dto.OrderSearchDTO" alias="OrderSearchDTO"/>
 		<typeAlias type="com.macat.dto.ReviewDTO" alias="ReviewDTO"/>
 		<typeAlias type="com.macat.dto.ReviewSearchDTO" alias="ReviewSearchDTO"/>
+		<typeAlias type="com.macat.dto.CouponDTO" alias="CouponDTO"/>
+		<typeAlias type="com.macat.dto.CouponSearchDTO" alias="CouponSearchDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

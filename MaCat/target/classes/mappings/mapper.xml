@@ -119,7 +119,7 @@
 	</update>
 	
 	
-	<!--=========================== 상품 관리 ===========================-->
+	<!--=========================== 1 상품등록 관리 ===========================-->
 
 	<!-- 전체 상품 갯수 -->
 	<select id="products_count" resultType="int">
@@ -412,7 +412,7 @@
 		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq}
 	</insert>
 	
-	<!--=========================== 주문 정보 관리 ===========================-->
+	<!--=========================== 2 주문 정보 관리 ===========================-->
 	
 	<!-- 전체 주문 숫자 -->
 	<select id="orders_count" resultType="int">
@@ -663,7 +663,7 @@
 	</update>
 
 
-	<!--=========================== 회원 정보 관리 ===========================-->
+	<!--=========================== 3 회원 정보 관리 ===========================-->
 	
 	<!-- 전체 회원 숫자 -->
 	<select id="mbers_count" resultType="int">
@@ -914,7 +914,7 @@
 	</delete>
 	
 	
-	<!--=========================== 공지사항 관리 ===========================-->
+	<!--=========================== 4 공지사항 관리 ===========================-->
 	
 	
 	<!-- 전체 공지 갯수 -->
@@ -1051,9 +1051,8 @@
 	</delete>
 	
 	
-	<!--=========================== 고객 문의 관리 ===========================-->
-	
-	
+	<!--=========================== 5 고객 문의(QNA) 관리 ===========================-->
+		
 	<!-- 전체 문의 갯수 -->
 	<select id="qna_count" resultType="int">
 		SELECT COUNT(*) FROM QNA_TB
@@ -1236,7 +1235,7 @@
 	</update>
 	
 	
-	<!--=========================== FAQ 관리 ===========================-->
+	<!--=========================== 6 FAQ 관리 ===========================-->
 	
 	
 	<!-- 전체 FAQ 갯수 -->
@@ -1331,10 +1330,9 @@
 		SELECT * FROM FAQ_TB WHERE FAQ_SQ = #{faq_sq}
 	</select>
 	
-	<!--=========================== 리뷰(후기) 관리 ===========================-->
+	<!--=========================== 7 리뷰(후기) 관리 ===========================-->
 	
 	<!-- 전체 리뷰 숫자 : 위에 있음-->
-
 	
 	<!-- 리뷰 정보 가져오기 -->
 	<select id="reviews" parameterType="Map" resultType="ReviewDTO"> 
@@ -1517,5 +1515,204 @@
 	<delete id="reviews_delete" parameterType="String">
 		DELETE FROM reviews_tb WHERE re_sq = #{re_sq}
 	</delete>
+	
+	<!--=========================== 8 쿠폰 관리 ===========================-->
+	
+	<!-- 전체 쿠폰 숫자 -->
+	<select id="coupons_count" resultType="int">
+		select count(*) from coupons_tb
+	</select>	
+	
+	<!-- 전체 쿠폰정보 가져오기 -->
+	<select id="coupons" parameterType="Map" resultType="CouponDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM coupons_tb ORDER BY cpon_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 쿠폰 and조건 검색결과 인원 -->
+	<select id="coupons_and_count" parameterType="CouponSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM coupons_tb
+		<where>
+	  		<if test="cpon_sq != null">
+		    	cpon_sq = #{cpon_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <!-- 쿠폰등록일 -->   
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end != null">
+		        AND cpon_reg_dt BETWEEN TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start == null and cpon_reg_dt_end != null">
+		        AND cpon_reg_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end == null">
+		        AND cpon_reg_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    
+		    <!-- 쿠폰만료일 -->   
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end != null">
+		        AND cpon_exp_dt BETWEEN TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start == null and cpon_exp_dt_end != null">
+		        AND cpon_exp_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end == null">
+		        AND cpon_exp_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    		    	   
+		    <if test="cpon_nm != null">
+		        AND cpon_nm = #{cpon_nm}
+		    </if>
+		    <if test="cpon_dc_pt != null">
+		    	and cpon_dc_pt = #{cpon_dc_pt}
+		    </if>
+		    <if test="cpon_dc != null">
+		    	and cpon_dc = #{cpon_dc}
+		    </if>		    
+		</where>
+	</select>
+	
+	<!-- 쿠폰 or조건 검색결과 인원 -->
+	<select id="coupons_or_count" parameterType="CouponSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM coupons_tb
+		<where>
+	  		<if test="cpon_sq != null">
+		    	cpon_sq = #{cpon_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <!-- 쿠폰등록일 -->   
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end != null">
+		        or cpon_reg_dt BETWEEN TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start == null and cpon_reg_dt_end != null">
+		        or cpon_reg_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end == null">
+		        or cpon_reg_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    
+		    <!-- 쿠폰만료일 -->   
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end != null">
+		        or cpon_exp_dt BETWEEN TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start == null and cpon_exp_dt_end != null">
+		        or cpon_exp_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end == null">
+		        or cpon_exp_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    		    	   
+		    <if test="cpon_nm != null">
+		        or cpon_nm = #{cpon_nm}
+		    </if>
+		    <if test="cpon_dc_pt != null">
+		    	or cpon_dc_pt = #{cpon_dc_pt}
+		    </if>
+		    <if test="cpon_dc != null">
+		    	or cpon_dc = #{cpon_dc}
+		    </if>		    
+		</where>
+	</select>
+	
+	<!-- 쿠폰 and조건 검색 -->
+	<select id="coupons_and_search" parameterType="CouponSearchDTO" resultType="CouponDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM coupons_tb
+		<where>
+	  		<if test="cpon_sq != null">
+		    	cpon_sq = #{cpon_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <!-- 쿠폰등록일 -->   
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end != null">
+		        AND cpon_reg_dt BETWEEN TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start == null and cpon_reg_dt_end != null">
+		        AND cpon_reg_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end == null">
+		        AND cpon_reg_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    
+		    <!-- 쿠폰만료일 -->   
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end != null">
+		        AND cpon_exp_dt BETWEEN TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start == null and cpon_exp_dt_end != null">
+		        AND cpon_exp_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end == null">
+		        AND cpon_exp_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    		    	   
+		    <if test="cpon_nm != null">
+		        AND cpon_nm = #{cpon_nm}
+		    </if>
+		    <if test="cpon_dc_pt != null">
+		    	and cpon_dc_pt = #{cpon_dc_pt}
+		    </if>
+		    <if test="cpon_dc != null">
+		    	and cpon_dc = #{cpon_dc}
+		    </if>		    
+		</where>
+			ORDER BY coupons_tb DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 쿠폰 or조건 검색 -->
+	<select id="coupons_or_search" parameterType="CouponSearchDTO" resultType="CouponDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM coupons_tb
+		<where>
+	  		<if test="cpon_sq != null">
+		    	cpon_sq = #{cpon_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <!-- 쿠폰등록일 -->   
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end != null">
+		        or cpon_reg_dt BETWEEN TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start == null and cpon_reg_dt_end != null">
+		        or cpon_reg_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_reg_dt_start != null and cpon_reg_dt_end == null">
+		        or cpon_reg_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    
+		    <!-- 쿠폰만료일 -->   
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end != null">
+		        or cpon_exp_dt BETWEEN TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start == null and cpon_exp_dt_end != null">
+		        or cpon_exp_dt <![CDATA[ <= ]]> TO_DATE(#{cpon_exp_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="cpon_exp_dt_start != null and cpon_exp_dt_end == null">
+		        or cpon_exp_dt <![CDATA[ >= ]]> TO_DATE(#{cpon_exp_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		    		    	   
+		    <if test="cpon_nm != null">
+		        or cpon_nm = #{cpon_nm}
+		    </if>
+		    <if test="cpon_dc_pt != null">
+		    	or cpon_dc_pt = #{cpon_dc_pt}
+		    </if>
+		    <if test="cpon_dc != null">
+		    	or cpon_dc = #{cpon_dc}
+		    </if>		    
+		</where>
+			ORDER BY coupons_tb DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 쿠폰 삭제 -->
+	<delete id="coupons_delete" parameterType="String">
+		delete from coupons_tb where cpon_sq = #{cpon_sq}
+	</delete>
+	
+	<!-- 쿠폰 수정 -->
+	<update id="coupons_update" parameterType="CouponDTO">
+		update coupons_tb set cpon_fl = #{cpon_fl}, cpon_nm = #{cpon_nm}, cpon_dc_pt =#{cpon_dc_pt}, cpon_dc = #{cpon_dc}
+	</update>
+	
 	
 </mapper>

@@ -71,6 +71,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />	
 	</bean>
 	
+	<!-- adminCouponManagementDAO -->
+	<bean id="adminCouponManagementDAO" class="com.macat.dao.AdminCouponManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 	<!-- categoryDAOImpl -->
 	<bean id="categoryDAOImpl" class="com.macat.dao.CategoryDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
