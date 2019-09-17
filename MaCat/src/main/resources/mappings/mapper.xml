@@ -662,7 +662,6 @@
 		update orders_tb set order_amt = #{order_amt}, order_point = #{order_point}, order_status =#{order_status}
 	</update>
 
-
 	<!--=========================== 3 회원 정보 관리 ===========================-->
 	
 	<!-- 전체 회원 숫자 -->
@@ -1338,6 +1337,11 @@
 	<select id="reviews" parameterType="Map" resultType="ReviewDTO"> 
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM reviews_tb ORDER BY re_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<!-- 하나의 리뷰 정보 가져오기 -->
+	<select id="review_read" resultType="ReviewDTO">
+		SELECT * FROM reviews_tb WHERE re_sq = #{re_sq}
+	</select>
 
 	<!-- 리뷰 and조건 검색 결과 인원 -->
 	<select id="reviews_and_count" parameterType="ReviewSearchDTO" resultType="int">
@@ -1356,14 +1360,14 @@
 		    	and re_id = #{re_id}
 		    </if>		    
 		    <!-- 리뷰등록일 -->
-		    <if test="re_reg_date_start != null and re_reg_date_end != null">
-		        AND re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end != null">
+		        AND re_reg_dt BETWEEN TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start == null and re_reg_date_end != null">
-		        AND re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start == null and re_reg_dt_end != null">
+		        AND re_reg_dt <![CDATA[ <= ]]> TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start != null and re_reg_date_end == null">
-		        AND re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end == null">
+		        AND re_reg_dt <![CDATA[ >= ]]> TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="re_rating != null">
 		        AND re_rating = #{re_rating}
@@ -1397,14 +1401,14 @@
 		    	or re_id = #{re_id}
 		    </if>		    
 		    <!-- 리뷰등록일 -->
-		    <if test="re_reg_date_start != null and re_reg_date_end != null">
-		        or re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end != null">
+		        or re_reg_dt BETWEEN TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start == null and re_reg_date_end != null">
-		        or re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start == null and re_reg_dt_end != null">
+		        or re_reg_dt <![CDATA[ <= ]]> TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start != null and re_reg_date_end == null">
-		        or re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end == null">
+		        or re_reg_dt <![CDATA[ >= ]]> TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="re_rating != null">
 		        or re_rating = #{re_rating}
@@ -1438,14 +1442,14 @@
 		    	and re_id = #{re_id}
 		    </if>		    
 		    <!-- 리뷰등록일 -->
-		    <if test="re_reg_date_start != null and re_reg_date_end != null">
-		        AND re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end != null">
+		        AND re_reg_dt BETWEEN TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start == null and re_reg_date_end != null">
-		        AND re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start == null and re_reg_dt_end != null">
+		        AND re_reg_dt <![CDATA[ <= ]]> TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start != null and re_reg_date_end == null">
-		        AND re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end == null">
+		        AND re_reg_dt <![CDATA[ >= ]]> TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="re_rating != null">
 		        AND re_rating = #{re_rating}
@@ -1483,14 +1487,14 @@
 		    	or re_id = #{re_id}
 		    </if>		    
 		    <!-- 리뷰등록일 -->
-		    <if test="re_reg_date_start != null and re_reg_date_end != null">
-		        or re_reg_date BETWEEN TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end != null">
+		        or re_reg_dt BETWEEN TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start == null and re_reg_date_end != null">
-		        or re_reg_date <![CDATA[ <= ]]> TO_DATE(#{re_reg_date_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start == null and re_reg_dt_end != null">
+		        or re_reg_dt <![CDATA[ <= ]]> TO_DATE(#{re_reg_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
-		    <if test="re_reg_date_start != null and re_reg_date_end == null">
-		        or re_reg_date <![CDATA[ >= ]]> TO_DATE(#{re_reg_date_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    <if test="re_reg_dt_start != null and re_reg_dt_end == null">
+		        or re_reg_dt <![CDATA[ >= ]]> TO_DATE(#{re_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		    <if test="re_rating != null">
 		        or re_rating = #{re_rating}
@@ -1714,5 +1718,570 @@
 		update coupons_tb set cpon_fl = #{cpon_fl}, cpon_nm = #{cpon_nm}, cpon_dc_pt =#{cpon_dc_pt}, cpon_dc = #{cpon_dc}
 	</update>
 	
+	<!--=========================== 9 포인트 관리 ===========================-->
+	
+	<!-- 전체 포인트 숫자 -->
+	<select id="points_count" resultType="int">
+		select count(*) from points_tb
+	</select>
+	
+	<!-- 전체 포인트정보 가져오기 -->
+	<select id="points" parameterType="Map" resultType="PointDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM points_tb ORDER BY point_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 포인트 and조건 검색결과 인원 -->
+	<select id="points_and_count" parameterType="PointSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM points_tb
+		<where>
+	  		<if test="point_sq != null">
+		    	point_sq = #{point_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        AND prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_sq != null">
+		    	and order_sq = #{order_sq}
+		    </if>	 
+		    <!-- 포인트 적립일 -->
+		    <if test="point_save_dt_start != null and point_save_dt_end != null">
+		        AND point_save_dt BETWEEN TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start == null and point_save_dt_end != null">
+		        AND point_save_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start != null and order_dt_start == null">
+		        AND point_save_dt <![CDATA[ >= ]]> TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 포인트 사용일 -->
+		    <if test="point_use_dt_start != null and point_save_dt_end != null">
+		        AND point_use_dt BETWEEN TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start == null and point_save_dt_end != null">
+		        AND point_use_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start != null and order_dt_start == null">
+		        AND point_use_dt <![CDATA[ >= ]]> TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+	</select>
+	
+	<!-- 포인트 or조건 검색결과 인원 -->
+	<select id="points_or_count" parameterType="PointSearchDTO" resultType="int">
+		SELECT COUNT(*) FROM points_tb
+		<where>
+	  		<if test="point_sq != null">
+		    	point_sq = #{point_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        or prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_sq != null">
+		    	or order_sq = #{order_sq}
+		    </if>	 
+		    <!-- 포인트 적립일 -->
+		    <if test="point_save_dt_start != null and point_save_dt_end != null">
+		        or point_save_dt BETWEEN TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start == null and point_save_dt_end != null">
+		        or point_save_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start != null and order_dt_start == null">
+		        or point_save_dt <![CDATA[ >= ]]> TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 포인트 사용일 -->
+		    <if test="point_use_dt_start != null and point_save_dt_end != null">
+		        or point_use_dt BETWEEN TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start == null and point_save_dt_end != null">
+		        or point_use_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start != null and order_dt_start == null">
+		        or point_use_dt <![CDATA[ >= ]]> TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+	</select>
+	
+	<!-- 포인트 and조건 검색 -->
+	<select id="points_and_search" parameterType="PointSearchDTO" resultType="PointDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM points_tb
+		<where>
+	  		<if test="order_sq != null">
+		    	order_sq = #{order_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        AND prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_pay != null">
+		    	and order_pay = #{order_pay}
+		    </if>
+		    <if test="order_method != null">
+		    	and order_method = #{order_method}
+		    </if>
+		    <if test="order_status != null">
+		    	and order_status = #{order_status}
+		    </if>		 
+		    <!-- 주문일 -->   
+		    <if test="order_dt_start != null and order_dt_end != null">
+		        AND order_dt BETWEEN TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start == null and order_dt_end != null">
+		        AND order_dt <![CDATA[ <= ]]> TO_DATE(#{order_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_dt_start != null and order_dt_start == null">
+		        AND order_dt <![CDATA[ >= ]]> TO_DATE(#{order_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문완료일 -->		    
+		    <if test="order_compt_dt_start != null and order_compt_dt둥 != null">
+		        AND order_compt_dt BETWEEN TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start == null and order_compt_dt_end != null">
+		        AND order_compt_dt <![CDATA[ <= ]]> TO_DATE(#{order_compt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_compt_dt_start != null and order_compt_dt_end == null">
+		        AND order_compt_dt <![CDATA[ >= ]]> TO_DATE(#{order_compt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <!-- 주문결제일 -->
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_end != null">
+		        AND order_paymt_dt BETWEEN TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start == null and order_paymt_dt_end != null">
+		        AND order_paymt_dt <![CDATA[ <= ]]> TO_DATE(#{order_paymt_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="order_paymt_dt_start != null and order_paymt_dt_start == null">
+		        AND order_paymt_dt <![CDATA[ >= ]]> TO_DATE(#{order_paymt_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>		   
+		</where>
+		ORDER BY point_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+
+	<!-- 포인트 or조건 검색 -->
+	<select id="points_or_search" parameterType="PointSearchDTO" resultType="PointDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM points_tb
+		<where>
+	  		<if test="point_sq != null">
+		    	point_sq = #{point_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="prduct_sq != null">
+		        or prduct_sq = #{prduct_sq}
+		    </if>
+		    <if test="order_sq != null">
+		    	or order_sq = #{order_sq}
+		    </if>	 
+		    <!-- 포인트 적립일 -->
+		    <if test="point_save_dt_start != null and point_save_dt_end != null">
+		        or point_save_dt BETWEEN TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start == null and point_save_dt_end != null">
+		        or point_save_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_save_dt_start != null and order_dt_start == null">
+		        or point_save_dt <![CDATA[ >= ]]> TO_DATE(#{point_save_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 포인트 사용일 -->
+		    <if test="point_use_dt_start != null and point_save_dt_end != null">
+		        or point_use_dt BETWEEN TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start == null and point_save_dt_end != null">
+		        or point_use_dt <![CDATA[ <= ]]> TO_DATE(#{point_save_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="point_use_dt_start != null and order_dt_start == null">
+		        or point_use_dt <![CDATA[ >= ]]> TO_DATE(#{point_use_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+		ORDER BY point_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 포인트 삭제 -->
+	<delete id="points_delete" parameterType="String">
+		delete from points_tb where point_sq = #{point_sq}
+	</delete>
+	
+	<!-- 포인트 수정 -->
+	<update id="points_update" parameterType="PointDTO">
+		update points_tb set point_save = #{point_save}, point_use = #{point_use}
+	</update>
+	
+	<!--=========================== 10 배송 관리 ===========================-->
+	
+	<!-- 전체 배송 숫자 -->
+	<select id="delivery_count" resultType="int">
+		select count(*) from delivery_tb
+	</select>
+	
+	<!-- 전체 배송정보 가져오기 -->
+	<select id="delivery" parameterType="Map" resultType="DeliveryDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM delivery_tb ORDER BY dlvy_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 배송 and조건 검색결과 인원 -->
+	<select id="delivery_and_count" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT COUNT(*) FROM delivery_tb
+		<where>
+	  		<if test="dlvy_sq != null">
+		    	dlvy_sq = #{dlvy_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="order_sq != null">
+		        AND order_sq = #{order_sq}
+		    </if>
+		    <if test="da_sq != null">
+		    	and da_sq = #{da_sq}
+		    </if>
+		    <if test="dlvy_zip_no != null">
+		    	and dlvy_zip_no = #{dlvy_zip_no}
+		    </if>
+		    <if test="dlvy_phone_no != null">
+		    	and dlvy_phone_no = #{dlvy_phone_no}
+		    </if>
+		    <if test="dlvy_nm != null">
+		    	and dlvy_nm = #{dlvy_nm}
+		    </if>		 
+		    <if test="dlvy_adres != null">
+		    	and dlvy_adres = #{dlvy_adres}
+		    </if>		  
+		    <!-- 배송시작일 -->
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end != null">
+		        AND dlvy_start_dt BETWEEN TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start == null and dlvy_start_dt_end != null">
+		        AND dlvy_start_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end == null">
+		        AND dlvy_start_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 배송완료일 -->
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end != null">
+		        AND dlvy_end_dt BETWEEN TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start == null and dlvy_end_dt_end != null">
+		        AND dlvy_end_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end == null">
+		        AND dlvy_end_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+	</select>
+	
+	<!-- 배송 or조건 검색결과 인원 -->
+	<select id="delivery_or_count" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT COUNT(*) FROM delivery_tb
+		<where>
+	  		<if test="dlvy_sq != null">
+		    	dlvy_sq = #{dlvy_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="order_sq != null">
+		        or order_sq = #{order_sq}
+		    </if>
+		    <if test="da_sq != null">
+		    	or da_sq = #{da_sq}
+		    </if>
+		    <if test="dlvy_zip_no != null">
+		    	or dlvy_zip_no = #{dlvy_zip_no}
+		    </if>
+		    <if test="dlvy_phone_no != null">
+		    	or dlvy_phone_no = #{dlvy_phone_no}
+		    </if>
+		    <if test="dlvy_nm != null">
+		    	or dlvy_nm = #{dlvy_nm}
+		    </if>		 
+		    <if test="dlvy_adres != null">
+		    	or dlvy_adres = #{dlvy_adres}
+		    </if>		  
+		    <!-- 배송시작일 -->
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end != null">
+		        or dlvy_start_dt BETWEEN TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start == null and dlvy_start_dt_end != null">
+		        or dlvy_start_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end == null">
+		        or dlvy_start_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 배송완료일 -->
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end != null">
+		        or dlvy_end_dt BETWEEN TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start == null and dlvy_end_dt_end != null">
+		        or dlvy_end_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end == null">
+		        or dlvy_end_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+	</select>
+	
+	<!-- 배송 and조건 검색 -->
+	<select id="delivery_and_search" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM delivery_tb
+		<where>
+	  		<if test="dlvy_sq != null">
+		    	dlvy_sq = #{dlvy_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="order_sq != null">
+		        AND order_sq = #{order_sq}
+		    </if>
+		    <if test="da_sq != null">
+		    	and da_sq = #{da_sq}
+		    </if>
+		    <if test="dlvy_zip_no != null">
+		    	and dlvy_zip_no = #{dlvy_zip_no}
+		    </if>
+		    <if test="dlvy_phone_no != null">
+		    	and dlvy_phone_no = #{dlvy_phone_no}
+		    </if>
+		    <if test="dlvy_nm != null">
+		    	and dlvy_nm = #{dlvy_nm}
+		    </if>		 
+		    <if test="dlvy_adres != null">
+		    	and dlvy_adres = #{dlvy_adres}
+		    </if>		  
+		    <!-- 배송시작일 -->
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end != null">
+		        AND dlvy_start_dt BETWEEN TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start == null and dlvy_start_dt_end != null">
+		        AND dlvy_start_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end == null">
+		        AND dlvy_start_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 배송완료일 -->
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end != null">
+		        AND dlvy_end_dt BETWEEN TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start == null and dlvy_end_dt_end != null">
+		        AND dlvy_end_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end == null">
+		        AND dlvy_end_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+		ORDER BY dlvy_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>		
+	</select>
+	
+	<!-- 배송 or조건 검색 -->
+	<select id="delivery_or_search" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM delivery_tb
+		<where>
+	  		<if test="dlvy_sq != null">
+		    	dlvy_sq = #{dlvy_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="order_sq != null">
+		        or order_sq = #{order_sq}
+		    </if>
+		    <if test="da_sq != null">
+		    	or da_sq = #{da_sq}
+		    </if>
+		    <if test="dlvy_zip_no != null">
+		    	or dlvy_zip_no = #{dlvy_zip_no}
+		    </if>
+		    <if test="dlvy_phone_no != null">
+		    	or dlvy_phone_no = #{dlvy_phone_no}
+		    </if>
+		    <if test="dlvy_nm != null">
+		    	or dlvy_nm = #{dlvy_nm}
+		    </if>		 
+		    <if test="dlvy_adres != null">
+		    	or dlvy_adres = #{dlvy_adres}
+		    </if>		  
+		    <!-- 배송시작일 -->
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end != null">
+		        or dlvy_start_dt BETWEEN TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start == null and dlvy_start_dt_end != null">
+		        or dlvy_start_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_start_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_start_dt_start != null and dlvy_start_dt_end == null">
+		        or dlvy_start_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_start_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		    <!-- 배송완료일 -->
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end != null">
+		        or dlvy_end_dt BETWEEN TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start == null and dlvy_end_dt_end != null">
+		        or dlvy_end_dt <![CDATA[ <= ]]> TO_DATE(#{dlvy_end_dt_end}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="dlvy_end_dt_start != null and dlvy_end_dt_end == null">
+		        or dlvy_end_dt <![CDATA[ >= ]]> TO_DATE(#{dlvy_end_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
+		    </if>   
+		</where>
+		ORDER BY dlvy_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>		
+	</select>
+	
+	<!-- 배송 삭제 -->
+	<delete id="delivery_delete" parameterType="String">
+		delete from delivery_tb where dlvy_sq = #{dlvy_sq}
+	</delete>
+	
+	<!-- 배송 수정 -->
+	<update id="delivery_update" parameterType="DelliveryDTO">
+		update delivery_tb set dlvy_zip_no = #{dlvy_zip_no}, dlvy_phone_no = #{dlvy_phone_no}, dlvy_nm = #{dlvy_nm}, dlvy_adres = #{dlvy_adres}, dlvy_tel_no = #{dlvy_tel_no}, dlvy_waybill_no = #{dlvy_waybill_no}, dlvy_delil_adres = #{dlvy_delil_adres}
+	</update>
+	
+	<!--=========================== 10-1 배송지 관리 ===========================-->
+	
+	<!-- 전체 배송지 관리 -->
+	<select id="dlvy_addr_count" resultType="int">
+		select count(*) from dlvy_addr_tb
+	</select>
+	
+	<!-- 전체 배송지 정보 가져오기 -->
+	<select id="dlvy_addr" parameterType="Map" resultType="">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM dlvy_addr_tb ORDER BY da_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 배송지 and조건 검색결과 인원 -->
+	<select id="dlvy_addr_and_count" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT COUNT(*) FROM dlvy_addr_tb
+		<where>
+	  		<if test="da_sq != null">
+		    	da_sq = #{da_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="da_zip_no != null">
+		        AND da_zip_no = #{da_zip_no}
+		    </if>
+		    <if test="da_adres != null">
+		    	and da_adres = #{da_adres}
+		    </if>
+		    <if test="da_tel != null">
+		    	and da_tel = #{da_tel}
+		    </if>
+		    <if test="da_detail_adres != null">
+		    	and da_detail_adres = #{da_detail_adres}
+		    </if>		 
+		</where>
+	</select>
+	
+	<!-- 배송지 or조건 검색결과 인원 -->
+	<select id="dlvy_addr_and_count" parameterType="DeliverySearchDTO" resultType="int">
+		SELECT COUNT(*) FROM dlvy_addr_tb
+		<where>
+	  		<if test="da_sq != null">
+		    	da_sq = #{da_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="da_zip_no != null">
+		        or da_zip_no = #{da_zip_no}
+		    </if>
+		    <if test="da_adres != null">
+		    	or da_adres = #{da_adres}
+		    </if>
+		    <if test="da_tel != null">
+		    	or da_tel = #{da_tel}
+		    </if>
+		    <if test="da_detail_adres != null">
+		    	or da_detail_adres = #{da_detail_adres}
+		    </if>		 
+		</where>
+	</select>
+	
+	<!-- 배송지 and조건 검색 -->
+	<select id="dlvy_addr_and_search" parameterType="DeliveryAddrSearchDTO" resultType="DeliveryAddrDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM dlvy_addr_tb
+		<where>
+	  		<if test="da_sq != null">
+		    	da_sq = #{da_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        AND MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="da_zip_no != null">
+		        AND da_zip_no = #{da_zip_no}
+		    </if>
+		    <if test="da_adres != null">
+		    	and da_adres = #{da_adres}
+		    </if>
+		    <if test="da_tel != null">
+		    	and da_tel = #{da_tel}
+		    </if>
+		    <if test="da_detail_adres != null">
+		    	and da_detail_adres = #{da_detail_adres}
+		    </if>		 
+		</where>
+			ORDER BY da_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 배송지 or조건 검색 -->
+	<select id="dlvy_addr_or_search" parameterType="DeliveryAddrSearchDTO" resultType="DeliveryAddrDTO">
+		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM dlvy_addr_tb
+		<where>
+	  		<if test="da_sq != null">
+		    	da_sq = #{da_sq}
+		    </if>
+		    <if test="mber_sq != null">
+		        or MBER_SQ = #{mber_sq}
+		    </if>
+		    <if test="da_zip_no != null">
+		        or da_zip_no = #{da_zip_no}
+		    </if>
+		    <if test="da_adres != null">
+		    	or da_adres = #{da_adres}
+		    </if>
+		    <if test="da_tel != null">
+		    	or da_tel = #{da_tel}
+		    </if>
+		    <if test="da_detail_adres != null">
+		    	or da_detail_adres = #{da_detail_adres}
+		    </if>		 
+		</where>
+			ORDER BY da_sq DESC) A )
+		<where>
+			R_NUM BETWEEN #{begin} AND #{end}
+		</where>
+	</select>
+	
+	<!-- 배송지 삭제 -->
+	<delete id="dlvy_addr_delete" parameterType="String">
+		delete from dlvy_addr_tb where da_sq = #{da_sq}
+	</delete>
+	
+	<!-- 배송지 수정 -->
+	<update id="dlvy_addr_update" parameterType="DelliveryDTO">
+		update dlvy_addr_tb set da_zip_no = #{da_zip_no}, da_phone = #{da_phone}, da_adres =#{da_adres}, da_tel = #{da_tel}, da_detail_adres =#{da_detail_adres} 
+	</update>
 	
 </mapper>

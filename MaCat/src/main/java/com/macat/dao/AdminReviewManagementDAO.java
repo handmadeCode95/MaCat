@@ -61,4 +61,9 @@ public class AdminReviewManagementDAO implements AdminManagementDAO{
 	public int deleteAdmin(String re_sq) {
 		return sqlSessionTemplate.delete("reviews_delete", re_sq);
 	}
+	
+	// 리뷰글 한개 가져오기
+	public ReviewDTO getReview(String re_sq) {
+		return sqlSessionTemplate.selectOne("review_read", re_sq);
+	}
 }

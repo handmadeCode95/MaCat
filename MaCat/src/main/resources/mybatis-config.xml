@@ -25,6 +25,12 @@
 		<typeAlias type="com.macat.dto.ReviewSearchDTO" alias="ReviewSearchDTO"/>
 		<typeAlias type="com.macat.dto.CouponDTO" alias="CouponDTO"/>
 		<typeAlias type="com.macat.dto.CouponSearchDTO" alias="CouponSearchDTO"/>
+		<typeAlias type="com.macat.dto.PointDTO" alias="PointDTO"/>
+		<typeAlias type="com.macat.dto.PointSearchDTO" alias="PointSearchDTO"/>
+		<typeAlias type="com.macat.dto.DeliveryDTO" alias="DeliveryDTO"/>
+		<typeAlias type="com.macat.dto.DeliverySearchDTO" alias="DeliverySearchDTO"/>
+		<typeAlias type="com.macat.dto.DeliveryAddrDTO" alias="DeliveryAddrDTO"/>
+		<typeAlias type="com.macat.dto.DeliveryAddrSearchDTO" alias="DeliveryAddrSearchDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/mapper.xml" />

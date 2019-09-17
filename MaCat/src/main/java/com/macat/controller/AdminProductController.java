@@ -184,29 +184,28 @@ public class AdminProductController {
 	}
 	
 	// 상품 삭제
-		@PostMapping("products_delete.mcat")
-		@ResponseBody
-		public Map<String, Object> getProductsDeleteCmd(@RequestBody Map<String, List<String>> products){
-			for (String i : products.keySet()) {
-				for (String j : products.get(i)) {
-					adminProductManagementDAO.deleteAdmin(j);
-				}
+	@PostMapping("products_delete.mcat")
+	@ResponseBody
+	public Map<String, Object> getProductsDeleteCmd(@RequestBody Map<String, List<String>> products){
+		for (String i : products.keySet()) {
+			for (String j : products.get(i)) {
+				adminProductManagementDAO.deleteAdmin(j);
 			}
-			
-			switch (usedDTO) {
-			case "ProductsDTO":
-				count = adminProductManagementDAO.getAdminCount();
-				break;
-			case "ProductsSearchDTO_and":
-				count = adminProductManagementDAO.getProductsAndCount(productsSearchDTO);
-				break;
-			case "ProductsSearchDTO_or":
-				count = adminProductManagementDAO.getProductsOrCount(productsSearchDTO);
-				break;
-			}
-			
-			return getProductsPageDTOCmd(cPage);		
 		}
-	
+		
+		switch (usedDTO) {
+		case "ProductsDTO":
+			count = adminProductManagementDAO.getAdminCount();
+			break;
+		case "ProductsSearchDTO_and":
+			count = adminProductManagementDAO.getProductsAndCount(productsSearchDTO);
+			break;
+		case "ProductsSearchDTO_or":
+			count = adminProductManagementDAO.getProductsOrCount(productsSearchDTO);
+			break;
+		}
+		
+		return getProductsPageDTOCmd(cPage);		
+	}	
 	
 }

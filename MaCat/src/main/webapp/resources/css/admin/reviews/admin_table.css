@@ -3,20 +3,20 @@ input[type=password] {
 }
 
 /*주문정보 테이블 파트 : 타이틀*/
-.order_info_table_title {
+.review_info_table_title {
      width: 1645px;
     height: 60px;
     background: #ffffff;
     margin: 16px 40px 14px 27px; 
 }
 
-.order_info_table_title span{
+.review_info_table_title span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
 
-.order_info_table_title span p{
+.review_info_table_title span p{
     line-height: 60px; 
     font-size: 22px;
     display: inherit;

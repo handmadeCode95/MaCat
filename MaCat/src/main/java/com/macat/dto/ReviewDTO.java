@@ -2,12 +2,12 @@ package com.macat.dto;
 
 public class ReviewDTO implements AdminDTO{
 	
-	private String re_sq, mber_sq, prduct_sq, re_reg_dt, re_ratgin, re_view_cnt, re_like, re_ans_st, re_id,
+	private String re_sq, mber_sq, prduct_sq, re_reg_dt, re_rating, re_view_cnt, re_like, re_ans_st, re_id,
 				re_sj, re_nm, re_cn;
 	
 	public ReviewDTO() {}
 
-	public ReviewDTO(String re_sq, String mber_sq, String prduct_sq, String re_reg_dt, String re_ratgin,
+	public ReviewDTO(String re_sq, String mber_sq, String prduct_sq, String re_reg_dt, String re_rating,
 			String re_view_cnt, String re_like, String re_ans_st, String re_id, String re_sj, String re_nm,
 			String re_cn) {
 		super();
@@ -15,7 +15,7 @@ public class ReviewDTO implements AdminDTO{
 		this.mber_sq = mber_sq;
 		this.prduct_sq = prduct_sq;
 		this.re_reg_dt = re_reg_dt;
-		this.re_ratgin = re_ratgin;
+		this.re_rating = re_rating;
 		this.re_view_cnt = re_view_cnt;
 		this.re_like = re_like;
 		this.re_ans_st = re_ans_st;
@@ -57,12 +57,12 @@ public class ReviewDTO implements AdminDTO{
 		this.re_reg_dt = re_reg_dt;
 	}
 
-	public String getRe_ratgin() {
-		return re_ratgin;
+	public String getRe_rating() {
+		return re_rating;
 	}
 
-	public void setRe_ratgin(String re_ratgin) {
-		this.re_ratgin = re_ratgin;
+	public void setRe_rating(String re_rating) {
+		this.re_rating = re_rating;
 	}
 
 	public String getRe_view_cnt() {

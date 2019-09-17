@@ -37,58 +37,57 @@ main{
     background: #dfdfdf;
     float: right;    
 }
-/* 회원관리 타이틀 파트*/
-.order_management {
+.review_management {
     width: 1645px;
     height: 60px;
     background: #ffffff;
     margin: 16px 40px 14px 27px;
 }
-.order_management span{
+.review_management span{
     line-height: 60px; 
     margin: 16px 0px 18px 26px;
     font-size: 22px;
 }
-/*회원정보 작업 파트*/
-.order_information_container {
+/* 리뷰정보 작업 파트*/
+.review_information_container {
     width: 1645px;
-    height: 676px;
+    height: 566px;
     background: #ffffff;
     margin: 0px 40px 26px 27px;    
 }
-/* 회원정보 파트*/
-.order_info {
+/* 리뷰정보 파트*/
+.review_info {
     width: 1592px;
     height: 197px;
     margin: 0 auto;
     box-sizing: border-box;
     border-bottom: 1px solid #707070;    
 }
-/*체크박스 포함 선택단*/
+/* 체크박스 포함 선택단*/
 .infomation_control_part {
     float: left;
     /*margin-top: 26.5px;*/
     height: 197px;
 }
-/*회원정보 타이틀*/
-.order_info_title {
+/* 리뷰정보 타이틀*/
+.review_info_title {
     width: 311px; 
     height: 175px; 
     float: left;
     margin-top: 19px;
 }
 
-/*회원정보 파트 */
-.order_info_middle{
+/* 리뷰정보 파트 */
+.review_info_middle{
     float: left;
     width: 555px;
     height: 166px;
     margin-top: 28px;
 }
 
-.order_info_right{
+.review_info_right{
     float: left;
-    width: 300px;
+    width: 350px;
     margin-left: 62.5px;
     margin-top: 28px;    
 }
@@ -143,53 +142,6 @@ main{
 .join_period_btn li:last-child{
     width: 56px;
 }
-
-/*접속기간 기간선택 버튼 div*/
-.connect_period_btn{
-    margin-top: 37.5px;
-    width: 380px;
-    height: 35.5px;
-}
-
-.connect_period_btn li{
-    float: left;
-    border: 1px solid #cfcfcf;
-    width: 66px;
-    height: 37.5px;
-    line-height: 35.5px;
-    text-align: center;
-    margin-left: -1px;    
-    box-sizing: border-box;
-}
-
-.connect_period_btn li:first-child,
-.connect_period_btn li:last-child{
-    width: 56px;
-}
-
-/*주문완료일*/
-.order_period_btn{
-    margin-top: 37.5px;
-    width: 380px;
-    height: 35.5px;
-}
-
-.order_period_btn li{
-    float: left;
-    border: 1px solid #cfcfcf;
-    width: 66px;
-    height: 37.5px;
-    line-height: 35.5px;
-    text-align: center;
-    margin-left: -1px;    
-    box-sizing: border-box;
-}
-
-.order_period_btn li:first-child,
-.order_period_btn li:last-child{
-    width: 56px;
-}
-
 
 ul,li{    
     list-style: none;
@@ -295,7 +247,7 @@ ul,li{
     margin-left: 84px;
 }
 
-#orders_count{
+#review_count{
 	color : #f25e5e;
 	font-weight: normal;
 }

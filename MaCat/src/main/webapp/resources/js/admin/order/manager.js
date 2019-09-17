@@ -256,7 +256,7 @@ $(function() {
 	        arr.push(row);
 	    });
 	    // arr배열을 mbersDTO라는 key값과 함께 저장
-	    data = {mbersDTO : arr};
+	    data = {orderDTO : arr};
 	    // JSON형태로 직렬화
 	    var mbersDTO = JSON.stringify(data);
 

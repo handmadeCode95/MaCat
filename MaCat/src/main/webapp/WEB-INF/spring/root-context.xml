@@ -76,6 +76,21 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<!-- adminPointManagementDAO -->
+	<bean id="adminPointManagementDAO" class="com.macat.dao.AdminPointManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminDeliveryManagementDAO -->
+	<bean id="adminDeliveryManagementDAO" class="com.macat.dao.AdminDeliveryManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminDeliveryAddrManagementDAO -->
+	<bean id="adminDeliveryAddrManagementDAO" class="com.macat.dao.AdminDeliveryAddrManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 	<!-- categoryDAOImpl -->
 	<bean id="categoryDAOImpl" class="com.macat.dao.CategoryDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />

@@ -239,7 +239,7 @@
 		                                    <td><input name="order_amt" class="${i.order_amt}" type="text" value="${i.order_amt}" disabled></td>
 		                                    <td><input name="order_point" class="${i.order_point}" type="text" value="${i.order_point}" disabled></td>
 		                                    <td>${i.order_pay}</td>
-		                                    <td>${i.ordet_method}</td>
+		                                    <td>${i.order_method}</td>
 		                                    <td><input name="order_status" class="${i.order_status}" type="text" value="${i.order_status}" disabled></td>
 		                                    <td>${i.order_compt_dt.substring(0,10)}</td>
 		                                </tr>

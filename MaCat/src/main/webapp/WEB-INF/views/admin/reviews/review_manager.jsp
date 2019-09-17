@@ -35,57 +35,50 @@
 	    <div class="macat_sideMenu_load"><%@ include file="../macat_admin_sideMenu.jsp" %></div>
 	    <main>
 	        <section class="wrap">
-	            <div class="order_management">
-	                <span>리뷰관리</span>
+	            <div class="review_management">
+	                <span>리뷰 관리</span>
 	            </div>
-	            <form id="searchForm" action="reviews_search.mcat" method="post">
-	                <div class="order_information_container">
+	            <form id="searchForm" action="reviews_manage.mcat" method="post">
+	                <div class="review_information_container">
 	                    <!--주문정보-->
-	                    <div class="order_info">
-	                        <div class="order_info_title"><span>주문정보</span></div>
+	                    <div class="review_info">
+	                        <div class="review_info_title"><span>리뷰정보</span></div>
 	                        <div class="infomation_control_part">
-	                            <!--이름 아이디 핸드폰번호 생일-->
-	                            <div class="order_info_middle">
-	                            
+	                            <!--리뷰번호 리뷰제목 리뷰작성자-->
+	                            <div class="review_info_middle">
 	                                <div class="checks">
-	                                    <input type="checkbox" id="order_chk" class="search" value="order_sq">
-	                                    <label for="order_chk" style="margin-right: 26px; ">주문번호</label>
-	                                    <span class="inputClickListener"><input type="text" name="order_sq" class="order_sq" disabled></span>
+	                                    <input type="checkbox" id="re_sq_chk" class="search" value="re_sq">
+	                                    <label for="re_sq_chk">리뷰번호</label>
+	                                    <span class="inputClickListener"><input type="text" name="re_sq" class="re_sq" disabled></span>
 	                                </div>
-	                                
 	                                <div class="checks">
-	                                    <input type="checkbox" id="prduct_chk" class="search" value="prduct_sq">
-	                                    <label for="prduct_chk" style="margin-right: 26px;">상품번호</label>
-	                                    <span class="inputClickListener"><input type="text" name="prduct_sq" class="prduct_sq" disabled></span>
+	                                    <input type="checkbox" id="re_sj_chk" class="search" value="re_sj">
+	                                    <label for="re_sj_chk">리뷰제목</label>
+	                                    <span class="inputClickListener"><input type="text" name="re_sj" class="re_sj" disabled></span>
 	                                </div>
-	                                
 	                                <div class="checks">
-	                                    <input type="checkbox" id="pay_chk" class="search" value="order_pay">
-	                                    <label for="pay_chk" style="margin-right: 26px;">결제금액</label>
-	                                    <span class="inputClickListener"><input type="tel" name="order_pay" class="order_pay" disabled></span>
+	                                    <input type="checkbox" id="re_nm_chk" class="search" value="re_nm">
+	                                    <label for="re_nm_chk">작성자명</label>
+	                                    <span class="inputClickListener"><input type="tel" name="re_nm" class="re_nm" disabled></span>
 	                                </div>
 	                            </div>
-	                            <!--회원번호 결제수단 주문현황-->
-	                            <div class="order_info_right">
-	                            
+	                            <!--리뷰아이디 리뷰평점 리뷰조회수-->
+	                            <div class="review_info_right">
 	                                <div class="checks">
-	                                    <input type="checkbox" id="member_no" class="search" value="mber_sq">
-	                                    <label for="member_no" style="margin-right: 13px;">회원번호</label>
-	                                    <span class="inputClickListener"><input type="text" name="mber_sq" class="mber_sq" disabled></span>
+	                                    <input type="checkbox" id="re_id_chk" class="search" value="re_id">
+	                                    <label for="re_id_chk" style="margin-right: 13px;">아이디</label>
+	                                    <span class="inputClickListener"><input type="text" name="re_id" class="re_id" disabled></span>
 	                                </div>
-	                                
 	                                <div class="checks">
-	                                    <input type="checkbox" id="pay_method" class="search" value="order_method">
-	                                    <label for="pay_method" style="margin-right: 13px;">결제수단</label>
-	                                    <span class="inputClickListener"><input type="text" name="order_method" class="order_method" disabled></span>
+	                                    <input type="checkbox" id="re_rating_chk" class="search" value="re_rating">
+	                                    <label for="re_rating">리뷰평점</label>
+	                                    <span class="inputClickListener"><input type="text" name="re_rating" class="re_rating" disabled></span>
 	                                </div>
-	                                
 	                                <div class="checks">
-	                                    <input type="checkbox" id="pro_status" class="search" value="order_status">
-	                                    <label for="pro_status" style="margin-right: 13px;">주문현황</label>
-	                                    <span class="inputClickListener"><input type="tel" name="order_status" class="order_status" disabled></span>
+	                                    <input type="checkbox" id="re_view_cnt_chk" class="search" value="re_view_cnt">
+	                                    <label for="re_view_cnt_chk" style="margin-right: 13px;">조회수</label>
+	                                    <span class="inputClickListener"><input type="tel" name="re_view_cnt" class="re_view_cnt" disabled></span>
 	                                </div>
-	                                
 	                            </div>
 	                        </div>
 	                    </div>
@@ -93,73 +86,32 @@
 	                    <div class="searching_term">
 	                        <div class="searching_term_title"><span>기간</span></div>
 	                        <div class="searching_term_middle">
-	                        
+                            
 	                            <div class="checks">
 	                                <input type="checkbox" id="join_date" class="search" value="order_dt">
-	                                <label for="join_date" style="margin-right: 36px;">주문일</label>
+	                                <label for="join_date" style="margin-right: 40px;">리뷰등록일</label>
 	                                <div>
-	                                    <span class="inputClickListener"><input type="date" id="join_box1" name="order_dt_start" class="order_dt" disabled></span>
+	                                    <span class="inputClickListener"><input type="date" id="join_box1" name="re_reg_dt_start" class="order_dt" disabled></span>
 	                                    ~
-	                                    <span class="inputClickListener"><input type="date" id="join_box2" name="order_dt_end" class="order_dt" disabled></span>
+	                                    <span class="inputClickListener"><input type="date" id="join_box2" name="re_reg_dt_end" class="order_dt" disabled></span>
 	                                </div>
 	                            </div>
 	                            
-	                            <div class="checks">
-	                                <input type="checkbox" id="connect_term" class="search" value="order_paymt_dt">
-	                                <label for="connect_term" style="margin-right: 17px;">주문결제일</label>
-	                                <div>
-	                                    <span class="inputClickListener"><input type="date" id="connect_box1" name="order_paymt_dt_start" class="order_paymt_dt" disabled></span>
-	                                    ~
-	                                    <span class="inputClickListener"><input type="date" id="connect_box2" name="order_paymt_dt_end" class="order_paymt_dt" disabled></span>
-	                                </div>
-	                            </div>
-	                            
-	                            <div class="checks">
-	                                  <input type="checkbox" id="order_compt" class="search" value="order_compt_dt">
-	                                  <label for="order_compt" style="margin-right: 17px;">주문완료일</label>
-	                                  <div>
-	                                      <span class="inputClickListener"><input type="date" id="compt_box1" name="order_compt_dt_start" class="order_compt_dt" disabled></span> ~
-	                                      <span class="inputClickListener"><input type="date" id="compt_box2" name="order_compt_dt_end" class="order_compt_dt" disabled></span>
-	                                  </div>
-	                             </div>
-	                             
 	                        </div>
 	                        <!-- 기간 선택 파트 -->
 	                        <div class="searching_term_right part2">
 	                        
 	                            <div class="join_period_btn">
 	                                <ul>
-	                                    <li class="join_period_li">오늘 <input type="hidden" name="order_dt_start" value="${dateDTO.today}" disabled></li>
-	                                    <li class="join_period_li">1주일 <input type="hidden" name="order_dt_start" value="${dateDTO.oneWeekAgo}" disabled></li>
-	                                    <li class="join_period_li">1개월 <input type="hidden" name="order_dt_start" value="${dateDTO.oneMonthAgo}" disabled></li>
-	                                    <li class="join_period_li">3개월 <input type="hidden" name="order_dt_start" value="${dateDTO.threeMonthAgo}" disabled></li>
-	                                    <li class="join_period_li">6개월 <input type="hidden" name="order_dt_start" value="${dateDTO.sixMonthAgo}" disabled></li>
-	                                    <li class="join_period_li">1년 <input type="hidden" name="order_dt_start" value="${dateDTO.oneYearAgo}" disabled></li>
+	                                    <li class="join_period_li">오늘 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.today}" disabled></li>
+	                                    <li class="join_period_li">1주일 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.oneWeekAgo}" disabled></li>
+	                                    <li class="join_period_li">1개월 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.oneMonthAgo}" disabled></li>
+	                                    <li class="join_period_li">3개월 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.threeMonthAgo}" disabled></li>
+	                                    <li class="join_period_li">6개월 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.sixMonthAgo}" disabled></li>
+	                                    <li class="join_period_li">1년 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.oneYearAgo}" disabled></li>
 	                                </ul>
 	                            </div>
-	                            
-	                            <div class="connect_period_btn">
-	                                <ul>
-	                                	<li class="connect_period_li">오늘 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.today}" disabled></li>
-	                                    <li class="connect_period_li">1주일 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.oneWeekAgo}" disabled></li>
-	                                    <li class="connect_period_li">1개월 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.oneMonthAgo}" disabled></li>
-	                                    <li class="connect_period_li">3개월 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.threeMonthAgo}" disabled></li>
-	                                    <li class="connect_period_li">6개월 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.sixMonthAgo}" disabled></li>
-	                                    <li class="connect_period_li">1년 <input type="hidden" name="order_paymt_dt_start" value="${dateDTO.oneYearAgo}" disabled></li>
-	                                </ul>
-	                            </div>
-	                            
-	                            <div class="order_period_btn">
-	                                <ul>
-	                                	<li class="order_period_li">오늘 <input type="hidden" name="order_compt_dt" value="${dateDTO.today}" disabled></li>
-	                                    <li class="order_period_li">1주일 <input type="hidden" name="order_compt_dt" value="${dateDTO.oneWeekAgo}" disabled></li>
-	                                    <li class="order_period_li">1개월 <input type="hidden" name="order_compt_dt" value="${dateDTO.oneMonthAgo}" disabled></li>
-	                                    <li class="order_period_li">3개월 <input type="hidden" name="order_compt_dt" value="${dateDTO.threeMonthAgo}" disabled></li>
-	                                    <li class="order_period_li">6개월 <input type="hidden" name="order_compt_dt" value="${dateDTO.sixMonthAgo}" disabled></li>
-	                                    <li class="order_period_li">1년 <input type="hidden" name="order_compt_dt" value="${dateDTO.oneYearAgo}" disabled></li>
-	                                </ul>
-	                            </div>
-	                            
+	                           
 	                        </div>
 	                    </div>
 	                    <!-- 버튼 파트-->
@@ -190,63 +142,113 @@
 	            </form>	            
 	            
 	            <!-- 테이블 파트-->
-	            <div class="order_info_table_title">
-	                <span>주문정보 (총 <b id="orders_count">${pageDTO.totalRecord}</b> 개)</span>
+	             <div class="review_info_table_title">
+	                <span>리뷰정보 (총 <b id="review_count">${pageDTO.totalRecord}</b> 개)</span>
 	            </div>
-	            <div id="orders" class="info_table">
+	            <div id="review" class="info_table">
 	                <form>
 	                    <div class="table_wrap">
 	                        <table class="type11" id="checkbox_js">
 	                            <colgroup>
 	                                <col width="40" />	<!--체크박스-->
-	                                <col width="80" />	<!--주문번호-->
+	                                <col width="80" />	<!--리뷰번호-->
 	                                <col width="80" />	<!--회원번호-->
 	                                <col width="80" />	<!--상품번호-->
-	                                <col width="240" />	<!--주문일-->
-	                                <col width="240" />	<!--주문결제일-->
-	                                <col width="140" />	<!--주문수량-->
-	                                <col width="140" />	<!--주문결제포인트-->
-	                                <col width="100" />	<!--주문결제금액-->
-	                                <col width="200" />	<!--주문결제수단-->
-	                                <col width="200" />	<!--주문처리현황-->
-	                                <col width="240" />	<!--주문완료일-->
+	                                <col width="240" />	<!--등록일-->
+	                                <col width="80" />	<!--리뷰평점-->
+	                                <col width="100" />	<!--조회수-->
+	                                <col width="100" />	<!--좋아요-->
+	                                <col width="160" />	<!--답변여부-->
+	                                <col width="240" />	<!--리뷰아이디-->
+	                                <col width="240" />	<!--리뷰제목-->
+	                                <col width="240" />	<!--리뷰작성자-->
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th class="checks"><input name="orders" type="checkbox" id="allCheck"><label for="allCheck"></label></th>
-	                                    <th scope="col">주문번호</th>
+	                                    <th class="checks"><input name="review" type="checkbox" id="allCheck"><label for="allCheck"></label></th>
+	                                    <th scope="col">리뷰번호</th>
 	                                    <th scope="col">회원번호</th>
 	                                    <th scope="col">상품번호</th>
-	                                    <th scope="col">주문일</th>
-	                                    <th scope="col">주문결제일</th>
-	                                    <th scope="col">주문수량</th>
-	                                    <th scope="col">주문결제포인트</th>
-	                                    <th scope="col">주문결제금액</th>
-	                                    <th scope="col">주문결제수단</th>
-	                                    <th scope="col">주문처리현황</th>
-	                                    <th scope="col">주문완료일</th>
+	                                    <th scope="col">등록일</th>
+	                                    <th scope="col">리뷰평점</th>
+	                                    <th scope="col">조회수</th>
+	                                    <th scope="col">좋아요</th>
+	                                    <th scope="col">답변여부</th>
+	                                    <th scope="col">리뷰아이디</th>
+	                                    <th scope="col">리뷰제목</th>
+	                                    <th scope="col">리뷰작성자</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody id="searchResult">
-	                            <c:forEach var="i" items="${orderDTO}">
-		                                <tr id="${i.order_sq}">
-		                                    <td class="checks"><input name="orders" class="chkbox" type="checkbox" id="table_chk" value="${i.order_sq}"><label for="table_chk"></label></td>
-		                                    <td>${i.order_sq}</td>
+	                            	<c:forEach var="i" items="${reviewDTO}">
+		                                <tr id="${i.re_sq}">
+		                                    <td class="checks"><input name="review" class="chkbox" type="checkbox" id="table_chk" value="${i.re_sq}"><label for="table_chk"></label></td>
+		                                    <td>${i.re_sq}</td>
 		                                    <td>${i.mber_sq}</td>
 		                                    <td>${i.prduct_sq}</td>
-		                                    <td>${i.order_dt.substring(0,10)}</td>
-		                                    <td>${i.order_paymt_dt.substring(0,10)}</td>
-		                                    <td><input name="order_amt" class="${i.order_amt}" type="text" value="${i.order_amt}" disabled></td>
-		                                    <td><input name="order_point" class="${i.order_point}" type="text" value="${i.order_point}" disabled></td>
-		                                    <td>${i.order_pay}</td>
-		                                    <td>${i.ordet_method}</td>
-		                                    <td><input name="order_status" class="${i.order_status}" type="text" value="${i.order_status}" disabled></td>
-		                                    <td>${i.order_compt_dt.substring(0,10)}</td>
+		                                    <td>${i.re_reg_dt.substring(0,10)}</td>
+		                                    <td>${i.re_rating}</td>
+		                                    <td>${i.re_view_cnt}</td>
+		                                    <td>${i.re_like}</td>
+		                                    <td><input name="re_ans_st" class="${i.re_ans_st}" type="text" value="${i.re_ans_st}" disabled></td>
+		                                    <td>${i.re_id}</td>
+		                                    <td><a href="review_manage.mcat?re_sj='${i.re_sj}'">${i.re_sj}</a></td>
+		                                    <td>${i.re_nm}</td>
 		                                </tr>
 		                          </c:forEach>
 	                            </tbody>
 	                        </table>
 	                    </div>
+	                    
+	                    <!-- 페이징 div -->
+	                    <div id="pagingDiv">
+							<ol id="paging">
+								<%-- 이전 --%>
+								<c:choose>
+									<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"> 
+										<input type="hidden" name="cPage" value="${pageDTO.beginBlock - 1}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+		
+								<%-- 블록안에 들어간 페이지번호들 --%>
+								<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}"
+									step="1" var="i">
+									<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
+									<c:choose>
+										<c:when test="${i == pageDTO.nowPage}">
+											<li class="now">${i}</li>
+										</c:when>
+										<c:otherwise>
+											<li><a class="page">${i}<input type="hidden"
+													name="cPage" value="${i}"></a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+		
+								<%-- 다음 --%>
+								<c:choose>
+									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page"> <img
+												src="resources/img/mcat-arrow-slider-right-grey.png"
+												height="10px"> <input type="hidden" name="cPage"
+												value="${pageDTO.beginBlock + pageDTO.pagePerBlock}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ol>
+						</div>
+	                    
 	                    <div class="edit_delete_btn">
 	                        <input class="edit_btn" type="button" value="수정" id="update" />
 	                        <input class="delete_btn" type="button" value="삭제" id="delete" />

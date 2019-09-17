@@ -14,11 +14,11 @@
 	    <link rel="stylesheet" href="resources/css/paging.css">	     
    	    <!-- 체크박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
+	    <!-- 라디오박스 css -->
+	    <link rel="stylesheet" href="resources/css/admin/radiobutton.css">
 	    	    
 	    <!-- 관리자페이지 css -->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/manager.css">
-	    <!-- 라디오박스 css -->
-	    <link rel="stylesheet" href="resources/css/admin/customer_center/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
 	    <link rel="stylesheet" href="resources/css/admin/customer_center/admin_table.css">
 	    <!--input text입력창 조절 css-->

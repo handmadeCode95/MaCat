@@ -1,22 +1,22 @@
 package com.macat.dto;
 
 public class ReviewSearchDTO implements AdminSearchDTO{
-	private String re_sn, re_sj, re_nm, re_id, re_reg_date_start, re_reg_date_end, re_rating, re_view_cnt, re_like,
+	private String re_sq, re_sj, re_nm, re_id, re_reg_dt_start, re_reg_dt_end, re_rating, re_view_cnt, re_like,
 				re_ans_st, and_or_chk;
 	private int begin, end;
 	
 	public ReviewSearchDTO() {	}
 
-	public ReviewSearchDTO(String re_sn, String re_sj, String re_nm, String re_id, String re_reg_date_start,
-			String re_reg_date_end, String re_rating, String re_view_cnt, String re_like, String re_ans_st,
+	public ReviewSearchDTO(String re_sq, String re_sj, String re_nm, String re_id, String re_reg_dt_start,
+			String re_reg_dt_end, String re_rating, String re_view_cnt, String re_like, String re_ans_st,
 			String and_or_chk, int begin, int end) {
 		super();
-		this.re_sn = re_sn;
+		this.re_sq = re_sq;
 		this.re_sj = re_sj;
 		this.re_nm = re_nm;
 		this.re_id = re_id;
-		this.re_reg_date_start = re_reg_date_start;
-		this.re_reg_date_end = re_reg_date_end;
+		this.re_reg_dt_start = re_reg_dt_start;
+		this.re_reg_dt_end = re_reg_dt_end;
 		this.re_rating = re_rating;
 		this.re_view_cnt = re_view_cnt;
 		this.re_like = re_like;
@@ -26,12 +26,12 @@ public class ReviewSearchDTO implements AdminSearchDTO{
 		this.end = end;
 	}
 
-	public String getRe_sn() {
-		return re_sn;
+	public String getRe_sq() {
+		return re_sq;
 	}
 
-	public void setRe_sn(String re_sn) {
-		this.re_sn = re_sn;
+	public void setRe_sq(String re_sq) {
+		this.re_sq = re_sq;
 	}
 
 	public String getRe_sj() {
@@ -58,20 +58,20 @@ public class ReviewSearchDTO implements AdminSearchDTO{
 		this.re_id = re_id;
 	}
 
-	public String getRe_reg_date_start() {
-		return re_reg_date_start;
+	public String getRe_reg_dt_start() {
+		return re_reg_dt_start;
 	}
 
-	public void setRe_reg_date_start(String re_reg_date_start) {
-		this.re_reg_date_start = re_reg_date_start;
+	public void setRe_reg_dt_start(String re_reg_dt_start) {
+		this.re_reg_dt_start = re_reg_dt_start;
 	}
 
-	public String getRe_reg_date_end() {
-		return re_reg_date_end;
+	public String getRe_reg_dt_end() {
+		return re_reg_dt_end;
 	}
 
-	public void setRe_reg_date_end(String re_reg_date_end) {
-		this.re_reg_date_end = re_reg_date_end;
+	public void setRe_reg_dt_end(String re_reg_dt_end) {
+		this.re_reg_dt_end = re_reg_dt_end;
 	}
 
 	public String getRe_rating() {
