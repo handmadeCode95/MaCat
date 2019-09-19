@@ -43,9 +43,6 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-<<<<<<< HEAD
-	            	<p>${sessionScope.productForm.prduct_nm}</p>
-=======
 	            	<c:choose>
 	            		<c:when test="${!empty sessionScope.productForm}">
 	            			<p>${sessionScope.productForm.prduct_nm}</p>
@@ -54,8 +51,6 @@
 	            			<input type="text">
 	            		</c:otherwise>
 	            	</c:choose>
-	            	
->>>>>>> xydragon
 
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
@@ -66,9 +61,6 @@
 		            	</div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-<<<<<<< HEAD
-	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite()">
-=======
 	            	<c:set var="url" value="${pageContext.request.requestURL}"></c:set>
 	            	<c:choose>
 	            		<!-- 공지사항 수정 페이지 -->
@@ -80,7 +72,6 @@
 	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite(${url})">
 	            		</c:when>
 	            	</c:choose>
->>>>>>> xydragon
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -112,11 +103,8 @@
 		var onWrite = function(url){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-<<<<<<< HEAD
 			boardWriteForm.action ="product_reg_ok.mcat";              
-=======
-			boardWriteForm.action = url;              
->>>>>>> xydragon
+//			boardWriteForm.action = url;        
 			boardWriteForm.submit();  
 		};
 		

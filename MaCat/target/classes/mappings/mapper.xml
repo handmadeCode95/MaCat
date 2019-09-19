@@ -912,11 +912,9 @@
 		DELETE FROM MEMBERS_TB WHERE MBER_SQ = #{mber_sq}
 	</delete>
 	
-	
 	<!--=========================== 4 공지사항 관리 ===========================-->
 	
-	
-	<!-- 전체 공지 갯수 -->
+	<!-- 전체 공지사항 갯수 -->
 	<select id="nots_count" resultType="int">
 		SELECT COUNT(*) FROM NOTICES_TB
 	</select>
@@ -926,10 +924,10 @@
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM NOTICES_TB ORDER BY NOT_SQ DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
-	<!-- 하나의 공지사항 가져오기 -->
+<!-- 	
 	<select id="nots" resultType="NotsDTO">
-		select * from nots_tb where not_sq = #{not_sq}
-	</select>
+		select * from notices_tb where not_sq = #{not_sq}
+	</select> -->
 	
 	<!-- 공지사항 and조건 검색 결과 인원 -->
 	<select id="nots_and_count" parameterType="NotsSearchDTO" resultType="int">
@@ -979,7 +977,7 @@
 		        AND NOT_REG_DT <![CDATA[ >= ]]> TO_DATE(#{not_reg_dt_start}, 'YYYY-MM-DD HH24:MI:SS')
 		    </if>
 		</where>
-		ORDER BY NOT_SQ DESC) A )
+			ORDER BY NOT_SQ DESC) A )
 		<where>
 			R_NUM BETWEEN #{begin} AND #{end}
 		</where>
@@ -1041,7 +1039,7 @@
 	
 	<!-- 공지사항 수정 -->
 	<update id="nots_update" parameterType="NotsDTO">
-		update nots_tb set not_sj = #{not_sj}, not_cn = #{not_cn}
+		update notices_tb set not_sj = #{not_sj}, not_cn = #{not_cn}
 	</update>
 	
 	<!-- 공지사항 삭제 -->
@@ -2150,7 +2148,7 @@
 	</delete>
 	
 	<!-- 배송 수정 -->
-	<update id="delivery_update" parameterType="DelliveryDTO">
+	<update id="delivery_update" parameterType="DeliveryDTO">
 		update delivery_tb set dlvy_zip_no = #{dlvy_zip_no}, dlvy_phone_no = #{dlvy_phone_no}, dlvy_nm = #{dlvy_nm}, dlvy_adres = #{dlvy_adres}, dlvy_tel_no = #{dlvy_tel_no}, dlvy_waybill_no = #{dlvy_waybill_no}, dlvy_delil_adres = #{dlvy_delil_adres}
 	</update>
 	
@@ -2162,7 +2160,7 @@
 	</select>
 	
 	<!-- 전체 배송지 정보 가져오기 -->
-	<select id="dlvy_addr" parameterType="Map" resultType="">
+	<select id="dlvy_addr" parameterType="Map" resultType="DeliveryAddrDTO">
 		SELECT * FROM (SELECT ROWNUM R_NUM, A.* FROM (SELECT * FROM dlvy_addr_tb ORDER BY da_sq DESC) A ) WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
@@ -2192,7 +2190,7 @@
 	</select>
 	
 	<!-- 배송지 or조건 검색결과 인원 -->
-	<select id="dlvy_addr_and_count" parameterType="DeliverySearchDTO" resultType="int">
+	<select id="dlvy_addr_or_count" parameterType="DeliverySearchDTO" resultType="int">
 		SELECT COUNT(*) FROM dlvy_addr_tb
 		<where>
 	  		<if test="da_sq != null">
@@ -2280,7 +2278,7 @@
 	</delete>
 	
 	<!-- 배송지 수정 -->
-	<update id="dlvy_addr_update" parameterType="DelliveryDTO">
+	<update id="dlvy_addr_update" parameterType="DeliveryDTO">
 		update dlvy_addr_tb set da_zip_no = #{da_zip_no}, da_phone = #{da_phone}, da_adres =#{da_adres}, da_tel = #{da_tel}, da_detail_adres =#{da_detail_adres} 
 	</update>
 	

@@ -1,6 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
@@ -21,6 +20,12 @@
 		<link rel="stylesheet"	 href="resources/css/admin/notices/admin_table.css">
 		<!-- 공지사항 관리자 input_textarea 전용 css -->
 		<link rel="stylesheet" href="resources/css/admin/notices/input_textarea.css">
+		
+		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+		<!-- checkbox 전체선택 쿼리 포함 -->
+		<script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
+		<!-- 공지사항 관리자 쿼리  -->
+		<script type="text/javascript" src="resources/js/admin/notices/manager.js"></script>
 	</head>
 
 <body>
@@ -101,14 +106,18 @@
        						<colgroup>
 								<col width="40" />	<!--체크박스-->
 								<col width="100" /> <!--글번호-->
-								<col width="100%" />	<!--제목-->
+								<col width="160">    <!-- 회원번호 -->
+								<col width="200" />	<!--제목-->
+								<col width="900">   <!-- 공지글 -->
 								<col width="200" /> <!--작성일-->
 							</colgroup>              
                             <thead>
                                 <tr>
 									<th class="checks"><input type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 									<th scope="col">글 번호</th>
+									<th scope="col">회원번호</th>
 									<th scope="col">제목</th>
+									<th scope="col">글 내용</th>
 									<th scope="col">작성일</th>
                                 </tr>
                             </thead>
@@ -116,8 +125,10 @@
                             	<c:forEach var="i" items="${notsDTO}">
 	                            	<tr id="${i.not_sq}">
 										<td class="checks"><input name="nots" class="chkbox" type="checkbox" id="table_chk" value="${i.not_sq}"><label for="table_chk"></label></td>
-										<td><input name="not_sq" class="${i.not_sq}" type="hidden" value="${i.not_sq}" disabled>${i.not_sq}</td>		
+										<td><input name="not_sq" class="${i.not_sq}" type="hidden" value="${i.not_sq}" disabled>${i.not_sq}</td>
+										<td><input name="mber_sq" class="${i.not_sq}" type="text" value="${i.mber_sq}" disabled></td>
 										<td>${i.not_sj}</td>
+										<td>${i.not_cn}</td>
 										<td>${i.not_reg_dt.substring(0, 10)}</td>
 									</tr>    
                             	</c:forEach>                                                         
@@ -175,17 +186,13 @@
 					</ol>
 				</div>
 				<div class="edit_delete_btn">
-					<input class="edit_btn" type="button" value="수정" id="update"/>
-					<input class="delete_btn" type="button" value="삭제" id="delete"/>
+					<input class="edit_btn" type="button" value="수정" id="update" />
+					<input class="delete_btn" type="button" value="삭제" id="delete" />
 				</div>
 			</form>
 		</div>
 	</section>
 	</main>			
-		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-		<!-- checkbox 전체선택 쿼리 포함 -->
-		<script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
-		<!-- 공지사항 관리자 쿼리  -->
-		<script type="text/javascript" src="resources/js/admin/notices/manager.js"></script>
+
 </body>
 </html>

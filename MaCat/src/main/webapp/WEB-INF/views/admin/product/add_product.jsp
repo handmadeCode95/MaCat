@@ -125,29 +125,29 @@
 				<span>상품색상</span>
 				<div class="color_palette">
 					<div class="palette_box">
-						<input name="colors" type="checkbox" id="test_1"
-							onclick="count_ck(this);" value="레드"> <label for="test_1"></label> <input name="colors" type="checkbox" id="test_2"
-							onclick="count_ck(this);" value="버건디"> <label for="test_2"></label> <input name="colors" type="checkbox" id="test_3"
-							onclick="count_ck(this);" value="오렌지"> <label for="test_3"></label> <input name="colors" type="checkbox" id="test_4"
-							onclick="count_ck(this);" value="골드"> <label for="test_4"></label> <input name="colors" type="checkbox" id="test_5"
-							onclick="count_ck(this);" value="옐로우"> <label for="test_5"></label> <input name="colors" type="checkbox" id="test_6"
-							onclick="count_ck(this);" value="라임"> <label for="test_6"></label> <input name="colors" type="checkbox" id="test_7"
-							onclick="count_ck(this);" value="그린"> <label for="test_7"></label> <input name="colors" type="checkbox" id="test_8"
-							onclick="count_ck(this);" value="카키"> <label for="test_8"></label> <input name="colors" type="checkbox" id="test_9"
-							onclick="count_ck(this);" value="민트"> <label for="test_9"></label> <input name="colors" type="checkbox" id="test_10"
-							onclick="count_ck(this);" value="스카이블루"><label for="test_10"></label> <input name="colors" type="checkbox" id="test_11"
-							onclick="count_ck(this);" value="블루"> <label for="test_11"></label> <input name="colors" type="checkbox" id="test_12"
-							onclick="count_ck(this);" value="네이비"><label for="test_12"></label> <input name="colors" type="checkbox" id="test_13"
-							onclick="count_ck(this);" value="퍼플"> <label for="test_13"></label> <input name="colors" type="checkbox" id="test_14"
-							onclick="count_ck(this);" value="인디핑크"><label for="test_14"></label> <input name="colors" type="checkbox" id="test_15"
-							onclick="count_ck(this);" value="핑크"> <label for="test_15"></label> <input name="colors" type="checkbox" id="test_16"
-							onclick="count_ck(this);" value="베이지"><label for="test_16"></label> <input name="colors" type="checkbox" id="test_17"
-							onclick="count_ck(this);" value="카멜"> <label for="test_17"></label> <input name="colors" type="checkbox" id="test_18"
-							onclick="count_ck(this);" value="브라운"><label for="test_18"></label> <input name="colors" type="checkbox" id="test_19"
-							onclick="count_ck(this);" value="화이트"><label for="test_19"></label> <input name="colors" type="checkbox" id="test_20"
-							onclick="count_ck(this);" value="아이보리"><label for="test_20"></label> <input name="colors" type="checkbox" id="test_21"
-							onclick="count_ck(this);" value="그레이"><label for="test_21"></label> <input name="colors" type="checkbox" id="test_22"
-							onclick="count_ck(this);" value="차콜"> <label for="test_22"></label> <input name="colors" type="checkbox" id="test_23"
+						<input name="palette_chk" type="checkbox" id="test_1"
+							onclick="count_ck(this);" value="레드"> <label for="test_1"></label> <input name="palette_chk" type="checkbox" id="test_2"
+							onclick="count_ck(this);" value="버건디"> <label for="test_2"></label> <input name="palette_chk" type="checkbox" id="test_3"
+							onclick="count_ck(this);" value="오렌지"> <label for="test_3"></label> <input name="palette_chk" type="checkbox" id="test_4"
+							onclick="count_ck(this);" value="골드"> <label for="test_4"></label> <input name="palette_chk" type="checkbox" id="test_5"
+							onclick="count_ck(this);" value="옐로우"> <label for="test_5"></label> <input name="palette_chk" type="checkbox" id="test_6"
+							onclick="count_ck(this);" value="라임"> <label for="test_6"></label> <input name="palette_chk" type="checkbox" id="test_7"
+							onclick="count_ck(this);" value="그린"> <label for="test_7"></label> <input name="palette_chk" type="checkbox" id="test_8"
+							onclick="count_ck(this);" value="카키"> <label for="test_8"></label> <input name="palette_chk" type="checkbox" id="test_9"
+							onclick="count_ck(this);" value="민트"> <label for="test_9"></label> <input name="palette_chk" type="checkbox" id="test_10"
+							onclick="count_ck(this);" value="스카이블루"><label for="test_10"></label> <input name="palette_chk" type="checkbox" id="test_11"
+							onclick="count_ck(this);" value="블루"> <label for="test_11"></label> <input name="palette_chk" type="checkbox" id="test_12"
+							onclick="count_ck(this);" value="네이비"><label for="test_12"></label> <input name="palette_chk" type="checkbox" id="test_13"
+							onclick="count_ck(this);" value="퍼플"> <label for="test_13"></label> <input name="palette_chk" type="checkbox" id="test_14"
+							onclick="count_ck(this);" value="인디핑크"><label for="test_14"></label> <input name="palette_chk" type="checkbox" id="test_15"
+							onclick="count_ck(this);" value="핑크"> <label for="test_15"></label> <input name="palette_chk" type="checkbox" id="test_16"
+							onclick="count_ck(this);" value="베이지"><label for="test_16"></label> <input name="palette_chk" type="checkbox" id="test_17"
+							onclick="count_ck(this);" value="카멜"> <label for="test_17"></label> <input name="palette_chk" type="checkbox" id="test_18"
+							onclick="count_ck(this);" value="브라운"><label for="test_18"></label> <input name="palette_chk" type="checkbox" id="test_19"
+							onclick="count_ck(this);" value="화이트"><label for="test_19"></label> <input name="palette_chk" type="checkbox" id="test_20"
+							onclick="count_ck(this);" value="아이보리"><label for="test_20"></label> <input name="palette_chk" type="checkbox" id="test_21"
+							onclick="count_ck(this);" value="그레이"><label for="test_21"></label> <input name="palette_chk" type="checkbox" id="test_22"
+							onclick="count_ck(this);" value="차콜"> <label for="test_22"></label> <input name="palette_chk" type="checkbox" id="test_23"
 							onclick="count_ck(this);" value="블랙"> <label for="test_23"></label>
 					</div>
 				</div>
@@ -268,13 +268,8 @@
 			
 			</c:if>
 				<div>
-					<a href="javascript:void(0)"> <input
-						class="detail_btn" type="submit" value="상세페이지 작성하기" />
-					</a>
-				</div>				
-				<div>
-					<a href="javascript:void(0)"> <input
-						class="detail_btn" type="submit" value="상세페이지 작성하기" />
+					<a href="javascript:void(0)">
+					<input class="detail_btn" type="submit" value="상세페이지 작성하기" />
 					</a>
 				</div>
 			</div>

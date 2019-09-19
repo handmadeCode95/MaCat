@@ -9,14 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.macat.dao.AdminNoticeManagementDAO;
-import com.macat.dto.FaqSearchDTO;
 import com.macat.dto.NotsSearchDTO;
 import com.macat.dto.PageDTO;
-import com.macat.dto.QnaSearchDTO;
 import com.macat.util.PagingUtil;
 
 @Controller
@@ -28,28 +27,28 @@ public class AdminNoticesController {
 	public AdminNoticesController(AdminNoticeManagementDAO adminNoticeManagementDAO) {
 		this.adminNoticeManagementDAO = adminNoticeManagementDAO;
 	}
-
-	// 페이징을 위한 회원 정보 검색 기록
-	private NotsSearchDTO notsSearchDTO;
-	private QnaSearchDTO qnaSearchDTO;
-	private FaqSearchDTO faqSearchDTO;
-
+	
 	private String usedDTO; // 페이징을 위한 조회 기록
 	private int count; // 페이징을 위한 검색 인원 수 기록
 	private String cPage; // 페이징을 위한 현재 페이지 기록
-	
+	private NotsSearchDTO notsSearchDTO; // 페이징을 위한 회원 정보 검색 기록	
 	
 	// 공지사항 조회로 이동
 	@GetMapping("nots_manage.mcat")
 	public ModelAndView redirectNoticesManagerCmd(ModelAndView mv, String cPage) {
 		mv.setViewName("admin/notices/manager");
+		
 		this.cPage = cPage;
 		usedDTO = "NotsDTO";
-		PageDTO pageDTO = new PageDTO();
+		
+		PageDTO pageDTO = new PageDTO(50);
 		count = adminNoticeManagementDAO.getAdminCount();
-		PagingUtil.getPage(pageDTO, count, cPage);
+		PagingUtil.getPage(pageDTO, count, cPage);		
+		mv.addObject("nots_count", count);
+		
 		mv.addObject("notsDTO", adminNoticeManagementDAO.getAdminList(pageDTO.getBegin(), pageDTO.getEnd()));
 		mv.addObject("pageDTO", pageDTO);
+		
 		return mv;
 	}
 	
@@ -59,11 +58,13 @@ public class AdminNoticesController {
 	public Map<String, Object> getNotsPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(50);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		PagingUtil.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
+		map.put("nots_count", count);
 		
 		switch (usedDTO) {
 		case "NotsDTO":
@@ -96,7 +97,7 @@ public class AdminNoticesController {
 			notsSearchDTO.setNot_reg_dt_end(notsSearchDTO.getNot_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(50);
 
 		switch (notsSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -111,6 +112,7 @@ public class AdminNoticesController {
 
 		PagingUtil.getPage(pageDTO, count, null);
 		map.put("pageDTO", pageDTO);
+		
 		notsSearchDTO.setBegin(pageDTO.getBegin());
 		notsSearchDTO.setEnd(pageDTO.getEnd());
 		this.notsSearchDTO = notsSearchDTO; // 페이징을 위한 검색 기록 저장

@@ -216,6 +216,7 @@
 	
 	// 회원 검색 AJAX
 	$("#searchBtn").click(function() {
+		console.log($().toJSON($("#searchForm")));
 		$.ajax({
 			url			: "mbers_search.mcat",
             type		: "POST",

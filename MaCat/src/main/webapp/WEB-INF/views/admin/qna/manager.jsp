@@ -27,7 +27,7 @@
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	    
 	    
-	    <script type="text/javascript" src="resources/js/admin/customer_center/manager.js"></script>
+	    <script type="text/javascript" src="resources/js/admin/qna/manager.js"></script>
 	    <!-- checkbox 전체선택 쿼리 포함 -->
 	    <script type="text/javascript" src="resources/js/checkbox_allchoose.js"></script>
 	</head>
@@ -40,7 +40,7 @@
 	            <div class="qna_management">
 	                <span>고객문의관리</span>
 	            </div>
-	            <form id="searchForm" action="mber_search.mcat" method="post">
+	            <form id="searchForm" action="qna_search.mcat" method="post">
 	                <div class="qna_information_container">
 	                    <!--회원정보-->
 	                    <div class="qna_info">

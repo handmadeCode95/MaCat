@@ -11,9 +11,11 @@
 					result += '<tr id="' + v["not_sq"] + '">';
 					result += '<td class="checks"><input name="nots" class="chkbox" type="checkbox" id="table_chk" value="' + v["not_sq"] 
 							 + '"><label for="table_chk"></label></td>';
-//					result += '<td><input name="not_sq" class="' + v["not_sq"] + '" type="hidden" value="' + v["not_sq"] + '" disabled>' + v["not_sq"] +'</td>';
+					result += '<td><input name="not_sq" class="' + v["not_sq"] + '" type="hidden" value="' + v["not_sq"] + '" disabled>' + v["not_sq"] + '</td>';
+					result += '<td><input name="mber_sq" class="' + v["not_sq"] + '" type="text" value="' + v["mber_sq"] + '" disabled></td>';
+//					result += '<td>' + v["mber_sq"] + '</td>';
 					result += '<td>' + v["not_sj"] + '</td>';
-					result += '<td><input name="not_sj" class="' + v["not_sq"] + '" type="text" value="' + v["not_sj"] + '" disabled></td>';
+					result += '<td>' + v["not_cn"] + '</td>';
 					result += '<td>' + v["not_reg_dt"].substring(0, 10) + '</td></tr>';
 				});
 			}else if (key === "pageDTO"){
@@ -48,13 +50,12 @@
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-			}else if (key === "mbers_count"){
-				nots_count = value;
+				nots_count = pageDTO.totalRecord;
 			}
 		});
 		$("#searchResult").html(result);
 		$("#paging").html(pagingResult);
-		$("#nots_count").html(mbers_count);
+		$("#nots_count").html(nots_count);
 		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
@@ -75,7 +76,7 @@
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 nots일 경우에는 무조건 배열처리(mbers는 체크박스이다)
+	        	// 이름이 nots일 경우에는 무조건 배열처리(nots는 체크박스이다)
 	        	if (name === "nots") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
@@ -165,7 +166,8 @@
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
-            data		: $().toJSON($("#searchForm")),
+//            data		: $().toJSON($("#searchForm")),
+            data		: $().toJSON($("#searchForm > *:not(input[name=search_chk])")),
             success		: function(data) {
             				  $().getTable(data);
             			  },
@@ -232,6 +234,11 @@
             				  alert("에러 발생");
             			  }
 		});
+	});
+	
+	// 글쓰기 버튼 클릭시 공지사항 작성 페이지로 이동
+	$("#write").click(function() {
+		$(location).attr("href", "nots_write.mcat");
 	});
 	
 });

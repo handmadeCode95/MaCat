@@ -186,3 +186,8 @@ main{
     border: none; 
     margin-left: 84px;
 }
+
+#nots_count{
+	color : #f25e5e;
+	font-weight: normal;
+}

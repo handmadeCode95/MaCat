@@ -25,6 +25,15 @@ public class AdminMemberManagementDAO implements AdminManagementDAO {
 		return sqlSessionTemplate.selectOne("mbers_count");
 	}
 	
+	// 회원 전체 조회
+	@Override
+	public List<MbersDTO> getAdminList(int begin, int end) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("members", map);
+	}
+	
 	// 회원 and조건 검색 결과 인원
 	@Override
 	public int getAndCount(AdminSearchDTO adminSearchDTO) {
@@ -37,15 +46,6 @@ public class AdminMemberManagementDAO implements AdminManagementDAO {
 		return sqlSessionTemplate.selectOne("mbers_or_count", adminSearchDTO);
 	}
 	
-	// 회원 전체 조회
-	@Override
-	public List<MbersDTO> getAdminList(int begin, int end) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("begin", begin);
-		map.put("end", end);
-		return sqlSessionTemplate.selectList("members", map);
-	}
-
 	// 회원 and조건 검색
 	@Override
 	public List<MbersDTO> getAndSearch(AdminSearchDTO adminSearchDTO) {

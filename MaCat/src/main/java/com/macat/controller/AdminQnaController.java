@@ -42,7 +42,7 @@ public class AdminQnaController {
 	// 고객 문의 관리로 이동
 	@GetMapping("qna_manage.mcat")
 	public ModelAndView redirectQnaManagerCmd(ModelAndView mv, String cPage) {
-		mv.setViewName("admin/qna/customer_manager");
+		mv.setViewName("admin/qna/manager");
 		
 		this.cPage = cPage;
 		usedDTO = "QnaDTO";
