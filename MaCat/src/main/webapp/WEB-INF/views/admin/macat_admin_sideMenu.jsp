@@ -44,7 +44,7 @@
 			</li>
 			<ul class="prd">
 					<li><a href="mbers_manager.mcat">회원</a></li> <!-- 회원정보 조회 -->
-					<li>쿠폰</li>
+					<li><a href="coupon_manage.mcat">쿠폰</a></li>
 					<li>포인트</li>
 				</ul>
 			<center>

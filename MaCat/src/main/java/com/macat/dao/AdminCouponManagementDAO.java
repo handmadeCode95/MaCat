@@ -58,7 +58,7 @@ public class AdminCouponManagementDAO implements AdminManagementDAO{
 	}
 	
 	// 쿠폰 수정 : 많지 않음 - 주문량, 주문결제포인트, 주문상태
-	public int updateOrder(CouponDTO couponDTO) {
+	public int updateCoupon(CouponDTO couponDTO) {
 		return sqlSessionTemplate.update("coupons_update", couponDTO);
 	}
 	

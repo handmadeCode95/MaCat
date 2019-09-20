@@ -15,12 +15,13 @@ $(function() {
 					result += '<td>' + v["mber_sq"] + '</td>';
 					result += '<td>' + v["prduct_sq"] + '</td>';
 					result += '<td>' + v["order_dt"].substring(0,10) + '</td>';
+					result += '<td>' + v["order_paymt_dt"].substring(0,10) + '</td>';
 					result +='<td><input name="order_amt" class="' + v["order_amt"] +'" type="text" value="'	+ v["order_amt"] +'" disabled></td>'; 
 					result += '<td><input name="order_point" class="' + v["order_point"] + '" type="text" value="' + v["order_point"] + '" disabled></td>';
 					result += '<td>' + v["order_pay"] + '</td>';
 					result += '<td>' + v["ordet_method"] + '</td>';
 					result += '<td><input name="order_status" class="' + v["order_status"] + '" type="text" value="' + v["order_status"] +'" disabled></td>';
-					result += '<td>' + v["order_compt_dt"].substring(0,10) + '</td>';					
+					result += '<td>' + v["order_compt_dt"].substring(0,10) + '</td></tr>';					
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -258,7 +259,7 @@ $(function() {
 	    // arr배열을 mbersDTO라는 key값과 함께 저장
 	    data = {orderDTO : arr};
 	    // JSON형태로 직렬화
-	    var mbersDTO = JSON.stringify(data);
+	    var orderDTO = JSON.stringify(data);
 
 	    $.ajax({
 			url			: "order_update.mcat",

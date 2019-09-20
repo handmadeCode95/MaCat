@@ -49,23 +49,23 @@
 	                            <!--이름 아이디 핸드폰번호 생일-->
 	                            <div class="qna_info_middle">
 	                                <div class="checks">
-	                                    <input type="checkbox" id="_chk" class="search" value="qna_sq">
-	                                    <label for="name_chk" style="margin-right: 26px; ">문의번호</label>
+	                                    <input type="checkbox" id="qna_sq_chk" class="search" value="qna_sq">
+	                                    <label for="qna_sq_chk" style="margin-right: 26px; ">문의번호</label>
 	                                    <span class="inputClickListener"><input type="text" name="qna_sq" class="qna_sq" disabled></span>
 	                                </div>
 	                                <div class="checks">
-	                                    <input type="checkbox" id="id_chk" class="search" value="prduct_sq">
-	                                    <label for="id_chk" style="margin-right: 26px;">상품번호</label>
+	                                    <input type="checkbox" id="prduct_sq_chk" class="search" value="prduct_sq">
+	                                    <label for="prduct_sq_chk" style="margin-right: 26px;">상품번호</label>
 	                                    <span class="inputClickListener"><input type="text" name="prduct_sq" class="prduct_sq" disabled></span>
 	                                </div>
 	                                <div class="checks">
-	                                    <input type="checkbox" id="cellphone_chk" class="search" value="qna_id">
-	                                    <label for="cellphone_chk" style="margin-right: 40px;">아이디</label>
+	                                    <input type="checkbox" id="qna_id_chk" class="search" value="qna_id">
+	                                    <label for="qna_id_chk" style="margin-right: 40px;">아이디</label>
 	                                    <span class="inputClickListener"><input type="tel" name="qna_id" class="qna_id" disabled></span>
 	                                </div>
 	                                <div class="checks">
-	                                    <input type="checkbox" id="birth_chk" class="search" value="qna_sj">
-	                                    <label for="birth_chk">제목</label>
+	                                    <input type="checkbox" id="qna_sj_chk" class="search" value="qna_sj">
+	                                    <label for="qna_sj_chk">제목</label>
 	                                    <div>
 	                                        <span class="inputClickListener"><input type="text" id="birth_box1" name="qna_sj" class="qna_sj" disabled></span>
 	                                    </div>
@@ -75,18 +75,18 @@
 	                            <!--회원번호 회원등급 전화번호-->
 	                            <div class="qna_info_right">
 	                                <div class="checks">
-	                                    <input type="checkbox" id="member_no" class="search" value="mber_sq">
-	                                    <label for="member_no" style="margin-right: 13px;">회원번호</label>
+	                                    <input type="checkbox" id="mber_sq_chk" class="search" value="mber_sq">
+	                                    <label for="mber_sq_chk" style="margin-right: 13px;">회원번호</label>
 	                                    <span class="inputClickListener"><input type="text" name="mber_sq" class="mber_sq" disabled></span>
 	                                </div>
 	                                <div class="checks">
-	                                    <input type="checkbox" id="member_grade" class="search" value="qc_nm">
-	                                    <label for="member_grade" style="margin-right: 13px;">카테고리</label>
+	                                    <input type="checkbox" id="qc_nm_chk" class="search" value="qc_nm">
+	                                    <label for="qc_nm_chk" style="margin-right: 13px;">카테고리</label>
 	                                    <span class="inputClickListener"><input type="text" name="qc_nm" class="qc_nm" disabled></span>
 	                                </div>
 	                                <div class="checks">
-	                                    <input type="checkbox" id="phone_num" class="search" value="qna_nm">
-	                                    <label for="phone_num" style="margin-right: 13px;">작성자명</label>
+	                                    <input type="checkbox" id="qna_nm_chk" class="search" value="qna_nm">
+	                                    <label for="qna_nm_chk" style="margin-right: 13px;">작성자명</label>
 	                                    <span class="inputClickListener"><input type="tel" name="qna_nm" class="qna_nm" disabled></span>
 	                                </div>
 	                                <div class="ans_st_radio_btn">
@@ -179,9 +179,9 @@
 	                                <tr>
 	                                    <th class="checks"><input type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 	                                    <th scope="col">답변여부</th>
-	                                    <th scope="col">카테고리</th>
+	                                    <th scope="col">카테고리명</th>
 	                                    <th scope="col">문의 번호</th>
-	                                    <th scope="col">제목</th>
+	                                    <th scope="col">문의제목</th>
 	                                    <th scope="col">고객명</th>
 	                                    <th scope="col">아이디</th>
 	                                    <th scope="col">등록일</th>
@@ -198,7 +198,7 @@
 		                                    <td><a href="qna_manage.mcat?qna_sj='${i.qna_sj}'">${i.qna_sj}</a></td>
 		                                    <td>${i.qna_nm}</td>
 		                                    <td>${i.qna_id}</td>
-		                                    <td>${i.qna_reg_dt}</td>
+		                                    <td>${i.qna_reg_dt.substring(0,10)}</td>
 		                                    <td>${i.qna_view_cnt}</td>
 		                                </tr>
 		                             </c:forEach>

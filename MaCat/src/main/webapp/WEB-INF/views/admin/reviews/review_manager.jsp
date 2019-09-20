@@ -99,8 +99,7 @@
 	                            
 	                        </div>
 	                        <!-- 기간 선택 파트 -->
-	                        <div class="searching_term_right part2">
-	                        
+	                        <div class="searching_term_right part2">	                        
 	                            <div class="join_period_btn">
 	                                <ul>
 	                                    <li class="join_period_li">오늘 <input type="hidden" name="re_reg_dt_start" value="${dateDTO.today}" disabled></li>
@@ -154,14 +153,14 @@
 	                                <col width="80" />	<!--리뷰번호-->
 	                                <col width="80" />	<!--회원번호-->
 	                                <col width="80" />	<!--상품번호-->
-	                                <col width="240" />	<!--등록일-->
+	                                <col width="160" />	<!--등록일-->
 	                                <col width="80" />	<!--리뷰평점-->
 	                                <col width="100" />	<!--조회수-->
 	                                <col width="100" />	<!--좋아요-->
-	                                <col width="160" />	<!--답변여부-->
-	                                <col width="240" />	<!--리뷰아이디-->
-	                                <col width="240" />	<!--리뷰제목-->
-	                                <col width="240" />	<!--리뷰작성자-->
+	                                <col width="100" />	<!--답변여부-->
+	                                <col width="160" />	<!--리뷰아이디-->
+	                                <col width="360" />	<!--리뷰제목-->
+	                                <col width="160" />	<!--리뷰작성자-->
 	                            </colgroup>
 	                            <thead>
 	                                <tr>

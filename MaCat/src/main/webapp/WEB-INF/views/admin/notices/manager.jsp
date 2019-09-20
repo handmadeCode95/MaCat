@@ -106,10 +106,10 @@
        						<colgroup>
 								<col width="40" />	<!--체크박스-->
 								<col width="100" /> <!--글번호-->
-								<col width="160">    <!-- 회원번호 -->
+								<col width="100">    <!-- 회원번호 -->
 								<col width="200" />	<!--제목-->
-								<col width="900">   <!-- 공지글 -->
-								<col width="200" /> <!--작성일-->
+								<col width="840">   <!-- 공지글 -->
+								<col width="160" /> <!--작성일-->
 							</colgroup>              
                             <thead>
                                 <tr>

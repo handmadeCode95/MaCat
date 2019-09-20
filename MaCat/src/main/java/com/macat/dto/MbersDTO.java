@@ -5,9 +5,7 @@ public class MbersDTO implements AdminDTO {
 	private String mber_sq, mber_id, mber_pw, mber_nm, mber_email, mber_email_end, mber_gender, mber_birthday_dt, mber_phone_no, mber_tel_no, mber_point_sum,
 				   mber_reg_dt, mber_conect_dt, mber_zip_no, mber_adres, mber_detail_adres, mber_grad_nm;
 	
-	public MbersDTO() {
-	
-	}
+	public MbersDTO() {	}
 
 	public MbersDTO(String mber_sq, String mber_id, String mber_pw, String mber_nm, String mber_email,
 			String mber_email_end, String mber_gender, String mber_birthday_dt, String mber_phone_no,
@@ -168,6 +166,5 @@ public class MbersDTO implements AdminDTO {
 	public void setMber_grad_nm(String mber_grad_nm) {
 		this.mber_grad_nm = mber_grad_nm;
 	}
-
 	
 }

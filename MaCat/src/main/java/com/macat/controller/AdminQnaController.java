@@ -63,7 +63,7 @@ public class AdminQnaController {
 	public Map<String, Object> getQnaPagingCmd(@RequestBody String cPage) {
 
 		this.cPage = cPage;
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(30);
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		PagingUtil.getPage(pageDTO, count, cPage);
@@ -100,7 +100,7 @@ public class AdminQnaController {
 			qnaSearchDTO.setQna_reg_dt_end(qnaSearchDTO.getQna_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		PageDTO pageDTO = new PageDTO();
+		PageDTO pageDTO = new PageDTO(30);
 
 		switch (qnaSearchDTO.getAnd_or_chk()) {
 		case "and":

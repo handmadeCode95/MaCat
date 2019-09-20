@@ -1,25 +1,29 @@
-$(function() {
-	
-	// AJAX 처리시 tbody에 출력할 값
+﻿$(function() {
+
 	$.fn.getTable = function(data) {
 		var result = "";
   	    var pagingResult = "";
-  	    var qnas_count;
+  	    var mbers_count;
 		$.each(data, function(key, value){
-			if (key === "qnaDTO") {
+			if (key === "mbersDTO") {
 				$.each(value, function(k, v){
-					result += '<tr id="' + v["qna_sq"] + '">';
-					result += '<td class="checks"><input name="qnas" class="chkbox" type="checkbox" id="table_chk" value="'
-							+ v["qna_sq"] + '"><label for="table_chk"></label></td>';
-					result += '<td><input name="qna_sq" class="' + v["qna_sq"] + '" type="hidden" value="' + v["qna_sq"] +'" disabled>'
-							+ v["qna_ans_st"] + '</td>';
-					result += '<td>' + v["qc_nm"] + '</td>';
-					result += '<td>' + v["qna_sq"] + '</td>';
-					result += '<td><a href="qna_manage.mcat?qna_sj="' + v["qna_sj"] + '">' + v["qna_sj"] + '</a></td>';
-					result += '<td>' + v["qna_nm"] + '</td>';
-					result += '<td>' + v["qna_id"] + '</td>';
-					result += '<td>' + v["qna_reg_dt"].substring(0,10) + '</td>';
-					result += '<td>' + v["qna_view_cnt"] + '</td></tr>';
+					result += '<tr id="' + v["mber_sq"] + '">';
+					result += '<td class="checks"><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="' + v["mber_sq"] + '"><label for="table_chk"></label></td>';
+					result += '<td><input name="mber_sq" class="' + v["mber_sq"] + '" type="hidden" value="' + v["mber_sq"] + '" disabled></td>';
+					result += '<td><input name="mber_nm" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_nm"] + '" disabled></td>';
+					result += '<td>' + v["mber_gender"] + '</td>';
+					result += '<td>' + v["mber_id"] + '</td>';
+					result += '<td><input name="mber_pw" class="' + v["mber_sq"] + '" type="password" value="' + v["mber_pw"] + '" disabled></td>';
+					result += '<td><input name="mber_phone_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_phone_no"] + '" disabled></td>';
+					result += '<td><input name="mber_tel_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_tel_no"] + '" disabled></td>';
+					result += '<td><input name="mber_zip_no" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_zip_no"] + '" disabled></td>';
+					result += '<td><input name="mber_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_adres"] + '" disabled></td>';
+					result += '<td><input name="mber_detail_adres" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_detail_adres"] + '" disabled></td>';
+					result += '<td><input name="mber_email" class="' + v["mber_sq"] + '" type="text" value="' + v["mber_email"] + '" disabled></td>';
+					result += '<td>' + v["mber_birthday_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_reg_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_conect_dt"].substring(0, 10) + '</td>';
+					result += '<td>' + v["mber_point_sum"] + 'p</td></tr>';
 				});
 			}else if (key === "pageDTO"){
 				var pageDTO = value;
@@ -53,14 +57,13 @@ $(function() {
 					pagingResult += '<input type="hidden" name="cPage" value="' + (pageDTO.beginBlock + pageDTO.pagePerBlock) + '">';
 					pagingResult += '</a></li>';
 				}
-			}else if (key === "qnas_count"){
-				qnas_count = value;
+				mbers_count = pageDTO.totalRecord;
 			}
 		});
-	$("#searchResult").html(result);
-	$("#paging").html(pagingResult);
-	$("#qnas_count").html(qnas_count);
-	if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
+		$("#searchResult").html(result);
+		$("#paging").html(pagingResult);
+		$("#mbers_count").html(mbers_count);
+		if($("#allCheck").prop("checked")) $("#allCheck").prop("checked", false);
 	}
 	
 	
@@ -80,8 +83,8 @@ $(function() {
 	            }
 	            newJSON[name].push(value || "");
 	        } else {
-	        	// 이름이 "qnas"일 경우에는 무조건 배열처리(qnas는 체크박스이다)
-	        	if (name === "qnas") {
+	        	// 이름이 mbers일 경우에는 무조건 배열처리(mbers는 체크박스이다)
+	        	if (name === "mbers") {
 	        		newJSON[name] = [value];
 	        	// 나머지는 변수 처리
 				}else{
@@ -95,7 +98,7 @@ $(function() {
 	
     $(".join_period_li").each(function() {
         $(this).click(function() {
-            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CSS인 selected클래스로 적용
             $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
             $("#join_date").prop("checked", false); // 기간 input 초기화
     		$("#join_date").trigger("change");		// 기간 input 초기화
@@ -107,7 +110,7 @@ $(function() {
     
     $(".connect_period_li").each(function() {
         $(this).click(function() {
-            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+            $(this).addClass("selected"); //클릭된 부분을 상단에 정의된 CSS인 selected클래스로 적용
             $(this).siblings().removeClass("selected"); //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
             $("#connect_term").prop("checked", false);  // 기간 input 초기화
     		$("#connect_term").trigger("change");		// 기간 input 초기화
@@ -143,7 +146,6 @@ $(function() {
 		}
 	});
 	
-	
 	// 검색 영역 인풋 클릭시 인풋 활성화/비활성화, 포커싱
 	$(".inputClickListener").click(function() {
 		if (!$(this).siblings(".search").prop("checked")){
@@ -157,15 +159,20 @@ $(function() {
 		}
 	});
     
-	
 	// 하단 테이블 체크박스 체크시 인풋 활성화/비활성화 + 색상변경
 	$(document).on("change", ".chkbox", function(){
 		if ($(this).prop("checked")){
 			$("."+this.value).attr("disabled", false);
 			$("."+this.value).css("color", "#F2A766");
-		}else{
+			
+			// 체크 안된 값이 없으면 allCheck 체크박스도 체크
+			if ($(".chkbox:not(:checked)").length == 0) $("#allCheck").prop("checked", true);
+		}else {
 			$("."+this.value).attr("disabled", true);
 			$("."+this.value).css("color", "#000");
+			
+			// 하나라도 체크 해제되면 allCheck 체크박스도 체크 해제
+			$("#allCheck").prop("checked", false);
 		}
 	});
 	
@@ -180,7 +187,7 @@ $(function() {
 	// 페이지 이동 AJAX
 	$(document).on("click", ".page", function(){
 		$.ajax({
-			url			: "qna_paging.mcat",
+			url			: "mbers_paging.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -200,7 +207,7 @@ $(function() {
 	$("#searchBtn").click(function() {
 		console.log($().toJSON($("#searchForm")));
 		$.ajax({
-			url			: "qna_search.mcat",
+			url			: "mbers_search.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
@@ -216,7 +223,7 @@ $(function() {
 	});
 	
 
-	// 수정 AJAX : 작업필요 190911
+	// 수정 AJAX
 	$(document).on("click", "#update", function(){
 		
 		/* 체크된 열만 JSON 배열로 파싱 */
@@ -247,7 +254,6 @@ $(function() {
             contentType : "application/json",
             data		: mbersDTO,
             success		: function(data) {
-            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
             			  },
             error		: function(error) {
@@ -259,15 +265,14 @@ $(function() {
 		
 	
 	// 탈퇴 AJAX
-	$(document).on("click", "#delete", function(){
+	$(document).on("click", "#withdrawal", function(){
 		$.ajax({
-			url			: "qna_delete.mcat",
+			url			: "withdrawal.mcat",
             type		: "POST",
             dataType	: "json",
             contentType : "application/json",
             data		: $().toJSON($(".chkbox:checked")),
             success		: function(data) {
-            				  $("#allCheck").prop("checked", false);
             				  $().getTable(data);
 			              },
             error		: function(error) {
