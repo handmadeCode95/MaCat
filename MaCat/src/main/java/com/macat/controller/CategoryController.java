@@ -1,5 +1,7 @@
 package com.macat.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,28 +71,29 @@ public class CategoryController {
 		ProductsDTO productsDTO = categoryDAOImpl.getProduct(prduct_sq);
 
 		// 상품 총 적립 금액
-		if (productsDTO.getPrduct_save() > 0) {
+		if (!productsDTO.getPrduct_save().isEmpty() && productsDTO.getPrduct_save() != "") {
 			productsDTO.setPrduct_point(productsDTO.getPrduct_save());
-		} else if (productsDTO.getPrduct_save_pt() > 0 && productsDTO.getPrduct_price() > 99) {
-			productsDTO.setPrduct_point(productsDTO.getPrduct_price() * productsDTO.getPrduct_save_pt() / 100);
+		} else if (!productsDTO.getPrduct_save_pt().isEmpty() && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
+			productsDTO.setPrduct_point(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) * Integer.parseInt(productsDTO.getPrduct_save_pt()) / 100));
 		} else {
-			productsDTO.setPrduct_point(0);
+			productsDTO.setPrduct_point(String.valueOf(0));
 		}
 
 		// 상품 할인된 가격
-		if (productsDTO.getPrduct_dc() > 0) {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - productsDTO.getPrduct_dc());
-		} else if (productsDTO.getPrduct_dc_pt() > 0 && productsDTO.getPrduct_price() > 99) {
-			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price() - (productsDTO.getPrduct_price() * productsDTO.getPrduct_dc_pt() / 100));
+		if (!productsDTO.getPrduct_dc().isEmpty() && productsDTO.getPrduct_dc() != "") {
+			productsDTO.setPrduct_dced_price(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) - Integer.parseInt(productsDTO.getPrduct_dc())));
+		} else if (!productsDTO.getPrduct_dc_pt().isEmpty() && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
+			productsDTO.setPrduct_dced_price(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) - (Integer.parseInt(productsDTO.getPrduct_price()) * Integer.parseInt(productsDTO.getPrduct_dc_pt()) / 100)));
 		} else {
 			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price());
 		}
 
 		// 상품 평점 반올림
-		productsDTO.setPrduct_rating_round(Math.round(productsDTO.getPrduct_rating_avg()));
+		productsDTO.setPrduct_rating_round(String.valueOf(Math.round(Float.parseFloat(productsDTO.getPrduct_rating_avg()))));
 
 		// 상품 색상
-		productsDTO.setColors(categoryDAOImpl.getColors(prduct_sq));
+		List<String> list = categoryDAOImpl.getColors(prduct_sq);
+		productsDTO.setColors(list.toArray(new String[list.size()]));
 
 		mv.addObject("imagesDTO", categoryDAOImpl.getProductImages(prduct_sq));
 		mv.addObject("more_product", mainDAOImpl.getProductsList(productsDTO.getCtgry_nm(), 1, 5));

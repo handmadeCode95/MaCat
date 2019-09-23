@@ -45,14 +45,13 @@
 	            </div>
 	            <div class="detail_text_area">
 	            	<p>${sessionScope.productForm.prduct_nm}</p>
-
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
-		            	<div class="smartEditor_container">
-		            		<form id="contentsForm" method="post">
-			            		<textarea id="txtContent" name="prduct_cn"></textarea>
-			            	</form>
-		            	</div>	            	
+		            <div class="smartEditor_container">
+		            	<form id="contentsForm" method="post">
+			            	<textarea id="txtContent" name="prduct_cn"></textarea>
+			            </form>
+		            </div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
 	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite()">
@@ -99,7 +98,7 @@
 		};
 		
 		var pasteHTML = function(filename){
-		    var sHTML = '<img src="${pageContext.request.contextPath}/resources/upload/'+filename+'">';
+		    var sHTML = '<img src="${pageContext.request.contextPath}/resources/upload/${sessionScope.loginData.mber_id}/'+filename+'">';
 		    oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
 		};
 	</script>
