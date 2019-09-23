@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtil {
 	
-	public static String fileUpload(MultipartFile fileData, String path, String fileName) throws IOException {
+	public static void fileUpload(MultipartFile fileData, String path, String fileName) throws IOException {
 		String originalFileName = fileData.getOriginalFilename();
 		String contentType = fileData.getContentType();
 		long fileSize = fileData.getSize();
@@ -41,8 +41,6 @@ public class FileUploadUtil {
 			if(out != null) out.close();
 			if(is != null) is.close();
 		}
-		
-		return path +"/"+ fileName;
 	}
 	
 }

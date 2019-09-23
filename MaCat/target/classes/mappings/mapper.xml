@@ -120,46 +120,46 @@
 	<insert id="add_product" parameterType="ProductsDTO">
 		INSERT INTO PRODUCTS_TB VALUES(PRDUCT_SEQ.NEXTVAL, #{ctgry_nm}, SYSDATE, #{prduct_dom_dt}, #{prduct_amt}, #{prduct_price}, #{prduct_dlvy_price},
 			0, 0, #{prduct_as}, #{prduct_maker}, #{prduct_coo}, #{prduct_matr}, #{prduct_size}, #{prduct_nm}, #{prduct_qa}, #{prduct_thumb_nm},
-			#{prduct_cn}, null,
+			#{prduct_cn}, null
 			<choose>
 				<when test="prduct_dc_pt != null">
-					#{prduct_dc_pt},
+					, #{prduct_dc_pt}
 				</when>
 				<otherwise>
-					null,
+					, null
 				</otherwise>
 			</choose>
 			<choose>
 				<when test="prduct_save_pt != null">
-					#{prduct_save_pt},
+					, #{prduct_save_pt}
 				</when>
 				<otherwise>
-					null,
+					, null
 				</otherwise>
 			</choose>
-			#{prduct_ctgry_group},
+			, #{prduct_ctgry_group}
 			<choose>
 				<when test="prduct_dc != null">
-					#{prduct_dc},
+					, #{prduct_dc}
 				</when>
 				<otherwise>
-					null,
+					, null
 				</otherwise>
 			</choose>
 			<choose>
 				<when test="prduct_save != null">
-					#{prduct_save},
+					, #{prduct_save}
 				</when>
 				<otherwise>
-					null,
+					, null
 				</otherwise>
 			</choose>
 			<choose>
 				<when test="prduct_cd != null">
-					#{prduct_cd}
+					, #{prduct_cd}
 				</when>
 				<otherwise>
-					null
+					, null
 				</otherwise>
 			</choose>
 			)
@@ -169,14 +169,112 @@
 	</insert>
 	
 	<insert id="add_img" parameterType="ImagesDTO">
-		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_nm}, #{prduct_sq}, #{event_sq}, #{faq_sq}, #{re_sq}, #{not_sq}, #{qna_sq})
+		INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{img_ord}, #{img_main_fl}, #{img_thumb_fl}, #{img_nm}
+		<choose>
+			<when test="prduct_sq != null">
+				, #{prduct_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="event_sq != null">
+				, #{event_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="faq_sq != null">
+				, #{faq_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="re_sq != null">
+				, #{re_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="not_sq != null">
+				, #{not_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="qna_sq != null">
+				, #{qna_sq}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		)
 	</insert>
 	
-	<insert id="add_imgs" parameterType="List">
-		<foreach collection="list" item="i">
-			INSERT INTO IMAGES_TB VALUES(IMG_SEQ.NEXTVAL, #{i.img_ord}, #{i.img_main_fl}, #{i.img_thumb_fl}, #{i.img_nm}, #{i.prduct_sq}, #{i.event_sq}, #{i.faq_sq}, #{i.re_sq}, #{i.not_sq}, #{i.qna_sq})
+	<update id="add_imgs" parameterType="List">
+		<foreach collection="list" item="i" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			INTO IMAGES_TB VALUES(GET_IMG_SQ(), #{i.img_ord}, #{i.img_main_fl}, #{i.img_thumb_fl}, #{i.img_nm}
+			<choose>
+				<when test="i.prduct_sq != null">
+					, #{i.prduct_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="i.event_sq != null">
+					, #{i.event_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="i.faq_sq != null">
+					, #{i.faq_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="i.re_sq != null">
+					, #{i.re_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="i.not_sq != null">
+					, #{i.not_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="i.qna_sq != null">
+					, #{i.qna_sq}
+				</when>
+				<otherwise>
+					, null
+				</otherwise>
+			</choose>
+			)
 		</foreach>
-	</insert>
+	</update>
 	
 	<!-- 카테고리가 소속된 그룹 조회 -->
 	<select id="category_group" resultType="String" parameterType="String">

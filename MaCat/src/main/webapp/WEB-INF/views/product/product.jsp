@@ -51,10 +51,10 @@
 	                        <c:if test="${i.img_thumb_fl < 1}">
 	                        	<c:choose>
 	                        		<c:when test="${i.img_main_fl > 0}">
-	                        			<img class="t1" src="resources/img/${i.img_nm}" alt="상품이미지${vs.count}">
+	                        			<img class="t1" src="resources/upload/${i.img_nm}" alt="상품이미지${vs.count}">
 		                        	</c:when>
 		                        	<c:otherwise>
-		                        		<img class="t1" src="resources/img/${i.img_nm}" alt="상품이미지${vs.count}">	
+		                        		<img class="t1" src="resources/upload/${i.img_nm}" alt="상품이미지${vs.count}">	
 		                        	</c:otherwise>
 	                        	</c:choose>
 	                    	</c:if>
@@ -81,12 +81,19 @@
 	                            <li>
 	                                <p>${productsDTO.prduct_nm}</p>
 	                                <span>
-	                                	<c:forEach var="i" begin="2" end="${productsDTO.prduct_rating_round}" step="2">
-											<img src="resources/img/mcat-whole-star.png" alt="★">
-										</c:forEach>
-										<c:if test="${productsDTO.prduct_rating_round % 2 eq 1}">
-											<img src="resources/img/mcat-half-star.png" alt="☆">
-										</c:if>
+	                                	<c:choose>
+	                                		<c:when test="${!empty productsDTO.prduct_rating_round}">	
+	                                			<c:forEach var="i" begin="2" end="${productsDTO.prduct_rating_round}" step="2">
+													<img src="resources/img/mcat-whole-star.png" alt="★">
+												</c:forEach>
+												<c:if test="${productsDTO.prduct_rating_round % 2 eq 1}">
+													<img src="resources/img/mcat-half-star.png" alt="☆">
+												</c:if>
+	                                		</c:when>
+	                                		<c:otherwise>
+	                                			등록된 상품평 없음
+	                                		</c:otherwise>
+	                                	</c:choose>
 									</span>
 	                            </li>
 	                        </ul>

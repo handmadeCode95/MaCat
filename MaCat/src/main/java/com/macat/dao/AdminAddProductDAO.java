@@ -26,7 +26,7 @@ public class AdminAddProductDAO {
 	}
 	
 	public int insertImages(List<ImagesDTO> imagesDTOs) {
-		return sqlSessionTemplate.insert("add_imgs", imagesDTOs);
+		return sqlSessionTemplate.update("add_imgs", imagesDTOs);
 	}
 	
 	public String getCategoryGroup(String ctgry_nm) {

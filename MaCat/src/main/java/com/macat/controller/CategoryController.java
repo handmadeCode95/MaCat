@@ -71,25 +71,27 @@ public class CategoryController {
 		ProductsDTO productsDTO = categoryDAOImpl.getProduct(prduct_sq);
 
 		// 상품 총 적립 금액
-		if (!productsDTO.getPrduct_save().isEmpty() && productsDTO.getPrduct_save() != "") {
+		if (productsDTO.getPrduct_save() != null && !productsDTO.getPrduct_save().equals("")) {
 			productsDTO.setPrduct_point(productsDTO.getPrduct_save());
-		} else if (!productsDTO.getPrduct_save_pt().isEmpty() && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
+		} else if (productsDTO.getPrduct_save_pt() != null && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
 			productsDTO.setPrduct_point(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) * Integer.parseInt(productsDTO.getPrduct_save_pt()) / 100));
 		} else {
 			productsDTO.setPrduct_point(String.valueOf(0));
 		}
 
 		// 상품 할인된 가격
-		if (!productsDTO.getPrduct_dc().isEmpty() && productsDTO.getPrduct_dc() != "") {
+		if (productsDTO.getPrduct_dc() != null) {
 			productsDTO.setPrduct_dced_price(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) - Integer.parseInt(productsDTO.getPrduct_dc())));
-		} else if (!productsDTO.getPrduct_dc_pt().isEmpty() && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
+		} else if (productsDTO.getPrduct_dc_pt() != null && Integer.parseInt(productsDTO.getPrduct_price()) > 99) {
 			productsDTO.setPrduct_dced_price(String.valueOf(Integer.parseInt(productsDTO.getPrduct_price()) - (Integer.parseInt(productsDTO.getPrduct_price()) * Integer.parseInt(productsDTO.getPrduct_dc_pt()) / 100)));
 		} else {
 			productsDTO.setPrduct_dced_price(productsDTO.getPrduct_price());
 		}
 
 		// 상품 평점 반올림
-		productsDTO.setPrduct_rating_round(String.valueOf(Math.round(Float.parseFloat(productsDTO.getPrduct_rating_avg()))));
+		if (productsDTO.getPrduct_rating_avg() != null) {
+			productsDTO.setPrduct_rating_round(String.valueOf(Math.round(Float.parseFloat(productsDTO.getPrduct_rating_avg()))));
+		}
 
 		// 상품 색상
 		List<String> list = categoryDAOImpl.getColors(prduct_sq);

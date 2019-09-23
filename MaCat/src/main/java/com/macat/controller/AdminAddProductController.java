@@ -75,9 +75,9 @@ public class AdminAddProductController {
 		productsDTO.setMain_img_nm(cal.getTimeInMillis() + mainfileType);
 		
 		String mainPath = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
-		String mainFilePath = FileUploadUtil.fileUpload(mainImg, mainPath, productsDTO.getMain_img_nm());
+		FileUploadUtil.fileUpload(mainImg, mainPath, productsDTO.getMain_img_nm());
 		
-		productsDTO.setPrduct_thumb_nm(productsDTO.getMain_img_nm());
+		productsDTO.setPrduct_thumb_nm(mbersDTO.getMber_id() + "/" + productsDTO.getMain_img_nm());
 		adminProductDAO.insertProduct(productsDTO);
 		String prduct_sq = productsDTO.getPrduct_sq();
 		System.out.println(prduct_sq);
@@ -87,35 +87,37 @@ public class AdminAddProductController {
 		map.put("colors", productsDTO.getColors());
 		adminProductDAO.insertColors(map);
 		
-		imagesDTOs.add(new ImagesDTO(mainFilePath, 0, 1, 0, prduct_sq));
+		imagesDTOs.add(new ImagesDTO(mbersDTO.getMber_id() + "/" + productsDTO.getMain_img_nm(), 0, 1, 0, prduct_sq));
 		
 		if (subImg1 != null && subImg1.getSize() > 0) {
 			String subfileName1 = subImg1.getOriginalFilename();
 			String subfileType1 = subfileName1.substring(subfileName1.lastIndexOf("."), subfileName1.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + subfileType1);  
+			productsDTO.setSub_img1_nm(cal.getTimeInMillis() + subfileType1);  
 			
 			String subPath1 = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			String subFilePath1 = FileUploadUtil.fileUpload(mainImg, subPath1, productsDTO.getMain_img_nm());
-			imagesDTOs.add(new ImagesDTO(subFilePath1, 1, 0, 0, prduct_sq));
+			FileUploadUtil.fileUpload(mainImg, subPath1, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(mbersDTO.getMber_id() + "/" + productsDTO.getSub_img1_nm(), 1, 0, 0, prduct_sq));
 		}
 		if (subImg2 != null && subImg2.getSize() > 0) {
 			String fileName = subImg2.getOriginalFilename();
 			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);
+			productsDTO.setSub_img2_nm(cal.getTimeInMillis() + fileType);
 			
 			String subPath2 = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			String subFilePath2 = FileUploadUtil.fileUpload(subImg2, subPath2, productsDTO.getMain_img_nm());
-			imagesDTOs.add(new ImagesDTO(subFilePath2, 1, 0, 0, prduct_sq));
+			FileUploadUtil.fileUpload(subImg2, subPath2, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(mbersDTO.getMber_id() + "/" + productsDTO.getSub_img2_nm(), 1, 0, 0, prduct_sq));
 		}
 		if (subImg3 != null && subImg3.getSize() > 0) {
 			String fileName = subImg3.getOriginalFilename();
 			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-			productsDTO.setMain_img_nm(cal.getTimeInMillis() + fileType);  
+			productsDTO.setSub_img3_nm(cal.getTimeInMillis() + fileType);  
 			
 			String subPath3 = request.getSession().getServletContext().getRealPath("/") + File.separator + "resources/upload/" + mbersDTO.getMber_id();
-			String subFilePath3 = FileUploadUtil.fileUpload(subImg3, subPath3, productsDTO.getMain_img_nm());
-			imagesDTOs.add(new ImagesDTO(subFilePath3, 1, 0, 0, prduct_sq));
+			FileUploadUtil.fileUpload(subImg3, subPath3, productsDTO.getMain_img_nm());
+			imagesDTOs.add(new ImagesDTO(mbersDTO.getMber_id() + "/" + productsDTO.getSub_img3_nm(), 1, 0, 0, prduct_sq));
 		}
+		
+		adminProductDAO.insertImages(imagesDTOs);
 		
 		sessionStatus.setComplete();
 		return mv;

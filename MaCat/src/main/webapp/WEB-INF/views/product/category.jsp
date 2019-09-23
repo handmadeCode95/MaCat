@@ -117,7 +117,7 @@
 								<div class="img_ratio_container">
 									<a
 										href="product.mcat?prduct_sq=${i.prduct_sq}&prduct_thumb_nm=${i.prduct_thumb_nm}">
-										<img id="product_img" src="resources/img/${i.prduct_thumb_nm}"
+										<img id="product_img" src="resources/upload/${i.prduct_thumb_nm}"
 										alt="" style="display: block">
 									</a>
 								</div>
