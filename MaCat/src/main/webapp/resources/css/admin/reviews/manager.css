@@ -87,7 +87,7 @@ main{
 
 .review_info_right{
     float: left;
-    width: 350px;
+    width: 555px;
     margin-left: 62.5px;
     margin-top: 28px;    
 }
@@ -109,7 +109,7 @@ main{
 
 .searching_term_middle{
     float: left;
-    width: 575px;
+    width: 600px;
     height: 140px;
     margin-top: 35.5px;
 }
