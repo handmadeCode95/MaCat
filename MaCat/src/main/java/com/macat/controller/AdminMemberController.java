@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -76,9 +78,7 @@ public class AdminMemberController {
 
 		PagingUtil.getPage(pageDTO, count, cPage);
 		map.put("pageDTO", pageDTO);
-
 		map.put("mbers_count", count);
-
 		
 		map.put("mber_grad", adminMemberManagementDAO.getMemberGradeList());
 
@@ -100,7 +100,27 @@ public class AdminMemberController {
 		}
 
 		return map;
-	}
+	}	
+	
+/*
+ * 예를들어 웹페이지에서 json으로 request한 파라미터들을 java에서 받으려면 java object로의 변환이 필요하며 마찬가지로
+ * response 시에도 java object에서 json으로 변환이 필요하다.
+ * 
+ * 이러한 작업들을 해주는 어노테이션이 바로 @RequestBody 와 @ResponseBody 이다. 컨트롤러에 두 어노테이션을 추가해주면,
+ * JSON이나 key/value 방식 xml 등으로 송수신 할 수 있다.
+ * 
+ * @RequestBody -> HTTP 요청의 body 내용을 자바 객체로 매핑하는 역할 : http 요청을 자바로 분배
+	- HTTP body안에 JSON을 VO에 맵핑
+	- HTTP 요청(Request)의 body안에 담겨있는 JSON(또는 XML)을 VO에 자동으로 맵핑시키는 어노테이션
+	
+	@ResponseBody -> 자바 객체를 HTTP 요청의 body 내용으로 매핑하는 역할 : 자바를 모아서 http로 송신	
+	- 함수의 return 값을 직렬화하여 HTTP Response의 body에 담습니다.
+	- VO 객체를 JSON으로 바꿔서 HTTP body에 담습니다.
+ * 
+ * 컨트롤러 메서드 안에 기술된 리스폰스바디는 '함수의 return 값을 직렬화하여 HTTP Response의 body에 담을꺼야!' 
+ * 라고 스프링에게 알려줍니다. 
+ * +만약에 Accept에 application/json이라고 적었으면 함수의 return값을 JSON으로 바꿔서 HTTP body에 담을 것입니다.
+ */
 
 	// 회원 검색
 	@PostMapping("mbers_search.mcat")
@@ -121,9 +141,7 @@ public class AdminMemberController {
 			mbersSearchDTO.setMber_reg_dt_end(mbersSearchDTO.getMber_reg_dt_end() + " 23:59:59");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		PageDTO pageDTO = new PageDTO(50);
-
 
 		switch (mbersSearchDTO.getAnd_or_chk()) {
 		case "and":
@@ -155,7 +173,6 @@ public class AdminMemberController {
 			map.put("mbersDTO", adminMemberManagementDAO.getOrSearch(mbersSearchDTO));
 			break;
 		}
-
 		return map;
 	}
 

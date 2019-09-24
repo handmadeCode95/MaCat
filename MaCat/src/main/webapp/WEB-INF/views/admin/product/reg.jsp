@@ -1,15 +1,14 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>마캣 관리자 페이지</title>
-
+	    <title>상품등록 페이지 - 상세페이지 작성</title>
     	<link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">	    
-
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
 	    <!-- 관리자페이지 css -->
@@ -44,7 +43,15 @@
 	                <span>상세페이지 작성</span>
 	            </div>
 	            <div class="detail_text_area">
-	            	<p>${sessionScope.productForm.prduct_nm}</p>
+	            	<c:choose>
+	            		<c:when test="${!empty sessionScope.productForm}">
+	            			<p>${sessionScope.productForm.prduct_nm}</p>
+	            		</c:when>
+	            		<c:otherwise>
+	            			<input type="text">
+	            		</c:otherwise>
+	            	</c:choose>
+
 	            	<!-- 구분선 -->
 	            	<div id="border_item"></div>
 		            <div class="smartEditor_container">
@@ -54,7 +61,17 @@
 		            </div>	            	
 	            </div>
 	            <div class="submit_or_back_btn">
-	            	<input id="submit_btn" type="image" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite()">
+	            	<c:set var="url" value="${pageContext.request.requestURL}"></c:set>
+	            	<c:choose>
+	            		<!-- 공지사항 수정 페이지 -->
+	            		<c:when test="${url eq 'nots_update_page'}">
+	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onMotify(${url})">
+	            		</c:when>
+	            		<!-- 상품상세 수정 페이지 : 기본값 -->
+	            		<c:when test="${url eq 'product_update_page'}">
+	            			<img id="submit_btn" src="resources/img/mcat-submit-btn.png" alt="작성완료" onclick="onWrite(${url})">
+	            		</c:when>
+	            	</c:choose>
 	            	<img id="back_btn" src="resources/img/mcat-back-btn.png" alt="뒤로가기">
 	            </div>
 	        </section>        
@@ -83,17 +100,18 @@
 		    fCreator: "createSEditor2"
 		});
 		
-		var onWrite = function(){
+		var onWrite = function(url){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
 			boardWriteForm.action ="product_reg_ok.mcat";              
+//			boardWriteForm.action = url;        
 			boardWriteForm.submit();  
 		};
 		
-		var onModify = function(){
+		var onModify = function(url){
 			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 			var boardWriteForm = document.getElementById("contentsForm");  
-			boardWriteForm.action ="modifySubmit";              
+			boardWriteForm.action =url;              
 			boardWriteForm.submit();  
 		};
 		

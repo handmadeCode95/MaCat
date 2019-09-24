@@ -76,3 +76,164 @@ Binding(SHIFT+DEL,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	MoreClipboard.contexts.main,,,system)
+!SESSION 2019-09-09 16:37:00.104 -----------------------------------------------
+eclipse.buildId=4.3.0.201906200901-RELEASE
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  openFile -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 openFile -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY org.eclipse.egit.core 1 0 2019-09-09 16:40:23.089
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface 2 0 2019-09-09 16:40:24.968
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-09-09 16:40:24.968
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@e763080,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@21252bef,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2019-09-09 16:40:33.241
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2019-09-09 16:40:33.241
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:36.823
+!MESSAGE Removing part descriptor with the 'org.eclipse.datatools.connectivity.DataSourceExplorerNavigator' id and the 'Data Source Explorer' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-09-09 16:40:37.774
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\이재용'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:38.347
+!MESSAGE Removing part descriptor with the 'org.eclipse.datatools.sqltools.plan.planView' id and the 'Execution Plan' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:39.651
+!MESSAGE Removing part descriptor with the 'org.eclipse.datatools.sqltools.result.resultView' id and the 'SQL Results' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.584
+!MESSAGE Removing part descriptor with the 'org.eclipse.eclemma.ui.CoverageView' id and the 'Coverage' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.827
+!MESSAGE Removing part descriptor with the 'org.eclipse.jpt.ui.jpaStructureView' id and the 'JPA Structure' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.855
+!MESSAGE Removing part descriptor with the 'org.eclipse.jpt.ui.jpaDetailsView' id and the 'JPA Details' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.858
+!MESSAGE Removing part descriptor with the 'org.eclipse.jst.ws.jaxws.ui.views.AnnotationsView' id and the 'Annotation Properties' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.862
+!MESSAGE Removing part descriptor with the 'org.eclipse.oomph.p2.ui.RepositoryExplorer' id and the 'Repository Explorer' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.868
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.systemView' id and the 'Remote Systems' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.871
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.teamView' id and the 'Team' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.873
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.systemTableView' id and the 'Remote System Details' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.875
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.SystemSearchView' id and the 'Remote Search' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.876
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.scratchpad.SystemScratchpadViewPart' id and the 'Remote Scratchpad' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.878
+!MESSAGE Removing part descriptor with the 'org.eclipse.rse.ui.view.monitorView' id and the 'Remote Monitor' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.880
+!MESSAGE Removing part descriptor with the 'org.eclipse.tips.ide.tipPart' id and the 'Tip of the Day' description. Points to the invalid 'bundleclass://org.eclipse.tips.ide/org.eclipse.tips.ide.internal.TipPart' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.890
+!MESSAGE Removing part descriptor with the 'org.eclipse.wst.xml.views.XPathView' id and the 'XPath' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.892
+!MESSAGE Removing part descriptor with the 'org.eclipse.wst.xsl.jaxp.debug.ui.resultview' id and the 'Result' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.894
+!MESSAGE Removing part descriptor with the 'org.eclipse.wst.xsl.ui.view.outline' id and the 'Stylesheet Model' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.987
+!MESSAGE Removing part descriptor with the 'com.genuitec.eclipse.icons.designer.ui.views.IconsDesignerView' id and the 'Icon Designer' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.988
+!MESSAGE Removing part descriptor with the 'org.sonarlint.eclipse.ui.views.issues.IssuesView' id and the 'SonarLint On-The-Fly' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.989
+!MESSAGE Removing part descriptor with the 'org.sonarlint.eclipse.ui.views.issues.ChangeSetIssuesView' id and the 'SonarLint Report' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.991
+!MESSAGE Removing part descriptor with the 'org.sonarlint.eclipse.ui.views.RuleDescriptionWebView' id and the 'SonarLint Rule Description' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.992
+!MESSAGE Removing part descriptor with the 'org.sonarlint.eclipse.ui.views.IssueLocationsView' id and the 'SonarLint Issue Locations' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.993
+!MESSAGE Removing part descriptor with the 'org.sonarlint.eclipse.ui.ServersView' id and the 'SonarLint Bindings' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-09-09 16:40:40.994
+!MESSAGE Removing part descriptor with the 'MoreClipboard.view' id and the 'MoreClipboard Contents' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+!SESSION 2019-09-11 16:08:34.989 -----------------------------------------------
+eclipse.buildId=4.3.0.201906200901-RELEASE
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  openFile -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 openFile -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY org.eclipse.egit.core 1 0 2019-09-11 16:10:50.080
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface 2 0 2019-09-11 16:10:51.937
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-09-11 16:10:51.938
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d2aa638,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f08e6d3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2019-09-11 16:10:59.777
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2019-09-11 16:10:59.777
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-09-11 16:11:04.474
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\이재용'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

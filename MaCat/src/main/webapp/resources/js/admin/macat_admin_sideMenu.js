@@ -10,21 +10,3 @@ $(document).on("click", ".side-item", function(){
 		$(this).children("img").removeClass("rotatedDown");
 	}
 });
-
-/*
-var cnt = 1;
-
-$(function(){
-	$(document).on("click", "#menu5", function(){
-		$("#service").slideToggle();
-		if(cnt % 2 == 1){
-			$("#arrow").addClass("rotatedUp");
-			$("#arrow").removeClass("rotatedDown");
-		}else{
-			$("#arrow").addClass("rotatedDown");
-			$("#arrow").removeClass("rotatedUp");
-		}
-		cnt++;
-	});
-});
-*/

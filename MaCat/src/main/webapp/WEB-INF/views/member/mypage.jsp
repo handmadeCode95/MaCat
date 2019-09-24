@@ -155,10 +155,6 @@
             </ul>
             
         </div>
-
-    </section>
-    
+    </section>    
     <footer><%@ include file="../footer.jsp" %></footer>
-
-
 </body></html>

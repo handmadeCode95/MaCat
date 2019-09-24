@@ -59,6 +59,36 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<!-- adminOrderManagementDAO -->
+	<bean id="adminOrderManagementDAO" class="com.macat.dao.AdminOrderManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminReviewManagementDAO -->
+	<bean id="adminReviewManagementDAO" class="com.macat.dao.AdminReviewManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />	
+	</bean>
+	
+	<!-- adminCouponManagementDAO -->
+	<bean id="adminCouponManagementDAO" class="com.macat.dao.AdminCouponManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminPointManagementDAO -->
+	<bean id="adminPointManagementDAO" class="com.macat.dao.AdminPointManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminDeliveryManagementDAO -->
+	<bean id="adminDeliveryManagementDAO" class="com.macat.dao.AdminDeliveryManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<!-- adminDeliveryAddrManagementDAO -->
+	<bean id="adminDeliveryAddrManagementDAO" class="com.macat.dao.AdminDeliveryAddrManagementDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 	<!-- categoryDAOImpl -->
 	<bean id="categoryDAOImpl" class="com.macat.dao.CategoryDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
@@ -73,5 +103,5 @@
 	<bean id="productDetailDAOImpl" class="com.macat.dao.ProductDetailDAOImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
-	
+		
 </beans>

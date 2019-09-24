@@ -1,0 +1,51 @@
+/*이름 아이디 핸드폰 생일 text박스*/
+.coupon_info_middle .checks input:last-child{
+    width: 190px;
+    height: 37px;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 16px;
+    background: #fff;
+    margin-left: 50px;
+}
+
+
+.checks>div{
+    float: right;
+    width: 456px;
+}
+
+.searching_term_middle .checks>div{
+    float: right;
+    width: 441px;
+}
+
+.searching_term_middle .checks label{
+    height: 72px;
+}
+
+/*기간 text박스*/
+div #join_box1,
+div #join_box2{
+    width: 190px;
+    height: 37px;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 16px;
+    background: #fff;   
+    margin-right: 17px;
+}
+
+div #connect_box1,
+div #connect_box2{
+    width: 190px;
+    height: 37px;
+    border: 1px solid #CFCFCF;
+    margin-bottom: 16px;
+    background: #fff;
+    margin-right: 17px;
+}
+
+.checks label{
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
+}

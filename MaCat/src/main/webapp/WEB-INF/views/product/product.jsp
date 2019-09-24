@@ -8,7 +8,7 @@
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>Document</title>
+	    <title>마캣 상품</title>
 	    <link rel="shortcut icon" href="resources/img/logos/mcat-favicon.ico">
 	    <!--초기화-->
 	    <link rel="stylesheet" href="resources/css/normalize.css">

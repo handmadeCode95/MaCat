@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../font/THEjunggt130.woff') format('woff'),
+        url('../../font/THEjunggt130.otf') format('opentype'),
+        url('../../font/THEjunggt130.eot') format('embedded-opentype');
+}
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+.radio-wrap{
+    position: relative;
+    height: 30px;
+}
+
+/*라디오버튼 화면에서 숨기기*/
+.radio-wrap input[type="radio"]{    
+    position: absolute;    
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    line-height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.radio-wrap input[type="radio"] + label{
+    display: inline-table;    
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;    
+}
+
+/*성별 선택 라디오버튼 디자인*/
+.radio-wrap input[type="radio"] + label:before{
+    content: '';
+    display: inline-block;    
+    left: 0;
+    top: -4px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #cacece;
+}
+
+.radio-wrap input[type="radio"] + label:active:before,
+.radio-wrap input[type="radio"]:checked + label:active:before
+{
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.radio-wrap input[type="radio"]:checked + label:before{
+    background: #5c5173;
+    border-color: #5c5173;
+}
+

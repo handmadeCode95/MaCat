@@ -87,25 +87,25 @@
 					</div>
 					<div class="search-bar">
 					    <p>상품분류
-					    <select id="ctg-select">
-                            <option value="">카테고리분류</option>
-					        <option value="">사료</option>
-					        <option value="">간식</option>
-					        <option value="">화장실/모래</option>
-					        <option value="">장난감</option>
-					        <option value="">생활용품</option>
-					        <option value="">악세사리</option>
-					        <option value="">목욕/위생</option>
-					    </select>
+						    <select id="ctg-select">
+	                            <option value="">카테고리분류</option>
+						        <option value="">사료</option>
+						        <option value="">간식</option>
+						        <option value="">화장실/모래</option>
+						        <option value="">장난감</option>
+						        <option value="">생활용품</option>
+						        <option value="">악세사리</option>
+						        <option value="">목욕/위생</option>
+						    </select>
                         </p>
 					    <p>검색어
-					    <select name="" id="">
-					        <option value="">제목</option>
-					        <option value="">내용</option>
-					        <option value="">아이디</option>
-					    </select>
+						    <select name="" id="">
+						        <option value="">제목</option>
+						        <option value="">내용</option>
+						        <option value="">아이디</option>
+						    </select>
 					    <input type="text">
-					    <a href="#"><img src="resources/img/mcat_search.png" alt=""></a>
+					    	<a href="#"><img src="resources/img/mcat_search.png" alt=""></a>
 					    </p>
 					</div>
 				</div>

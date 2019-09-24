@@ -32,7 +32,7 @@
 			<ul class="prd">
 					<li><a href="product_manage.mcat">상품</a></li>
 					<li><a href="add_product.mcat">상품등록</a></li>
-					<li>주문</li>
+					<li><a href="order_manage.mcat">주문</a></li>
 					<li>배송</li>
 			</ul>
 			<center>
@@ -44,7 +44,7 @@
 			</li>
 			<ul class="prd">
 					<li><a href="mbers_manager.mcat">회원</a></li> <!-- 회원정보 조회 -->
-					<li>쿠폰</li>
+					<li><a href="coupon_manage.mcat">쿠폰</a></li>
 					<li>포인트</li>
 				</ul>
 			<center>
@@ -57,7 +57,7 @@
 			</li>
 			<ul class="prd">
 					<li><a href="qna_manage.mcat">고객문의</a></li>
-					<li>리뷰</li>
+					<li><a href="reviews_manage.mcat">리뷰</a></li>
 				</ul>
 			<center>
 				<hr width="193" noshade="noshade" size="2px" border-color="#707070">
@@ -65,7 +65,6 @@
 			<li class="side-item" id="menu4">
 				<img id="arrow4" src="resources/img/mcat-arrow-down.png" alt="">
 				<a>게시글 관리</a>
-
 			</li>
 			<ul class="prd">
 					<li><a href="nots_manage.mcat">공지</a></li>
@@ -75,13 +74,12 @@
 				<hr width="193" noshade="noshade" size="2px" border-color="#707070">
 			</center>
 			<li class="side-item" id="menu5">
-
-<!--				<img id="arrow5" src="resources/img/mcat-arrow-down.png" alt="">-->
+				<img id="arrow5" src="resources/img/mcat-arrow-down.png" alt="">
 				<a id="side-item-sub">카테고리관리</a>
 			</li>
-<!--			<ul class="prd">
-				<li>메뉴</li>
-			</ul>-->
+			<ul class="prd">
+				<li>미사용</li>
+			</ul>
 		</ul>
 	</nav>
 </body>

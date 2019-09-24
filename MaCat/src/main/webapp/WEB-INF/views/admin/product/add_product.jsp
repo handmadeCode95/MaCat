@@ -11,8 +11,7 @@
 <!--초기화-->
 <link rel="stylesheet" href="resources/css/normalize.css">
 <!--상품등록 페이지 css-->
-<link rel="stylesheet"
-	href="resources/css/admin/product/macat_admin_add_product.css">
+<link rel="stylesheet" href="resources/css/admin/product/macat_admin_add_product.css">
 
 <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 <!--카테고리 파트 select 문-->
@@ -29,21 +28,29 @@
 		</div>
 		<form action="product_reg.mcat" onsubmit="return check()" method="post"
 			enctype="multipart/form-data">
+
 			<!--카테고리 선택 파트-->
 			<div class="choose_product_category">
 				<span>카테고리</span>
 				<div class="category_select_box">
-					<select class="category_depth_1" onchange="categoryChange(this)">
+					<select class="category_depth_1" onchange="categoryChange(this, '${productsDTO.ctgry_nm}')">
 						<option value="0">1차 카테고리</option>
-						<option value="1">사료</option>
-						<option value="2">간식</option>
-						<option value="3">화장실/모래</option>
-						<option value="4">장난감</option>
-						<option value="5">생활용품</option>
-						<option value="6">악세사리</option>
-						<option value="7">목욕/위생</option>
-					</select> <select name="ctgry_nm" class="category_depth_2"
-						id="second_category">
+						<option value="1" <c:if test="${productsDTO.prduct_ctgry_group eq 1}">selected </c:if>>사료</option>
+						<option value="2" <c:if test="${productsDTO.prduct_ctgry_group eq 2}">selected </c:if>>간식</option>
+						<option value="3" <c:if test="${productsDTO.prduct_ctgry_group eq 3}">selected </c:if>>장난감</option>
+						<option value="4" <c:if test="${productsDTO.prduct_ctgry_group eq 4}">selected </c:if>>생활용품</option>
+						<option value="5" <c:if test="${productsDTO.prduct_ctgry_group eq 5}">selected </c:if>>의류</option>
+						<option value="6" <c:if test="${productsDTO.prduct_ctgry_group eq 6}">selected </c:if>>화장실</option>
+						<option value="7" <c:if test="${productsDTO.prduct_ctgry_group eq 7}">selected </c:if>>목욕/위생</option>
+						<c:if test="${!empty productsDTO.prduct_ctgry_group}">
+							<script type="text/javascript">
+								$(function() {
+									$('.category_depth_1').trigger("change");
+								});
+							</script>
+						</c:if>
+					</select>
+					<select name="ctgry_nm" class="category_depth_2" id="second_category">
 						<option>2차 카테고리</option>
 					</select>
 				</div>
@@ -53,7 +60,7 @@
 				<span>상품명</span>
 				<div class="title_write_part">
 					<input class="product_title_inputBox" type="text" name="prduct_nm"
-						id="byteInfo" onkeyup="chkword(this, 150)">
+						id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_nm}">
 				</div>
 			</div>
 			<!--판매가 입력 파트-->
@@ -66,6 +73,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -78,6 +86,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="won_percnt_box">
 							<ul>
 								<li>원</li>
@@ -102,6 +111,7 @@
 							onkeyup="this.value = setComma(this.value)"
 							onkeydown="this.value = setComma(this.value)"
 							onfocus="this.value = setComma(this.value)">
+
 						<div class="left_stock_box">
 							<ul>
 								<li>개</li>
@@ -115,29 +125,29 @@
 				<span>상품색상</span>
 				<div class="color_palette">
 					<div class="palette_box">
-						<input name="colors" type="checkbox" id="test_1"
-							onclick="count_ck(this);" value="레드"> <label for="test_1"></label> <input name="colors" type="checkbox" id="test_2"
-							onclick="count_ck(this);" value="버건디"> <label for="test_2"></label> <input name="colors" type="checkbox" id="test_3"
-							onclick="count_ck(this);" value="오렌지"> <label for="test_3"></label> <input name="colors" type="checkbox" id="test_4"
-							onclick="count_ck(this);" value="골드"> <label for="test_4"></label> <input name="colors" type="checkbox" id="test_5"
-							onclick="count_ck(this);" value="옐로우"> <label for="test_5"></label> <input name="colors" type="checkbox" id="test_6"
-							onclick="count_ck(this);" value="라임"> <label for="test_6"></label> <input name="colors" type="checkbox" id="test_7"
-							onclick="count_ck(this);" value="그린"> <label for="test_7"></label> <input name="colors" type="checkbox" id="test_8"
-							onclick="count_ck(this);" value="카키"> <label for="test_8"></label> <input name="colors" type="checkbox" id="test_9"
-							onclick="count_ck(this);" value="민트"> <label for="test_9"></label> <input name="colors" type="checkbox" id="test_10"
-							onclick="count_ck(this);" value="스카이블루"><label for="test_10"></label> <input name="colors" type="checkbox" id="test_11"
-							onclick="count_ck(this);" value="블루"> <label for="test_11"></label> <input name="colors" type="checkbox" id="test_12"
-							onclick="count_ck(this);" value="네이비"><label for="test_12"></label> <input name="colors" type="checkbox" id="test_13"
-							onclick="count_ck(this);" value="퍼플"> <label for="test_13"></label> <input name="colors" type="checkbox" id="test_14"
-							onclick="count_ck(this);" value="인디핑크"><label for="test_14"></label> <input name="colors" type="checkbox" id="test_15"
-							onclick="count_ck(this);" value="핑크"> <label for="test_15"></label> <input name="colors" type="checkbox" id="test_16"
-							onclick="count_ck(this);" value="베이지"><label for="test_16"></label> <input name="colors" type="checkbox" id="test_17"
-							onclick="count_ck(this);" value="카멜"> <label for="test_17"></label> <input name="colors" type="checkbox" id="test_18"
-							onclick="count_ck(this);" value="브라운"><label for="test_18"></label> <input name="colors" type="checkbox" id="test_19"
-							onclick="count_ck(this);" value="화이트"><label for="test_19"></label> <input name="colors" type="checkbox" id="test_20"
-							onclick="count_ck(this);" value="아이보리"><label for="test_20"></label> <input name="colors" type="checkbox" id="test_21"
-							onclick="count_ck(this);" value="그레이"><label for="test_21"></label> <input name="colors" type="checkbox" id="test_22"
-							onclick="count_ck(this);" value="차콜"> <label for="test_22"></label> <input name="colors" type="checkbox" id="test_23"
+						<input name="palette_chk" type="checkbox" id="test_1"
+							onclick="count_ck(this);" value="레드"> <label for="test_1"></label> <input name="palette_chk" type="checkbox" id="test_2"
+							onclick="count_ck(this);" value="버건디"> <label for="test_2"></label> <input name="palette_chk" type="checkbox" id="test_3"
+							onclick="count_ck(this);" value="오렌지"> <label for="test_3"></label> <input name="palette_chk" type="checkbox" id="test_4"
+							onclick="count_ck(this);" value="골드"> <label for="test_4"></label> <input name="palette_chk" type="checkbox" id="test_5"
+							onclick="count_ck(this);" value="옐로우"> <label for="test_5"></label> <input name="palette_chk" type="checkbox" id="test_6"
+							onclick="count_ck(this);" value="라임"> <label for="test_6"></label> <input name="palette_chk" type="checkbox" id="test_7"
+							onclick="count_ck(this);" value="그린"> <label for="test_7"></label> <input name="palette_chk" type="checkbox" id="test_8"
+							onclick="count_ck(this);" value="카키"> <label for="test_8"></label> <input name="palette_chk" type="checkbox" id="test_9"
+							onclick="count_ck(this);" value="민트"> <label for="test_9"></label> <input name="palette_chk" type="checkbox" id="test_10"
+							onclick="count_ck(this);" value="스카이블루"><label for="test_10"></label> <input name="palette_chk" type="checkbox" id="test_11"
+							onclick="count_ck(this);" value="블루"> <label for="test_11"></label> <input name="palette_chk" type="checkbox" id="test_12"
+							onclick="count_ck(this);" value="네이비"><label for="test_12"></label> <input name="palette_chk" type="checkbox" id="test_13"
+							onclick="count_ck(this);" value="퍼플"> <label for="test_13"></label> <input name="palette_chk" type="checkbox" id="test_14"
+							onclick="count_ck(this);" value="인디핑크"><label for="test_14"></label> <input name="palette_chk" type="checkbox" id="test_15"
+							onclick="count_ck(this);" value="핑크"> <label for="test_15"></label> <input name="palette_chk" type="checkbox" id="test_16"
+							onclick="count_ck(this);" value="베이지"><label for="test_16"></label> <input name="palette_chk" type="checkbox" id="test_17"
+							onclick="count_ck(this);" value="카멜"> <label for="test_17"></label> <input name="palette_chk" type="checkbox" id="test_18"
+							onclick="count_ck(this);" value="브라운"><label for="test_18"></label> <input name="palette_chk" type="checkbox" id="test_19"
+							onclick="count_ck(this);" value="화이트"><label for="test_19"></label> <input name="palette_chk" type="checkbox" id="test_20"
+							onclick="count_ck(this);" value="아이보리"><label for="test_20"></label> <input name="palette_chk" type="checkbox" id="test_21"
+							onclick="count_ck(this);" value="그레이"><label for="test_21"></label> <input name="palette_chk" type="checkbox" id="test_22"
+							onclick="count_ck(this);" value="차콜"> <label for="test_22"></label> <input name="palette_chk" type="checkbox" id="test_23"
 							onclick="count_ck(this);" value="블랙"> <label for="test_23"></label>
 					</div>
 				</div>
@@ -224,19 +234,19 @@
 				<span>상세정보</span>
 				<div class="detail-resource">
 					<span>소재</span> <input class="detail_1_input" type="text"
-						name="prduct_matr" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_matr" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_matr}">
 				</div>
 				<div class="detail-size">
 					<span>크기</span> <input class="detail_1_input" type="text"
-						name="prduct_size" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_size" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_size}">
 				</div>
 				<div class="detail-maker">
 					<span>제조사</span> <input class="detail_1_input" type="text"
-						name="prduct_maker" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_maker" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_maker}">
 				</div>
 				<div class="detail-country">
 					<span>제조국</span> <input class="detail_1_input" type="text"
-						name="prduct_coo" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_coo" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_coo}">
 				</div>
 				<div class="detail-yymmdd">
 					<span>제조일자</span> <input class="detail_1_input" type="text"
@@ -244,18 +254,22 @@
 				</div>
 				<div class="detail-as_code">
 					<span>A/S번호</span> <input class="detail_1_input" type="text"
-						name="prduct_as" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_as" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_as}">
 				</div>
 				<div class="detail-quality">
 					<span>품질보증기준</span> <input class="detail_quality_input" type="text"
-						name="prduct_qa" id="byteInfo" onkeyup="chkword(this, 150)">
+						name="prduct_qa" id="byteInfo" onkeyup="chkword(this, 150)" value="${productsDTO.prduct_qa}">
 				</div>
 			</div>
 			<!--상세페이지 버튼-->
 			<div class="product_detail_page">
+			
+			<c:if test="">
+			
+			</c:if>
 				<div>
-					<a href="javascript:void(0)"> <input
-						class="detail_btn" type="submit" value="상세페이지 작성하기" />
+					<a href="javascript:void(0)">
+					<input class="detail_btn" type="submit" value="상세페이지 작성하기" />
 					</a>
 				</div>
 			</div>

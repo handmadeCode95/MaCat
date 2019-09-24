@@ -23,7 +23,7 @@
 			.odd {background:silver}
 		</style>
 		<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
-	    <script src="resources/js/admin/notices/update.js"></script>
+	    <!-- <script src="resources/js/admin/reviews/update.js"></script> -->
 	</head>
 	
 	<body>

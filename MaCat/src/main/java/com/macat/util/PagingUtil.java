@@ -1,9 +1,8 @@
-package com.macat.util;
+﻿package com.macat.util;
 
 import com.macat.dto.PageDTO;
 
 public class PagingUtil {
-
 	public static void getPage(PageDTO paging, int count, String cPage) {
 		paging.setTotalRecord(count);
 

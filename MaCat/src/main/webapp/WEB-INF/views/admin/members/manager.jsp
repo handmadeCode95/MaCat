@@ -1,5 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
@@ -178,7 +177,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="member_info_table_title">
-	                <span>회원정보 (총 <b id="mbers_count">${mbers_count}</b> 명)</span>
+	                <span>회원정보 (총 <b id="mbers_count">${pageDTO.totalRecord}</b> 명)</span>
 	            </div>
 	            <div id="members" class="info_table">
 	                <form>
@@ -204,7 +203,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input type="checkbox" id="allCheck"></th>
+	                                    <th class="checks"><input type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 	                                    <th scope="col">회원번호</th>
 	                                    <th scope="col">이름</th>
 	                                    <th scope="col">성별</th>
@@ -225,7 +224,7 @@
 	                            <tbody id="searchResult">
 	                            	<c:forEach var="i" items="${mbersDTO}">
 		                                <tr id="${i.mber_sq}">
-		                                    <td><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="${i.mber_sq}"></td>
+		                                    <td class="checks"><input name="mbers" class="chkbox" type="checkbox" id="table_chk" value="${i.mber_sq}"><label for="table_chk"></label></td>
 		                                    <td><input name="mber_sq" class="${i.mber_sq}" type="hidden" value="${i.mber_sq}" disabled>${i.mber_sq}</td>
 		                                    <td><input name="mber_nm" class="${i.mber_sq}" type="text" value="${i.mber_nm}" disabled></td>
 		                                    <td>${i.mber_gender}</td>
@@ -283,9 +282,8 @@
 								<%-- 다음 --%>
 								<c:choose>
 									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
-										<li class="disable"><img
-											src="resources/img/mcat-arrow-slider-right-grey.png"
-											height="10px"></li>
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
 									</c:when>
 									<c:otherwise>
 										<li><a class="page"> <img

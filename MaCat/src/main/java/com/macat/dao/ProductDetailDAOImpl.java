@@ -29,5 +29,11 @@ public class ProductDetailDAOImpl implements ProductDetailDAO {
 	public int insertCart(Map<String, Object> map) {
 		return sqlSessionTemplate.insert("add_cart", map);
 	}
+	
+	// 장바구니 업데이트
+	@Override
+	public int editCart(Map<String, String> map) {
+		return sqlSessionTemplate.update("edit_cart", map);
+	}
 
 }

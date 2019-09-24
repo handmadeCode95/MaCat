@@ -17,12 +17,12 @@ public class AdminFaqManagementDAO implements AdminPostManagementDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	public SqlSessionTemplate getSqlSessionTemplate() { return sqlSessionTemplate; }
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) { this.sqlSessionTemplate = sqlSessionTemplate; }
-
+	// 전체 faq 수량
 	@Override
 	public int getAdminCount() {
 		return sqlSessionTemplate.selectOne("faq_count");
 	}
-
+	// 전체 faq 정보 가져오기
 	@Override
 	public List<FaqDTO> getAdminList(int begin, int end) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -30,22 +30,22 @@ public class AdminFaqManagementDAO implements AdminPostManagementDAO {
 		map.put("end", end);
 		return sqlSessionTemplate.selectList("faq", map);
 	}
-
+	// faq and조건 검색결과 count
 	@Override
 	public int getAndCount(AdminSearchDTO adminSearchDTO) {
 		return sqlSessionTemplate.selectOne("faq_and_count", adminSearchDTO);
 	}
-
+	// faq or조건 검색결과 count
 	@Override
 	public int getOrCount(AdminSearchDTO adminSearchDTO) {
 		return sqlSessionTemplate.selectOne("faq_or_count", adminSearchDTO);
 	}
-
+	// faq and조건 검색
 	@Override
 	public List<FaqDTO> getAndSearch(AdminSearchDTO adminSearchDTO) {
 		return sqlSessionTemplate.selectList("faq_and_search", adminSearchDTO);
 	}
-
+	// faq or조건 검색
 	@Override
 	public List<FaqDTO> getOrSearch(AdminSearchDTO adminSearchDTO) {
 		return sqlSessionTemplate.selectList("faq_or_search", adminSearchDTO);

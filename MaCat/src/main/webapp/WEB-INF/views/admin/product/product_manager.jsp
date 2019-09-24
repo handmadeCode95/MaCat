@@ -7,21 +7,23 @@
 
 	<head>
 	    <meta charset="UTF-8">
-	    <title>상품 정보 관리</title>
+	    <title>상품정보 관리</title>
 	    <!-- 초기화 -->
 	    <link rel="stylesheet" href="resources/css/normalize.css">
+   	    <!-- 페이징 -->
+	    <link rel="stylesheet" href="resources/css/paging.css">	     
+   	    <!-- 체크박스 css -->
+	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
+	    
 	    <!-- 관리자페이지 css -->
 	    <link rel="stylesheet" href="resources/css/admin/product/manager.css">
-	    <!-- 체크박스 css -->
-	    <link rel="stylesheet" href="resources/css/admin/checkbox.css">
 	    <!-- 라디오박스 css -->
 	    <link rel="stylesheet" href="resources/css/admin/product/radiobutton.css">
 	    <!-- 관리자 테이블 css-->
 	    <link rel="stylesheet" href="resources/css/admin/product/admin_table.css">
 	    <!--input text입력창 조절 css-->
 	    <link rel="stylesheet" href="resources/css/admin/product/input_textarea.css">
-	    <!-- 페이징 -->
-	    <link rel="stylesheet" href="resources/css/paging.css">	      
+ 
 	    <!-- 스크립트 -->
 	    <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>	
 	        
@@ -39,7 +41,7 @@
 	            <div class="product_management">
 	                <span>상품관리</span>
 	            </div>
-	            <form id="searchForm" action="mber_search.mcat" method="post">
+	            <form id="searchForm" action="products_search.mcat" method="post">
 	                <div class="product_information_container">
 	                    <!--상품정보-->
 	                    <div class="product_info">
@@ -47,8 +49,7 @@
 	                        <div class="infomation_control_part">
 	                            <!--상품번호 상품명 상품재고-->
 	                            <div class="product_info_middle">
-	                                <div class="checks">
-	                                
+	                                <div class="checks">	                                
 	                                    <input type="checkbox" id="product_chk" class="search" value="prduct_sq">
 	                                    <label for="product_chk" style="margin-right: 26px; ">상품번호</label>
 	                                    <span class="inputClickListener"><input type="text" name="prduct_sq" class="prduct_sq" disabled></span>
@@ -174,7 +175,7 @@
 	            </form>
 	            <!-- 테이블 파트-->
 	            <div class="product_info_table_title">
-	                <span>상품정보 (총 <p>1,837</p> 개)</span>
+	                <span>상품정보 (총 <b id="prducts_count"> ${pageDTO.totalRecord} </b> 개)</span>
 	            </div>
 	            <div id="products" class="info_table">
 	                <form>
@@ -183,16 +184,16 @@
 	                            <colgroup>
 	                                <col width="40" />	<!--체크박스-->
 	                                <col width="80" />	<!--상품번호-->
-	                                <col width="80" />	<!--상품코드-->
-	                                <col width="80" />	<!--카테고리-->
-	                                <col width="140" />	<!--상품명-->
-	                                <col width="140" />	<!--상품가격-->
-	                                <col width="140" />	<!--할인가격-->
-	                                <col width="140" />	<!--배송비-->
+	                                <col width="120" />	<!--상품코드-->
+	                                <col width="120" />	<!--카테고리-->
+	                                <col width="400" />	<!--상품명-->
+	                                <col width="120" />	<!--상품가격-->
+	                                <col width="120" />	<!--할인가격-->
+	                                <col width="120" />	<!--배송비-->
 	                                <col width="100" />	<!--제조사-->
-	                                <col width="300" />	<!--제조국-->
-	                                <col width="300" />	<!--주소재-->
-	                                <col width="240" />	<!--등록일-->
+	                                <col width="100" />	<!--제조국-->
+	                                <col width="200" />	<!--주소재-->
+	                                <col width="150" />	<!--등록일-->
 	                                <col width="100" />	<!--할인율-->
 	                                <col width="100" />	<!--적립율-->
 	                                <col width="100" />	<!--적립포인트-->
@@ -203,7 +204,7 @@
 	                            </colgroup>
 	                            <thead>
 	                                <tr>
-	                                    <th><input name="mbers" type="checkbox" id="allCheck"></th>
+	                                    <th class="checks"><input name="products" type="checkbox" id="allCheck"><label for="allCheck"></label></th>
 	                                    <th scope="col">상품번호</th>
 	                                    <th scope="col">상품코드</th>
 	                                    <th scope="col">카테고리</th>
@@ -227,18 +228,19 @@
 	                            <tbody id="searchResult">
 	                            <c:forEach var="i" items="${productsDTO}">
 		                                <tr id="${i.prduct_sq}">
-		                                    <td><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="${i.prduct_sq}"></td>
-		                                    <td><input name="prduct_sq" class="${i.prduct_sq}" type="hidden" value="${i.prduct_sq}" disabled>1001</td>		                                    
+		                                    <td class="checks"><input name="prduct" class="chkbox" type="checkbox" id="table_chk" value="${i.prduct_sq}"><label for="table_chk"></label></td>
+		                                    <td><input name="prduct_sq" class="${i.prduct_sq}" type="hidden" value="${i.prduct_sq}" disabled>${i.prduct_sq}</td>		                                    
 		                                    <td>${i.prduct_cd}</td> <!-- 상품코드 -->
 		                                    <td>${i.ctgry_nm}</td><!-- 카테고리 -->
-		                                    <td><a href="product.mcat?prduct_nm='${i.prduct_nm}'">${i.prduct_nm}</a></td><!-- 상품명 -->
-		                                    <td>${i.prduct_price }</td><!-- 상품가격 -->
-		                                    <td>${i.prduct_dc }</td>
+		                                    <%-- <td><a href="product.mcat?prduct_nm=${i.prduct_nm}">${i.prduct_nm}</a></td><!-- 상품명 --> --%>
+		                                    <td><a href="product_update_page.mcat?prduct_sq=${i.prduct_sq}">${i.prduct_nm}</a></td><!-- 상품명 -->
+		                                    <td>${i.prduct_price}</td><!-- 상품가격 -->
+		                                    <td>${i.prduct_dc}</td>
 		                                    <td>${i.prduct_dlvy_price}</td>
 		                                    <td>${i.prduct_maker}</td>
 		                                    <td>${i.prduct_coo}</td>
 		                                    <td>${i.prduct_matr}</td>
-		                                    <td>${i.prduct_reg_dt}</td>
+		                                    <td>${i.prduct_reg_dt.substring(0,10)}</td>
 		                                    <td>${i.prduct_dc_pt}</td>
 		                                    <td>${i.prduct_save_pt}</td>
 		                                    <td>${i.prduct_save}</td>
@@ -251,9 +253,58 @@
 	                            </tbody>
 	                        </table>
 	                    </div>
+	                    <!-- 페이징 div -->
+	                    <div id="pagingDiv">
+							<ol id="paging">
+								<%-- 이전 --%>
+								<c:choose>
+									<c:when test="${pageDTO.beginBlock <= pageDTO.pagePerBlock}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page">
+										<img src="resources/img/mcat-arrow-slider-left-grey.png" height="10px"> 
+										<input type="hidden" name="cPage" value="${pageDTO.beginBlock - 1}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+		
+								<%-- 블록안에 들어간 페이지번호들 --%>
+								<c:forEach begin="${pageDTO.beginBlock}" end="${pageDTO.endBlock}"
+									step="1" var="i">
+									<%-- 현재 페이지는 링크 비활성화, 나머지는 해당 페이지로 링크 --%>
+									<c:choose>
+										<c:when test="${i == pageDTO.nowPage}">
+											<li class="now">${i}</li>
+										</c:when>
+										<c:otherwise>
+											<li><a class="page">${i}<input type="hidden"
+													name="cPage" value="${i}"></a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+		
+								<%-- 다음 --%>
+								<c:choose>
+									<c:when test="${pageDTO.endBlock >= pageDTO.totalPage}">
+										<li class="disable">
+										<img src="resources/img/mcat-arrow-slider-right-grey.png" height="10px"></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page"> <img
+												src="resources/img/mcat-arrow-slider-right-grey.png"
+												height="10px"> <input type="hidden" name="cPage"
+												value="${pageDTO.beginBlock + pageDTO.pagePerBlock}">
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ol>
+						</div>
+						
 	                    <div class="edit_delete_btn">
 	                        <input class="edit_btn" type="button" value="수정" id="update" />
-	                        <input class="delete_btn" type="button" value="삭제" id="withdrawal" />
+	                        <input class="delete_btn" type="button" value="삭제" id="delete" />
 	                    </div>
 	                </form>
 	            </div>

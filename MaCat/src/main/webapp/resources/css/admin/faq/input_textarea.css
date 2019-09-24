@@ -1,0 +1,37 @@
+/*공지사항 관리 페이지용*/
+
+/*작성일 기간선택 input div 단 정렬하기*/
+.notices_info_middle .checks>div{
+    float: right;
+    width: 456px;
+}
+
+.notices_info_middle .checks{
+	height: 50px;
+}
+
+/* 조건검색파트 input 디자인 */
+.checks label{
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
+    margin-bottom: 30px;
+}
+/* 테이블 속 체크박스 */
+.info_table table.type11 thead tr th.checks label,
+.info_table table.type11 tbody tr td.checks label{
+    font-size: 15px;
+    line-height: 40px;
+    height: 40px;
+    margin-bottom: 0px;
+}
+
+/*전체 input 디자인*/
+.checks input{
+	background: white; 
+	border: 1px solid #cfcfcf; 
+	height: 36px;
+	width: 190px;
+	margin-bottom: 16px;  
+	float: right;
+}

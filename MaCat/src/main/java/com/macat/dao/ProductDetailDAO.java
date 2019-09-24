@@ -10,4 +10,6 @@ public interface ProductDetailDAO {
 	
 	public int insertCart(Map<String, Object> map);
 	
+	public int editCart(Map<String, String> map) ;
+	
 }

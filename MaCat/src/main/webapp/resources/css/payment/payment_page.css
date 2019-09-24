@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+@font-face{
+    font-family : 'THEjunggt130';
+    src : local('THEjunggt130'),
+        url('../../font/THEjunggt130.woff2') format('woff2'),
+        url('../../font/THEjunggt130.woff') format('woff'),
+        url('../../font/THEjunggt130.otf') format('opentype'),
+        url('../../font/THEjunggt130.eot') format('embedded-opentype');
+}
+@font-face{
+    font-family : '서울남산 장체EB';
+    src : local('서울남산 장체EB'),
+        url('../../font/서울남산 장체EB.woff2') format('woff2'),
+        url('../../font/서울남산 장체EB.woff') format('woff'),
+        url('../../font/서울남산 장체EB.otf') format('truetype'),        
+        url('../../font/서울남산 장체EB.eot') format('embedded-opentype');
+}
+
+* {
+    font-family: 'THEjunggt130';
+}
+
+/*전체를 감싸는 main*/
+main{
+    width: 1080px;
+    min-width: 960px;
+    height: 1024px;
+    /*요소 중앙정렬*/
+    margin: 0 auto;      
+    text-align: center;
+}
+
+main h2{
+    font-size: 50px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 48px;
+}
+
+/*좌측 section*/
+#order_main{
+    float: left;
+    width: 690px;
+    height: 790px;  
+}
+/*우측 aside*/
+#total_price_agreement{
+    float: right;
+    width: 290px;
+    height: 790px;
+    margin-right: 30px;
+}
+/*결제정보동의 체크박스 디자인*/

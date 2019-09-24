@@ -53,14 +53,16 @@ public class AdminNoticeManagementDAO implements AdminPostManagementDAO {
 	}
 	
 	@Override
-	public AdminDTO getPostView(String sq) {
-		// 조회수상승
-		return null;
-	}
-
-	@Override
-	public int deleteAdmin(String sq) {
-		return sqlSessionTemplate.delete("nots_delete", sq);
+	public int deleteAdmin(String not_sq) {
+		return sqlSessionTemplate.delete("nots_delete", not_sq);
 	}
 	
+	@Override
+	public AdminDTO getPostView(String sq) {
+		return null;
+	}
+	
+	public NotsDTO getNotice(String not_sq) {
+		return sqlSessionTemplate.selectOne("nots", not_sq);
+	}
 }

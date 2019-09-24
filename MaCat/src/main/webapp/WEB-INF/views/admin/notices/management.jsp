@@ -82,6 +82,8 @@
 							</c:otherwise>
 						</c:choose>
 					</tbody>
+					
+					
 					<%-- 페이징 기법 --%>
 					<tfoot>
 						<tr>
